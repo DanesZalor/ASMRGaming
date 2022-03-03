@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "GjNTGZlD3SU1Wyr420fjYbZKa94JFvJmx9LZnl77hVUbLuF2O3xK7RonG89Ry5Uh8QXlHDIN7ChJFBUfTJO+HA==",
+  "success": true,
+  "projectFilePath": "/home/djdols/Projects/GodotProjects/ThesisGame/ASMR Robotgame.csproj",
+  "expectedPackageFiles": [
+    "/home/djdols/.nuget/packages/microsoft.netframework.referenceassemblies/1.0.2/microsoft.netframework.referenceassemblies.1.0.2.nupkg.sha512",
+    "/home/djdols/.nuget/packages/microsoft.netframework.referenceassemblies.net472/1.0.2/microsoft.netframework.referenceassemblies.net472.1.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}
