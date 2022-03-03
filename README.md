@@ -10,4 +10,3 @@ This is the repo for the actual game itself but it uses code from [MachineCodeSi
 - `Assembler/Assembler/PreprocessorDirectives.cs`
 - `Assembler/Assembler/SyntaxChecker.cs`
 - `Assembler/Assembler/Translator.cs`
-
