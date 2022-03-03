@@ -1,7 +1,8 @@
 using System;
-namespace CPU
-{
-    public class ALU
+using Godot;
+
+
+    public class ALU : Node
     {
         [Flags]
         public enum FLAG : byte
@@ -145,4 +146,3 @@ namespace CPU
         }
 
     }
-}

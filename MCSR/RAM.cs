@@ -1,7 +1,7 @@
 using System;
+using Godot;
 
-namespace CPU{
-    public class RAM {
+    public class RAM : Node {
         private byte[] content;
         
         public RAM(short size = 256){
@@ -48,4 +48,4 @@ namespace CPU{
         }
         
     }
-}
+

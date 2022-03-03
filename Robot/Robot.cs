@@ -6,10 +6,13 @@ public class Robot : Spatial
     [Export(PropertyHint.MultilineText)]
     private string program = "";
     
-    CPU.CPU cpu;
+    //MSCR_CPU cpu;
+
     public override void _Ready()
     {
-        cpu = new CPU.CPU(Assembler.Assembler.compile(program));
+        
+        //cpu = new MSCR_CPU(Assembler.Assembler.compile(program));
+        
     }
 
     public override void _PhysicsProcess(float delta)
