@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
 using System;
-namespace Assembler;
 
+namespace Assembler{
 public static class SyntaxChecker
 {
     /// <summary> Lexicon containing somewhat correct grammar that can be recognized for evaluation </summary>
@@ -360,4 +360,6 @@ public static class SyntaxChecker
         if (codeEval != "") codeEval = "SYNTAX ERROR(s)\n" + codeEval;
         return codeEval;
     }
+}
+
 }

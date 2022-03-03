@@ -1,5 +1,4 @@
-﻿
-namespace CPU{
+﻿namespace CPU{
     public class CPU{
         private class Register{ // for readability
             public byte value = 0;
@@ -281,6 +280,7 @@ namespace CPU{
                 IAR.value += increment;
             }
         }
+
     }
 }
 

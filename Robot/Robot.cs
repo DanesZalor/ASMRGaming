@@ -3,16 +3,18 @@ using System;
 
 public class Robot : Spatial
 {
-    [Export]
+    [Export(PropertyHint.MultilineText)]
     private string program = "";
+    
+    CPU.CPU cpu;
     public override void _Ready()
     {
-        
+        cpu = new CPU.CPU(Assembler.Assembler.compile(program));
     }
 
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+    public override void _PhysicsProcess(float delta)
+    {
+        base._PhysicsProcess(delta);
+        
+    }
 }
