@@ -6,6 +6,7 @@
 
 [node name="Robot" type="Spatial"]
 script = ExtResource( 1 )
+program = "mov a, a"
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )

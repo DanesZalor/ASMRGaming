@@ -14,18 +14,6 @@ config/name="ASMR Robotgame"
 run/main_scene="res://Robot/Robot.tscn"
 config/icon="res://icon.png"
 
-[autoload]
-
-RAM="*res://MachineCodeSimulatorClassFiles/CPU/RAM.cs"
-ALU="*res://MachineCodeSimulatorClassFiles/CPU/ALU.cs"
-CPU="*res://MachineCodeSimulatorClassFiles/CPU/CPU.cs"
-Lexicon="*res://MachineCodeSimulatorClassFiles/Assembler/LEXICON.cs"
-Common="*res://MachineCodeSimulatorClassFiles/Assembler/Common.cs"
-PreprocessorDirectives="*res://MachineCodeSimulatorClassFiles/Assembler/PreprocessorDirectives.cs"
-SyntaxChecker="*res://MachineCodeSimulatorClassFiles/Assembler/SyntaxChecker.cs"
-Translator="*res://MachineCodeSimulatorClassFiles/Assembler/Translator.cs"
-Assembler="*res://MachineCodeSimulatorClassFiles/Assembler/Assembler.cs"
-
 [physics]
 
 common/enable_pause_aware_picking=true

@@ -54,10 +54,9 @@ public static class PreprocessorDirectives
             {"(0b([01]{1,8}))","<BIN>"}
         };
         string newLines = "";
-
-        using (var reader = new StringReader(linesOfCode))
+        using (StringReader reader = new StringReader(linesOfCode))
         {
-            for (string? line = reader.ReadLine(); line != null; line = reader.ReadLine())
+            for (string line = reader.ReadLine(); line != null; line = reader.ReadLine())
             {
                 // removes the comments
                 string newLine = Common.replace(line, ";.*","").Trim();
@@ -130,11 +129,11 @@ public static class PreprocessorDirectives
         string labelCoords = "";
 
         // gather labels and coordinates
-        using (var reader = new StringReader(linesOfCode))
+        using (StringReader reader = new StringReader(linesOfCode))
         {
             int coordCounter = 0;
 
-            for (string? line = reader.ReadLine(); line != null; line = reader.ReadLine())
+            for (string line = reader.ReadLine(); line != null; line = reader.ReadLine())
             {
                 if (line.Contains(':')) { // if label, record it's coordinate
                     labels = new string(string.Concat(labels, (labels.Length>0?"|":"") + line.Split(':')[0] ));
