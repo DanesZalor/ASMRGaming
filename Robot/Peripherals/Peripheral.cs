@@ -5,7 +5,7 @@ using System;
 /// <summary> Memory-mapped IO interface </summary>
 public class Peripheral : Spatial
 {
-    protected Spatial parent; 
+    protected KinematicBody parent; 
     protected byte RAMcoordStart = 255;     // starting coordinate 
     protected byte RAMcoordLength = 0;    // length of reading
     public override void _Ready()
@@ -17,7 +17,7 @@ public class Peripheral : Spatial
         RAMcoordStart = ramCoord;
     }
 
-    protected CPU.CPU cpuref; public virtual void setCPU(CPU.CPU c, Spatial p){ 
+    protected CPU.CPU cpuref; public virtual void setCPU(CPU.CPU c, KinematicBody p){ 
         cpuref = c;
         parent = p;
     }

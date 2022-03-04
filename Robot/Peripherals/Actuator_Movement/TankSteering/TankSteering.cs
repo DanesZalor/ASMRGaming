@@ -9,7 +9,7 @@ public class TankSteering : Peripheral
         RAMcoordLength = 2;
     }
 
-    public override void setCPU(CPU.CPU c, Spatial p)
+    public override void setCPU(CPU.CPU c, KinematicBody p)
     {
         base.setCPU(c, p);
         writeToRam(0, 127);
@@ -26,9 +26,12 @@ public class TankSteering : Peripheral
         //GD.Print(String.Format("[254] = {0}\t[255] = {1}",lram, rram));
 
         parent.Rotation -= new Vector3(0f, lwp, 0f);
-        parent.Translation += GlobalTransform.basis.z * lwp *2f;
+        Vector3 lvel = GlobalTransform.basis.z * lwp *3f;
         
         parent.Rotation += new Vector3(0f, rwp, 0f);
-        parent.Translation += GlobalTransform.basis.z * rwp *2f;
+        Vector3 rvel = GlobalTransform.basis.z * rwp *3f;
+
+        parent.MoveAndCollide(lvel + rvel);
+
     }
 }
