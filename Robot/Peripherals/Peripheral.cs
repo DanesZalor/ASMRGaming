@@ -14,19 +14,17 @@ public class Peripheral : Spatial
         RAMcoordStart = ramCoord;
     }
 
-    protected CPU.CPU cpuref; public void setCPU(CPU.CPU c){ cpuref = c;}
+    protected CPU.CPU cpuref; public virtual void setCPU(CPU.CPU c){ cpuref = c;}
 
     public byte SIZE{ get => RAMcoordLength; }
 
     protected bool addressInRange(byte address){
-        return 
-            (address <= RAMcoordStart) && 
-            (address > (RAMcoordStart-RAMcoordLength));
+        return address < RAMcoordLength;
     }
     protected byte readFromRam(byte address){
         
         if(addressInRange(address))
-            return cpuref.readFromRAM(address);
+            return cpuref.readFromRAM( (byte)(RAMcoordStart - address) );
 
         else{
             GD.Print("ERROR: out of bounds");
@@ -37,12 +35,14 @@ public class Peripheral : Spatial
 
     protected void writeToRam(byte address, byte data){
         if(addressInRange(address))
-            cpuref.writeToRAM(address,data);
+            cpuref.writeToRAM((byte)(RAMcoordStart - address),data);
         
         else{
             GD.Print("ERROR: out of bounds");
             // some code to throw exception or some shit
         }
     }
+
+    public virtual void Steer(float delta){}
 
 }

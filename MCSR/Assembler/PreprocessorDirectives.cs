@@ -167,11 +167,14 @@ public static class PreprocessorDirectives
         linesOfCode = new string(linesOfCode.Replace(":",":\n")); 
 
         try{
+            Godot.GD.Print("translateAlias call");
+            Godot.GD.Print("replacing alias...");
             linesOfCode = replaceAliases(linesOfCode); // System.TypeLoadException
+            Godot.GD.Print("replacing labels...");
             linesOfCode = replaceLabels(linesOfCode);
             linesOfCode = removeExcessWhitespace(linesOfCode);
         }catch(System.TypeLoadException e){ // catch System.TypeLoadException from Converts
-            Console.WriteLine(e);
+            Godot.GD.Print("translateAlias Error");
             return "";
         }
         

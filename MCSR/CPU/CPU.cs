@@ -32,7 +32,6 @@
         
 
         public void InstructionCycleTick(){
-
             byte getOffsetByteFromInstruction(int instructionAddress){
                 byte instruction = ram.read(instructionAddress);
                 byte offsetCode = (byte)((instruction & 0b0111_1000) >> 3);
