@@ -17,9 +17,9 @@
         private Register IAR; // Instruction Address Register
         
         
-        public CPU(byte[] program){
+        public CPU(byte[] program, byte sp=255){
             for(int i = 0; i<8; i++) GP[i] = new CPU.Register();
-            SP.value = 255;
+            SP.value = sp;
             IR = new CPU.Register();
             IAR = new CPU.Register();
             alu = new ALU();
@@ -290,6 +290,7 @@
         public void writeToRAM(byte address, byte data){
             ram.write(address,data);
         }
+
     }
 }
 
