@@ -186,6 +186,7 @@ public static class PreprocessorDirectives
             linesOfCode = replaceLabels(linesOfCode);
             linesOfCode = removeExcessWhitespace(linesOfCode);
         }catch(System.TypeLoadException e){ // catch System.TypeLoadException from Converts
+            System.Console.WriteLine(e.StackTrace);
             return "";
         }
         

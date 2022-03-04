@@ -5,16 +5,22 @@ using System;
 /// <summary> Memory-mapped IO interface </summary>
 public class Peripheral : Spatial
 {
+    protected Spatial parent; 
     protected byte RAMcoordStart = 255;     // starting coordinate 
     protected byte RAMcoordLength = 0;    // length of reading
     public override void _Ready()
-    {}
+    {
+        //parent = GetParent<Spatial>().GetParent<Spatial>();
+    }
 
     public void Init(byte ramCoord){
         RAMcoordStart = ramCoord;
     }
 
-    protected CPU.CPU cpuref; public virtual void setCPU(CPU.CPU c){ cpuref = c;}
+    protected CPU.CPU cpuref; public virtual void setCPU(CPU.CPU c, Spatial p){ 
+        cpuref = c;
+        parent = p;
+    }
 
     public byte SIZE{ get => RAMcoordLength; }
 

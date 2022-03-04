@@ -15,7 +15,7 @@ public class Robot : Spatial
         byte temp_sp = 255;
 
         /* Count Peripherals */{
-            steering = GetNode<Peripheral>("Actuator_Steering");
+            steering = GetNode<Peripheral>("Peripherals/Actuator_Steering");
             steering.Init(temp_sp);
             temp_sp -= steering.SIZE;
         }
@@ -24,7 +24,7 @@ public class Robot : Spatial
         cpu = new CPU.CPU(Assembler.Assembler.compile(program), temp_sp );
 
         /* Final Init Peripherals */{
-            steering.setCPU(cpu);
+            steering.setCPU(cpu, this);
         }
     }
 
@@ -33,7 +33,7 @@ public class Robot : Spatial
         base._PhysicsProcess(delta);
         
         cpu.InstructionCycleTick();
-        //GD.Print(cpu.readFromRAM(1));
+        GD.Print(cpu.readFromRAM(255));
 
         steering.Steer(delta*0.1f);
         

@@ -9,9 +9,9 @@ public class TankSteering : Peripheral
         RAMcoordLength = 2;
     }
 
-    public override void setCPU(CPU.CPU c)
+    public override void setCPU(CPU.CPU c, Spatial p)
     {
-        base.setCPU(c);
+        base.setCPU(c, p);
         writeToRam(0, 127);
         writeToRam(1, 127);
     }
@@ -25,13 +25,13 @@ public class TankSteering : Peripheral
 
         //GD.Print(lw); GD.Print(rw); GD.Print("--");
 
-        float lwspeed = Godot.Mathf.Abs(lw-127)*delta;
-        float rwspeed = Godot.Mathf.Abs(rw-127)*delta;
+        float lwspeed = Godot.Mathf.Abs(lw-127)*delta*0.1f;
+        float rwspeed = Godot.Mathf.Abs(rw-127)*delta*0.1f;
+        
+        parent.Rotation += new Vector3(0f, lw, 0f) * lwspeed;
+        parent.Translation += GlobalTransform.basis.z * lw*2f * lwspeed;
 
-        Rotation -= new Vector3(0f, lw, 0f) * lwspeed;
-        Translation += GlobalTransform.basis.z * lw*2f * lwspeed;
-
-        Rotation += new Vector3(0f, rw, 0f) * rwspeed;
-        Translation += GlobalTransform.basis.z * rw*2f * rwspeed;
+        parent.Rotation -= new Vector3(0f, rw, 0f) * rwspeed;
+        parent.Translation += GlobalTransform.basis.z * rw*2f * rwspeed;
     }
 }
