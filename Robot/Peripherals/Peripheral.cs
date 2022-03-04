@@ -49,6 +49,6 @@ public class Peripheral : Spatial
         }
     }
 
-    public virtual void Steer(float delta){}
+    public virtual void tick(float delta){}
 
 }

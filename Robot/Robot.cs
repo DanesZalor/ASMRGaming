@@ -33,9 +33,8 @@ public class Robot : Spatial
         base._PhysicsProcess(delta);
         
         cpu.InstructionCycleTick();
-        GD.Print(cpu.readFromRAM(255));
 
-        steering.Steer(delta*0.1f);
+        steering.tick(delta);
         
     }
 }
