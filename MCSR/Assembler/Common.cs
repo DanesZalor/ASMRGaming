@@ -8,7 +8,11 @@ public static class Common
     public static Match getMatch(string line, string pattern, bool exact = false)
     {
         if (exact) pattern = "^" + pattern + "$";
-        return Regex.Match(line, pattern, RegexOptions.IgnoreCase);
+        try{
+            return Regex.Match(line, pattern, RegexOptions.IgnoreCase);
+        }catch(System.TypeLoadException e){
+            return Match.Empty;
+        }
     }
 
     /// <summary> returns true if line satisfy the grammar pattern </summary>
@@ -18,7 +22,13 @@ public static class Common
     }
 
     public static string replace(string line, string pattern, string replacement){
-        return Regex.Replace(line, pattern, replacement, RegexOptions.IgnoreCase);
+
+        try{
+            return Regex.Replace(line, pattern, replacement, RegexOptions.IgnoreCase);
+        }catch(System.TypeLoadException){
+            return "";
+        }
+        
     }
 }
 

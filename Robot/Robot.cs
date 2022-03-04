@@ -10,6 +10,7 @@ public class Robot : Spatial
 
     public override void _Ready()
     {
+        GD.Print(program);
         cpu = new CPU.CPU(Assembler.Assembler.compile(program));
         
     }
