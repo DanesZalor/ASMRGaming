@@ -243,7 +243,7 @@
                 
                 switch(IR.value){
                     case 0b1101_0000:   
-                        alu.clearFlags();   
+                        alu.CLF();   
                         return 1;
                     case 0b1101_0001:
                         IAR.value = ram.read(++SP.value); // JUMP to the POP'd value
@@ -279,6 +279,16 @@
 
                 IAR.value += increment;
             }
+        }
+
+        // Peripherals Purposes
+        /// <summary> For Peripherals purposes only. </sumary>
+        public byte readFromRAM(byte address){
+            return ram.read(address);
+        }
+
+        public void writeToRAM(byte address, byte data){
+            ram.write(address,data);
         }
     }
 }

@@ -166,18 +166,14 @@ public static class PreprocessorDirectives
         // separate label declarations into different lines
         linesOfCode = new string(linesOfCode.Replace(":",":\n")); 
 
-        Godot.GD.Print("before error");
         try{
             linesOfCode = replaceAliases(linesOfCode); // System.TypeLoadException
             linesOfCode = replaceLabels(linesOfCode);
             linesOfCode = removeExcessWhitespace(linesOfCode);
         }catch(System.TypeLoadException e){ // catch System.TypeLoadException from Converts
-            Godot.GD.Print(e);
+            Console.WriteLine(e);
             return "";
         }
-        
-        
-        Godot.GD.Print("after line");
         
         return linesOfCode;
     }

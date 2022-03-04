@@ -287,7 +287,8 @@ public static class Translator
             for(int i = 0; i < 9; i++)
                 if (Common.match(line, LineStarters[i])) return translateFuncs[i](line);
         }catch(System.TypeLoadException e){ // catch exception from Convert
-            Godot.GD.Print(e);
+            Console.WriteLine(e);
+            return new byte[0];
         }
         
         
