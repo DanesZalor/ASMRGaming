@@ -124,7 +124,7 @@ public static class SyntaxChecker
                                         String.Format("'{0}' offset out of bounds",Common.getMatch(single_arg, VAGUE_LEXICON.TOKENS.OFFSET).Value)
                                     )
                                 ):(  // is it a legit offset, then check the register
-                                    !Common.match(single_arg.Split('+', StringSplitOptions.RemoveEmptyEntries)[0].Trim(), LEXICON.SYNTAX.ARGUEMENTS.R, true)?
+                                    !Common.match(single_arg.Split(new char[1]{' '}, StringSplitOptions.RemoveEmptyEntries)[0].Trim(), LEXICON.SYNTAX.ARGUEMENTS.R, true)?
                                         String.Format("'{0}' not a register",single_arg.Replace("[","").Replace("]","").Trim()):("")
                                 )
                             ):( String.Format("'{0}' {1}", Regex.Replace(single_arg, "(\\[|\\])", "").Trim(), 
@@ -156,7 +156,7 @@ public static class SyntaxChecker
             return "";
         }
 
-        string[] args = argsline.Split(",");
+        string[] args = argsline.Split(',');
         for (int i = 0; i < args.Length; i++)
         {
             string s = single_evaluation(args[i].Trim());
@@ -173,7 +173,7 @@ public static class SyntaxChecker
         {
             if (!Common.match(movline, movSyntaxVague, true)) return "invalid MOV statement";
             else return evaluateArgs(
-                movline.Substring(movline.Split(" ", StringSplitOptions.RemoveEmptyEntries)[0].Length)
+                movline.Substring(movline.Split(new char[1]{' '}, StringSplitOptions.RemoveEmptyEntries)[0].Length)
             );
         }
         else return "";
@@ -186,14 +186,14 @@ public static class SyntaxChecker
         {
             if (!Common.match(jmpline, jmpSyntaxVague, true)) return "invalid JMP arguement";
             else return evaluateArgs(
-                jmpline.Substring(jmpline.Split(" ", StringSplitOptions.RemoveEmptyEntries)[0].Length)
+                jmpline.Substring(jmpline.Split(new char[1]{' '}, StringSplitOptions.RemoveEmptyEntries)[0].Length)
             );
         }
         return "";
     }
     private static string evaluateJmpIf(string jmpline)
     {
-        string[] jmpline_splitted = jmpline.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+        string[] jmpline_splitted = jmpline.Split(new char[1]{' '}, StringSplitOptions.RemoveEmptyEntries);
         string jcaz = jmpline_splitted[0];
         string arg = jmpline_splitted[1];
         string jcazflagSyntax = "(JN?(C|A|Z|E|B|AE|BE))";
@@ -216,7 +216,7 @@ public static class SyntaxChecker
         {
             if (!Common.match(pushline, pushSyntaxVague, true)) return "invalid PUSH arguement";
             else return evaluateArgs(
-                pushline.Substring(pushline.Split(" ", StringSplitOptions.RemoveEmptyEntries)[0].Length)
+                pushline.Substring(pushline.Split(new char[1]{' '}, StringSplitOptions.RemoveEmptyEntries)[0].Length)
             );
         }
         return "";
@@ -230,7 +230,7 @@ public static class SyntaxChecker
         {
             if (!Common.match(popline, popSyntaxVague, true)) return "invalid POP arguement";
             else return evaluateArgs(
-                popline.Substring(popline.Split(" ", StringSplitOptions.RemoveEmptyEntries)[0].Length)
+                popline.Substring(popline.Split(new char[1]{' '}, StringSplitOptions.RemoveEmptyEntries)[0].Length)
             );
         }
         return "";
@@ -243,7 +243,7 @@ public static class SyntaxChecker
         {
             if (!Common.match(callline, callSyntaxVague, true)) return "invalid CALL arguement";
             else return evaluateArgs(
-                callline.Substring(callline.Split(" ", StringSplitOptions.RemoveEmptyEntries)[0].Length)
+                callline.Substring(callline.Split(new char[1]{' '}, StringSplitOptions.RemoveEmptyEntries)[0].Length)
             );
         }
         return "";
@@ -252,14 +252,14 @@ public static class SyntaxChecker
     {
         string evaluateALU_Nomadic(string aluline)
         {
-            string operation = aluline.Split(" ", StringSplitOptions.RemoveEmptyEntries)[0];
+            string operation = aluline.Split(new char[1]{' '}, StringSplitOptions.RemoveEmptyEntries)[0];
             string syntax = String.Format("((not|inc|dec|shl|shr) {0})", LEXICON.SYNTAX.ARGUEMENTS.R);
             if (!Common.match(aluline, syntax, true)) return "invalid " + operation.ToUpper() + " arguement";
             return "";
         }
         string evaluateALU_Dyadic(string aluline)
         {
-            string operation = aluline.Split(" ", StringSplitOptions.RemoveEmptyEntries)[0];
+            string operation = aluline.Split(new char[1]{' '}, StringSplitOptions.RemoveEmptyEntries)[0];
             string syntax = String.Format("(cmp|xor|and|or|not|shr|shl|div|mul|sub|add) {0},({0}|{1}|{2})", LEXICON.SYNTAX.ARGUEMENTS.R, NEW_LEXICON.SYNTAX.ARGUEMENTS.A, NEW_LEXICON.SYNTAX.ARGUEMENTS.C);
             string syntaxVague = String.Format("(cmp|xor|and|or|not|shr|shl|div|mul|sub|add) {0},{1}", VAGUE_LEXICON.SYNTAX.ARGUEMENTS.L, VAGUE_LEXICON.SYNTAX.ARGUEMENTS.X);
             if (!Common.match(aluline, syntax, true))

@@ -283,13 +283,11 @@ public static class Translator
     /// <sumary>translated the line into its corresponding byte[] that represents machine code. returns an empty array if it is grammatically incorrect</summary> 
     public static byte[] translateLine(string line)
     {
-        Godot.GD.Print("translateLine call");
         try{
             for(int i = 0; i < 9; i++)
                 if (Common.match(line, LineStarters[i])) return translateFuncs[i](line);
         }catch(System.TypeLoadException e){ // catch exception from Convert
             Console.WriteLine(e);
-            Godot.GD.Print("SEx");
             return new byte[0];
         }
         
@@ -305,7 +303,7 @@ public static class Translator
     public static byte[] translateProgram(string linesOfCode){
         byte[] bin = new byte[256];
 
-        string[] lines = linesOfCode.Split("\n");
+        string[] lines = linesOfCode.Split('\n');
         byte ctr = 0;
         foreach(string line in lines){
             byte[] bytes = translateLine(line);

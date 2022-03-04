@@ -1,0 +1,5 @@
+/home/djdols/Projects/GodotProjects/ThesisGame/obj/Debug/net6.0/ASMR Robotgame.csproj.AssemblyReference.cache
+/home/djdols/Projects/GodotProjects/ThesisGame/obj/Debug/net6.0/ASMR Robotgame.GeneratedMSBuildEditorConfig.editorconfig
+/home/djdols/Projects/GodotProjects/ThesisGame/obj/Debug/net6.0/ASMR Robotgame.AssemblyInfoInputs.cache
+/home/djdols/Projects/GodotProjects/ThesisGame/obj/Debug/net6.0/ASMR Robotgame.AssemblyInfo.cs
+/home/djdols/Projects/GodotProjects/ThesisGame/obj/Debug/net6.0/ASMR Robotgame.csproj.CoreCompileInputs.cache

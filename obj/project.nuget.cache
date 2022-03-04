@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Hp868CTmYtOGix0te6e350/FzuYkUrbi+nyR+Q6T7dVC/Vh7av+lZxxHXzC1jE8XY7MknglxIhOUNKig0grhHg==",
+  "success": true,
+  "projectFilePath": "/home/djdols/Projects/GodotProjects/ThesisGame/ASMR Robotgame.csproj",
+  "expectedPackageFiles": [
+    "/home/djdols/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.2/microsoft.aspnetcore.app.ref.6.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}
