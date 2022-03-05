@@ -3,6 +3,12 @@ using System;
 
 public class Robot : KinematicBody
 {
+    [Export(PropertyHint.Enum, "Tank,Differential")]
+    private string Steering_Device = "Tank";
+
+    [Export(PropertyHint.Enum, "Drill,Saw")]
+    private string Combat_Device = "Drill";
+
     [Export(PropertyHint.MultilineText)]
     private string program = "";
     
@@ -21,9 +27,23 @@ public class Robot : KinematicBody
         cpu = new CPU.CPU(Assembler.Assembler.compile(program));
 
         /* Init Peripherals */{
-            steering = GetNode<Peripheral>("Peripherals/Actuator_Steering");
+            
+            switch(Steering_Device){
+                case "Tank":
+                    steering = GetNode<Peripheral>("Peripherals/Actuator_Steering");
+                    break;
+                case "Diferential":
+                    break;
+            } 
             steering.Init();
-            combat = GetNode<Peripheral>("Peripherals/Actuator_Combat");
+
+            switch(Combat_Device){
+                case "Drill":
+                    combat = GetNode<Peripheral>("Peripherals/Actuator_Combat");
+                    break;
+                case "Saw":
+                    break;
+            } 
             combat.Init();
         }
     }
