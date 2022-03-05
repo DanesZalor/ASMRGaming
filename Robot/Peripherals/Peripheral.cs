@@ -6,14 +6,18 @@ using System;
 public class Peripheral : Spatial
 {
     protected Robot parent; 
+    protected byte[] ram;
     private byte RAMcoordStart = 255;     // starting coordinate 
-    protected byte RAMcoordLength = 0;      // length of reading
+    protected byte RAMcoordLength = 0;      // length of reading, set on _Ready() by inheritor
 
 
     public virtual void Init(){
         parent = GetParent().GetParent<Robot>();
+
+        // RAMcoordStart is where SP is right now
         RAMcoordStart = parent.CPU.getStackPointerValue();
         
+        // subtract SP by length of the peripheral
         parent.CPU.setStackPointerValue( 
             System.Convert.ToByte(
                 parent.CPU.getStackPointerValue() - RAMcoordLength

@@ -17,9 +17,9 @@
         private Register IAR; // Instruction Address Register
         
         
-        public CPU(byte[] program, byte sp=255){
+        public CPU(byte[] program){
             for(int i = 0; i<8; i++) GP[i] = new CPU.Register();
-            SP.value = sp;
+            SP.value = 255;
             IR = new CPU.Register();
             IAR = new CPU.Register();
             alu = new ALU();
@@ -300,7 +300,6 @@
         public void setStackPointerValue(byte v){
             SP.value = v;
         }
-
     }
 }
 
