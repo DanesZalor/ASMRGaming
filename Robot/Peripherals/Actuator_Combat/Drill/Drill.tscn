@@ -12,6 +12,19 @@ rings = 1
 
 [node name="Actuator_Combat" type="Spatial"]
 script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": "Combat Actuator Peripheral
+
+Takes up 1 byte of RAM
+if turned on, will damage any robot directly infront
+
+INIT:	ram[0] = 0
+
+STATES:
+	ram[0] == 0			off
+	ram[1] == 1			on
+	"
+}
 
 [node name="Hitbox" type="Spatial" parent="."]
 
