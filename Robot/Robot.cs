@@ -3,6 +3,14 @@ using System;
 
 public class Robot : KinematicBody
 {
+
+    public static PackedScene[] preloadedPeripherals = new PackedScene[2]{
+        // movement actuators
+        GD.Load<PackedScene>("res://Robot/Peripherals/Actuator_Movement/TankSteering/TankSteering.tscn"),
+        // combat actuators
+        GD.Load<PackedScene>("res://Robot/Peripherals/Actuator_Combat/Drill/Drill.tscn"),
+    };
+
     [Export(PropertyHint.Enum, "Tank,Differential")]
     private string Steering_Device = "Tank";
 
@@ -23,27 +31,30 @@ public class Robot : KinematicBody
     public override void _Ready()
     {
         GD.Print(program);
-
         cpu = new CPU.CPU(Assembler.Assembler.compile(program));
 
         /* Init Peripherals */{
-            
+            Node peripherals = GetNode("Peripherals");
+
             switch(Steering_Device){
                 case "Tank":
-                    steering = GetNode<Peripheral>("Peripherals/Actuator_Steering");
+                    steering = preloadedPeripherals[0].Instance<Peripheral>();
                     break;
                 case "Diferential":
                     break;
-            } 
+            }
+            peripherals.AddChild(steering); 
             steering.Init();
 
             switch(Combat_Device){
                 case "Drill":
-                    combat = GetNode<Peripheral>("Peripherals/Actuator_Combat");
+                    combat = preloadedPeripherals[1].Instance<Peripheral>();
+                    
                     break;
                 case "Saw":
                     break;
             } 
+            peripherals.AddChild(combat);
             combat.Init();
         }
     }
