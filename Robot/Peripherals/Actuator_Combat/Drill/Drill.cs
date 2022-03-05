@@ -20,6 +20,10 @@ public class Drill : Peripheral
         writeToRam(0,0);
     }
 
+    public override void tickLogical(float delta)
+    {
+        //throw new NotImplementedException();
+    }
     public override void tickPresentational(float delta){
         drillbit.Rotation += new Vector3(0,0,0.5f) * (readFromRam(0) > 0 ? 1 : 0);
     }

@@ -3,7 +3,7 @@ using System;
 
 
 /// <summary> Memory-mapped IO interface </summary>
-public class Peripheral : Spatial
+public abstract class Peripheral : Spatial
 {
     protected Robot parent; 
     protected byte[] ram;
@@ -54,9 +54,10 @@ public class Peripheral : Spatial
         }
     }
 
-    public virtual void tickLogical(float delta){}
+    /// <summary> 
+    public abstract void tickLogical(float delta);
 
-    public virtual void tickPresentational(float delta){}
+    public abstract void tickPresentational(float delta);
 
     public void tick(float delta){
         if(!initialized) GD.Print("WARNING: Peripheral \""+Name+"\" not initialized");

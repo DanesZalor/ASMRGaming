@@ -36,4 +36,9 @@ public class TankSteering : Peripheral
         parent.MoveAndCollide(lvel + rvel);
 
     }
+
+    public override void tickPresentational(float delta)
+    {
+        //throw new NotImplementedException();
+    }
 }
