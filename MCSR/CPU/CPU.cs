@@ -286,8 +286,19 @@
             return ram.read(address);
         }
 
+        /// <summary> For Peripherals purposes only. </sumary>
         public void writeToRAM(byte address, byte data){
             ram.write(address,data);
+        }
+
+        /// <summary> For Peripherals purposes only. </sumary>
+        public byte getStackPointerValue(){
+            return SP.value;
+        }
+
+        /// <summary> For Peripherals purposes only. </sumary>
+        public void setStackPointerValue(byte v){
+            SP.value = v;
         }
 
     }

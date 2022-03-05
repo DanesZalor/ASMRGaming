@@ -3,18 +3,20 @@ using System;
 
 public class TankSteering : Peripheral
 {
-    
+
     public override void _Ready()
     {
+        base._Ready();
         RAMcoordLength = 2;
     }
 
-    public override void setCPU(CPU.CPU c, KinematicBody p)
+    public override void Init()
     {
-        base.setCPU(c, p);
+        base.Init();
         writeToRam(0, 127);
         writeToRam(1, 127);
     }
+
     public override void tick(float delta){
 
         float lram = (float)(Godot.Mathf.Min(readFromRam(1),254));

@@ -5,32 +5,30 @@ using System;
 /// <summary> Memory-mapped IO interface </summary>
 public class Peripheral : Spatial
 {
-    protected KinematicBody parent; 
-    protected byte RAMcoordStart = 255;     // starting coordinate 
-    protected byte RAMcoordLength = 0;    // length of reading
-    public override void _Ready()
-    {
-        //parent = GetParent<Spatial>().GetParent<Spatial>();
-    }
+    protected Robot parent; 
+    private byte RAMcoordStart = 255;     // starting coordinate 
+    protected byte RAMcoordLength = 0;      // length of reading
 
-    public void Init(byte ramCoord){
-        RAMcoordStart = ramCoord;
-    }
 
-    protected CPU.CPU cpuref; public virtual void setCPU(CPU.CPU c, KinematicBody p){ 
-        cpuref = c;
-        parent = p;
+    public virtual void Init(){
+        parent = GetParent().GetParent<Robot>();
+        RAMcoordStart = parent.CPU.getStackPointerValue();
+        
+        parent.CPU.setStackPointerValue( 
+            System.Convert.ToByte(
+                parent.CPU.getStackPointerValue() - RAMcoordLength
+        ));
     }
 
     public byte SIZE{ get => RAMcoordLength; }
 
-    protected bool addressInRange(byte address){
+    private bool addressInRange(byte address){
         return address < RAMcoordLength;
     }
     protected byte readFromRam(byte address){
         
         if(addressInRange(address))
-            return cpuref.readFromRAM( (byte)(RAMcoordStart - address) );
+            return parent.CPU.readFromRAM( (byte)(RAMcoordStart - address) );
 
         else{
             GD.Print("ERROR: out of bounds");
@@ -41,7 +39,7 @@ public class Peripheral : Spatial
 
     protected void writeToRam(byte address, byte data){
         if(addressInRange(address))
-            cpuref.writeToRAM((byte)(RAMcoordStart - address),data);
+            parent.CPU.writeToRAM((byte)(RAMcoordStart - address),data);
         
         else{
             GD.Print("ERROR: out of bounds");

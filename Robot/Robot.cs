@@ -9,22 +9,19 @@ public class Robot : KinematicBody
     private Peripheral steering;
     private CPU.CPU cpu;
 
+    public CPU.CPU CPU { 
+        get { return cpu; } 
+    }
+
     public override void _Ready()
     {
         GD.Print(program);
-        byte temp_sp = 255;
 
-        /* Count Peripherals */{
+        cpu = new CPU.CPU(Assembler.Assembler.compile(program));
+
+        /* Init Peripherals */{
             steering = GetNode<Peripheral>("Peripherals/Actuator_Steering");
-            steering.Init(temp_sp);
-            temp_sp -= steering.SIZE;
-        }
-
-        /* Initialize CPU */
-        cpu = new CPU.CPU(Assembler.Assembler.compile(program), temp_sp );
-
-        /* Final Init Peripherals */{
-            steering.setCPU(cpu, this);
+            steering.Init();
         }
     }
 
