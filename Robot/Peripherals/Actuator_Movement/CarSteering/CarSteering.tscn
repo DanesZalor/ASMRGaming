@@ -28,7 +28,20 @@ __meta__ = {
 
 Takes up 2 bytes in RAM
 
-The 1st byte is for the rear wheel.
+ram[0] : rear wheel
+ram[1] : front steering
+
+INIT:
+	ram[0] = 127
+	ram[1] = 127
+
+STATES
+	ram[0] == 127			stationary
+	ram[0] < 127			reversing
+	ram[0] > 127			moving forward
+	ram[1] == 127			facing forward
+	ram[1] > 127			facing right
+	ram[1] < 127			facing left
  "
 }
 
