@@ -11,17 +11,29 @@ size = Vector3( 1, 1, 3 )
 [node name="Actuator_Steering" type="Spatial"]
 script = ExtResource( 1 )
 __meta__ = {
-"_editor_description_": "Tank Steering Peripheral
+"_editor_description_": "Movement Actuator Peripheral
 
 Takes up 2 bytes of RAM space. One for each wheel.
 
-The 1st byte is for the left wheel and the 2nd for the right.
+ram[0] = Left Wheel
+ram[1] = Right Wheel
 
-if the value of a wheel is 127, it means stationary.
-if greater than 127, it means it will rotate forward
-if lesser,  it means it will rotate backward.
+INIT:
+	ram[0] = 127
+	ram[1] = 127
 
-to steer left, the rotation of the right wheel must be greater than the left and vice versa
+STATES:
+ram[x] == 127			stationary. 
+ 
+ram[x] < 127			wheel revolves backwards
+
+ram[x] > 127			wheel revolves forward
+
+ram[0] > ram[1]		rotates clockwise
+ram[0] < ram[1]		rotates counter-clockwise
+
+(ram[0] == ram[1]) && ( ram[0] != 0 || ram[1] != 0 ) 
+	moves forward/backward depending on the value
 "
 }
 

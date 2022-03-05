@@ -39,7 +39,7 @@ public abstract class Peripheral : Spatial
 
         else{
             GD.Print("ERROR: out of bounds");
-            // some code to throw exception or some shit
+            throw new System.IndexOutOfRangeException();
             return 0;
         }
     }
@@ -50,7 +50,7 @@ public abstract class Peripheral : Spatial
         
         else{
             GD.Print("ERROR: out of bounds");
-            // some code to throw exception or some shit
+            throw new System.IndexOutOfRangeException();
         }
     }
 
