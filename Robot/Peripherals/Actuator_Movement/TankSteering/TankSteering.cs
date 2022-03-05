@@ -17,7 +17,7 @@ public class TankSteering : Peripheral
         writeToRam(1, 127);
     }
 
-    public override void tick(float delta){
+    public override void tickLogical(float delta){
 
         float lram = (float)(Godot.Mathf.Min(readFromRam(1),254));
         float rram = (float)(Godot.Mathf.Min(readFromRam(0),254));

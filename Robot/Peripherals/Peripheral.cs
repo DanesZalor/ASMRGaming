@@ -11,6 +11,9 @@ public class Peripheral : Spatial
     protected byte RAMcoordLength = 0;      // length of reading, set on _Ready() by inheritor
     private bool initialized = false;
 
+    public byte SIZE{ get => RAMcoordLength; }
+
+
     /// <summary> should be called for Initialization. </summary>
     public virtual void Init(){
         initialized = true;
@@ -25,8 +28,6 @@ public class Peripheral : Spatial
                 parent.CPU.getStackPointerValue() - RAMcoordLength
         ));
     }
-
-    public byte SIZE{ get => RAMcoordLength; }
 
     private bool addressInRange(byte address){
         return address < RAMcoordLength;
@@ -53,8 +54,15 @@ public class Peripheral : Spatial
         }
     }
 
-    public virtual void tick(float delta){
+    public virtual void tickLogical(float delta){}
+
+    public virtual void tickPresentational(float delta){}
+
+    public void tick(float delta){
         if(!initialized) GD.Print("WARNING: Peripheral \""+Name+"\" not initialized");
+
+        tickLogical(delta);
+        tickPresentational(delta);
     }
 
 }

@@ -7,6 +7,7 @@ public class Robot : KinematicBody
     private string program = "";
     
     private Peripheral steering;
+    private Peripheral combat;
     private CPU.CPU cpu;
 
     public CPU.CPU CPU { 
@@ -22,6 +23,8 @@ public class Robot : KinematicBody
         /* Init Peripherals */{
             steering = GetNode<Peripheral>("Peripherals/Actuator_Steering");
             steering.Init();
+            combat = GetNode<Peripheral>("Peripherals/Actuator_Combat");
+            combat.Init();
         }
     }
 
@@ -32,6 +35,7 @@ public class Robot : KinematicBody
         cpu.InstructionCycleTick();
 
         steering.tick(delta);
+        combat.tick(delta);
         
     }
 }

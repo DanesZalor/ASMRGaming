@@ -5,10 +5,10 @@
 [sub_resource type="CylinderMesh" id=4]
 radial_segments = 4
 
-[sub_resource type="CylinderMesh" id=3]
+[sub_resource type="CylinderMesh" id=5]
 top_radius = 0.0
-height = 2.5
 radial_segments = 4
+rings = 1
 
 [node name="Actuator_Combat" type="Spatial"]
 script = ExtResource( 1 )
@@ -25,8 +25,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 mesh = SubResource( 4 )
 material/0 = null
 
-[node name="MeshInstance" type="MeshInstance" parent="MeshPlaceHolder"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.38419e-07, 2 )
-mesh = SubResource( 3 )
-skeleton = NodePath("../..")
+[node name="Drill" type="Spatial" parent="MeshPlaceHolder"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.38419e-07, 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="MeshPlaceHolder/Drill"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+mesh = SubResource( 5 )
 material/0 = null
