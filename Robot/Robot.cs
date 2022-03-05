@@ -4,11 +4,12 @@ using System;
 public class Robot : KinematicBody
 {
 
-    public static PackedScene[] preloadedPeripherals = new PackedScene[2]{
+    public static PackedScene[] preloadedPeripherals = new PackedScene[3]{
         // movement actuators
         GD.Load<PackedScene>("res://Robot/Peripherals/Actuator_Movement/TankSteering/TankSteering.tscn"),
         // combat actuators
         GD.Load<PackedScene>("res://Robot/Peripherals/Actuator_Combat/Drill/Drill.tscn"),
+        GD.Load<PackedScene>("res://Robot/Peripherals/Actuator_Combat/Saw/RingSaw.tscn"),
     };
 
     [Export(PropertyHint.Enum, "Tank,Differential")]
@@ -49,9 +50,9 @@ public class Robot : KinematicBody
             switch(Combat_Device){
                 case "Drill":
                     combat = preloadedPeripherals[1].Instance<Peripheral>();
-                    
                     break;
                 case "Saw":
+                    combat = preloadedPeripherals[2].Instance<Peripheral>();
                     break;
             } 
             peripherals.AddChild(combat);
