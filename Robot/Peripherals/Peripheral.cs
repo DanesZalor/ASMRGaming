@@ -9,9 +9,11 @@ public class Peripheral : Spatial
     protected byte[] ram;
     private byte RAMcoordStart = 255;     // starting coordinate 
     protected byte RAMcoordLength = 0;      // length of reading, set on _Ready() by inheritor
+    private bool initialized = false;
 
-
+    /// <summary> should be called for Initialization. </summary>
     public virtual void Init(){
+        initialized = true;
         parent = GetParent().GetParent<Robot>();
 
         // RAMcoordStart is where SP is right now
@@ -51,6 +53,8 @@ public class Peripheral : Spatial
         }
     }
 
-    public virtual void tick(float delta){}
+    public virtual void tick(float delta){
+        if(!initialized) GD.Print("WARNING: Peripheral \""+Name+"\" not initialized");
+    }
 
 }
