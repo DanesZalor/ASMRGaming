@@ -4,14 +4,15 @@ using System;
 public class Drill : Peripheral
 {
 
-    private Spatial drillbit; // temporary
+    private Spatial drillShaft;
+    private float rotvel = 0;
 
     public override void _Ready()
     {
         base._Ready();
         RAMcoordLength = 1;
 
-        drillbit = GetNode<Spatial>("MeshPlaceHolder/Drill");
+        drillShaft = GetNode<Spatial>("MainMesh/DrillShaft");
     }
 
     public override void Init()
@@ -19,13 +20,14 @@ public class Drill : Peripheral
         base.Init();
         writeToRam(0,0);
     }
-
+    
     public override void tickLogical(float delta)
     {
         //throw new NotImplementedException();
+        rotvel = Mathf.MoveToward(rotvel, (readFromRam(0)==0 ? 0f : 1f), delta );
     }
     public override void tickPresentational(float delta){
-        drillbit.Rotation += new Vector3(0,0,0.5f) * (readFromRam(0) > 0 ? 1 : 0);
+        drillShaft.Rotation += new Vector3(0.2f,0,0) * rotvel;
     }
     
 }

@@ -21,7 +21,7 @@ program = "mov a, 150
 mov b, 160
 mov [254], a
 mov [255], b
-mov [253], a
+;mov [253], a
 jmp 0"
 
 [node name="Camera" type="Camera" parent="."]
