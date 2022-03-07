@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Robot/Peripherals/Actuator_Movement/CarSteering/CarSteering.cs" type="Script" id=1]
+[ext_resource path="res://Robot/Peripherals/Actuator_Movement/Car/Car.cs" type="Script" id=1]
 
 [sub_resource type="CubeMesh" id=3]
 size = Vector3( 1.5, 0.5, 2 )
@@ -21,7 +21,7 @@ height = 0.5
 [sub_resource type="SpatialMaterial" id=7]
 albedo_color = Color( 0.764706, 0.764706, 0.764706, 1 )
 
-[node name="Actuator_Movement" type="Spatial"]
+[node name="Actuator_Steering" type="Spatial"]
 script = ExtResource( 1 )
 __meta__ = {
 "_editor_description_": "Movement Actuator Peripheral

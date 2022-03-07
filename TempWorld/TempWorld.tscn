@@ -17,22 +17,15 @@ mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
 [node name="Robot" parent="." instance=ExtResource( 2 )]
-Steering_Device = "Car"
 Combat_Device = "Saw"
-program = "; turn right
-mov a, 255
+program = "mov a, 140
 mov [255], a
-
-; accelerate
-mov [254], b
-mov b, 255
-
-mov c, 1
-mov [253], c
-
-jmp 0
-"
+jmp 0"
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( -1, -8.60947e-08, 1.51808e-08, 0, 0.173648, 0.984808, -8.74228e-08, 0.984808, -0.173648, 0, 30, -10 )
+transform = Transform( -1, 7.57104e-08, -4.37114e-08, 0, 0.5, 0.866026, 8.74228e-08, 0.866026, -0.5, 0, 13, -10 )
 current = true
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.866025, -0.353553, -0.353553, 0, -0.707107, 0.707107, -0.5, -0.612372, -0.612372, 0, 0, 0 )
+shadow_enabled = true

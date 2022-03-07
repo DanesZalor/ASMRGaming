@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class CarSteering : Peripheral
+public class Car : Peripheral
 {
     public override void _Ready()
     {
