@@ -1,14 +1,15 @@
 using Godot;
 using System;
 
-public class RingSaw : Peripheral
+public class Chopper : Peripheral
 {
-    private Spatial sawmesh; 
+    private Spatial blades;
+    private float rotvel = 0;
     public override void _Ready()
     {
         RAMcoordLength = 1;
 
-        sawmesh = GetNode<Spatial>("MeshPlaceholder");   
+        blades = GetNode<Spatial>("MainMesh/Blades");   
     }
 
     public override void Init()
@@ -19,13 +20,14 @@ public class RingSaw : Peripheral
 
     public override void tickLogical(float delta)
     {
-        //throw new NotImplementedException();
+        //rotvel = Mathf.Lerp(rotvel, (readFromRam(0)==0 ? 0f : 1f), 0.05f );
+        rotvel = Mathf.MoveToward(rotvel, (readFromRam(0)==0 ? 0f : 1f), delta );
     }
 
     public override void tickPresentational(float delta)
     {
         //throw new NotImplementedException();
-        sawmesh.Rotation += new Vector3(0,0.1f,0) * (readFromRam(0) > 0? 1 : 0);
+        blades.Rotation += new Vector3(0,0.2f,0) * rotvel;
     }
 
 }

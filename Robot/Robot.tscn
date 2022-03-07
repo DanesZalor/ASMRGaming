@@ -12,3 +12,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 shape = SubResource( 2 )
 
 [node name="Peripherals" type="Spatial" parent="."]
+
+[node name="CamHolder" type="Spatial" parent="."]
+
+[node name="Camera" type="Camera" parent="CamHolder"]
+transform = Transform( -1, -7.57103e-08, 4.37114e-08, 0, 0.5, 0.866025, -8.74228e-08, 0.866025, -0.5, 0, 15, -10 )
+current = true

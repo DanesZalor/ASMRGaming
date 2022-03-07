@@ -10,7 +10,7 @@ public class Robot : KinematicBody
         GD.Load<PackedScene>("res://Robot/Peripherals/Actuator_Movement/Car/Car.tscn"),
         // combat actuators
         GD.Load<PackedScene>("res://Robot/Peripherals/Actuator_Combat/Drill/Drill.tscn"),
-        GD.Load<PackedScene>("res://Robot/Peripherals/Actuator_Combat/Saw/RingSaw.tscn"),
+        GD.Load<PackedScene>("res://Robot/Peripherals/Actuator_Combat/Chopper/Chopper.tscn"),
     };
 
     [Export(PropertyHint.Enum, "Tank,Car")]
@@ -21,17 +21,19 @@ public class Robot : KinematicBody
 
     [Export(PropertyHint.MultilineText)]
     private string program = "";
-    
     private Peripheral steering;
     private Peripheral combat;
-    private CPU.CPU cpu;
-
-    public CPU.CPU CPU { 
+    private CPU.CPU cpu;    public CPU.CPU CPU { 
         get { return cpu; } 
     }
 
+    private Spatial camholder;
+
     public override void _Ready()
     {
+        camholder = GetNode<Spatial>("CamHolder");
+        camholder.SetAsToplevel(true);
+
         GD.Print(program);
         cpu = new CPU.CPU(Assembler.Assembler.compile(program));
 
@@ -65,8 +67,9 @@ public class Robot : KinematicBody
     public override void _PhysicsProcess(float delta)
     {
         base._PhysicsProcess(delta);
-        cpu.InstructionCycleTick();
+        camholder.Translation = GlobalTransform.origin;
 
+        cpu.InstructionCycleTick();
         steering.tick(delta);
         combat.tick(delta);
         

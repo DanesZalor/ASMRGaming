@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Robot/Peripherals/Actuator_Combat/Saw/RingSaw.cs" type="Script" id=1]
+[ext_resource path="res://Robot/Peripherals/Actuator_Combat/Chopper/Chopper.cs" type="Script" id=1]
 
 [sub_resource type="CubeMesh" id=3]
 size = Vector3( 4.5, 0.1, 1 )

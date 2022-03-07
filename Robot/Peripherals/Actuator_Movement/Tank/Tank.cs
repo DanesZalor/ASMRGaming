@@ -17,10 +17,10 @@ public class Tank : Peripheral
         RAMcoordLength = 2;
         
         /* Get Presentational Layer Init*/{
-            Ltracks = GetNode<MeshInstance>("TracksL");
+            Ltracks = GetNode<MeshInstance>("MainMesh/TracksL");
             Ltracks_Mat = (Ltracks.GetSurfaceMaterial(0) as ShaderMaterial);
 
-            Rtracks = GetNode<MeshInstance>("TracksR");
+            Rtracks = GetNode<MeshInstance>("MainMesh/TracksR");
             Rtracks_Mat = (Rtracks.GetSurfaceMaterial(0) as ShaderMaterial);
 
             Lwheels[0] = Ltracks.GetNode<Spatial>("WheelL1");
