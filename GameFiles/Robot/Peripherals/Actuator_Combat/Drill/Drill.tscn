@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Robot/Peripherals/Actuator_Combat/Drill/Drill.cs" type="Script" id=1]
+[ext_resource path="res://GameFiles/Robot/Peripherals/Actuator_Combat/Drill/Drill.cs" type="Script" id=1]
 
 [sub_resource type="CylinderMesh" id=4]
 radial_segments = 4

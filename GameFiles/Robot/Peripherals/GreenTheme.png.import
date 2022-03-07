@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/GreenTheme.png-03302fd9b291aafda1141ea87dd3a695.s3tc.stex"
-path.etc="res://.import/GreenTheme.png-03302fd9b291aafda1141ea87dd3a695.etc.stex"
+path.s3tc="res://.import/GreenTheme.png-9efd5b6ae8c7e766cb308234c8b9bf58.s3tc.stex"
+path.etc="res://.import/GreenTheme.png-9efd5b6ae8c7e766cb308234c8b9bf58.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Robot/Peripherals/GreenTheme.png"
-dest_files=[ "res://.import/GreenTheme.png-03302fd9b291aafda1141ea87dd3a695.s3tc.stex", "res://.import/GreenTheme.png-03302fd9b291aafda1141ea87dd3a695.etc.stex" ]
+source_file="res://GameFiles/Robot/Peripherals/GreenTheme.png"
+dest_files=[ "res://.import/GreenTheme.png-9efd5b6ae8c7e766cb308234c8b9bf58.s3tc.stex", "res://.import/GreenTheme.png-9efd5b6ae8c7e766cb308234c8b9bf58.etc.stex" ]
 
 [params]
 

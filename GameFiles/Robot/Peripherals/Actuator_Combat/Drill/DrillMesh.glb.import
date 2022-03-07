@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/DrillMesh.glb-ce786bef078a0beea1d0b429124b8dce.scn"
+path="res://.import/DrillMesh.glb-a8b6b4e6c64c638893b9e0edbbbd597e.scn"
 
 [deps]
 
-source_file="res://Robot/Peripherals/Actuator_Combat/Drill/DrillMesh.glb"
-dest_files=[ "res://.import/DrillMesh.glb-ce786bef078a0beea1d0b429124b8dce.scn" ]
+source_file="res://GameFiles/Robot/Peripherals/Actuator_Combat/Drill/DrillMesh.glb"
+dest_files=[ "res://.import/DrillMesh.glb-a8b6b4e6c64c638893b9e0edbbbd597e.scn" ]
 
 [params]
 

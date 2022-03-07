@@ -6,11 +6,11 @@ public class Robot : KinematicBody
 
     public static PackedScene[] preloadedPeripherals = new PackedScene[4]{
         // movement actuators
-        GD.Load<PackedScene>("res://Robot/Peripherals/Actuator_Movement/Tank/Tank.tscn"),
-        GD.Load<PackedScene>("res://Robot/Peripherals/Actuator_Movement/Car/Car.tscn"),
+        GD.Load<PackedScene>("res://GameFiles/Robot/Peripherals/Actuator_Movement/Tank/Tank.tscn"),
+        GD.Load<PackedScene>("res://GameFiles/Robot/Peripherals/Actuator_Movement/Car/Car.tscn"),
         // combat actuators
-        GD.Load<PackedScene>("res://Robot/Peripherals/Actuator_Combat/Drill/Drill.tscn"),
-        GD.Load<PackedScene>("res://Robot/Peripherals/Actuator_Combat/Chopper/Chopper.tscn"),
+        GD.Load<PackedScene>("res://GameFiles/Robot/Peripherals/Actuator_Combat/Drill/Drill.tscn"),
+        GD.Load<PackedScene>("res://GameFiles/Robot/Peripherals/Actuator_Combat/Chopper/Chopper.tscn"),
     };
 
     [Export(PropertyHint.Enum, "Tank,Car")]

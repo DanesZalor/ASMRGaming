@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Robot/Peripherals/PeripheralCommonMat.tres" type="Material" id=1]
-[ext_resource path="res://Robot/Peripherals/Actuator_Combat/Chopper/Chopper.cs" type="Script" id=2]
+[ext_resource path="res://GameFiles/Robot/Peripherals/Actuator_Combat/Chopper/Chopper.cs" type="Script" id=1]
+[ext_resource path="res://GameFiles/Common/Common.shader" type="Shader" id=2]
+[ext_resource path="res://GameFiles/Robot/Peripherals/GreenTheme.png" type="Texture" id=3]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "SawMesh_Cube"
@@ -16,6 +17,11 @@ surfaces/0 = {
 "skeleton_aabb": [  ],
 "vertex_count": 152
 }
+
+[sub_resource type="ShaderMaterial" id=15]
+shader = ExtResource( 2 )
+shader_param/offset = null
+shader_param/tex = ExtResource( 3 )
 
 [sub_resource type="ArrayMesh" id=2]
 resource_name = "SawMesh_Cube014"
@@ -32,15 +38,14 @@ surfaces/0 = {
 }
 
 [node name="Actuator_Combat" type="Spatial"]
-script = ExtResource( 2 )
+script = ExtResource( 1 )
 
 [node name="MainMesh" type="MeshInstance" parent="."]
 transform = Transform( 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0, 0 )
 mesh = SubResource( 1 )
-material/0 = ExtResource( 1 )
+material/0 = SubResource( 15 )
 
 [node name="Blades" type="MeshInstance" parent="MainMesh"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 mesh = SubResource( 2 )
 skeleton = NodePath("../..")
-material/0 = ExtResource( 1 )
+material/0 = SubResource( 15 )
