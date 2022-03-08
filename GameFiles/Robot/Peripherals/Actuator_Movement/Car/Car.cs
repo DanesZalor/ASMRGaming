@@ -12,11 +12,8 @@ public class Car : Peripheral
             GetNode<Spatial>("MainMesh/WheelFrontL"),
             GetNode<Spatial>("MainMesh/WheelFrontR"),
         };
-    }
 
-    public override void Init()
-    {
-        base.Init();
+        base._Ready();
         writeToRam(0, 127);
         writeToRam(1, 127);
     }

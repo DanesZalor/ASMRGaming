@@ -8,13 +8,9 @@ public class Chopper : Peripheral
     public override void _Ready()
     {
         RAMcoordLength = 1;
-        blades = GetNode<Spatial>("MainMesh/Blades");   
-    }
-
-    public override void Init()
-    {
-        base.Init();
-        writeToRam(0,0);
+        blades = GetNode<Spatial>("MainMesh/Blades"); 
+        base._Ready();
+        writeToRam(0,0);  
     }
 
     public override void tickLogical(float delta)

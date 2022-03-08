@@ -13,7 +13,7 @@ public class Tank : Peripheral
 
     public override void _Ready()
     {
-        base._Ready();
+        
         RAMcoordLength = 2;
         
         /* Get Presentational Layer Init*/{
@@ -31,21 +31,15 @@ public class Tank : Peripheral
             Rwheels[1] = Rtracks.GetNode<Spatial>("WheelR2");
             Rwheels[2] = Rtracks.GetNode<Spatial>("WheelR3");
         }
-    }
 
-    public override void Init()
-    {
-        base.Init();
+        base._Ready();
+        
         writeToRam(0, 127);
         writeToRam(1, 127);
     }
 
     float lwp, rwp = 0f;
     public override void tickLogical(float delta){
-
-        // For presentational layer
-        //prevLwheel = new Vector2(Lwheels[0].GlobalTransform.origin.x, Lwheels[0].GlobalTransform.origin.z);
-        //prevRwheel = new Vector2(Rwheels[0].GlobalTransform.origin.x, Rwheels[0].GlobalTransform.origin.z);
 
         float lram = (float)(Godot.Mathf.Min(readFromRam(1),254));
         float rram = (float)(Godot.Mathf.Min(readFromRam(0),254));

@@ -9,18 +9,13 @@ public class Drill : Peripheral
 
     public override void _Ready()
     {
-        base._Ready();
+        
         RAMcoordLength = 1;
-
         drillShaft = GetNode<Spatial>("MainMesh/DrillShaft");
-    }
-
-    public override void Init()
-    {
-        base.Init();
+        base._Ready();
         writeToRam(0,0);
     }
-    
+
     public override void tickLogical(float delta)
     {
         //throw new NotImplementedException();

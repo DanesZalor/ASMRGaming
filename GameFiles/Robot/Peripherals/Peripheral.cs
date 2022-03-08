@@ -14,8 +14,7 @@ public abstract class Peripheral : Spatial
     public byte SIZE{ get => RAMcoordLength; }
 
 
-    /// <summary> should be called for Initialization. </summary>
-    public virtual void Init(){
+    public virtual void _Ready(){
         initialized = true;
         parent = GetParent().GetParent<Robot>();
 

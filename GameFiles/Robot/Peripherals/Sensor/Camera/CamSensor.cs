@@ -6,13 +6,10 @@ public class CamSensor : Peripheral
     public override void _Ready()
     {
         RAMcoordLength = 2;
-    }
-
-    public override void Init()
-    {
-        base.Init();
+        base._Ready();
         writeToRam(0,0);
     }
+
 
     public override void tickLogical(float delta)
     {

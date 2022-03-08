@@ -56,7 +56,6 @@ public class Robot : KinematicBody
                     break;
             }
             peripherals.AddChild(steering); 
-            steering.Init();
 
             switch(Combat_Device){
                 case "Drill":
@@ -67,7 +66,6 @@ public class Robot : KinematicBody
                     break;
             } 
             peripherals.AddChild(combat);
-            combat.Init();
 
             switch(Sensor_Device){
                 case "Laser":
@@ -78,7 +76,6 @@ public class Robot : KinematicBody
                     break;
             }
             peripherals.AddChild(sensor);
-            sensor.Init();
         }
     }
 

@@ -41,11 +41,8 @@ public class LaserSensor : Peripheral
         RAMcoordLength = 3;
         lasers[0] = new Laser(GetNode<RayCast>("MainMesh/RCL"));
         lasers[1] = new Laser(GetNode<RayCast>("MainMesh/RCR"));
-    }
 
-    public override void Init()
-    {
-        base.Init();
+        base._Ready();
         writeToRam(0, 0b000);
         writeToRam(1, 0);
         writeToRam(2, 0);
