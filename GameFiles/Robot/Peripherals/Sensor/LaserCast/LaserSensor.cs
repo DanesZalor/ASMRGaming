@@ -7,6 +7,8 @@ public class LaserSensor : Peripheral
         private RayCast rayCast;
         private Spatial laserMesh, redBeam, blueBeam;
         private float laserLength = 0f;
+        public float LENGTH { get => laserLength; }
+        public bool COLLIDING { get => redBeam.Visible; }
         public Laser(RayCast rc){
             rayCast = rc;
             laserMesh = rc.GetNode<Spatial>("LaserMesh");
@@ -32,7 +34,7 @@ public class LaserSensor : Peripheral
 
     }
 
-    private Laser[] lasers = new Laser[2];
+    private Laser[] lasers = new Laser[2]; // Left and Right
 
     public override void _Ready()
     {
