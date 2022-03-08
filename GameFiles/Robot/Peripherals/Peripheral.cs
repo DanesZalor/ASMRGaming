@@ -12,7 +12,7 @@ public abstract class Peripheral : Spatial
     
 
     /// <summary> make sure to Set RAMCoordLength first before calling base._Ready()
-    public virtual void _Ready(){
+    public override void _Ready(){
         parent = GetParent().GetParent<Robot>();
 
         // RAMcoordStart is where SP is right now
