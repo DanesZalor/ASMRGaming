@@ -7,7 +7,7 @@ public abstract class Peripheral : Spatial
 {
     protected Robot parent; 
     protected byte[] ram;
-    private byte RAMcoordStart = 255;     // starting coordinate 
+    protected byte RAMcoordStart = 255;     // starting coordinate 
     protected byte RAMcoordLength = 0;      // length of reading, set on _Ready() by inheritor
     
 
@@ -23,6 +23,8 @@ public abstract class Peripheral : Spatial
             System.Convert.ToByte(
                 parent.CPU.getStackPointerValue() - RAMcoordLength
         ));
+
+        ram = new byte[RAMcoordLength];
     }
 
     private bool addressInRange(byte address){
@@ -55,8 +57,25 @@ public abstract class Peripheral : Spatial
     public abstract void tickPresentational(float delta);
 
     public void tick(float delta){
+        copyRam();        
         tickLogical(delta);
         tickPresentational(delta);
+        updateRam();
     }
 
+    protected void copyRam(){
+        if(ram.Length==0) return;
+        for(byte i = (byte)ram.Length; i>0; i--) // read ram
+            ram[i-1] = parent.CPU.readFromRAM( 
+                (byte)((RAMcoordStart - RAMcoordLength) + i)
+            );
+    }
+
+    protected void updateRam(){
+        if(ram.Length==0) return;
+        for(byte i = (byte)ram.Length; i>0; i--) // write ram
+            parent.CPU.writeToRAM(
+                (byte)((RAMcoordStart - RAMcoordLength) + i), ram[i-1]
+            );
+    }
 }

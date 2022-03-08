@@ -18,20 +18,18 @@ material/0 = SubResource( 2 )
 
 [node name="Robot2" parent="." instance=ExtResource( 2 )]
 transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 1.28462, 0, 8.9177 )
-Steering_Device = "Car"
 Sensor_Device = "Camera"
-program = "mov a, 255
-mov b, 190
-mov [255], a
-mov [254], b
+program = "mov a, 190
+mov b, 140
+
+mov [254], a
+mov [255], b
+mov [253], a
 jmp 0"
 
 [node name="Robot" parent="." instance=ExtResource( 2 )]
 program = "mov a, 0b100
-mov [250], a
-mov [251], a
-mov [249], a
-mov [248], a"
+mov [250], a"
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( -1, -6.69697e-08, 5.61943e-08, 0, 0.642788, 0.766045, -8.74228e-08, 0.766045, -0.642788, 0, 10, -5 )
