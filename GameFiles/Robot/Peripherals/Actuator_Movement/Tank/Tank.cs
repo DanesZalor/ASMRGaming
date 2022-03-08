@@ -50,8 +50,8 @@ public class Tank : Peripheral
         float lram = (float)(Godot.Mathf.Min(readFromRam(1),254));
         float rram = (float)(Godot.Mathf.Min(readFromRam(0),254));
 
-        lwp = ( ((lram-127f) / 127f) * 0.25f ) * delta * 30f;
-        rwp = ( ((rram-127f) / 127f) * 0.25f ) * delta * 30f;
+        lwp = ( ((lram-127f) / 127f) * 0.25f ) * delta * 5f;
+        rwp = ( ((rram-127f) / 127f) * 0.25f ) * delta * 5f;
 
         parent.Rotation -= new Vector3(0f, lwp, 0f);
         Vector3 lvel = GlobalTransform.basis.z * lwp *4f;
@@ -66,8 +66,9 @@ public class Tank : Peripheral
     Vector2 prevRwheel;
     public override void tickPresentational(float delta)
     {
-        float lv = (lwp * 3.5f) + (rwp * 2.5f);
-        float rv = (rwp * 3.5f) + (lwp * 2.5f);
+        float lv = (lwp * 18.5f) + (rwp * 9.5f);
+        float rv = (rwp * 18.5f) + (lwp * 9.5f);
+
 
         for(int i = 0; i<3; i++){
             Lwheels[i].Rotation += Vector3.Right * lv ;

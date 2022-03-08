@@ -4,13 +4,16 @@ using System;
 public class Robot : KinematicBody
 {
 
-    public static PackedScene[] preloadedPeripherals = new PackedScene[4]{
+    public static PackedScene[] preloadedPeripherals = new PackedScene[6]{
         // movement actuators
         GD.Load<PackedScene>("res://GameFiles/Robot/Peripherals/Actuator_Movement/Tank/Tank.tscn"),
         GD.Load<PackedScene>("res://GameFiles/Robot/Peripherals/Actuator_Movement/Car/Car.tscn"),
         // combat actuators
         GD.Load<PackedScene>("res://GameFiles/Robot/Peripherals/Actuator_Combat/Drill/Drill.tscn"),
         GD.Load<PackedScene>("res://GameFiles/Robot/Peripherals/Actuator_Combat/Chopper/Chopper.tscn"),
+        // sensors
+        GD.Load<PackedScene>("res://GameFiles/Robot/Peripherals/Sensor/LaserCast/LaserSensor.tscn"),
+        GD.Load<PackedScene>("res://GameFiles/Robot/Peripherals/Sensor/Camera/CamSensor.tscn"),
     };
 
     [Export(PropertyHint.Enum, "Tank,Car")]
@@ -18,11 +21,15 @@ public class Robot : KinematicBody
 
     [Export(PropertyHint.Enum, "Drill,Saw")]
     private string Combat_Device = "Drill";
+    
+    [Export(PropertyHint.Enum, "Laser,Camera")]
+    private string Sensor_Device = "Laser";  
 
     [Export(PropertyHint.MultilineText)]
     private string program = "";
     private Peripheral steering;
     private Peripheral combat;
+    private Peripheral sensor;
     private CPU.CPU cpu;    public CPU.CPU CPU { 
         get { return cpu; } 
     }
@@ -61,6 +68,17 @@ public class Robot : KinematicBody
             } 
             peripherals.AddChild(combat);
             combat.Init();
+
+            switch(Sensor_Device){
+                case "Laser":
+                    sensor = preloadedPeripherals[4].Instance<Peripheral>();
+                    break;
+                case "Camera":
+                    sensor = preloadedPeripherals[5].Instance<Peripheral>();
+                    break;
+            }
+            peripherals.AddChild(sensor);
+            sensor.Init();
         }
     }
 

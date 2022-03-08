@@ -8,7 +8,6 @@ public class Chopper : Peripheral
     public override void _Ready()
     {
         RAMcoordLength = 1;
-
         blades = GetNode<Spatial>("MainMesh/Blades");   
     }
 

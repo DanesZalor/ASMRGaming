@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/LaserMesh.obj-d0239f9044fd9cf50d2677e35df7d322.mesh"
+
+[deps]
+
+files=[ "res://.import/LaserMesh.obj-d0239f9044fd9cf50d2677e35df7d322.mesh" ]
+
+source_file="res://GameFiles/Robot/Peripherals/Sensor/LaserCast/LaserMesh.obj"
+dest_files=[ "res://.import/LaserMesh.obj-d0239f9044fd9cf50d2677e35df7d322.mesh", "res://.import/LaserMesh.obj-d0239f9044fd9cf50d2677e35df7d322.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286
