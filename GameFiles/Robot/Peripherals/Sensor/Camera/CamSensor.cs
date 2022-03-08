@@ -7,7 +7,7 @@ public class CamSensor : Peripheral
     {
         RAMcoordLength = 2;
         base._Ready();
-        writeToRam(0,0);
+        ram[0] = 0;
     }
 
 

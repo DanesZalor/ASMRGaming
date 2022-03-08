@@ -13,15 +13,15 @@ public class Car : Peripheral
             GetNode<Spatial>("MainMesh/WheelFrontL"),
             GetNode<Spatial>("MainMesh/WheelFrontR"),
         };
-        writeToRam(0, 127);
-        writeToRam(1, 127);
+        ram[0] = 127;
+        ram[1] = 127;
     }
 
     float accel, steering;
     public override void tickLogical(float delta)
     {
-        accel = (((float)readFromRam(1) - 127f) / 127f) * delta * 45f;
-        steering = (((float)readFromRam(0) - 127f) / 127f)  ;
+        accel = (((float)ram[0] - 127f) / 127f) * delta * 45f;
+        steering = (((float)ram[1] - 127f) / 127f)  ;
 
         parent.RotationDegrees -= Vector3.Up * steering * delta * 135f * accel;
 

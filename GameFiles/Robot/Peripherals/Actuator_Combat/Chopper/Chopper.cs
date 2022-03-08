@@ -10,13 +10,13 @@ public class Chopper : Peripheral
         RAMcoordLength = 1;
         base._Ready();
         blades = GetNode<Spatial>("MainMesh/Blades"); 
-        writeToRam(0,0);  
+        ram[0] = 0; 
     }
 
     public override void tickLogical(float delta)
     {
         //rotvel = Mathf.Lerp(rotvel, (readFromRam(0)==0 ? 0f : 1f), 0.05f );
-        rotvel = Mathf.MoveToward(rotvel, (readFromRam(0)==0 ? 0f : 1f), delta );
+        rotvel = Mathf.MoveToward(rotvel, (ram[0]==0 ? 0f : 1f), delta );
     }
 
     public override void tickPresentational(float delta)

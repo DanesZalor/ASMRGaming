@@ -27,30 +27,6 @@ public abstract class Peripheral : Spatial
         ram = new byte[RAMcoordLength];
     }
 
-    private bool addressInRange(byte address){
-        return address < RAMcoordLength;
-    }
-    protected byte readFromRam(byte address){
-        
-        if(addressInRange(address))
-            return parent.CPU.readFromRAM( (byte)(RAMcoordStart - address) );
-
-        else{
-            GD.Print("ERROR: out of bounds");
-            throw new System.IndexOutOfRangeException();
-        }
-    }
-
-    protected void writeToRam(byte address, byte data){
-        if(addressInRange(address))
-            parent.CPU.writeToRAM((byte)(RAMcoordStart - address),data);
-        
-        else{
-            GD.Print("ERROR: out of bounds");
-            throw new System.IndexOutOfRangeException();
-        }
-    }
-
     /// <summary> 
     public abstract void tickLogical(float delta);
 
