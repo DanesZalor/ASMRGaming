@@ -10,8 +10,13 @@ public abstract class Peripheral : Spatial
     protected byte RAMcoordStart = 255;     // starting coordinate 
     
 
-    /// <summary> make sure to Set RAMCoordLength first before calling base._Ready()
+    /// <summary> make sure ram[] is initialized before calling base._Ready()
     public override void _Ready(){
+        if(ram == null) 
+            throw new NullReferenceException(
+                "Peripheral.ram==NULL. Set ram on Subclass _Ready() before calling base._Ready()"
+            );
+
         parent = GetParent().GetParent<Robot>();
 
         // RAMcoordStart is where SP is right now

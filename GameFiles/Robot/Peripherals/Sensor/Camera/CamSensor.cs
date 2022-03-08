@@ -5,7 +5,7 @@ public class CamSensor : Peripheral
 {
     public override void _Ready()
     {
-        ram = new byte[1]{0};
+        //ram = new byte[1]{0};
         base._Ready();
     }
 
