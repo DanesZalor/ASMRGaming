@@ -20,7 +20,7 @@ material/0 = SubResource( 2 )
 program = "mov a, 150
 mov b, 160
 mov [254], a
-mov [255], b
+;mov [255], b
 ;mov [253], a
 jmp 0"
 
