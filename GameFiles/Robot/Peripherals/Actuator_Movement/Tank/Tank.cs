@@ -14,7 +14,7 @@ public class Tank : Peripheral
     public override void _Ready()
     {
         
-        RAMcoordLength = 2;
+        ram = new byte[2]{ 127, 127};
         base._Ready();
 
         /* Get Presentational Layer Init*/{
@@ -34,15 +34,14 @@ public class Tank : Peripheral
             Rwheels[1] = Rtracks.GetNode<Spatial>("WheelR2");
             Rwheels[2] = Rtracks.GetNode<Spatial>("WheelR3");
         }
-        writeToRam(0, 127);
-        writeToRam(1, 127);
+        
     }
 
     float lwp, rwp = 0f;
     public override void tickLogical(float delta){
 
-        float lram = (float)(Godot.Mathf.Min(readFromRam(1),254));
-        float rram = (float)(Godot.Mathf.Min(readFromRam(0),254));
+        float lram = (float)(Godot.Mathf.Min(ram[0],254));
+        float rram = (float)(Godot.Mathf.Min(ram[1],254));
 
         lwp = ( ((lram-127f) / 127f) * 0.25f ) * delta * 5f;
         rwp = ( ((rram-127f) / 127f) * 0.25f ) * delta * 5f;

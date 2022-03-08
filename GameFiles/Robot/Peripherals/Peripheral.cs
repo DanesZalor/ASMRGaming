@@ -7,12 +7,16 @@ public abstract class Peripheral : Spatial
 {
     protected Robot parent; 
     protected byte[] ram;
-    private byte RAMcoordStart = 255;     // starting coordinate 
-    protected byte RAMcoordLength = 0;      // length of reading, set on _Ready() by inheritor
+    protected byte RAMcoordStart = 255;     // starting coordinate 
     
 
-    /// <summary> make sure to Set RAMCoordLength first before calling base._Ready()
+    /// <summary> make sure ram[] is initialized before calling base._Ready()
     public override void _Ready(){
+        if(ram == null) 
+            throw new NullReferenceException(
+                "Peripheral.ram==NULL. Set ram on Subclass _Ready() before calling base._Ready()"
+            );
+
         parent = GetParent().GetParent<Robot>();
 
         // RAMcoordStart is where SP is right now
@@ -21,32 +25,10 @@ public abstract class Peripheral : Spatial
         // subtract SP by length of the peripheral
         parent.CPU.setStackPointerValue( 
             System.Convert.ToByte(
-                parent.CPU.getStackPointerValue() - RAMcoordLength
+                parent.CPU.getStackPointerValue() - ram.Length
         ));
-    }
 
-    private bool addressInRange(byte address){
-        return address < RAMcoordLength;
-    }
-    protected byte readFromRam(byte address){
-        
-        if(addressInRange(address))
-            return parent.CPU.readFromRAM( (byte)(RAMcoordStart - address) );
-
-        else{
-            GD.Print("ERROR: out of bounds");
-            throw new System.IndexOutOfRangeException();
-        }
-    }
-
-    protected void writeToRam(byte address, byte data){
-        if(addressInRange(address))
-            parent.CPU.writeToRAM((byte)(RAMcoordStart - address),data);
-        
-        else{
-            GD.Print("ERROR: out of bounds");
-            throw new System.IndexOutOfRangeException();
-        }
+        updateRam();
     }
 
     /// <summary> 
@@ -55,8 +37,25 @@ public abstract class Peripheral : Spatial
     public abstract void tickPresentational(float delta);
 
     public void tick(float delta){
+        copyRam();        
         tickLogical(delta);
         tickPresentational(delta);
+        updateRam();
     }
 
+    private void copyRam(){
+        if(ram.Length==0) return;
+        for(byte i = (byte)ram.Length; i>0; i--) // read ram
+            ram[i-1] = parent.CPU.readFromRAM( 
+                (byte)((RAMcoordStart - ram.Length) + i)
+            );
+    }
+
+    private void updateRam(){
+        if(ram.Length==0) return;
+        for(byte i = (byte)ram.Length; i>0; i--) // write ram
+            parent.CPU.writeToRAM(
+                (byte)((RAMcoordStart - ram.Length) + i), ram[i-1]
+            );
+    }
 }
