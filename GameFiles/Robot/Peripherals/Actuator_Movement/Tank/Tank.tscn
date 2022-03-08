@@ -20,6 +20,7 @@ surfaces/0 = {
 
 [sub_resource type="ShaderMaterial" id=15]
 shader = ExtResource( 2 )
+shader_param/albedo = null
 shader_param/offset = null
 shader_param/tex = ExtResource( 3 )
 
@@ -39,6 +40,7 @@ surfaces/0 = {
 
 [sub_resource type="ShaderMaterial" id=10]
 shader = ExtResource( 2 )
+shader_param/albedo = null
 shader_param/offset = Vector2( 0, 0 )
 shader_param/tex = ExtResource( 3 )
 
@@ -98,6 +100,7 @@ surfaces/0 = {
 
 [sub_resource type="ShaderMaterial" id=14]
 shader = ExtResource( 2 )
+shader_param/albedo = null
 shader_param/offset = Vector2( 0, 0 )
 shader_param/tex = ExtResource( 3 )
 

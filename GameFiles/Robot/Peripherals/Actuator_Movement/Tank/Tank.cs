@@ -19,9 +19,11 @@ public class Tank : Peripheral
 
         /* Get Presentational Layer Init*/{
             Ltracks = GetNode<MeshInstance>("MainMesh/TracksL");
+            Ltracks.SetSurfaceMaterial(0, (Material)Ltracks.GetSurfaceMaterial(0).Duplicate() );
             Ltracks_Mat = (Ltracks.GetSurfaceMaterial(0) as ShaderMaterial);
 
             Rtracks = GetNode<MeshInstance>("MainMesh/TracksR");
+            Rtracks.SetSurfaceMaterial(0, (Material)Rtracks.GetSurfaceMaterial(0).Duplicate() );
             Rtracks_Mat = (Rtracks.GetSurfaceMaterial(0) as ShaderMaterial);
 
             Lwheels[0] = Ltracks.GetNode<Spatial>("WheelL1");
