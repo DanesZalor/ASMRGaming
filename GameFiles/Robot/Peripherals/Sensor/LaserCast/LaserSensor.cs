@@ -46,7 +46,7 @@ public class LaserSensor : Peripheral
 
     public override void _Ready()
     {
-        RAMcoordLength = 3;
+        ram = new byte[3]{0, 0, 0};
         base._Ready();
         lasers[0] = new Laser(GetNode<RayCast>("MainMesh/RCL"));
         lasers[1] = new Laser(GetNode<RayCast>("MainMesh/RCR"));

@@ -14,7 +14,7 @@ public class Tank : Peripheral
     public override void _Ready()
     {
         
-        RAMcoordLength = 2;
+        ram = new byte[2]{ 127, 127};
         base._Ready();
 
         /* Get Presentational Layer Init*/{
@@ -35,9 +35,6 @@ public class Tank : Peripheral
             Rwheels[2] = Rtracks.GetNode<Spatial>("WheelR3");
         }
         
-        ram[0] = 127;
-        ram[1] = 127;
-        updateRam();
     }
 
     float lwp, rwp = 0f;

@@ -9,10 +9,9 @@ public class Drill : Peripheral
 
     public override void _Ready()
     {
-        RAMcoordLength = 1;
+        ram = new byte[1]{0};
         base._Ready();
         drillShaft = GetNode<Spatial>("MainMesh/DrillShaft");
-        ram[0] = 0;
     }
 
     public override void tickLogical(float delta)

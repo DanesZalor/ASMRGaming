@@ -6,15 +6,14 @@ public class Car : Peripheral
     private Spatial[] wheels; // {Rear, Left, Right}
     public override void _Ready()
     {
-        RAMcoordLength = 2;
+        ram = new byte[2]{127,127};
         base._Ready();
         wheels = new Spatial[3]{
             GetNode<Spatial>("MainMesh/WheelRear"),
             GetNode<Spatial>("MainMesh/WheelFrontL"),
             GetNode<Spatial>("MainMesh/WheelFrontR"),
         };
-        ram[0] = 127;
-        ram[1] = 127;
+        
     }
 
     float accel, steering;

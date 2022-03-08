@@ -7,10 +7,9 @@ public class Chopper : Peripheral
     private float rotvel = 0;
     public override void _Ready()
     {
-        RAMcoordLength = 1;
+        ram = new byte[1]{0};
         base._Ready();
         blades = GetNode<Spatial>("MainMesh/Blades"); 
-        ram[0] = 0; 
     }
 
     public override void tickLogical(float delta)
