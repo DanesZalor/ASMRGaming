@@ -9,10 +9,9 @@ public abstract class Peripheral : Spatial
     protected byte[] ram;
     protected byte RAMcoordStart = 255;     // starting coordinate 
     
-
-    /// <summary> make sure ram[] is initialized before calling base._Ready()
     public override void _Ready(){
-        if(ram == null) 
+        
+        if(ram == null) // throw null if ram is not initialized 
             throw new NullReferenceException(
                 "Peripheral.ram==NULL. Set ram on Subclass _Ready() before calling base._Ready()"
             );
