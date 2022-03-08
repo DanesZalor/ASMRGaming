@@ -15,7 +15,8 @@ public class Tank : Peripheral
     {
         
         RAMcoordLength = 2;
-        
+        base._Ready();
+
         /* Get Presentational Layer Init*/{
             Ltracks = GetNode<MeshInstance>("MainMesh/TracksL");
             Ltracks_Mat = (Ltracks.GetSurfaceMaterial(0) as ShaderMaterial);
@@ -31,9 +32,6 @@ public class Tank : Peripheral
             Rwheels[1] = Rtracks.GetNode<Spatial>("WheelR2");
             Rwheels[2] = Rtracks.GetNode<Spatial>("WheelR3");
         }
-
-        base._Ready();
-        
         writeToRam(0, 127);
         writeToRam(1, 127);
     }

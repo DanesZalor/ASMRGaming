@@ -7,13 +7,12 @@ public class Car : Peripheral
     public override void _Ready()
     {
         RAMcoordLength = 2;
+        base._Ready();
         wheels = new Spatial[3]{
             GetNode<Spatial>("MainMesh/WheelRear"),
             GetNode<Spatial>("MainMesh/WheelFrontL"),
             GetNode<Spatial>("MainMesh/WheelFrontR"),
         };
-
-        base._Ready();
         writeToRam(0, 127);
         writeToRam(1, 127);
     }
