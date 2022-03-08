@@ -90,6 +90,7 @@ public class Robot : KinematicBody
         cpu.InstructionCycleTick();
         steering.tick(delta);
         combat.tick(delta);
+        sensor.tick(delta);
         
     }
 }
