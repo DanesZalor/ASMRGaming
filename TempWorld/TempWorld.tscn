@@ -27,25 +27,11 @@ mov [254], b
 jmp 0"
 
 [node name="Robot" parent="." instance=ExtResource( 2 )]
-program = "init:
-	mov a, 108
-	mov b, 148
-	mov c, 10
-	jmp trap
-		
-loop:
-	mov [254], a
-	mov [255], b
-	sub c, 1
-	cmp c, 0
-	ja loop
-	
-
-trap:
-	mov a, 127
-	mov [254], a
-	mov [255], a
-	jmp trap"
+program = "mov a, 0b100
+mov [250], a
+mov [251], a
+mov [249], a
+mov [248], a"
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( -1, -6.69697e-08, 5.61943e-08, 0, 0.642788, 0.766045, -8.74228e-08, 0.766045, -0.642788, 0, 10, -5 )

@@ -6,7 +6,7 @@ public class LaserSensor : Peripheral
     private class Laser{
         private RayCast rayCast;
         private Spatial laserMesh, redBeam, blueBeam;
-        private float laserLength = 0f;
+        private float laserLength = 0f; private bool enemyDetected = false;
         public float LENGTH { get => laserLength; }
         public bool COLLIDING { get => redBeam.Visible; }
         public Laser(RayCast rc){
@@ -16,14 +16,22 @@ public class LaserSensor : Peripheral
             blueBeam = laserMesh.GetNode<Spatial>("W/Blue");
         }
 
-        public void process(){
+        public void tickLogical(bool on=true){
+            if(!on) return;
+
             bool isColliding = rayCast.IsColliding();
             laserLength = (!isColliding ? rayCast.CastTo.x : rayCast.ToLocal(rayCast.GetCollisionPoint()).x) / rayCast.CastTo.x ;
+
+            enemyDetected = isColliding && (rayCast.GetCollider() is Robot);
+        }
+
+        public void tickPresentational(bool on=true){
+            laserMesh.Visible = on;
 
             laserMesh.Scale = new Vector3(170 * laserLength,1,1) ;
             laserMesh.Translation = new Vector3(-12.75f * laserLength,0,0);
 
-            redBeam.Visible = rayCast.IsColliding() && (rayCast.GetCollider() is Robot);
+            redBeam.Visible = enemyDetected;
             blueBeam.Visible = !redBeam.Visible;
 
             // flicker effect
@@ -42,20 +50,25 @@ public class LaserSensor : Peripheral
         base._Ready();
         lasers[0] = new Laser(GetNode<RayCast>("MainMesh/RCL"));
         lasers[1] = new Laser(GetNode<RayCast>("MainMesh/RCR"));
-        writeToRam(0, 0b000);
-        writeToRam(1, 0);
-        writeToRam(2, 0);
+        writeToRam(2, 0b000); // 3rd bit: if the peripheral is on/off. 2nd and 3rd are whether if the lasers are detecting an enemy (if red)
+        writeToRam(1, 0);     // length of Left laser (0 if no enemy detected)
+        writeToRam(0, 0);     // length of right laser (0 if no enemy detected)
     }
 
     public override void tickLogical(float delta)
     {
-        //throw new NotImplementedException();
-        lasers[0].process();
-        lasers[1].process();
+        for(byte i=0; i<2; i++){
+            lasers[i].tickLogical( (readFromRam(2) & 0b100) > 0 );
+            
+            GD.Print(lasers[i].LENGTH);
+            //writeToRam(i+1, (lasers[i].COLLIDING ? lasers[i].LENGTH : 0) );
+        }
     }
 
     public override void tickPresentational(float delta)
     {
-        //throw new NotImplementedException();
+        for(byte i=0; i<2; i++){
+            lasers[i].tickPresentational((readFromRam(2) | 0b100) > 0);
+        }
     }
 }

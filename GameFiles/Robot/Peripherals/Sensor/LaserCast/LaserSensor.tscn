@@ -54,6 +54,7 @@ cast_to = Vector3( -25.5, 0, 0 )
 transform = Transform( 170, 0, 0, 0, 1, 0, 0, 0, 1, -12.75, 0, 0 )
 
 [node name="W" type="MeshInstance" parent="MainMesh/RCL/LaserMesh"]
+cast_shadow = 0
 mesh = SubResource( 7 )
 skeleton = NodePath("../..")
 material/0 = SubResource( 8 )
@@ -61,12 +62,14 @@ material/0 = SubResource( 8 )
 [node name="Red" type="MeshInstance" parent="MainMesh/RCL/LaserMesh/W"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19209e-07, 0 )
 visible = false
+cast_shadow = 0
 mesh = SubResource( 2 )
 skeleton = NodePath("../../..")
 material/0 = ExtResource( 4 )
 
 [node name="Blue" type="MeshInstance" parent="MainMesh/RCL/LaserMesh/W"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19209e-07, 0 )
+cast_shadow = 0
 mesh = SubResource( 2 )
 skeleton = NodePath("../../..")
 material/0 = SubResource( 9 )
@@ -80,6 +83,7 @@ cast_to = Vector3( -25.5, 0, 0 )
 transform = Transform( 170, 0, 0, 0, 1, 0, 0, 0, 1, -12.75, 0, 0 )
 
 [node name="W" type="MeshInstance" parent="MainMesh/RCR/LaserMesh"]
+cast_shadow = 0
 mesh = SubResource( 7 )
 skeleton = NodePath("../../../RCL/LaserMesh")
 material/0 = SubResource( 8 )
@@ -87,12 +91,14 @@ material/0 = SubResource( 8 )
 [node name="Red" type="MeshInstance" parent="MainMesh/RCR/LaserMesh/W"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19209e-07, 0 )
 visible = false
+cast_shadow = 0
 mesh = SubResource( 2 )
 skeleton = NodePath("../../../../RCL/LaserMesh")
 material/0 = ExtResource( 4 )
 
 [node name="Blue" type="MeshInstance" parent="MainMesh/RCR/LaserMesh/W"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19209e-07, 0 )
+cast_shadow = 0
 mesh = SubResource( 2 )
 skeleton = NodePath("../../../../RCL/LaserMesh")
 material/0 = SubResource( 9 )
