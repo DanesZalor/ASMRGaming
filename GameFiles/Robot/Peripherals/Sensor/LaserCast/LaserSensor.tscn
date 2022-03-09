@@ -2,8 +2,8 @@
 
 [ext_resource path="res://GameFiles/Robot/Peripherals/GreenPerpiheral.tres" type="Material" id=1]
 [ext_resource path="res://GameFiles/Robot/Peripherals/Sensor/LaserCast/LaserSensor.cs" type="Script" id=2]
-[ext_resource path="res://GameFiles/Common/Common.shader" type="Shader" id=3]
 [ext_resource path="res://GameFiles/Robot/Peripherals/Sensor/LaserCast/LaserMat.tres" type="Material" id=4]
+[ext_resource path="res://GameFiles/Common/UnshadedCommon.shader" type="Shader" id=5]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "LaserMesh_Cube023"
@@ -24,7 +24,7 @@ flip_faces = true
 size = Vector3( 0.15, 0.1, 0.1 )
 
 [sub_resource type="ShaderMaterial" id=8]
-shader = ExtResource( 3 )
+shader = ExtResource( 5 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/offset = null
 
@@ -33,7 +33,7 @@ flip_faces = true
 size = Vector3( 0.15, 0.2, 0.2 )
 
 [sub_resource type="ShaderMaterial" id=9]
-shader = ExtResource( 3 )
+shader = ExtResource( 5 )
 shader_param/albedo = Color( 0, 0.623529, 1, 1 )
 shader_param/offset = null
 

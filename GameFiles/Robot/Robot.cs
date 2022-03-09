@@ -64,7 +64,7 @@ public class Robot : KinematicBody
                     p.AddChild(preloads.SENSORS[0].Instance<Peripheral>());
                     break;
                 case "Camera":
-                    p.AddChild(preloads.SENSORS[0].Instance<Peripheral>());
+                    p.AddChild(preloads.SENSORS[1].Instance<Peripheral>());
                     break;
             }
             

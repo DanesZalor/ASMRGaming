@@ -16,18 +16,19 @@ albedo_texture = ExtResource( 1 )
 mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
-[node name="Robot" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.05702 )
-program = "mov a, 0b100
-mov [250], a
-"
+[node name="DirectionalLight" type="DirectionalLight" parent="MeshInstance"]
+transform = Transform( -0.654002, -0.534921, -0.534921, 0, -0.707107, 0.707107, -0.756493, 0.462449, 0.462449, 0, 0, 0 )
+shadow_enabled = true
+
+[node name="Robot3" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.976526, 0, -0.2154, 0, 1, 0, 0.2154, 0, 0.976526, 7.91509, 0, -3.19107 )
+Sensor_Device = "Camera"
 
 [node name="Robot2" parent="." instance=ExtResource( 2 )]
-transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -0.520037, 0, 12.1876 )
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -3.21121, 0, 12.1876 )
 Combat_Device = "Saw"
-Sensor_Device = "Camera"
 program = "
-mov a, 190
+mov a, 220
 mov b, 140
 mov [254], a
 mov [255], b
@@ -35,8 +36,5 @@ mov [253], a
 jmp 0"
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( -1, -6.69697e-08, 5.61943e-08, 0, 0.642788, 0.766045, -8.74228e-08, 0.766045, -0.642788, 0, 10, -5 )
-
-[node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( -0.654002, -0.534921, -0.534922, 0, -0.707107, 0.707106, -0.756493, 0.462449, 0.46245, 0, 0, 0 )
-shadow_enabled = true
+transform = Transform( 1, 0, 0, 0, 0.573576, 0.819152, 0, -0.819152, 0.573576, 5, 15, 15 )
+current = true
