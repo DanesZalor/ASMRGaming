@@ -21,20 +21,24 @@ transform = Transform( -0.654002, -0.534921, -0.534921, 0, -0.707107, 0.707107, 
 shadow_enabled = true
 
 [node name="Robot3" parent="." instance=ExtResource( 2 )]
-transform = Transform( 0.976526, 0, -0.2154, 0, 1, 0, 0.2154, 0, 0.976526, 7.91509, 0, -3.19107 )
+transform = Transform( 0.99995, 0, 0.0100007, 0, 1, 0, -0.0100007, 0, 0.99995, 3.00399, 0, -3.19107 )
 Sensor_Device = "Camera"
+program = "mov a, 255
+mov [250], a
+
+jmp 0"
 
 [node name="Robot2" parent="." instance=ExtResource( 2 )]
-transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -3.21121, 0, 12.1876 )
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 1.82773, 0, 12.1876 )
 Combat_Device = "Saw"
 program = "
-mov a, 220
-mov b, 140
+mov a, 250
+mov b, 180
 mov [254], a
 mov [255], b
 mov [253], a
 jmp 0"
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.573576, 0.819152, 0, -0.819152, 0.573576, 5, 15, 15 )
+transform = Transform( 1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 5, 16, 21 )
 current = true
