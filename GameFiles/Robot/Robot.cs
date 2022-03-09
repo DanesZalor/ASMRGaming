@@ -3,37 +3,34 @@ using System;
 
 public class Robot : KinematicBody
 {
+    public static class preloads{
+        public static PackedScene[] ACTUATOR_MOVEMENT = new PackedScene[2]{
+            GD.Load<PackedScene>("res://GameFiles/Robot/Peripherals/Actuator_Movement/Tank/Tank.tscn"),
+            GD.Load<PackedScene>("res://GameFiles/Robot/Peripherals/Actuator_Movement/Car/Car.tscn"),
+        };
 
-    public static PackedScene[] preloadedPeripherals = new PackedScene[6]{
-        // movement actuators
-        GD.Load<PackedScene>("res://GameFiles/Robot/Peripherals/Actuator_Movement/Tank/Tank.tscn"),
-        GD.Load<PackedScene>("res://GameFiles/Robot/Peripherals/Actuator_Movement/Car/Car.tscn"),
-        // combat actuators
-        GD.Load<PackedScene>("res://GameFiles/Robot/Peripherals/Actuator_Combat/Drill/Drill.tscn"),
-        GD.Load<PackedScene>("res://GameFiles/Robot/Peripherals/Actuator_Combat/Chopper/Chopper.tscn"),
-        // sensors
-        GD.Load<PackedScene>("res://GameFiles/Robot/Peripherals/Sensor/LaserCast/LaserSensor.tscn"),
-        GD.Load<PackedScene>("res://GameFiles/Robot/Peripherals/Sensor/Camera/CamSensor.tscn"),
-    };
+        public static PackedScene[] ACTUATOR_COMBAT = new PackedScene[2]{
+            GD.Load<PackedScene>("res://GameFiles/Robot/Peripherals/Actuator_Combat/Drill/Drill.tscn"),
+            GD.Load<PackedScene>("res://GameFiles/Robot/Peripherals/Actuator_Combat/Chopper/Chopper.tscn"),
+        };
 
-    [Export(PropertyHint.Enum, "Tank,Car")]
-    private string Steering_Device = "Tank";
-
-    [Export(PropertyHint.Enum, "Drill,Saw")]
-    private string Combat_Device = "Drill";
-    
-    [Export(PropertyHint.Enum, "Laser,Camera")]
-    private string Sensor_Device = "Laser";  
-
-    [Export(PropertyHint.MultilineText)]
-    private string program = "";
-    private Peripheral steering;
-    private Peripheral combat;
-    private Peripheral sensor;
-    private CPU.CPU cpu;    public CPU.CPU CPU { 
-        get { return cpu; } 
+        public static PackedScene[] SENSORS = new PackedScene[2]{
+            GD.Load<PackedScene>("res://GameFiles/Robot/Peripherals/Sensor/LaserCast/LaserSensor.tscn"),
+            GD.Load<PackedScene>("res://GameFiles/Robot/Peripherals/Sensor/Camera/CamSensor.tscn"),
+        };
     }
 
+    [Export(PropertyHint.Enum, "Tank,Car")] private string Steering_Device = "Tank";
+
+    [Export(PropertyHint.Enum, "Drill,Saw")] private string Combat_Device = "Drill";
+    
+    [Export(PropertyHint.Enum, "Laser,Camera")] private string Sensor_Device = "Laser";  
+
+    [Export(PropertyHint.MultilineText)] private string program = "";
+
+    private CPU.CPU cpu;    public CPU.CPU CPU { get { return cpu; } }
+
+    private Peripheral[] peripherals;
     private Spatial camholder;
 
     public override void _Ready()
@@ -45,37 +42,36 @@ public class Robot : KinematicBody
         cpu = new CPU.CPU(Assembler.Assembler.compile(program));
 
         /* Init Peripherals */{
-            Node peripherals = GetNode("Peripherals");
-
+            Node p = GetNode("Peripherals");
             switch(Steering_Device){
                 case "Tank":
-                    steering = preloadedPeripherals[0].Instance<Peripheral>();
+                    p.AddChild(preloads.ACTUATOR_MOVEMENT[0].Instance<Peripheral>());
                     break;
                 case "Car":
-                    steering = preloadedPeripherals[1].Instance<Peripheral>();
+                    p.AddChild(preloads.ACTUATOR_MOVEMENT[1].Instance<Peripheral>());
                     break;
             }
-            peripherals.AddChild(steering); 
-
             switch(Combat_Device){
                 case "Drill":
-                    combat = preloadedPeripherals[2].Instance<Peripheral>();
+                    p.AddChild(preloads.ACTUATOR_COMBAT[0].Instance<Peripheral>());
                     break;
                 case "Saw":
-                    combat = preloadedPeripherals[3].Instance<Peripheral>();
+                    p.AddChild(preloads.ACTUATOR_COMBAT[1].Instance<Peripheral>());
                     break;
             } 
-            peripherals.AddChild(combat);
-
             switch(Sensor_Device){
                 case "Laser":
-                    sensor = preloadedPeripherals[4].Instance<Peripheral>();
+                    p.AddChild(preloads.SENSORS[0].Instance<Peripheral>());
                     break;
                 case "Camera":
-                    sensor = preloadedPeripherals[5].Instance<Peripheral>();
+                    p.AddChild(preloads.SENSORS[0].Instance<Peripheral>());
                     break;
             }
-            peripherals.AddChild(sensor);
+            
+            peripherals = new Peripheral[p.GetChildCount()];
+            for(byte i = 0; i<p.GetChildCount(); i++)
+                peripherals[i] = p.GetChild<Peripheral>(i);
+
         }
     }
 
@@ -85,9 +81,9 @@ public class Robot : KinematicBody
         camholder.Translation = GlobalTransform.origin;
 
         cpu.InstructionCycleTick();
-        steering.tick(delta);
-        combat.tick(delta);
-        sensor.tick(delta);
-        
+
+        foreach(Peripheral p in peripherals)
+            p.tick(delta);
+           
     }
 }
