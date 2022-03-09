@@ -27,7 +27,7 @@ public class LaserSensor : Peripheral
 
         public void tickPresentational(bool on=true){
             laserMesh.Visible = on;
-
+            
             laserMesh.Scale = new Vector3(170 * laserLength,1,1) ;
             laserMesh.Translation = new Vector3(-12.75f * laserLength,0,0);
 
@@ -50,10 +50,6 @@ public class LaserSensor : Peripheral
         base._Ready();
         lasers[0] = new Laser(GetNode<RayCast>("MainMesh/RCL"));
         lasers[1] = new Laser(GetNode<RayCast>("MainMesh/RCR"));
-
-        ram[0] = 0b000; // 3rd bit: if the peripheral is on/off. 2nd and 3rd are whether if the lasers are detecting an enemy (if red)
-        ram[1] = 0;     // length of Left laser (0 if no enemy detected)
-        ram[2] = 0;     // length of right laser (0 if no enemy detected)
     }
 
     public override void tickLogical(float delta)
@@ -61,8 +57,11 @@ public class LaserSensor : Peripheral
         for(byte i=0; i<2; i++){
             lasers[i].tickLogical((ram[0] & 0b100) > 0 );
             
-            //GD.Print(lasers[i].LENGTH);
-            //writeToRam(i+1, (lasers[i].COLLIDING ? lasers[i].LENGTH : 0) );
+            // turn ram[0] bit on if colliding with Enemy
+            ram[0] = (byte)(ram[0] | (lasers[i].COLLIDING ? (0b010 >> i) : 0b0 ));
+            
+            // set respective ram[i] with laser distance if colliding
+            ram[i + 1] = (byte)( lasers[i].COLLIDING ? lasers[i].LENGTH * 255 : 0 );
         }
     }
 
