@@ -37,3 +37,4 @@ jmp 0"
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.573576, 0.819152, 0, -0.819152, 0.573576, 5, 15, 15 )
+current = true
