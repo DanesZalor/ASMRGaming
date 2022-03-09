@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.s3tc.stex"
-path.etc="res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.etc.stex"
+path.s3tc="res://.import/targetHud.png-5096ad4f99db7bf27bceb20e9d389e17.s3tc.stex"
+path.etc="res://.import/targetHud.png-5096ad4f99db7bf27bceb20e9d389e17.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://icon.png"
-dest_files=[ "res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.s3tc.stex", "res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.etc.stex" ]
+source_file="res://GameFiles/Robot/Peripherals/Sensor/Camera/targetHud.png"
+dest_files=[ "res://.import/targetHud.png-5096ad4f99db7bf27bceb20e9d389e17.s3tc.stex", "res://.import/targetHud.png-5096ad4f99db7bf27bceb20e9d389e17.etc.stex" ]
 
 [params]
 

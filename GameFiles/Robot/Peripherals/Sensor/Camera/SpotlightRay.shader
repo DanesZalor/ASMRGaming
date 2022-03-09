@@ -1,6 +1,6 @@
 shader_type spatial;
 
-render_mode  unshaded, cull_disabled, blend_add;
+render_mode  unshaded, cull_front, blend_add;
 
 uniform vec4 albedo : hint_color;
 uniform sampler2D gridtex;
@@ -18,8 +18,9 @@ void vertex(){
 void fragment(){
 	vec3 GRIDTEX = texture(
 		gridtex, 
-		UV*vec2(9f,1f) + vec2(TIME*0.25f,TIME*0.2f) ).rgb * (sin(TIME*2f) + 2.5f
-	);
+		UV*vec2(9f,0.5f) + 
+		vec2(TIME*0.25f, TIME*0.1f) 
+	).rgb * (sin(TIME*5f)*2f + 3f);
 	vec3 TEX = albedo.rgb + GRIDTEX;
 	TEX *= intensity;
 	//ALPHA = intensity * intensity * 4f;
