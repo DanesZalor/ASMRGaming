@@ -7,7 +7,7 @@
 size = Vector2( 100, 100 )
 
 [sub_resource type="SpatialMaterial" id=2]
-albedo_color = Color( 0.223529, 0.254902, 0.121569, 1 )
+albedo_color = Color( 0.545098, 0.545098, 0.545098, 1 )
 albedo_texture = ExtResource( 3 )
 uv1_scale = Vector3( 10, 10, 1 )
 
@@ -24,7 +24,7 @@ shadow_enabled = true
 [node name="Robot2" parent="." instance=ExtResource( 2 )]
 transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 1.82773, 0, 12.1876 )
 Sensor_Device = "Camera"
-program = "
+program = ";jmp 0
 mov a, 250
 mov b, 180
 mov [254], a

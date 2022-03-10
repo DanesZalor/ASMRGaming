@@ -5,5 +5,5 @@
 
 [resource]
 shader = ExtResource( 1 )
-shader_param/albedo = Color( 1, 0, 0, 1 )
+shader_param/albedo = Color( 0.666667, 0, 0, 1 )
 shader_param/gridtex = ExtResource( 2 )
