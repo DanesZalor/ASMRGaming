@@ -20,30 +20,27 @@ material/0 = SubResource( 2 )
 transform = Transform( -0.654002, -0.534921, -0.534921, 0, -0.707107, 0.707107, -0.756493, 0.462449, 0.462449, 0, 0, 0 )
 shadow_enabled = true
 
-[node name="Robot3" parent="." instance=ExtResource( 2 )]
-transform = Transform( 0.99995, 0, 0.0100007, 0, 1, 0, -0.0100007, 0, 0.99995, 3.00399, 0, -3.19107 )
-Steering_Device = "Car"
-Combat_Device = "Saw"
-Sensor_Device = "Camera"
-program = "mov a, 0b100
-mov [250], a
-
-jmp 0"
-
 [node name="Robot2" parent="." instance=ExtResource( 2 )]
 transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 1.82773, 0, 12.1876 )
+Sensor_Device = "Camera"
 program = "
 mov a, 250
 mov b, 180
 mov [254], a
 mov [255], b
 mov [253], a
+mov c, 4
+mov [250], c
 jmp 0"
 
-[node name="Robot4" parent="." instance=ExtResource( 2 )]
-transform = Transform( -0.734216, 0, 0.678916, 0, 1, 0, -0.678916, 0, -0.734216, 18.6012, 0.545158, 15.526 )
+[node name="Robot" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.34499 )
 Steering_Device = "Car"
-Combat_Device = "Saw"
+Combat_Device = "Chopper"
+Sensor_Device = "Camera"
+program = "mov a, 4
+mov [250], a
+jmp 0"
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 0.984808, -0.0868241, 0.150384, 0, 0.866025, 0.5, -0.173648, -0.492404, 0.852868, 5, 13, 25 )

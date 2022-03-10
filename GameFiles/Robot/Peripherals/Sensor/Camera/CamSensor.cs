@@ -13,7 +13,7 @@ public class CamSensor : Peripheral
     // Area stuff
     private Area RadiusArea;
 
-    private const float FOV = 30, RADIUS = 30;
+    private const float FOV = 30, RADIUS = 23;
 
     private bool ON { get => (ram[0] & 0b100) > 0; }
     private bool DETECTED { get => (ram[0] & 0b10) > 0; }

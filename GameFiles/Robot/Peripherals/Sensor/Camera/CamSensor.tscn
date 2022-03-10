@@ -10,7 +10,7 @@
 [ext_resource path="res://GameFiles/Robot/Peripherals/Sensor/Camera/HUDcyl.obj" type="ArrayMesh" id=9]
 
 [sub_resource type="CylinderShape" id=5]
-radius = 30.0
+radius = 23.0
 height = 3.0
 
 [sub_resource type="CylinderMesh" id=6]

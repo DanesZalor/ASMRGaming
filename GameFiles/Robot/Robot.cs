@@ -20,13 +20,13 @@ public class Robot : KinematicBody
         };
     }
 
-    [Export(PropertyHint.Enum, "Tank,Car")] private string Steering_Device = "Tank";
+    [Export(PropertyHint.Enum, "Tank,Car")] public string Steering_Device = "Tank";
 
-    [Export(PropertyHint.Enum, "Drill,Saw")] private string Combat_Device = "Drill";
+    [Export(PropertyHint.Enum, "Drill,Chopper")] public string Combat_Device = "Drill";
     
-    [Export(PropertyHint.Enum, "Laser,Camera")] private string Sensor_Device = "Laser";  
+    [Export(PropertyHint.Enum, "Laser,Camera")] public string Sensor_Device = "Laser";  
 
-    [Export(PropertyHint.MultilineText)] private string program = "";
+    [Export(PropertyHint.MultilineText)] public string program = "";
 
     private CPU.CPU cpu;    public CPU.CPU CPU { get { return cpu; } }
 
@@ -35,12 +35,12 @@ public class Robot : KinematicBody
 
     public override void _Ready()
     {
+        GD.Print(Name+":\n"+program+"----\n\n");
         // remove editor placeholder
         GetNode("MeshPlaceHolder").QueueFree();
         camholder = GetNode<Spatial>("CamHolder");
         camholder.SetAsToplevel(true);
 
-        GD.Print(program);
         cpu = new CPU.CPU(Assembler.Assembler.compile(program));
 
         /* Init Peripherals */{
@@ -57,7 +57,7 @@ public class Robot : KinematicBody
                 case "Drill":
                     p.AddChild(preloads.ACTUATOR_COMBAT[0].Instance<Peripheral>());
                     break;
-                case "Saw":
+                case "Chopper":
                     p.AddChild(preloads.ACTUATOR_COMBAT[1].Instance<Peripheral>());
                     break;
             } 
