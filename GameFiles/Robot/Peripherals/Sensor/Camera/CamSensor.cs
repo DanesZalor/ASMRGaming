@@ -141,8 +141,6 @@ public class CamSensor : Peripheral
             // Percentage of Distance of detected over Range
             ram[2] = (byte)((parent.GlobalTransform.origin.DistanceTo(nearestBody.GlobalTransform.origin) / RADIUS) * 255) ;
         }
-
-        GD.Print(ram[2]);
     }
 
 }
