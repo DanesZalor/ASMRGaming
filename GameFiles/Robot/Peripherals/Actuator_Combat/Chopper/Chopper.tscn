@@ -20,6 +20,7 @@ surfaces/0 = {
 
 [sub_resource type="ShaderMaterial" id=15]
 shader = ExtResource( 2 )
+shader_param/albedo = null
 shader_param/offset = null
 shader_param/tex = ExtResource( 3 )
 
@@ -46,6 +47,7 @@ mesh = SubResource( 1 )
 material/0 = SubResource( 15 )
 
 [node name="Blades" type="MeshInstance" parent="MainMesh"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
 mesh = SubResource( 2 )
 skeleton = NodePath("../..")
 material/0 = SubResource( 15 )

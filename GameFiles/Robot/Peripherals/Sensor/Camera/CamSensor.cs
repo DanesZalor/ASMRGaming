@@ -8,7 +8,7 @@ public class CamSensor : Peripheral
     private Spatial spotLightParent;
     
     // Marker stuff
-    private Spatial targetMarker; private Sprite3D targetMarkerSprite;
+    private Spatial targetMarker; private Sprite3D targetMarkerSprite; private Spatial targetCircle;
     
     // Area stuff
     private Area RadiusArea;
@@ -37,7 +37,8 @@ public class CamSensor : Peripheral
 
         targetMarker = GetNode<Spatial>("TargetMarker");
         targetMarkerSprite = targetMarker.GetNode<Sprite3D>("Sprite3D");
-        targetMarker.SetAsToplevel(true);
+        targetCircle = targetMarker.GetNode<Spatial>("Circle3D");
+        targetMarker.SetAsToplevel(true);       
     }
 
     public override void tickLogical(float delta)
@@ -57,7 +58,9 @@ public class CamSensor : Peripheral
         spotLightParent.Visible = ON;
         spotLights[0].Visible = nearestBody != null;
         spotLights[1].Visible = !spotLights[0].Visible;
-        
+        targetCircle.Visible = spotLights[0].Visible;
+        //targetCircle.Rotation += Vector3.Up;
+
         /*Target Marker*/{
             targetMarkerSprite.Opacity = Mathf.Lerp(
                 targetMarkerSprite.Opacity, spotLights[0].Visible ? 1f : 0f, 0.2f
@@ -67,7 +70,9 @@ public class CamSensor : Peripheral
                 targetMarkerSprite.PixelSize, spotLights[0].Visible ? 0.015f : 0.04f, 0.2f  
             );
 
-            if(spotLights[0].Visible) targetMarker.Translation = nearestBody.GlobalTransform.origin ;
+            if(spotLights[0].Visible){
+                targetMarker.Translation = nearestBody.GlobalTransform.origin ;
+            }
         }
         
     }

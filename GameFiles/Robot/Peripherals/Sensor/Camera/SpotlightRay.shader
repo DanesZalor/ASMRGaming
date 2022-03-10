@@ -1,6 +1,6 @@
 shader_type spatial;
 
-render_mode  unshaded, cull_front, blend_add;
+render_mode  unshaded, cull_back, blend_add;
 
 uniform vec4 albedo : hint_color;
 uniform sampler2D gridtex;

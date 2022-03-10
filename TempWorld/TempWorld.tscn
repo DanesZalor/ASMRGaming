@@ -22,6 +22,8 @@ shadow_enabled = true
 
 [node name="Robot3" parent="." instance=ExtResource( 2 )]
 transform = Transform( 0.99995, 0, 0.0100007, 0, 1, 0, -0.0100007, 0, 0.99995, 3.00399, 0, -3.19107 )
+Steering_Device = "Car"
+Combat_Device = "Saw"
 Sensor_Device = "Camera"
 program = "mov a, 255
 mov [250], a
@@ -30,7 +32,7 @@ jmp 0"
 
 [node name="Robot2" parent="." instance=ExtResource( 2 )]
 transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 1.82773, 0, 12.1876 )
-Combat_Device = "Saw"
+Sensor_Device = "Camera"
 program = "
 mov a, 250
 mov b, 180
@@ -40,5 +42,7 @@ mov [253], a
 jmp 0"
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 5, 16, 21 )
+transform = Transform( 0.984808, -0.0868241, 0.150384, 0, 0.866025, 0.5, -0.173648, -0.492404, 0.852868, 5, 13, 25 )
+projection = 1
 current = true
+size = 25.0

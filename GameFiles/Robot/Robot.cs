@@ -35,6 +35,8 @@ public class Robot : KinematicBody
 
     public override void _Ready()
     {
+        // remove editor placeholder
+        GetNode("MeshPlaceHolder").QueueFree();
         camholder = GetNode<Spatial>("CamHolder");
         camholder.SetAsToplevel(true);
 

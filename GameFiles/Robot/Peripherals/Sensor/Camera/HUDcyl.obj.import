@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/HUDcyl.obj-a4533bf4225425689761999a58150c84.mesh"
+
+[deps]
+
+files=[ "res://.import/HUDcyl.obj-a4533bf4225425689761999a58150c84.mesh" ]
+
+source_file="res://GameFiles/Robot/Peripherals/Sensor/Camera/HUDcyl.obj"
+dest_files=[ "res://.import/HUDcyl.obj-a4533bf4225425689761999a58150c84.mesh", "res://.import/HUDcyl.obj-a4533bf4225425689761999a58150c84.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286
