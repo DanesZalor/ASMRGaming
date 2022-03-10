@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://GameFiles/Common/Common.shader" type="Shader" id=1]
+[ext_resource path="res://GameFiles/Interface/InterfaceWorld/prototex.jpg" type="Texture" id=2]
+
+[sub_resource type="PlaneMesh" id=1]
+size = Vector2( 100, 100 )
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 1 )
+shader_param/albedo = Color( 0.505882, 0.556863, 0, 0.388235 )
+shader_param/offset = null
+shader_param/uvmul = Vector2( 25, 25 )
+shader_param/tex = ExtResource( 2 )
+
+[node name="InterfaceWorld" type="Spatial"]
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )

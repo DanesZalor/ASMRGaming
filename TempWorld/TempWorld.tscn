@@ -1,14 +1,15 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://TempWorld/templategrid_albedo.png" type="Texture" id=1]
 [ext_resource path="res://GameFiles/Robot/Robot.tscn" type="PackedScene" id=2]
+[ext_resource path="res://GameFiles/Interface/InterfaceWorld/prototex.jpg" type="Texture" id=3]
 
 [sub_resource type="PlaneMesh" id=1]
 size = Vector2( 100, 100 )
 
 [sub_resource type="SpatialMaterial" id=2]
-albedo_color = Color( 0.658824, 0.658824, 0.658824, 1 )
-albedo_texture = ExtResource( 1 )
+albedo_color = Color( 0.223529, 0.254902, 0.121569, 1 )
+albedo_texture = ExtResource( 3 )
+uv1_scale = Vector3( 10, 10, 1 )
 
 [node name="TempWorld" type="Spatial"]
 
