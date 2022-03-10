@@ -13,7 +13,7 @@ public class CamSensor : Peripheral
     // Area stuff
     private Area RadiusArea;
 
-    private float FOV = 30;
+    private const float FOV = 30, RADIUS = 30;
 
     private bool ON { get => (ram[0] & 0b100) > 0; }
     private bool DETECTED { get => (ram[0] & 0b10) > 0; }
@@ -43,7 +43,7 @@ public class CamSensor : Peripheral
 
     public override void tickLogical(float delta)
     {
-        if(Global.FRAME % 3 == 0 && ON)
+        if(Global.FRAME % 4 == 0 && ON)
             updateEnemyDetected();
         
     }
@@ -121,7 +121,7 @@ public class CamSensor : Peripheral
                 }
             }
         }
-        if(r==false) nearestBody = null;
+        
         
         ram[0] = setFlagsIf(r, ram[0], 0b010); // DETECTED(1) / NO(0)
 
@@ -130,7 +130,19 @@ public class CamSensor : Peripheral
             ram[0], 0b001 
         );
 
-        GD.Print(ram[0] & 0b111);
+        if(!r){
+            nearestBody = null;
+            ram[2] = 0;
+        } 
+        else{
+            // Percentage of Angle of detected over FOV
+            ram[1] = (byte)((getAngle(nearestBody) / FOV) * 255);
+
+            // Percentage of Distance of detected over Range
+            ram[2] = (byte)((parent.GlobalTransform.origin.DistanceTo(nearestBody.GlobalTransform.origin) / RADIUS) * 255) ;
+        }
+
+        GD.Print(ram[2]);
     }
 
 }
