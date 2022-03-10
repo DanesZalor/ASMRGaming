@@ -1,17 +1,81 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
+[ext_resource path="res://GameFiles/Common/CascadiaFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://GameFiles/Interface/InterfaceWorld/prototex.jpg" type="Texture" id=2]
 [ext_resource path="res://GameFiles/Interface/RobotPlaceHolder/RobotPlaceHolder.tscn" type="PackedScene" id=3]
+[ext_resource path="res://GameFiles/Common/Cascadia.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=5]
+size = 20
+use_filter = true
+font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.172549, 0.164706, 0.196078, 0 )
+border_blend = true
+
+[sub_resource type="Theme" id=4]
+LineEdit/colors/font_color = Color( 0.862745, 0.866667, 0.87451, 1 )
+LineEdit/colors/font_color_selected = Color( 0.137255, 0.137255, 0.14902, 1 )
+LineEdit/colors/selection_color = Color( 0.862745, 0.866667, 0.87451, 1 )
+LineEdit/styles/focus = SubResource( 3 )
+LineEdit/styles/normal = SubResource( 3 )
 
 [sub_resource type="PlaneMesh" id=1]
 size = Vector2( 100, 100 )
 
 [sub_resource type="SpatialMaterial" id=2]
-albedo_color = Color( 0.360784, 0.360784, 0.360784, 1 )
+albedo_color = Color( 0.156863, 0.211765, 0.164706, 1 )
 albedo_texture = ExtResource( 2 )
 uv1_scale = Vector3( 20, 20, 1 )
 
 [node name="InterfaceWorld" type="Node"]
+
+[node name="Console" type="Node" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Console"]
+margin_right = 480.0
+margin_bottom = 247.0
+color = Color( 0.137255, 0.137255, 0.14902, 1 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Console/ColorRect"]
+modulate = Color( 0.862745, 0.866667, 0.87451, 1 )
+self_modulate = Color( 0.862745, 0.866667, 0.87451, 1 )
+margin_left = 8.78177
+margin_top = 2.0
+margin_right = 473.782
+margin_bottom = 213.0
+custom_fonts/normal_font = SubResource( 5 )
+text = "abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz1234567890aaaaaaaaaaaaaaaa"
+scroll_following = true
+__meta__ = {
+"_editor_description_": "limit for scroll
+304 letters or 8 new lines"
+}
+
+[node name="Prompt" type="LineEdit" parent="Console/ColorRect"]
+margin_left = 37.7818
+margin_top = 206.236
+margin_right = 481.782
+margin_bottom = 246.236
+theme = SubResource( 4 )
+custom_fonts/font = ExtResource( 1 )
+placeholder_text = "prompt"
+placeholder_alpha = 0.5
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Console/ColorRect/Prompt"]
+modulate = Color( 0.862745, 0.866667, 0.87451, 1 )
+margin_left = -31.5405
+margin_top = 4.16222
+margin_right = 4.45953
+margin_bottom = 40.1622
+custom_fonts/font = ExtResource( 1 )
+text = ">>"
+valign = 1
 
 [node name="EnvironmentStuff" type="Node" parent="."]
 
@@ -25,7 +89,7 @@ transform = Transform( 0.604182, -0.654496, 0.454531, 0, 0.570413, 0.821358, -0.
 shadow_enabled = true
 
 [node name="Camera" type="Camera" parent="EnvironmentStuff"]
-transform = Transform( 0.939693, -0.17101, 0.296198, 0, 0.866025, 0.5, -0.34202, -0.469846, 0.813798, 0, 15, 15 )
+transform = Transform( 0.707107, -0.353553, 0.612372, 0, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 0, 15, 15 )
 projection = 1
 size = 20.0
 
