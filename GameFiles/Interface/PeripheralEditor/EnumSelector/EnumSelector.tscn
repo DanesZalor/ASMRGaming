@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://GameFiles/Interface/RobotPlaceHolder/png/WhiteArrowRight.png" type="Texture" id=1]
+[ext_resource path="res://GameFiles/Common/TypoGraphica_demo.otf" type="DynamicFontData" id=2]
+[ext_resource path="res://GameFiles/Interface/WhiteArrowLeft.png" type="Texture" id=3]
+[ext_resource path="res://GameFiles/Interface/PeripheralEditor/EnumSelector/EnumSelector.cs" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 2 )
+
+[node name="EnumSelector" type="Control"]
+script = ExtResource( 4 )
+choices = PoolStringArray(  )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 19.023
+margin_top = -1.94314
+margin_right = 220.023
+margin_bottom = 51.0569
+custom_fonts/font = SubResource( 2 )
+text = "default tex"
+align = 1
+
+[node name="Lbtn" type="TextureButton" parent="."]
+margin_right = 512.0
+margin_bottom = 512.0
+rect_scale = Vector2( 0.075, 0.075 )
+texture_normal = ExtResource( 3 )
+
+[node name="Rbtn" type="TextureButton" parent="."]
+margin_left = 200.0
+margin_right = 712.0
+margin_bottom = 512.0
+rect_scale = Vector2( 0.075, 0.075 )
+texture_normal = ExtResource( 1 )
+
+[connection signal="pressed" from="Lbtn" to="." method="_on_Lbtn_pressed"]
+[connection signal="pressed" from="Rbtn" to="." method="_on_Rbtn_pressed"]

@@ -1,20 +1,35 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://GameFiles/Common/Common.shader" type="Shader" id=1]
 [ext_resource path="res://GameFiles/Interface/InterfaceWorld/prototex.jpg" type="Texture" id=2]
+[ext_resource path="res://GameFiles/Interface/RobotPlaceHolder/RobotPlaceHolder.tscn" type="PackedScene" id=3]
 
 [sub_resource type="PlaneMesh" id=1]
 size = Vector2( 100, 100 )
 
-[sub_resource type="ShaderMaterial" id=2]
-shader = ExtResource( 1 )
-shader_param/albedo = Color( 0.505882, 0.556863, 0, 0.388235 )
-shader_param/offset = null
-shader_param/uvmul = Vector2( 25, 25 )
-shader_param/tex = ExtResource( 2 )
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0.360784, 0.360784, 0.360784, 1 )
+albedo_texture = ExtResource( 2 )
+uv1_scale = Vector3( 20, 20, 1 )
 
-[node name="InterfaceWorld" type="Spatial"]
+[node name="InterfaceWorld" type="Node"]
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
+[node name="EnvironmentStuff" type="Node" parent="."]
+
+[node name="Plane" type="MeshInstance" parent="EnvironmentStuff"]
 mesh = SubResource( 1 )
+skeleton = NodePath("../..")
 material/0 = SubResource( 2 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="EnvironmentStuff/Plane"]
+transform = Transform( 0.604182, -0.654496, 0.454531, 0, 0.570413, 0.821358, -0.796846, -0.49625, 0.344633, 0, 4.75649, 0 )
+shadow_enabled = true
+
+[node name="Camera" type="Camera" parent="EnvironmentStuff"]
+transform = Transform( 0.939693, -0.17101, 0.296198, 0, 0.866025, 0.5, -0.34202, -0.469846, 0.813798, 0, 15, 15 )
+projection = 1
+size = 20.0
+
+[node name="Robots" type="Node" parent="."]
+
+[node name="RobotPlaceHolder" parent="Robots" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.8343, 0, 0 )
