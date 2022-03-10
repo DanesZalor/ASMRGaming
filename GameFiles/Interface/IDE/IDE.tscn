@@ -1,9 +1,16 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://GameFiles/Common/CascadiaFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://GameFiles/Interface/IDE/InterfaceConsole.cs" type="Script" id=1]
 [ext_resource path="res://GameFiles/Common/prototex.jpg" type="Texture" id=2]
-[ext_resource path="res://GameFiles/Interface/RobotPlaceHolder/RobotPlaceHolder.tscn" type="PackedScene" id=3]
+[ext_resource path="res://GameFiles/Common/CascadiaFont.tres" type="DynamicFont" id=3]
 [ext_resource path="res://GameFiles/Common/Cascadia.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://GameFiles/Interface/IDE/IDE.cs" type="Script" id=5]
+
+[sub_resource type="DynamicFont" id=6]
+size = 20
+outline_size = 1
+outline_color = Color( 1, 1, 1, 0.623529 )
+font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=5]
 size = 20
@@ -30,37 +37,38 @@ albedo_texture = ExtResource( 2 )
 uv1_scale = Vector3( 20, 20, 1 )
 
 [node name="InterfaceWorld" type="Node"]
+script = ExtResource( 5 )
 
-[node name="Console" type="Node" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="Console"]
+[node name="Console" type="ColorRect" parent="."]
 margin_top = 473.0
 margin_right = 480.0
 margin_bottom = 720.0
 color = Color( 0.137255, 0.137255, 0.14902, 1 )
+script = ExtResource( 1 )
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Console/ColorRect"]
+[node name="Logs" type="RichTextLabel" parent="Console"]
 modulate = Color( 0.862745, 0.866667, 0.87451, 1 )
 self_modulate = Color( 0.862745, 0.866667, 0.87451, 1 )
 margin_left = 8.78177
 margin_top = 2.0
 margin_right = 473.782
 margin_bottom = 213.0
+custom_fonts/bold_font = SubResource( 6 )
 custom_fonts/normal_font = SubResource( 5 )
-text = "abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz1234567890aaaaaaaaaaaaaaaa"
+bbcode_enabled = true
 scroll_following = true
 __meta__ = {
 "_editor_description_": "limit for scroll
 304 letters or 8 new lines"
 }
 
-[node name="Prompt" type="LineEdit" parent="Console/ColorRect"]
+[node name="Prompt" type="LineEdit" parent="Console"]
 margin_left = 37.7818
 margin_top = 206.236
 margin_right = 481.782
 margin_bottom = 246.236
 theme = SubResource( 4 )
-custom_fonts/font = ExtResource( 1 )
+custom_fonts/font = ExtResource( 3 )
 placeholder_text = "prompt"
 placeholder_alpha = 0.5
 caret_blink = true
@@ -68,13 +76,13 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Label" type="Label" parent="Console/ColorRect/Prompt"]
+[node name="Label" type="Label" parent="Console/Prompt"]
 modulate = Color( 1, 1, 1, 0.784314 )
 margin_left = -31.5405
 margin_top = 4.16222
 margin_right = 4.45953
 margin_bottom = 40.1622
-custom_fonts/font = ExtResource( 1 )
+custom_fonts/font = ExtResource( 3 )
 text = ">>"
 valign = 1
 
@@ -98,4 +106,4 @@ size = 25.0
 
 [node name="Robots" type="Node" parent="."]
 
-[node name="RobotPlaceHolder" parent="Robots" instance=ExtResource( 3 )]
+[connection signal="text_entered" from="Console/Prompt" to="Console" method="onPromptEnteredSignal"]
