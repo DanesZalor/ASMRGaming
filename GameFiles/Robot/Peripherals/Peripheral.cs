@@ -57,4 +57,12 @@ public abstract class Peripheral : Spatial
                 (byte)((RAMcoordStart - ram.Length) + i), ram[i-1]
             );
     }
+
+    protected byte setFlagsIf(bool cond, byte flags, byte mask)
+    {
+        return (byte)((cond) ?
+            (flags | mask) :  // set to true
+            (flags & ~mask)   // set to false
+        );
+    }
 }

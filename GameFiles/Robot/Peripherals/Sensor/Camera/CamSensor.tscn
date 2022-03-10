@@ -172,7 +172,7 @@ material/0 = null
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0 )
 
 [node name="Sprite3D" type="Sprite3D" parent="TargetMarker"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 2, 0 )
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 2.25, 0 )
 cast_shadow = 0
 pixel_size = 0.02
 billboard = 1
@@ -180,6 +180,7 @@ double_sided = false
 texture = ExtResource( 7 )
 
 [node name="Circle3D" type="MeshInstance" parent="TargetMarker"]
+cast_shadow = 0
 mesh = ExtResource( 9 )
 material/0 = SubResource( 12 )
 

@@ -25,14 +25,13 @@ transform = Transform( 0.99995, 0, 0.0100007, 0, 1, 0, -0.0100007, 0, 0.99995, 3
 Steering_Device = "Car"
 Combat_Device = "Saw"
 Sensor_Device = "Camera"
-program = "mov a, 255
+program = "mov a, 0b100
 mov [250], a
 
 jmp 0"
 
 [node name="Robot2" parent="." instance=ExtResource( 2 )]
 transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 1.82773, 0, 12.1876 )
-Sensor_Device = "Camera"
 program = "
 mov a, 250
 mov b, 180
@@ -41,8 +40,13 @@ mov [255], b
 mov [253], a
 jmp 0"
 
+[node name="Robot4" parent="." instance=ExtResource( 2 )]
+transform = Transform( -0.734216, 0, 0.678916, 0, 1, 0, -0.678916, 0, -0.734216, 18.6012, 0.545158, 15.526 )
+Steering_Device = "Car"
+Combat_Device = "Saw"
+
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 0.984808, -0.0868241, 0.150384, 0, 0.866025, 0.5, -0.173648, -0.492404, 0.852868, 5, 13, 25 )
 projection = 1
 current = true
-size = 25.0
+size = 30.0

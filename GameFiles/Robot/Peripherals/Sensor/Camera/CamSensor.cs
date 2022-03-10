@@ -46,11 +46,6 @@ public class CamSensor : Peripheral
         if(Global.FRAME % 3 == 0 && ON)
             updateEnemyDetected();
         
-        if(nearestBody != null){
-            Vector3 local = parent.ToLocal(nearestBody.GlobalTransform.origin);
-            GD.Print(local.x);
-        }
-        
     }
 
     public override void tickPresentational(float delta)
@@ -128,7 +123,14 @@ public class CamSensor : Peripheral
         }
         if(r==false) nearestBody = null;
         
-        ram[0] |= (byte)(r ? 0b10: 0b0);
+        ram[0] = setFlagsIf(r, ram[0], 0b010); // DETECTED(1) / NO(0)
+
+        ram[0] = setFlagsIf( // DETECTED is LEFT(0) or RIGHT(1)
+            r && parent.ToLocal(nearestBody.GlobalTransform.origin).x > 0,
+            ram[0], 0b001 
+        );
+
+        GD.Print(ram[0] & 0b111);
     }
 
 }
