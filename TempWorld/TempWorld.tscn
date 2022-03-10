@@ -22,9 +22,9 @@ transform = Transform( -0.654002, -0.534921, -0.534921, 0, -0.707107, 0.707107, 
 shadow_enabled = true
 
 [node name="Robot2" parent="." instance=ExtResource( 2 )]
-transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 1.82773, 0, 12.1876 )
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 4.54855, 0, 7.08143 )
 Sensor_Device = "Camera"
-program = ";jmp 0
+program = "jmp 0
 mov a, 250
 mov b, 180
 mov [254], a
