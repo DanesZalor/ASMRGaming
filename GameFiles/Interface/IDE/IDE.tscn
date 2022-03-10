@@ -4,7 +4,7 @@
 [ext_resource path="res://GameFiles/Common/prototex.jpg" type="Texture" id=2]
 [ext_resource path="res://GameFiles/Common/CascadiaFont.tres" type="DynamicFont" id=3]
 [ext_resource path="res://GameFiles/Common/Cascadia.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://GameFiles/Interface/IDE/IDE.cs" type="Script" id=5]
+[ext_resource path="res://GameFiles/Interface/IDE/IDE.cs" type="Script" id=6]
 
 [sub_resource type="DynamicFont" id=6]
 size = 20
@@ -37,7 +37,7 @@ albedo_texture = ExtResource( 2 )
 uv1_scale = Vector3( 20, 20, 1 )
 
 [node name="InterfaceWorld" type="Node"]
-script = ExtResource( 5 )
+script = ExtResource( 6 )
 
 [node name="Console" type="ColorRect" parent="."]
 margin_top = 473.0
@@ -102,6 +102,7 @@ shadow_enabled = true
 [node name="Camera" type="Camera" parent="EnvironmentStuff/CamHolder"]
 transform = Transform( 0.707107, -0.353553, 0.612373, 0, 0.866026, 0.5, -0.707107, -0.353553, 0.612373, 15, 15, 15 )
 projection = 1
+current = true
 size = 25.0
 
 [node name="Robots" type="Node" parent="."]

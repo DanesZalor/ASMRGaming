@@ -120,7 +120,7 @@ mesh = SubResource( 3 )
 skeleton = NodePath("../../..")
 material/0 = null
 
-[node name="Dril" type="MeshInstance" parent="Parts/ActuatorCombat"]
+[node name="Drill" type="MeshInstance" parent="Parts/ActuatorCombat"]
 transform = Transform( 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0, 0 )
 material_override = ExtResource( 3 )
 mesh = SubResource( 4 )

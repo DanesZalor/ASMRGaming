@@ -39,20 +39,34 @@ public class InterfaceConsole : Node
                 if(args.Length>2) return args[1]+" takes no arguements";
                 // run code clear|list
 
-            }else if( match(args[1],"(add|mod|del)") ){
+            }else if( match(args[1],"(add|mod)") ){
 
-                if(args.Length==2) return "[b]"+args[1]+ "[b] needs atleast one arguement";
+                if(args.Length==2) return "[b]"+args[1]+ "[/b] needs atleast one arguement";
+                
+                string[] argsGrammar = new string[7]{
+                    "(--name=.{1,})", "(--steering=(tank|car))", "(--combat=(drill|chopper))",
+                    "(--sensor=(laser|camera))","(--x=(-|)(\\d){1,})","(--y=(-|)(\\d){1,})","(--r=(-|)(\\d){1,})"
+                }; string[] argsValue = new string[7]{"","Tank","Drill","Laser","0","0","0"};
                 
                 for(int i = 2; i<args.Length; i++){
                     
-                    if(!match(args[i], 
-                        "^((--name=.{1,})|"+"(--steering=(tank|car))|"+"(--combat=(drill|chopper))|"+
-                        "(--sensor=(laser|camera))|"+"(--[xyr]=(-|)(\\d){1,})|"+")", 
-                    true)) 
-                        return args[i] + " unrecognized arguement";
-                    
+                    bool matched = false;
+                    for(int j = 0; j < argsGrammar.Length; j++){
+                        if(match(args[i], argsGrammar[j])){
+                            matched = true;
+                            argsValue[j] = args[i].Split(new char[1]{'='})[1];
+                            argsValue[j] = char.ToUpper(argsValue[j][0]) + argsValue[j].Substring(1);
+                        } 
+                    }
+                    if(!matched) return "[u]"+args[i] + "[/u] unrecognized arguement";
                 }
-
+                if(argsValue[0].Length==0) return "[b]bot "+args[1]+"[/b] requires [u]--name=[/u] arguement";
+                else return 
+                    ideparent.Command_AddRobot(
+                        argsValue[0], argsValue[1], argsValue[2], 
+                        argsValue[3], argsValue[4], argsValue[5], argsValue[6]
+                    );
+                    
             }
 
         }

@@ -7,33 +7,33 @@ public class RobotPlaceHolder : Spatial
     [Export(PropertyHint.Enum, "Drill,Chopper")] public string combat_peripheral = "Drill";
     [Export(PropertyHint.Enum, "Laser,Camera")] public string sensor_peripheral = "Laser";
 
-    private Spatial[,] peripherals;
+    private Spatial[] peripherals;
 
     public override void _Ready()
     {
-        peripherals = new Spatial[3,2]{
-            {
-                GetNode<Spatial>("ActuatorMovement/Tank"),
-                GetNode<Spatial>("ActuatorMovement/Car")
-            },{
-                GetNode<Spatial>("ActuatorCombat/Drill"),
-                GetNode<Spatial>("ActuatorCombat/Chopper")
-            },{
-                GetNode<Spatial>("Sensor/Laser"),
-                GetNode<Spatial>("Sensor/Camera")
-            }
+        peripherals = new Spatial[6]{
+            GetNode<Spatial>("Parts/ActuatorMovement/Tank"),
+            GetNode<Spatial>("Parts/ActuatorMovement/Car"),
+            GetNode<Spatial>("Parts/ActuatorCombat/Drill"),
+            GetNode<Spatial>("Parts/ActuatorCombat/Chopper"),
+            GetNode<Spatial>("Parts/Sensor/Laser"),
+            GetNode<Spatial>("Parts/Sensor/Camera")
         };
+        updatePeripherals();
     }
 
-    public void setVisible(string ca="Drill", string ma="Tank", string s="Laser"){
+    public void updatePeripherals(string ca="", string ma="", string s=""){
+        
+        if(ca=="") ca = combat_peripheral;
+        if(ma=="") ma = steering_peripheral;
+        if(s=="") ma = sensor_peripheral;
         
         foreach(Spatial p in peripherals){
             p.Visible = false;
 
-            if(p.Name==ca || p.Name==ma || p.Name==s) p.Visible = true;
+            if(p.Name==steering_peripheral || p.Name==combat_peripheral || p.Name==sensor_peripheral) p.Visible = true;
         }
 
     }
-
 
 }
