@@ -3,9 +3,9 @@ using System;
 
 public class RobotPlaceHolder : Spatial
 {
-    [Export(PropertyHint.Enum, "Tank,Car")] private string steering_peripheral = "Tank";
-    [Export(PropertyHint.Enum, "Drill,Chopper")] private string combat_peripheral = "Drill";
-    [Export(PropertyHint.Enum, "Laser,Camera")] private string sensor_peripheral = "Laser";
+    [Export(PropertyHint.Enum, "Tank,Car")] public string steering_peripheral = "Tank";
+    [Export(PropertyHint.Enum, "Drill,Chopper")] public string combat_peripheral = "Drill";
+    [Export(PropertyHint.Enum, "Laser,Camera")] public string sensor_peripheral = "Laser";
 
     private Spatial[,] peripherals;
 

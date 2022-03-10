@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/prototex.jpg-f2855474f7d157489c5bb83f0190041f.s3tc.stex"
-path.etc="res://.import/prototex.jpg-f2855474f7d157489c5bb83f0190041f.etc.stex"
+path.s3tc="res://.import/prototex.jpg-dc7feadea4609990481d2153ab550f89.s3tc.stex"
+path.etc="res://.import/prototex.jpg-dc7feadea4609990481d2153ab550f89.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://GameFiles/Interface/InterfaceWorld/prototex.jpg"
-dest_files=[ "res://.import/prototex.jpg-f2855474f7d157489c5bb83f0190041f.s3tc.stex", "res://.import/prototex.jpg-f2855474f7d157489c5bb83f0190041f.etc.stex" ]
+source_file="res://GameFiles/Common/prototex.jpg"
+dest_files=[ "res://.import/prototex.jpg-dc7feadea4609990481d2153ab550f89.s3tc.stex", "res://.import/prototex.jpg-dc7feadea4609990481d2153ab550f89.etc.stex" ]
 
 [params]
 
