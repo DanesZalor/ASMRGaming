@@ -9,17 +9,21 @@ public class WindowsHandler : Node
         
     }
 
-    private string create_KeyFile(string filename){
+    private string create_KeyFile(string filename){ // assuming filename does not exist (it isn't in IDE.SaveFile.DATA)
         IDE.SaveFile.DATA.Add(filename,"");
         IDE.SaveFile.Save();
         return "";//"cat : \""+filename+"\" created";
     }
 
+    private string delete_KeyFile(string filename){ // assuming filename exist (it is in IDE.SaveFile.DATA)
+        IDE.SaveFile.DATA.Remove(filename);
+        IDE.SaveFile.Save();
+        return "";
+    }
+
     private string openTextEditor(string filename){
-        //TextEditor te = TEXT_EDITOR_PRELOAD.Instance<TextEditor>();
         ASMRTextEditor te = TEXT_EDITOR_PRELOAD.Instance<ASMRTextEditor>();
         te.setFileName(filename);
-        //te.setFilename(filename);
         AddChild(te);
         return "";
     }
@@ -58,9 +62,14 @@ public class WindowsHandler : Node
                         else if(args[0].Equals("edit"))
                             return openTextEditor(args[1]);
 
+                        else if(args[0].Equals("rm"))
+                            return delete_KeyFile(args[1]);
                     }
                 }
                 else{ // keyfile does not exist
+
+                    if( args[0].Equals("touch") )
+                        return create_KeyFile(args[1]);
 
                 }
             }
