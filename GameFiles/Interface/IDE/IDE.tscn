@@ -150,6 +150,4 @@ script = ExtResource( 5 )
 
 [connection signal="mouse_entered" from="Console/BlackBG/TitleBar" to="Console" method="_on_TitleBarMouseEnterOrExit" binds= [ true ]]
 [connection signal="mouse_exited" from="Console/BlackBG/TitleBar" to="Console" method="_on_TitleBarMouseEnterOrExit" binds= [ false ]]
-[connection signal="mouse_entered" from="Console/Logs" to="Console" method="_on_Logs_mouseIN" binds= [ true ]]
-[connection signal="mouse_exited" from="Console/Logs" to="Console" method="_on_Logs_mouseIN" binds= [ false ]]
 [connection signal="text_entered" from="Console/Prompt" to="Console" method="onPromptEnteredSignal"]

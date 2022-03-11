@@ -20,18 +20,18 @@ public class InterfaceConsole : Control
             else IDE.SaveFile.DATA.Remove(filename);
             IDE.SaveFile.Save();
         }
-        private string mvCommand(string filename, string newname){ // ASSUMING it's used by MV IDE.SaveFile.Load()ed 
-            bool[] exists = {keyFileExists(filename), keyFileExists(newname)};
+        private string mv_or_cp_Command(string[] args, bool cp=false){ // ASSUMING it's used by MV IDE.SaveFile.Load()ed 
+            bool[] exists = {keyFileExists(args[1]), keyFileExists(args[2])};
             
             
             if(exists[0] && !exists[1]){
-                create_KeyFile(newname, IDE.SaveFile.DATA[filename] as String);
-                delete_KeyFile(filename);
+                create_KeyFile(args[2], IDE.SaveFile.DATA[args[1]] as String);
+                if(!cp) delete_KeyFile(args[1]);
                 return "";
             }
             string s = "";
-            if(!exists[0]) s += "mv: "+ filename+": no such file\n";
-            if(exists[1])  s += "mv: "+ filename+": file exists" + (!exists[0]?"":"\n");
+            if(!exists[0]) s += args[0]+": "+ args[1]+": no such file\n";
+            if(exists[1])  s += args[0]+": "+ args[2]+": file exists" + (!exists[0]?"":"\n");
             return s;
         }
         private string rmCommand(string[] args){
@@ -116,8 +116,7 @@ public class InterfaceConsole : Control
                 if(args.Length!=3)
                     return String.Format("{0}: needs exactly 2 filename arguements", args[0]);
                 
-                if(args[0].Equals("mv"))
-                    return mvCommand(args[1], args[2]);
+                return mv_or_cp_Command(args, args[0].Equals("cp"));
             }
             return "";
         }
@@ -152,7 +151,7 @@ public class InterfaceConsole : Control
         
         else if(args.Length>=1 && args[0]=="bot")
             return ideparent.robots.interpretCommand(args);
-        else if(args.Length>=1 && Global.match(args[0], "(ls|touch|cat|edit|rm|mv)") )
+        else if(args.Length>=1 && Global.match(args[0], "(ls|touch|cat|edit|rm|mv|cp)") )
             return shell.interpretCommand(args);
 
         else 
@@ -172,7 +171,6 @@ public class InterfaceConsole : Control
     private bool mousePressInTitleBar = false, mouseInTitleBar = false, mouseInLogs = false;
 
     /*Signal*/ public void _on_TitleBarMouseEnterOrExit(bool enter){ mouseInTitleBar = enter; }
-    /*Signal*/ public void _on_Logs_mouseIN(bool enter){ mouseInLogs = enter; }
     LinkedListNode<string> cmd_history_NodePointer;
     public override void _Input(InputEvent @event)
     {
@@ -182,9 +180,6 @@ public class InterfaceConsole : Control
             
             InputEventMouseButton e = (@event as InputEventMouseButton);
             mousePressInTitleBar = e.Pressed && mouseInTitleBar;
-            
-            // grabs focus to prompt if pressed logs // doesnt work for now
-            if(e.Pressed && mouseInLogs ) prompt.GrabFocus();
         }
 
         else if(@event is InputEventMouseMotion && mousePressInTitleBar){
