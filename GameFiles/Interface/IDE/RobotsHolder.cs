@@ -97,6 +97,8 @@ public class RobotsHolder : Node
         return s;
     }
 
+    /// <summary> this is meant for the InterfaceConsole to access 
+    /// <br>returns bbcode text</summary>
     public string interpretCommand(string[] args){
         
         const string help = "[b]bot[/b] <options> --<arg>=<value>\n"+

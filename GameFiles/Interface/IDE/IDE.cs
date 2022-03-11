@@ -39,6 +39,8 @@ public class IDE : Node
             Write(JSON.Print(data));
         }
     }
+    
+    
     private InterfaceConsole console;
     public RobotsHolder robots;
     private Spatial camHolder; private Camera cam;
