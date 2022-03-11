@@ -3,12 +3,28 @@ using System;
 
 public class TextEditor : ColorRect
 {
+    [Export]
+    private string fileName = "";
 
+    private Label titleLabel; private TextEdit textBox;
+    private WindowsHandler parent;
     public override void _Ready()
     {
-        
+        parent = GetParent<WindowsHandler>();
+        titleLabel = GetNode<Label>("TitleBar/Label");
+        textBox = GetNode<TextEdit>("TextEdit");
+
+        IDE.SaveFile.Load();
+        if(IDE.SaveFile.DATA.Contains(fileName))
+            textBox.Text = (IDE.SaveFile.DATA[fileName] as String);
+        else{
+            GD.Print(fileName + " not found");
+            QueueFree();
+        }
+            
     }
 
+    /// ------------    EVENTS---------
     private bool mouseIn = false, mousePress = false; 
     public void _on_TitleBar_mouse_entered(){
         mouseIn = true;
@@ -32,5 +48,11 @@ public class TextEditor : ColorRect
                 Mathf.Clamp(RectPosition.y, 0, 300)
             );
         }
+    }
+
+    public void _on_TextureButton_pressed(){
+        IDE.SaveFile.DATA[fileName] = textBox.Text;
+        IDE.SaveFile.Save();
+        QueueFree();
     }
 }

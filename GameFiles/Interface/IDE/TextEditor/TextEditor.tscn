@@ -78,12 +78,14 @@ margin_left = 1.0
 margin_top = 0.738998
 margin_right = 28.0
 margin_bottom = 27.739
+mouse_filter = 2
 color = Color( 0, 0, 0, 1 )
 
 [node name="ExitButton3" type="ColorRect" parent="ExitButton/ExitButton2"]
 margin_top = 0.261002
 margin_right = 26.0
 margin_bottom = 26.261
+mouse_filter = 2
 color = Color( 0.823529, 0.823529, 0.823529, 1 )
 
 [node name="Label" type="Label" parent="ExitButton"]
@@ -95,5 +97,10 @@ custom_colors/font_color = Color( 0.435294, 0.435294, 0.435294, 1 )
 custom_fonts/font = SubResource( 10 )
 text = "×"
 
+[node name="TextureButton" type="TextureButton" parent="ExitButton"]
+margin_right = 28.0
+margin_bottom = 28.0
+
 [connection signal="mouse_entered" from="TitleBar" to="." method="_on_TitleBar_mouse_entered"]
 [connection signal="mouse_exited" from="TitleBar" to="." method="_on_TitleBar_mouse_exited"]
+[connection signal="pressed" from="ExitButton/TextureButton" to="." method="_on_TextureButton_pressed"]

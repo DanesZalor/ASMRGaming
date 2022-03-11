@@ -42,6 +42,7 @@ public class IDE : Node
 
     private InterfaceConsole console;
     public RobotsHolder robots;
+    public WindowsHandler windowsHandler;
     private Spatial camHolder; private Camera cam;
 
     public override void _Ready()
@@ -51,6 +52,7 @@ public class IDE : Node
         cam = camHolder.GetNode<Camera>("Camera");
 
         robots = GetNode<RobotsHolder>("Robots");
+        windowsHandler = GetNode<WindowsHandler>("WindowsHandler");
         console = GetNode<InterfaceConsole>("Console");
     }
 
