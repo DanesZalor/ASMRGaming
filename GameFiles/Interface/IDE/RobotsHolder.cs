@@ -34,7 +34,6 @@ public class RobotsHolder : Node
                                 string sensor="Laser", string x="0", string y="0", string r="0"
     ){
         name = name.ToLower();
-        //GD.Print(String.Format("{0} {1} {2} {3} {4} {5} {6}", name, steering, combat, sensor, x, y, r));
         if(exists(name)) return String.Format("Robot:{0} exists",name); 
         RobotPlaceHolder temp = preloads[0].Instance<RobotPlaceHolder>();
         
@@ -73,7 +72,7 @@ public class RobotsHolder : Node
         if(GetChildCount()==0) return "No Robots found";
         string s = "";
         foreach(Node n in GetChildren())
-            s += String.Format("[b]{0}[/b]\n");
+            s += String.Format("[b]{0}[/b]\t", n.Name);
         return s;
     }
 

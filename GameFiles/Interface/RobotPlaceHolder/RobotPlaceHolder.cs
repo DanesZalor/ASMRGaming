@@ -25,11 +25,9 @@ public class RobotPlaceHolder : Spatial
     }
 
     public void updatePeripherals(){
-        GD.Print("sex");
         foreach(Spatial p in peripherals){
             
             p.Visible = false;
-            GD.Print(p.Name);
             if( p.Name.Equals(steering_peripheral) || 
                 p.Name.Equals(combat_peripheral) || 
                 p.Name.Equals(sensor_peripheral)

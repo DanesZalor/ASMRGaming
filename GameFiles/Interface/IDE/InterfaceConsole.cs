@@ -37,7 +37,9 @@ public class InterfaceConsole : Node
             if( match(args[1],"(clear|list|help)") ){
                 
                 if(args.Length>2) return args[1]+" takes no arguements";
-                // run code clear|list
+                
+                else if(args[1].Equals("list"))
+                    return ideparent.robots.ListRobots();
 
             }else if( match(args[1],"(add|mod)") ){
 
