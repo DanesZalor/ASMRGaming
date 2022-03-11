@@ -109,12 +109,8 @@ public class RobotsHolder : Node
                 //"\n\t del --name="
                 ;
 
-        bool match(string line, string grammar, bool exact=true){
-            return Assembler.Common.match(line,grammar,exact);
-        }
-
         if(args.Length<2) return help;
-        if( match(args[1],"(clear|list|help)") ){
+        if( Global.match(args[1],"(clear|list|help)") ){
                 
             if(args.Length>2) return "[b]"+args[1]+"[/b] takes no arguements";
             
@@ -125,7 +121,7 @@ public class RobotsHolder : Node
             }
                 
         }
-        else if( match(args[1],"(add|mod)") ){
+        else if( Global.match(args[1],"(add|mod)") ){
 
             if(args.Length==2) return "[b]"+args[1]+ "[/b] needs atleast one arguement";
             
@@ -141,7 +137,7 @@ public class RobotsHolder : Node
                 
                 bool matched = false;
                 for(int j = 0; j < argsGrammar.Length; j++){
-                    if(match(args[i], argsGrammar[j])){
+                    if(Global.match(args[i], argsGrammar[j])){
                         matched = true;
                         argsValue[j] = args[i].Split(new char[1]{'='})[1];
                         argsValue[j] = char.ToUpper(argsValue[j][0]) + argsValue[j].Substring(1);
@@ -163,9 +159,9 @@ public class RobotsHolder : Node
                     );
             }                    
         }
-        else if( match(args[1], "del")){
+        else if( Global.match(args[1], "del")){
             
-            if(args.Length==3 && match(args[2], "(--name=.{1,})") )
+            if(args.Length==3 && Global.match(args[2], "(--name=.{1,})") )
                 return DeleteRobot(args[2].Replace("--name=",""));
             
             else return "[b]del[/b] only requires [u]--name=[/u] arguement";

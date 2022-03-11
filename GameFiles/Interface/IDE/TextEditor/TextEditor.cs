@@ -4,7 +4,7 @@ using System;
 public class TextEditor : ColorRect
 {
     [Export]
-    private string fileName = "";
+    private string fileName = ""; public string FILE_NAME { get => fileName; }
 
     private Label titleLabel; private TextEdit textBox;
     private WindowsHandler parent;

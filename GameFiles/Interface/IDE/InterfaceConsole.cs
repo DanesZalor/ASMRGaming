@@ -15,8 +15,6 @@ public class InterfaceConsole : Control
     }
 
     private string interpretCommand(string cmd){
-        
-        
 
         cmd = cmd.Trim().ToLower();
         
@@ -26,6 +24,9 @@ public class InterfaceConsole : Control
         
         else if(args.Length>=1 && args[0]=="bot")
             return ideparent.robots.interpretCommand(args);
+        else if(args.Length>=1 && Global.match(args[0], "(cat|touch|ls|edit)") )
+            return ideparent.windowsHandler.interpretCommand(args);
+
         else 
             return cmd + " : command not found";
     }
