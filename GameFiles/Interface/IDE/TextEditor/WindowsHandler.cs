@@ -19,10 +19,9 @@ public class WindowsHandler : Node
         return "";//"cat : \""+filename+"\" created";
     }
 
-    private string delete_KeyFile(string filename){ // ASSUMING filename exist (it is in IDE.SaveFile.DATA) and IDE.SaveFile.Load()ed
+    private void delete_KeyFile(string filename){ // ASSUMING filename exist (it is in IDE.SaveFile.DATA) and IDE.SaveFile.Load()ed
         IDE.SaveFile.DATA.Remove(filename);
         IDE.SaveFile.Save();
-        return "";
     }
 
     private string rename_KeyFile(string filename, string newname){ // ASSUMING it's used by MV IDE.SaveFile.Load()ed 
@@ -35,6 +34,17 @@ public class WindowsHandler : Node
         else if(!exists[0]) return "mv: "+ filename+": no such file";
         else if(exists[1]) return  "mv: "+ filename+": file exists";
         return "";
+    }
+
+    private string rmCommand(string[] args){
+        string s = "";
+        for(int i = 1; i < args.Length; i++){
+            if(!keyFileExists(args[i])) 
+                s += String.Format("rm: cannot remove \'{0}\': No such file\n", args[i]); // BUGGY does not show for more than one line
+            else
+                delete_KeyFile(args[i]);   
+        }
+        return s;
     }
 
     private string openTextEditor(string filename){
@@ -78,7 +88,7 @@ public class WindowsHandler : Node
                             return openTextEditor(args[1]);
 
                         else if(args[0].Equals("rm"))
-                            return delete_KeyFile(args[1]);
+                            return rmCommand(args);
                     }
                 }
                 else{ // keyfile does not exist
