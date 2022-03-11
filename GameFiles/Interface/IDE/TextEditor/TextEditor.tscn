@@ -1,0 +1,96 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://GameFiles/Common/Cascadia.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://GameFiles/Common/CascadiaFont.tres" type="DynamicFont" id=2]
+
+[sub_resource type="Theme" id=9]
+default_font = ExtResource( 2 )
+TextEdit/fonts/font = null
+
+[sub_resource type="DynamicFont" id=8]
+size = 14
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://GameFiles/Common/Cascadia.ttf"
+
+[sub_resource type="DynamicFont" id=10]
+size = 32
+use_filter = true
+font_data = SubResource( 1 )
+
+[node name="TextEditor" type="ColorRect"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 430.0
+margin_bottom = 430.0
+color = Color( 0.752941, 0.752941, 0.752941, 1 )
+
+[node name="TextEdit" type="TextEdit" parent="."]
+margin_left = 3.0
+margin_top = 40.0
+margin_right = 417.0
+margin_bottom = 416.0
+theme = SubResource( 9 )
+custom_colors/symbol_color = Color( 0, 0, 0, 1 )
+custom_colors/selection_color = Color( 0, 0.0745098, 0.396078, 1 )
+custom_colors/font_color_selected = Color( 1, 1, 1, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/line_number_color = Color( 0.482353, 0.482353, 0.482353, 1 )
+custom_colors/background_color = Color( 1, 1, 1, 1 )
+custom_colors/number_color = Color( 0, 0, 0, 1 )
+custom_colors/completion_background_color = Color( 0, 0, 0, 1 )
+custom_colors/mark_color = Color( 0, 0, 0, 1 )
+custom_colors/word_highlighted_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "mov a, 10 ; comment
+label
+mov a, [10]"
+syntax_highlighting = true
+show_line_numbers = true
+highlight_all_occurrences = true
+override_selected_font_color = true
+
+[node name="TitleBar" type="ColorRect" parent="."]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 417.0
+margin_bottom = 37.0
+color = Color( 0, 0, 0.501961, 1 )
+
+[node name="Label" type="Label" parent="TitleBar"]
+margin_left = 5.35112
+margin_top = 6.40213
+margin_right = 148.351
+margin_bottom = 29.4021
+custom_fonts/font = ExtResource( 2 )
+text = "Textpad - Filename.asmr"
+
+[node name="ExitButton" type="ColorRect" parent="."]
+margin_left = 386.0
+margin_top = 6.261
+margin_right = 414.0
+margin_bottom = 34.261
+
+[node name="ExitButton2" type="ColorRect" parent="ExitButton"]
+margin_left = 1.0
+margin_top = 0.738998
+margin_right = 28.0
+margin_bottom = 27.739
+color = Color( 0, 0, 0, 1 )
+
+[node name="ExitButton3" type="ColorRect" parent="ExitButton/ExitButton2"]
+margin_top = 0.261002
+margin_right = 26.0
+margin_bottom = 26.261
+color = Color( 0.823529, 0.823529, 0.823529, 1 )
+
+[node name="Label" type="Label" parent="ExitButton"]
+margin_left = 5.24408
+margin_top = -5.99323
+margin_right = 33.2441
+margin_bottom = 33.0068
+custom_colors/font_color = Color( 0.435294, 0.435294, 0.435294, 1 )
+custom_fonts/font = SubResource( 10 )
+text = "×"

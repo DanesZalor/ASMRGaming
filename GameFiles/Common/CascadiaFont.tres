@@ -1,8 +1,9 @@
 [gd_resource type="DynamicFont" load_steps=2 format=2]
 
-[ext_resource path="res://GameFiles/Common/Cascadia.ttf" type="DynamicFontData" id=1]
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://GameFiles/Common/Cascadia.ttf"
 
 [resource]
 size = 18
 use_filter = true
-font_data = ExtResource( 1 )
+font_data = SubResource( 1 )
