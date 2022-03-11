@@ -4,6 +4,7 @@ using System;
 
 public class IDE : Node
 {
+    /// <summary> access DATA to get data. make sure to call Load() first before anything and Save() after using </summary>
     public static class SaveFile{
         public const string path = "user://saveFile.json";
         private static Godot.File file = new Godot.File();
