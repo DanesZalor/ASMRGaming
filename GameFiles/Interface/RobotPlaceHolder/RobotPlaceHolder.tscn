@@ -88,8 +88,7 @@ surfaces/0 = {
 "vertex_count": 796
 }
 
-[sub_resource type="ViewportTexture" id=9]
-resource_local_to_scene = false
+[sub_resource type="ViewportTexture" id=7]
 viewport_path = NodePath("3DNameTag/Viewport")
 
 [node name="RobotPlaceHolder" type="Spatial"]
@@ -151,15 +150,10 @@ flip_v = true
 pixel_size = 0.014
 billboard = 1
 double_sided = false
-texture = SubResource( 9 )
+texture = SubResource( 7 )
 
 [node name="Viewport" type="Viewport" parent="3DNameTag"]
 size = Vector2( 400, 200 )
 transparent_bg = true
-gui_disable_input = true
-shadow_atlas_quad_0 = 0
-shadow_atlas_quad_1 = 0
-shadow_atlas_quad_2 = 0
-shadow_atlas_quad_3 = 0
 
 [node name="Tag" parent="3DNameTag/Viewport" instance=ExtResource( 1 )]
