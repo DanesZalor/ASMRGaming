@@ -42,7 +42,7 @@ script = ExtResource( 6 )
 margin_top = 400.0
 margin_right = 480.0
 margin_bottom = 720.0
-color = Color( 0.137255, 0.137255, 0.137255, 0.803922 )
+color = Color( 0.0901961, 0.12549, 0.137255, 0.588235 )
 script = ExtResource( 1 )
 
 [node name="Logs" type="RichTextLabel" parent="Console"]
