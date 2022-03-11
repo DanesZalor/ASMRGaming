@@ -1,13 +1,15 @@
 using Godot;
 using System;
 
-public class TextEditor : ColorRect
+public class ASMRTextEditor : ColorRect
 {
     [Export]
-    private string fileName = ""; public string FILE_NAME { get => fileName; }
+    private string fileName = "";
 
     private Label titleLabel; private TextEdit textBox;
     private WindowsHandler parent;
+
+    private bool ready = false;
     public override void _Ready()
     {
         parent = GetParent<WindowsHandler>();
@@ -21,7 +23,12 @@ public class TextEditor : ColorRect
             GD.Print(fileName + " not found");
             QueueFree();
         }
-            
+        ready = true;       
+    }
+
+    public void setFileName(string s){
+        if(!ready) fileName = s;
+        else throw new Exception("Assigned ASMRTextEditor.fileName after _Ready()");
     }
 
     /// ------------    EVENTS---------

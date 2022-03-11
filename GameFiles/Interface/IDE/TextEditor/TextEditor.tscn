@@ -2,7 +2,7 @@
 
 [ext_resource path="res://GameFiles/Common/Cascadia.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://GameFiles/Common/CascadiaFont.tres" type="DynamicFont" id=2]
-[ext_resource path="res://GameFiles/Interface/IDE/TextEditor/TextEditor.cs" type="Script" id=3]
+[ext_resource path="res://GameFiles/Interface/IDE/TextEditor/ASMRTextEditor.cs" type="Script" id=3]
 
 [sub_resource type="Theme" id=9]
 default_font = ExtResource( 2 )
