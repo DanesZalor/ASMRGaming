@@ -17,8 +17,10 @@ public class ASMRTextEditor : ColorRect
         textBox = GetNode<TextEdit>("TextEdit");
 
         IDE.SaveFile.Load();
-        if(IDE.SaveFile.DATA.Contains(fileName))
+        if(IDE.SaveFile.DATA.Contains(fileName)){
             textBox.Text = (IDE.SaveFile.DATA[fileName] as String);
+            titleLabel.Text = "Textpad - " + fileName;
+        }
         else{
             GD.Print(fileName + " not found");
             QueueFree();

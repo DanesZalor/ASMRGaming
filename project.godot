@@ -18,14 +18,10 @@ config/icon="res://icon.png"
 
 Global="*res://GameFiles/Common/Global.cs"
 
-[debug]
-
-settings/stdout/print_fps=true
-
 [display]
 
-window/size/width=1280
-window/size/height=720
+window/size/width=1600
+window/size/height=900
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 
@@ -92,6 +88,16 @@ ui_end={
 LBtn={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+ArrowUp={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777232,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ArrowDown={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777234,"unicode":0,"echo":false,"script":null)
  ]
 }
 

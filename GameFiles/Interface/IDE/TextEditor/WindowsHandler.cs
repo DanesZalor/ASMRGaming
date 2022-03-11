@@ -17,9 +17,10 @@ public class WindowsHandler : Node
 
     private string openTextEditor(string filename){
         //TextEditor te = TEXT_EDITOR_PRELOAD.Instance<TextEditor>();
-        
+        ASMRTextEditor te = TEXT_EDITOR_PRELOAD.Instance<ASMRTextEditor>();
+        te.setFileName(filename);
         //te.setFilename(filename);
-        //AddChild(te);
+        AddChild(te);
         return "";
     }
 
@@ -37,7 +38,10 @@ public class WindowsHandler : Node
                 return r;
             }
 
-            else if( Global.match(args[0], "(cat|touch|edit)") ){
+            if(args.Length<2)
+                return String.Format("{0} : requires an arguement", args[0]);
+
+            else if( Global.match(args[0], "(touch|cat|edit|rm)") ){
                 
                 if(args.Length>2) return "[b]"+args[0]+"[/b] requires filename arguement";
 
@@ -46,13 +50,13 @@ public class WindowsHandler : Node
                     if( args[0].Equals("touch") ) 
                         return "touch : \""+args[1]+"\" exists";
                     
-                    else{ // args[0] == (cat|edit)
+                    else{ // args[0] == (cat|edit|rm)
                         
                         if( args[0].Equals("cat") ) 
                             return (IDE.SaveFile.DATA[args[1]] as String);
                         
-                        //else // args[0] == edit
-                            
+                        else if(args[0].Equals("edit"))
+                            return openTextEditor(args[1]);
 
                     }
                 }

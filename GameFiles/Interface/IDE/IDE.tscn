@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://GameFiles/Interface/IDE/InterfaceConsole.cs" type="Script" id=1]
 [ext_resource path="res://GameFiles/Common/prototex.jpg" type="Texture" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://GameFiles/Common/Cascadia.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://GameFiles/Interface/IDE/RobotsHolder.cs" type="Script" id=5]
 [ext_resource path="res://GameFiles/Interface/IDE/IDE.cs" type="Script" id=6]
-[ext_resource path="res://GameFiles/Interface/IDE/TextEditor/TextEditor.tscn" type="PackedScene" id=7]
 [ext_resource path="res://GameFiles/Interface/IDE/TextEditor/WindowsHandler.cs" type="Script" id=8]
 
 [sub_resource type="DynamicFontData" id=1]
@@ -49,11 +48,10 @@ uv1_scale = Vector3( 10, 10, 10 )
 script = ExtResource( 6 )
 
 [node name="Console" type="ColorRect" parent="."]
-margin_left = 10.0
-margin_top = 348.0
-margin_right = 490.0
-margin_bottom = 748.0
-rect_scale = Vector2( 0.9, 0.9 )
+margin_left = 1120.0
+margin_top = 500.0
+margin_right = 1600.0
+margin_bottom = 900.0
 color = Color( 0.752941, 0.752941, 0.752941, 1 )
 script = ExtResource( 1 )
 
@@ -103,9 +101,10 @@ margin_right = 475.0
 margin_bottom = 400.0
 theme = SubResource( 4 )
 custom_fonts/font = ExtResource( 3 )
-placeholder_text = "prompt"
+placeholder_text = "asmr shell"
 placeholder_alpha = 0.5
 caret_blink = true
+caret_blink_speed = 0.3
 __meta__ = {
 "_edit_use_anchors_": true
 }
@@ -123,14 +122,6 @@ valign = 1
 
 [node name="WindowsHandler" type="Node" parent="."]
 script = ExtResource( 8 )
-
-[node name="TextEditor" parent="WindowsHandler" instance=ExtResource( 7 )]
-margin_left = 860.0
-margin_top = 300.0
-margin_right = 1280.0
-margin_bottom = 720.0
-color = Color( 0.752941, 0.752941, 0.752941, 1 )
-fileName = "program1.asmr"
 
 [node name="EnvironmentStuff" type="Node" parent="."]
 
@@ -158,4 +149,6 @@ script = ExtResource( 5 )
 
 [connection signal="mouse_entered" from="Console/BlackBG/TitleBar" to="Console" method="_on_TitleBar_mouse_entered"]
 [connection signal="mouse_exited" from="Console/BlackBG/TitleBar" to="Console" method="_on_TitleBar_mouse_exited"]
+[connection signal="focus_entered" from="Console/Prompt" to="Console" method="_on_Prompt_focus_entered"]
+[connection signal="focus_exited" from="Console/Prompt" to="Console" method="_on_Prompt_focus_exited"]
 [connection signal="text_entered" from="Console/Prompt" to="Console" method="onPromptEnteredSignal"]
