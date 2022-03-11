@@ -39,7 +39,7 @@ public class IDE : Node
             Write(JSON.Print(data));
         }
     }
-    
+     
     
     private InterfaceConsole console;
     public RobotsHolder robots;
@@ -55,4 +55,26 @@ public class IDE : Node
         console = GetNode<InterfaceConsole>("Console");
     }
 
+    public void moveCamera(){
+        if(Global.FRAME%3==0) return;
+
+        Vector2 ave = Vector2.Zero;
+        if(robots.GetChildCount()>=1){
+            foreach(Spatial b in robots.GetChildren()){
+                ave.x += b.GlobalTransform.origin.x;
+                ave.y += b.GlobalTransform.origin.z;
+            }
+            
+            ave /= robots.GetChildCount();
+        } 
+
+        camHolder.Translation = new Vector3(
+            Mathf.Lerp(camHolder.Translation.x, ave.x, 0.2f), 0,
+            Mathf.Lerp(camHolder.Translation.z, ave.y, 0.2f)
+        );
+    } 
+
+    public override void _PhysicsProcess(float delta){
+        moveCamera();
+    }
 }
