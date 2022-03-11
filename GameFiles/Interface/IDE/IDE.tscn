@@ -120,6 +120,12 @@ custom_fonts/font = ExtResource( 3 )
 text = ">>"
 valign = 1
 
+[node name="HitBox" type="TextureButton" parent="Console"]
+visible = false
+margin_top = 40.0
+margin_right = 480.0
+margin_bottom = 400.0
+
 [node name="WindowsHandler" type="Node" parent="."]
 script = ExtResource( 8 )
 
@@ -149,6 +155,4 @@ script = ExtResource( 5 )
 
 [connection signal="mouse_entered" from="Console/BlackBG/TitleBar" to="Console" method="_on_TitleBar_mouse_entered"]
 [connection signal="mouse_exited" from="Console/BlackBG/TitleBar" to="Console" method="_on_TitleBar_mouse_exited"]
-[connection signal="focus_entered" from="Console/Prompt" to="Console" method="_on_Prompt_focus_entered"]
-[connection signal="focus_exited" from="Console/Prompt" to="Console" method="_on_Prompt_focus_exited"]
 [connection signal="text_entered" from="Console/Prompt" to="Console" method="onPromptEnteredSignal"]

@@ -57,11 +57,6 @@ public class InterfaceConsole : Control
     LinkedListNode<string> cmd_history_NodePointer;
     public override void _Input(InputEvent @event)
     {
-        async void setCaretPositionLast(){
-            await ToSignal(GetTree().CreateTimer(0.05f), "timeout");
-            prompt.CaretPosition = prompt.Text.Length;
-        }
-
         base._Input(@event);
 
         if(mouseIn && @event is InputEventMouseButton)
@@ -76,7 +71,7 @@ public class InterfaceConsole : Control
                 Mathf.Clamp(RectPosition.y, 0, screenSize.y - RectSize.y)
             );
         }
-        else if(@event is InputEventKey && promptFocused && (@event as InputEventKey).Pressed ){
+        else if(@event is InputEventKey && prompt.HasFocus() && (@event as InputEventKey).Pressed ){
             
             bool[] arrow = {Input.IsActionJustPressed("ArrowUp"), Input.IsActionJustPressed("ArrowDown")};
 
@@ -93,18 +88,14 @@ public class InterfaceConsole : Control
                 
                 if(cmd_history_NodePointer != null){
                     prompt.Text = cmd_history_NodePointer.Value;
-                    setCaretPositionLast();
+                    
+                    async void setCaretPositionLast(){
+                        await ToSignal(GetTree().CreateTimer(0.05f), "timeout");
+                        prompt.CaretPosition = prompt.Text.Length;
+                    } setCaretPositionLast();
                 }
             }
 
         }
-    }
-
-    private bool promptFocused = false;
-    public void _on_Prompt_focus_entered(){
-        promptFocused = true;
-    }
-    public void _on_Prompt_focus_exited(){
-        promptFocused = false;
     }
 }
