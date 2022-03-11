@@ -46,7 +46,10 @@ public class InterfaceConsole : Node
                 string[] argsGrammar = new string[7]{
                     "(--name=.{1,})", "(--steering=(tank|car))", "(--combat=(drill|chopper))",
                     "(--sensor=(laser|camera))","(--x=(-|)(\\d){1,})","(--y=(-|)(\\d){1,})","(--r=(-|)(\\d){1,})"
-                }; string[] argsValue = new string[7]{"","Tank","Drill","Laser","0","0","0"};
+                }; 
+                string[] argsValue = args[1]=="add"?
+                    new string[7]{"","Tank","Drill","Laser","0","0","0"}:
+                    new String[7]{"","","","","","",""};
                 
                 for(int i = 2; i<args.Length; i++){
                     
@@ -61,12 +64,18 @@ public class InterfaceConsole : Node
                     if(!matched) return "[u]"+args[i] + "[/u] unrecognized arguement";
                 }
                 if(argsValue[0].Length==0) return "[b]bot "+args[1]+"[/b] requires [u]--name=[/u] arguement";
-                else return 
-                    ideparent.Command_AddRobot(
-                        argsValue[0], argsValue[1], argsValue[2], 
-                        argsValue[3], argsValue[4], argsValue[5], argsValue[6]
-                    );
-                    
+                else{
+                    if(args[1]=="add")
+                        return ideparent.robots.AddRobot(
+                            argsValue[0], argsValue[1], argsValue[2], argsValue[3], 
+                            argsValue[4], argsValue[5], argsValue[6]
+                        );
+                    else if(args[1]=="mod")
+                        return ideparent.robots.ModRobot(
+                            argsValue[0], argsValue[1], argsValue[2], argsValue[3], 
+                            argsValue[4], argsValue[5], argsValue[6]
+                        );
+                }                    
             }
 
         }
