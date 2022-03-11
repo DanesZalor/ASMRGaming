@@ -60,8 +60,10 @@ public class InterfaceConsole : Control
             string s = "";
             for(int i=1; i< args.Length; i++){
                 
-                if(!keyFileExists(args[i]))
+                if(!keyFileExists(args[i])){
+                    create_KeyFile(args[i]);
                     s += String.Format("edit: \'{0}\': created since no such file existed\n",args[i]);
+                }
                 openTextEditor(args[i]);
             }
             return s;
@@ -157,6 +159,7 @@ public class InterfaceConsole : Control
         else 
             return cmd + " : command not found";
     }
+
     // EVENTS
     /*Signal*/ public void onPromptEnteredSignal(String cmd){
         string feedback = interpretCommand(cmd);
