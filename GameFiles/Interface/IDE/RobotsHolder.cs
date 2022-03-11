@@ -111,10 +111,10 @@ public class RobotsHolder : Node
             return Assembler.Common.match(line,grammar,exact);
         }
 
-        if(args.Length==1) return help;
-        else if( args.Length >= 2 && match(args[1],"(clear|list|help)") ){
+        if(args.Length<2) return help;
+        if( match(args[1],"(clear|list|help)") ){
                 
-            if(args.Length>2) return args[1]+" takes no arguements";
+            if(args.Length>2) return "[b]"+args[1]+"[/b] takes no arguements";
             
             switch(args[1]){
                 case "list": return ListRobots();
@@ -122,7 +122,8 @@ public class RobotsHolder : Node
                 case "clear": return "robots cleared";
             }
                 
-        }else if( match(args[1],"(add|mod)") ){
+        }
+        else if( match(args[1],"(add|mod)") ){
 
             if(args.Length==2) return "[b]"+args[1]+ "[/b] needs atleast one arguement";
             
@@ -159,6 +160,16 @@ public class RobotsHolder : Node
                         argsValue[4], argsValue[5], argsValue[6]
                     );
             }                    
+        }
+        else if( match(args[1], "del")){
+            
+            if(args.Length==3 && match(args[2], "(--name=.{1,})") )
+                return DeleteRobot(args[2].Split(new char[1]{'='})[1]);
+            
+            else return "[b]del[/b] only requires [u]--name=[/u] arguement";
+            
+            
+
         }
         return "";
     }
