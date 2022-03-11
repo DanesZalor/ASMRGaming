@@ -97,6 +97,7 @@ public class RobotsHolder : Node
         return s;
     }
 
+
     /// <summary> this is meant for the InterfaceConsole to access 
     /// <br>returns bbcode text</summary>
     public string interpretCommand(string[] args){
@@ -165,9 +166,6 @@ public class RobotsHolder : Node
                 return DeleteRobot(args[2].Replace("--name=",""));
             
             else return "[b]del[/b] only requires [u]--name=[/u] arguement";
-            
-            
-
         }
         return "";
     }
