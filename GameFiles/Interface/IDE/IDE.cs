@@ -30,7 +30,10 @@ public class IDE : Node
         }
         public static void Load(){
             Godot.JSONParseResult jparse = Godot.JSON.Parse(Read());
-            data = jparse.Result as Godot.Collections.Dictionary;
+            if(jparse.Result == null)
+                data = new Godot.Collections.Dictionary();
+            else
+                data = jparse.Result as Godot.Collections.Dictionary;
         }
         public static void Save(){
             Write(JSON.Print(data));
@@ -48,7 +51,6 @@ public class IDE : Node
 
         robots = GetNode<RobotsHolder>("Robots");
         console = GetNode<InterfaceConsole>("Console");
-
     }
 
 }
