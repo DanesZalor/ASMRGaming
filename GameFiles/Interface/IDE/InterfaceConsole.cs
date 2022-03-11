@@ -27,7 +27,7 @@ public class InterfaceConsole : Control
         
         else if(args.Length>=1 && args[0]=="bot")
             return ideparent.robots.interpretCommand(args);
-        else if(args.Length>=1 && Global.match(args[0], "(touch|cat|rm|ls|edit|mv)") )
+        else if(args.Length>=1 && Global.match(args[0], "(ls|touch|cat|edit|rm|mv)") )
             return ideparent.windowsHandler.interpretCommand(args);
 
         else 

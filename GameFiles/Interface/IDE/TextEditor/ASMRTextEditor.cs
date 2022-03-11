@@ -25,7 +25,9 @@ public class ASMRTextEditor : ColorRect
             GD.Print(fileName + " not found");
             QueueFree();
         }
-        ready = true;       
+        ready = true;     
+        
+        textBox.GrabFocus();
     }
 
     public void setFileName(string s){
