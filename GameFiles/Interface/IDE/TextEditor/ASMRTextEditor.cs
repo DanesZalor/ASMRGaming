@@ -37,16 +37,16 @@ public class ASMRTextEditor : ColorRect
 
     /// ------------    EVENTS---------
     private bool mouseIn = false, mousePress = false; 
-    public void _on_TitleBarMouseEnterOrExit(bool enter){
-        mouseIn = enter;
-    }
+    public void _on_TitleBarMouseEnterOrExit(bool enter){ mouseIn = enter; }
 
     public override void _Input(InputEvent @event)
     {
         base._Input(@event);
         
-        if(mouseIn && @event is InputEventMouseButton)
+        if(mouseIn && @event is InputEventMouseButton){
             mousePress = (@event as InputEventMouseButton).Pressed;
+            parent.RaiseWindow(GetIndex());
+        }
 
         else if(@event is InputEventMouseMotion && mousePress){
 
@@ -59,9 +59,12 @@ public class ASMRTextEditor : ColorRect
         }
     }
 
-    public void _on_TextureButton_pressed(){
+    /*Signal - Exit button*/ public void _on_TextureButton_pressed(){
         IDE.SaveFile.DATA[fileName] = textBox.Text;
         IDE.SaveFile.Save();
         QueueFree();
+    }
+    /*Signal*/ public void _on_TextEdit_focus_entered(){
+        parent.RaiseWindow(GetIndex());
     }
 }

@@ -8,5 +8,8 @@ public class WindowsHandler : Node
     {
         
     }
+    public void RaiseWindow(int index){
+        MoveChild(GetChild(index), GetChildCount()-1);
+    }
 
 }

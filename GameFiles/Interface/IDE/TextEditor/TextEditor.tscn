@@ -101,6 +101,7 @@ text = "×"
 margin_right = 28.0
 margin_bottom = 28.0
 
+[connection signal="focus_entered" from="TextEdit" to="." method="_on_TextEdit_focus_entered"]
 [connection signal="mouse_entered" from="TitleBar" to="." method="_on_TitleBarMouseEnterOrExit" binds= [ true ]]
 [connection signal="mouse_exited" from="TitleBar" to="." method="_on_TitleBarMouseEnterOrExit" binds= [ false ]]
 [connection signal="pressed" from="ExitButton/TextureButton" to="." method="_on_TextureButton_pressed"]
