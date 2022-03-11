@@ -2,7 +2,7 @@ using Godot;
 using System;
 
 
-public class InterfaceConsole : Node
+public class InterfaceConsole : Control
 {
     private IDE ideparent;    
     private RichTextLabel logs;
@@ -12,12 +12,6 @@ public class InterfaceConsole : Node
         ideparent = GetParent<IDE>();
         logs = GetNode<RichTextLabel>("Logs");
         prompt = GetNode<LineEdit>("Prompt");
-    }
-
-    public void onPromptEnteredSignal(String cmd){
-        string feedback = interpretCommand(cmd);
-        logs.BbcodeText += "[color=#8fff7f]>>[/color] " + cmd + "\n" + (feedback.Length > 0? (feedback + "\n") :"");
-        prompt.Text = "";
     }
 
     private string interpretCommand(string cmd){
@@ -36,5 +30,37 @@ public class InterfaceConsole : Node
             return cmd + " : command not found";
     }
 
-    
+    // EVENTS
+    public void onPromptEnteredSignal(String cmd){
+        string feedback = interpretCommand(cmd);
+        logs.BbcodeText += "[color=#8fff7f]>>[/color] " + cmd + "\n" + (feedback.Length > 0? (feedback + "\n") :"");
+        prompt.Text = "";
+    }
+
+    private bool mouseIn = false, mousePress = false; 
+    public void _on_TitleBar_mouse_entered(){
+        mouseIn = true;
+        //GD.Print("mousein");
+    }
+
+    public void _on_TitleBar_mouse_exited(){
+        mouseIn = false;
+        mousePress = false;
+        //GD.Print("mouseout");
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        base._Input(@event);
+
+        if(mouseIn && @event is InputEventMouseButton)
+            mousePress = (@event as InputEventMouseButton).Pressed;
+        else if(@event is InputEventMouseMotion && mousePress){
+            RectPosition += (@event as InputEventMouseMotion).Relative; 
+            RectPosition = new Vector2(
+                Mathf.Clamp(RectPosition.x, 0, 848),
+                Mathf.Clamp(RectPosition.y, 0, 357)
+            );
+        }
+    }
 }

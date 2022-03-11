@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://GameFiles/Common/Cascadia.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://GameFiles/Common/CascadiaFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://GameFiles/Interface/IDE/TextEditor/TextEditor.cs" type="Script" id=3]
 
 [sub_resource type="Theme" id=9]
 default_font = ExtResource( 2 )
@@ -21,11 +22,10 @@ use_filter = true
 font_data = SubResource( 1 )
 
 [node name="TextEditor" type="ColorRect"]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 430.0
-margin_bottom = 430.0
+margin_right = 420.0
+margin_bottom = 420.0
 color = Color( 0.752941, 0.752941, 0.752941, 1 )
+script = ExtResource( 3 )
 
 [node name="TextEdit" type="TextEdit" parent="."]
 margin_left = 3.0
@@ -94,3 +94,6 @@ margin_bottom = 33.0068
 custom_colors/font_color = Color( 0.435294, 0.435294, 0.435294, 1 )
 custom_fonts/font = SubResource( 10 )
 text = "×"
+
+[connection signal="mouse_entered" from="TitleBar" to="." method="_on_TitleBar_mouse_entered"]
+[connection signal="mouse_exited" from="TitleBar" to="." method="_on_TitleBar_mouse_exited"]
