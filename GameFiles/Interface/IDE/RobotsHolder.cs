@@ -128,7 +128,7 @@ public class RobotsHolder : Node
             if(args.Length==2) return "[b]"+args[1]+ "[/b] needs atleast one arguement";
             
             string[] argsGrammar = new string[7]{
-                "(--name=.{1,})", "(--steering=(tank|car))", "(--combat=(drill|chopper))",
+                "(--name=(\\w){1,})", "(--steering=(tank|car))", "(--combat=(drill|chopper))",
                 "(--sensor=(laser|camera))","(--x=(-|)(\\d){1,})","(--y=(-|)(\\d){1,})","(--r=(-|)(\\d){1,})"
             }; 
             string[] argsValue = args[1]=="add"?
@@ -145,7 +145,7 @@ public class RobotsHolder : Node
                         argsValue[j] = char.ToUpper(argsValue[j][0]) + argsValue[j].Substring(1);
                     } 
                 }
-                if(!matched) return "[u]"+args[i] + "[/u] unrecognized arguement";
+                if(!matched) return "[u]"+args[i] + "[/u] unrecognized parameter or arguement";
             }
             if(argsValue[0].Length==0) return "[b]bot "+args[1]+"[/b] requires [u]--name=[/u] arguement";
             else{
@@ -164,7 +164,7 @@ public class RobotsHolder : Node
         else if( match(args[1], "del")){
             
             if(args.Length==3 && match(args[2], "(--name=.{1,})") )
-                return DeleteRobot(args[2].Split(new char[1]{'='})[1]);
+                return DeleteRobot(args[2].Replace("--name=",""));
             
             else return "[b]del[/b] only requires [u]--name=[/u] arguement";
             
