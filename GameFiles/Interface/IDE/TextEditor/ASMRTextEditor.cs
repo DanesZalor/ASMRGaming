@@ -50,11 +50,14 @@ public class ASMRTextEditor : ColorRect
         
         if(mouseIn && @event is InputEventMouseButton)
             mousePress = (@event as InputEventMouseButton).Pressed;
+
         else if(@event is InputEventMouseMotion && mousePress){
+
+            Vector2 screenSize = Global.SCREENSIZE; 
             RectPosition += (@event as InputEventMouseMotion).Relative; 
             RectPosition = new Vector2(
-                Mathf.Clamp(RectPosition.x, 0, 860),
-                Mathf.Clamp(RectPosition.y, 0, 300)
+                Mathf.Clamp(RectPosition.x, 0, screenSize.x - RectSize.x),
+                Mathf.Clamp(RectPosition.y, 0, screenSize.y - RectSize.y)
             );
         }
     }
