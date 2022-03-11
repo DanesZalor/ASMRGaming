@@ -7,6 +7,7 @@ public class InterfaceConsole : Control
     private IDE ideparent;    
     private RichTextLabel logs;
     private LineEdit prompt;
+    private Control titleBar;
 
     private LinkedList<string> cmd_history;
     public override void _Ready()
@@ -15,8 +16,12 @@ public class InterfaceConsole : Control
         ideparent = GetParent<IDE>();
         logs = GetNode<RichTextLabel>("Logs");
         prompt = GetNode<LineEdit>("Prompt");
+        titleBar = GetNode<Control>("BlackBG/TitleBar");
     }
-
+    public override void _PhysicsProcess(float delta)
+    {
+        base._PhysicsProcess(delta);
+    }
     private string interpretCommand(string cmd){
 
         cmd = cmd.Trim().ToLower();
@@ -44,14 +49,10 @@ public class InterfaceConsole : Control
         cmd_history_NodePointer = null;
     }
 
-    private bool mouseIn = false, mousePress = false; 
-    public void _on_TitleBar_mouse_entered(){
-        mouseIn = true;
-    }
+    private bool mousePress = false, mouseIn = false;
 
-    public void _on_TitleBar_mouse_exited(){
-        mouseIn = false;
-        mousePress = false;
+    public void _on_TitleBarMouseEnterOrExit(bool enter){
+        mouseIn = enter;
     }
 
     LinkedListNode<string> cmd_history_NodePointer;
@@ -59,17 +60,21 @@ public class InterfaceConsole : Control
     {
         base._Input(@event);
 
-        if(mouseIn && @event is InputEventMouseButton)
-            mousePress = (@event as InputEventMouseButton).Pressed;
+        if( (@event is InputEventMouseButton) ){
+            mousePress = (@event as InputEventMouseButton).Pressed && mouseIn;
+        }
 
         else if(@event is InputEventMouseMotion && mousePress){
-
+            
+            InputEventMouseMotion e = (@event as InputEventMouseMotion);
             Vector2 screenSize = Global.SCREENSIZE;
-            RectPosition += (@event as InputEventMouseMotion).Relative; 
+            RectPosition += e.Relative; 
             RectPosition = new Vector2(
                 Mathf.Clamp(RectPosition.x, 0, screenSize.x - RectSize.x),
                 Mathf.Clamp(RectPosition.y, 0, screenSize.y - RectSize.y)
             );
+            
+            //if(!Global.isOnScreen(e.Position)) mousePress = false; // we can disable this if its too clunky or some shit
         }
         else if(@event is InputEventKey && prompt.HasFocus() && (@event as InputEventKey).Pressed ){
             
@@ -97,5 +102,9 @@ public class InterfaceConsole : Control
             }
 
         }
+    }
+    
+    public void _on_ConsoleHitBox_pressed(){
+        prompt.GrabFocus();
     }
 }

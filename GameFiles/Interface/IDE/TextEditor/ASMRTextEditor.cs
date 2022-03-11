@@ -37,13 +37,8 @@ public class ASMRTextEditor : ColorRect
 
     /// ------------    EVENTS---------
     private bool mouseIn = false, mousePress = false; 
-    public void _on_TitleBar_mouse_entered(){
-        mouseIn = true;
-    }
-
-    public void _on_TitleBar_mouse_exited(){
-        mouseIn = false;
-        mousePress = false;
+    public void _on_TitleBarMouseEnterOrExit(bool enter){
+        mouseIn = enter;
     }
 
     public override void _Input(InputEvent @event)

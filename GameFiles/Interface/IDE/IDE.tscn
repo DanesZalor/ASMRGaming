@@ -102,7 +102,7 @@ margin_bottom = 400.0
 theme = SubResource( 4 )
 custom_fonts/font = ExtResource( 3 )
 placeholder_text = "asmr shell"
-placeholder_alpha = 0.5
+placeholder_alpha = 0.3
 caret_blink = true
 caret_blink_speed = 0.3
 __meta__ = {
@@ -121,7 +121,6 @@ text = ">>"
 valign = 1
 
 [node name="HitBox" type="TextureButton" parent="Console"]
-visible = false
 margin_top = 40.0
 margin_right = 480.0
 margin_bottom = 400.0
@@ -153,6 +152,7 @@ far = 150.0
 [node name="Robots" type="Node" parent="."]
 script = ExtResource( 5 )
 
-[connection signal="mouse_entered" from="Console/BlackBG/TitleBar" to="Console" method="_on_TitleBar_mouse_entered"]
-[connection signal="mouse_exited" from="Console/BlackBG/TitleBar" to="Console" method="_on_TitleBar_mouse_exited"]
+[connection signal="mouse_entered" from="Console/BlackBG/TitleBar" to="Console" method="_on_TitleBarMouseEnterOrExit" binds= [ true ]]
+[connection signal="mouse_exited" from="Console/BlackBG/TitleBar" to="Console" method="_on_TitleBarMouseEnterOrExit" binds= [ false ]]
 [connection signal="text_entered" from="Console/Prompt" to="Console" method="onPromptEnteredSignal"]
+[connection signal="pressed" from="Console/HitBox" to="Console" method="_on_ConsoleHitBox_pressed"]
