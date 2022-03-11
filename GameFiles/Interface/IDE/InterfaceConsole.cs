@@ -4,8 +4,7 @@ using System;
 
 public class InterfaceConsole : Control
 {
-
-    public class Shell{
+    private class Shell{
         private InterfaceConsole parent;
         public Shell(InterfaceConsole ic){ parent = ic;}
         private bool keyFileExists(string fileName){ // ASSUMING IDE.SaveFile.Load()ed
@@ -21,16 +20,19 @@ public class InterfaceConsole : Control
             else IDE.SaveFile.DATA.Remove(filename);
             IDE.SaveFile.Save();
         }
-        private string rename_KeyFile(string filename, string newname){ // ASSUMING it's used by MV IDE.SaveFile.Load()ed 
+        private string mvCommand(string filename, string newname){ // ASSUMING it's used by MV IDE.SaveFile.Load()ed 
             bool[] exists = {keyFileExists(filename), keyFileExists(newname)};
+            
             
             if(exists[0] && !exists[1]){
                 create_KeyFile(newname, IDE.SaveFile.DATA[filename] as String);
                 delete_KeyFile(filename);
+                return "";
             }
-            else if(!exists[0]) return "mv: "+ filename+": no such file";
-            else if(exists[1]) return  "mv: "+ filename+": file exists";
-            return "";
+            string s = "";
+            if(!exists[0]) s += "mv: "+ filename+": no such file\n";
+            if(exists[1])  s += "mv: "+ filename+": file exists" + (!exists[0]?"":"\n");
+            return s;
         }
         private string rmCommand(string[] args){
             string s = "";
@@ -69,7 +71,7 @@ public class InterfaceConsole : Control
             for(int i=1; i<args.Length; i++){
                 if(keyFileExists(args[i])){
                     string content = IDE.SaveFile.DATA[args[i]] as String;
-                    if(!content.EndsWith("\n")) content += "\n";
+                    if(!content.EndsWith("\n") && i<args.Length-1) content += "\n";
                     s += content;
                 }
                 else s+= String.Format("cat: \'{0}\': No such file\n", args[i]);
@@ -94,21 +96,29 @@ public class InterfaceConsole : Control
                 return r;
             }
             
-            if(Global.match(args[0],"(touch|rm|edit|cat)") && args.Length<2) 
-                return String.Format("{0}: needs atleast one filename arguement", args[0]);
+            if(Global.match(args[0],"(touch|rm|edit|cat)")){
+                if(args.Length<2)
+                    return String.Format("{0}: needs atleast one filename arguement", args[0]);
 
-            if(args[0].Equals("rm"))
-                return rmCommand(args);
-            
-            else if(args[0].Equals("touch"))
-                return touchCommand(args);
-            
-            else if(args[0].Equals("edit"))
-                return editCommand(args);
+                if(args[0].Equals("rm"))
+                    return rmCommand(args);
+                
+                else if(args[0].Equals("touch"))
+                    return touchCommand(args);
+                
+                else if(args[0].Equals("edit"))
+                    return editCommand(args);
 
-            else if(args[0].Equals("cat"))
-                return catCommand(args);
-            
+                else if(args[0].Equals("cat"))
+                    return catCommand(args);
+            }
+            if (Global.match(args[0], "(mv|cp)")){
+                if(args.Length!=3)
+                    return String.Format("{0}: needs exactly 2 filename arguements", args[0]);
+                
+                if(args[0].Equals("mv"))
+                    return mvCommand(args[1], args[2]);
+            }
             return "";
         }
     }
@@ -149,7 +159,7 @@ public class InterfaceConsole : Control
             return cmd + " : command not found";
     }
     // EVENTS
-    public void onPromptEnteredSignal(String cmd){
+    /*Signal*/ public void onPromptEnteredSignal(String cmd){
         string feedback = interpretCommand(cmd);
         logs.BbcodeText += "[color=#8fff7f]>>[/color] " + cmd + "\n" + (feedback.Length > 0? (feedback + "\n") :"");
         prompt.Text = "";
@@ -159,22 +169,25 @@ public class InterfaceConsole : Control
         cmd_history_NodePointer = null;
     }
 
-    private bool mousePress = false, mouseIn = false;
+    private bool mousePressInTitleBar = false, mouseInTitleBar = false, mouseInLogs = false;
 
-    public void _on_TitleBarMouseEnterOrExit(bool enter){
-        mouseIn = enter;
-    }
-
+    /*Signal*/ public void _on_TitleBarMouseEnterOrExit(bool enter){ mouseInTitleBar = enter; }
+    /*Signal*/ public void _on_Logs_mouseIN(bool enter){ mouseInLogs = enter; }
     LinkedListNode<string> cmd_history_NodePointer;
     public override void _Input(InputEvent @event)
     {
         base._Input(@event);
 
         if( (@event is InputEventMouseButton) ){
-            mousePress = (@event as InputEventMouseButton).Pressed && mouseIn;
+            
+            InputEventMouseButton e = (@event as InputEventMouseButton);
+            mousePressInTitleBar = e.Pressed && mouseInTitleBar;
+            
+            // grabs focus to prompt if pressed logs // doesnt work for now
+            if(e.Pressed && mouseInLogs ) prompt.GrabFocus();
         }
 
-        else if(@event is InputEventMouseMotion && mousePress){
+        else if(@event is InputEventMouseMotion && mousePressInTitleBar){
             
             InputEventMouseMotion e = (@event as InputEventMouseMotion);
             Vector2 screenSize = Global.SCREENSIZE;
@@ -184,7 +197,6 @@ public class InterfaceConsole : Control
                 Mathf.Clamp(RectPosition.y, 0, screenSize.y - RectSize.y)
             );
             
-            //if(!Global.isOnScreen(e.Position)) mousePress = false; // we can disable this if its too clunky or some shit
         }
         else if(@event is InputEventKey && prompt.HasFocus() && (@event as InputEventKey).Pressed ){
             
@@ -214,7 +226,4 @@ public class InterfaceConsole : Control
         }
     }
     
-    public void _on_ConsoleHitBox_pressed(){
-        prompt.GrabFocus();
-    }
 }

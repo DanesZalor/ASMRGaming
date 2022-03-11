@@ -85,13 +85,14 @@ margin_left = 8.0
 margin_top = 45.0
 margin_right = 472.0
 margin_bottom = 368.0
+focus_mode = 2
 custom_fonts/bold_font = SubResource( 6 )
 custom_fonts/normal_font = SubResource( 5 )
 bbcode_enabled = true
 scroll_following = true
+selection_enabled = true
 __meta__ = {
-"_editor_description_": "limit for scroll
-304 letters or 8 new lines"
+"_editor_description_": ""
 }
 
 [node name="Prompt" type="LineEdit" parent="Console"]
@@ -119,11 +120,6 @@ margin_bottom = 38.0
 custom_fonts/font = ExtResource( 3 )
 text = ">>"
 valign = 1
-
-[node name="HitBox" type="TextureButton" parent="Console"]
-margin_top = 40.0
-margin_right = 480.0
-margin_bottom = 400.0
 
 [node name="WindowsHandler" type="Node" parent="."]
 script = ExtResource( 8 )
@@ -154,5 +150,6 @@ script = ExtResource( 5 )
 
 [connection signal="mouse_entered" from="Console/BlackBG/TitleBar" to="Console" method="_on_TitleBarMouseEnterOrExit" binds= [ true ]]
 [connection signal="mouse_exited" from="Console/BlackBG/TitleBar" to="Console" method="_on_TitleBarMouseEnterOrExit" binds= [ false ]]
+[connection signal="mouse_entered" from="Console/Logs" to="Console" method="_on_Logs_mouseIN" binds= [ true ]]
+[connection signal="mouse_exited" from="Console/Logs" to="Console" method="_on_Logs_mouseIN" binds= [ false ]]
 [connection signal="text_entered" from="Console/Prompt" to="Console" method="onPromptEnteredSignal"]
-[connection signal="pressed" from="Console/HitBox" to="Console" method="_on_ConsoleHitBox_pressed"]
