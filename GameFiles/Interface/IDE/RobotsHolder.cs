@@ -103,14 +103,13 @@ public class RobotsHolder : Node
         // PRECONDITIONS
         string r = "";
         if(!exists(name))  r += "asm : bot \'"+name+"\" does not exist";
-        
-        //if(!IDE.SaveFile.DATA.Contains(keyfilename)) r+= "asm : \'"+keyfilename+"\' No such file";
+        if(!IDE.SaveFile.DATA.Contains(keyfilename)) r+= "asm : \'"+keyfilename+"\' No such file";
 
         if(r.Length>0) return r;
 
         string content = IDE.SaveFile.DATA[keyfilename] as string;
         string syntaxErrors = Assembler.SyntaxChecker.evaluateProgram(content);
-        if(syntaxErrors.Length>0) return "asm : "+syntaxErrors;
+        if(syntaxErrors.Length>0) return "asm : [color=#ff4411]"+syntaxErrors+"[/color]";
         
         foreach(RobotPlaceHolder rph in GetChildren()){
             if(rph.Name.Equals(name))
@@ -139,7 +138,10 @@ public class RobotsHolder : Node
             if( args.Length==3 && 
                 Global.match(args[1], "(--name=.{1,})") &&
                 Global.match(args[2], "(--src=.{1,})")
-            ) return asmCommand(args[1], args[2]);
+            ) return asmCommand(
+                args[1].Split( new char[1]{'='})[1], 
+                args[2].Split( new char[1]{'='})[1]
+                );
             else return "asm usage : asm --name=botname --src=filename";
         }
         else if( Global.match(args[1],"(clear|list|help)") ){
