@@ -4,7 +4,49 @@ using System;
 
 public class IDE : Node
 {
-    private enum STATE{ SETUP, PLAYING } private STATE CurrentState; 
+    private enum STATE : byte 
+        { SETUP, PLAYING, PAUSED } 
+        private STATE CurrentState = STATE.SETUP;
+    
+    private string StateCommand(string[] args){ // (play|pause|reset)
+        
+        STATE targetState = STATE.SETUP;
+        if( args[0].Equals("play") ) targetState = STATE.PLAYING;
+        else if( args[0].Equals("pause") ) targetState = STATE.PAUSED;
+        else if( args[0].Equals("(reset|setup)") ) targetState = STATE.SETUP;
+
+        //GD.Print(CurrentState+" -> "+targetState);
+
+        if(targetState==STATE.PAUSED && CurrentState==STATE.SETUP)
+                return "IDE: state is not running";
+        else if(targetState==CurrentState)
+                return "IDE: already in \'"+targetState+"\'";
+
+        string r = "";
+        // SETUP -> PLAYING
+        if( CurrentState==STATE.SETUP && targetState==STATE.PLAYING ){
+            // some init code shit, replace the robotplaceholders with robots, compile their programs, etc
+            r = ("SETUP -> PLAYING");
+
+        }
+
+        // PLAYING|PAUSED -> SETUP
+        else if ( ( CurrentState==STATE.PLAYING || CurrentState==STATE.PAUSED ) && targetState==STATE.SETUP ){
+            // some code to reset the field
+            r = ("PLAYING|PAUSED -> SETUP");
+        }
+
+        else if( 
+            (CurrentState==STATE.PLAYING && targetState==STATE.PAUSED) ||
+            (CurrentState==STATE.PAUSED && targetState==STATE.PLAYING)
+         ){
+             // some code to toggle between playing and paused
+            r = ("PLAYING <-> PAUSED");
+        }
+
+        CurrentState = targetState;    
+        return r;
+    }
 
     /// <summary> access DATA to get data. make sure to call Load() first before anything and Save() after using </summary>
     public static class SaveFile{
@@ -94,14 +136,24 @@ public class IDE : Node
             Mathf.Lerp(camHolder.Translation.x, ave.x, 0.1f), 0,
             Mathf.Lerp(camHolder.Translation.z, ave.y, 0.1f)
         );
-    } 
+    }
 
     public string interpretCommand(string[] args){
         if(args.Length==0) return "";
+        
         else if( Global.match(args[0], "(ls|touch|cat|edit|rm|mv|cp)") )
             return shell.interpretCommand(args);
-        else if( Global.match(args[0],"(bot|asm)"))
-            return robots.interpretCommand(args);
+        
+        else if( Global.match(args[0], "(play|pause|(reset|setup))"))
+            return StateCommand(args);
+
+        else if( Global.match(args[0],"(bot|asm)")){
+
+            if(CurrentState==STATE.SETUP)    
+                return robots.interpretCommand(args);
+            else
+                return String.Format("{0} : cannot be used on current state");
+        }
         else 
             return args[0] + " : command not found";
     }
