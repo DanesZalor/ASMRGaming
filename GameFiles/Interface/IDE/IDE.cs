@@ -46,16 +46,17 @@ public class IDE : Node
     public RobotsHolder robots;
     public WindowsHandler windowsHandler;
     private Spatial camHolder; private Camera cam;
+    private Shell shell;
 
     public override void _Ready()
     {
         base._Ready();
         camHolder = GetNode<Spatial>("EnvironmentStuff/CamHolder");
         cam = camHolder.GetNode<Camera>("Camera");
-
         robots = GetNode<RobotsHolder>("Robots");
         windowsHandler = GetNode<WindowsHandler>("WindowsHandler");
         console = GetNode<InterfaceConsole>("Console");
+        shell = new Shell(this);
     }
 
     private void moveCamera(){
@@ -94,6 +95,16 @@ public class IDE : Node
             Mathf.Lerp(camHolder.Translation.z, ave.y, 0.1f)
         );
     } 
+
+    public string interpretCommand(string[] args){
+        if(args.Length==0) return "";
+        else if( Global.match(args[0], "(ls|touch|cat|edit|rm|mv|cp)") )
+            return shell.interpretCommand(args);
+        else if( Global.match(args[0],"(bot|asm)"))
+            return robots.interpretCommand(args);
+        else 
+            return args[0] + " : command not found";
+    }
 
     public override void _PhysicsProcess(float delta){
         moveCamera();
