@@ -16,7 +16,7 @@ public class RobotsHolder : Node
 
     private bool exists(string name){
         foreach(Node n in GetChildren())
-            if(n.Name==name) return true;
+            if(n.Name.Equals(name)) return true;
         return false;
     }
 
@@ -97,6 +97,28 @@ public class RobotsHolder : Node
         return s;
     }
 
+    private string asmCommand(string name, string keyfilename){ 
+        IDE.SaveFile.Load();
+
+        // PRECONDITIONS
+        string r = "";
+        if(!exists(name))  r += "asm : bot \'"+name+"\" does not exist";
+        
+        //if(!IDE.SaveFile.DATA.Contains(keyfilename)) r+= "asm : \'"+keyfilename+"\' No such file";
+
+        if(r.Length>0) return r;
+
+        string content = IDE.SaveFile.DATA[keyfilename] as string;
+        string syntaxErrors = Assembler.SyntaxChecker.evaluateProgram(content);
+        if(syntaxErrors.Length>0) return "asm : "+syntaxErrors;
+        
+        foreach(RobotPlaceHolder rph in GetChildren()){
+            if(rph.Name.Equals(name))
+                rph.program = content;
+        }
+        
+        return "";
+    }
 
     /// <summary> this is meant for the InterfaceConsole to access 
     /// <br>returns bbcode text</summary>
@@ -111,14 +133,23 @@ public class RobotsHolder : Node
                 ;
 
         if(args.Length<2) return help;
-        if( Global.match(args[1],"(clear|list|help)") ){
+
+        if( args[0].Equals("asm") ){
+
+            if( args.Length==3 && 
+                Global.match(args[1], "(--name=.{1,})") &&
+                Global.match(args[2], "(--src=.{1,})")
+            ) return asmCommand(args[1], args[2]);
+            else return "asm usage : asm --name=botname --src=filename";
+        }
+        else if( Global.match(args[1],"(clear|list|help)") ){
                 
             if(args.Length>2) return "[b]"+args[1]+"[/b] takes no arguements";
             
             switch(args[1]){
                 case "list": return ListRobots();
                 case "help": return help;
-                case "clear": return "robots cleared";
+                case "clear": return "not implemented. Might be deprecated";
             }
                 
         }
@@ -160,12 +191,12 @@ public class RobotsHolder : Node
                     );
             }                    
         }
-        else if( Global.match(args[1], "del")){
+        else if( args[1].Equals("del") ){
             
             if(args.Length==3 && Global.match(args[2], "(--name=.{1,})") )
                 return DeleteRobot(args[2].Replace("--name=",""));
             
-            else return "[b]del[/b] only requires [u]--name=[/u] arguement";
+            else return "bot del usage: bot del --name=botname";
         }
         return "";
     }

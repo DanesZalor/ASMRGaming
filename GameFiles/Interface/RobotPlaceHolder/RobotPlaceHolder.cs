@@ -6,7 +6,7 @@ public class RobotPlaceHolder : Spatial
     [Export(PropertyHint.Enum, "Tank,Car")] public string steering_peripheral = "Tank";
     [Export(PropertyHint.Enum, "Drill,Chopper")] public string combat_peripheral = "Drill";
     [Export(PropertyHint.Enum, "Laser,Camera")] public string sensor_peripheral = "Laser";
-
+    [Export(PropertyHint.MultilineText)] public string program = ""; 
     private Spatial[] peripherals;
     public Tag robotTag;
 

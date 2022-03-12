@@ -151,9 +151,9 @@ public class InterfaceConsole : Control
         
         if(args.Length==0) return "";
         
-        else if(args.Length>=1 && args[0]=="bot")
+        else if( Global.match(args[0],"(bot|asm)"))
             return ideparent.robots.interpretCommand(args);
-        else if(args.Length>=1 && Global.match(args[0], "(ls|touch|cat|edit|rm|mv|cp)") )
+        else if( Global.match(args[0], "(ls|touch|cat|edit|rm|mv|cp)") )
             return shell.interpretCommand(args);
 
         else 
