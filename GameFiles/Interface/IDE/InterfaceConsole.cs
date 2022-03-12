@@ -18,28 +18,45 @@ public class InterfaceConsole : Control
         prompt = GetNode<LineEdit>("Prompt");
         titleBar = GetNode<Control>("BlackBG/TitleBar");
     }
-    public override void _PhysicsProcess(float delta)
-    {
-        base._PhysicsProcess(delta);
-    }
+    
     private string interpretCommand(string cmd){
-
         cmd = cmd.Trim().ToLower();
-        
         string[] args = cmd.Split(new char[1]{' '},StringSplitOptions.RemoveEmptyEntries);
-        
         return ideparent.interpretCommand(args);
     }
 
+    public void clearCommand(){
+        logLines = 0;
+        logs.BbcodeText = "";
+    }
+
     // EVENTS
+    int logLines = 0;
     /*Signal*/ public void onPromptEnteredSignal(String cmd){
+        
+        prompt.Text = "";
+        if(Global.match(cmd, "clear")) {
+            clearCommand();
+            return;
+        }
+        
         string feedback = interpretCommand(cmd);
         logs.BbcodeText += "[color=#8fff7f]>>[/color] " + cmd + "\n" + (feedback.Length > 0? (feedback + "\n") :"");
-        prompt.Text = "";
         
         cmd_history.AddFirst(cmd);
         if(cmd_history.Count >= 10) cmd_history.RemoveLast();
         cmd_history_NodePointer = null;
+
+        /*Line capping*/{
+            logLines += 1;
+            if(logLines>20){
+                string[] lineSplit = logs.BbcodeText.Split(new string[1]{"[color=#8fff7f]>>[/color] "}, 2, StringSplitOptions.RemoveEmptyEntries);
+                //foreach(string line in lineSplit) GD.Print(line +"-----"); GD.Print("\n\n\n\n\n");
+                logs.BbcodeText = lineSplit[1];
+                logLines = 20;
+            }
+        }
+        
     }
 
     private bool mousePressInTitleBar = false, mouseInTitleBar = false, mouseInLogs = false;
