@@ -4,6 +4,8 @@ using System;
 
 public class IDE : Node
 {
+    private enum STATE{ SETUP, PLAYING } private STATE CurrentState; 
+
     /// <summary> access DATA to get data. make sure to call Load() first before anything and Save() after using </summary>
     public static class SaveFile{
         public const string path = "user://saveFile.json";
@@ -56,7 +58,7 @@ public class IDE : Node
         console = GetNode<InterfaceConsole>("Console");
     }
 
-    public void moveCamera(){
+    private void moveCamera(){
         if(Global.FRAME%3==0) return;
 
         Vector2 ave = Vector2.Zero;
