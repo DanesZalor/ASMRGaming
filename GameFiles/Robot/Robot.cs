@@ -77,7 +77,7 @@ public class Robot : KinematicBody
         }
     }
 
-    public override void _PhysicsProcess(float delta)
+    public void tick(float delta)
     {
         base._PhysicsProcess(delta);
         camholder.Translation = GlobalTransform.origin;

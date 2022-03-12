@@ -4,7 +4,7 @@ using System;
 
 public class IDE : Node
 {
-    private enum STATE : byte 
+    public enum STATE : byte 
         { SETUP, PLAYING, PAUSED } 
         private STATE CurrentState = STATE.SETUP;
     
@@ -25,15 +25,15 @@ public class IDE : Node
         string r = "";
         // SETUP -> PLAYING
         if( CurrentState==STATE.SETUP && targetState==STATE.PLAYING ){
+            
             // some init code shit, replace the robotplaceholders with robots, compile their programs, etc
-            r = ("SETUP -> PLAYING");
-
+            r = robots.setUp();
         }
 
         // PLAYING|PAUSED -> SETUP
         else if ( ( CurrentState==STATE.PLAYING || CurrentState==STATE.PAUSED ) && targetState==STATE.SETUP ){
             // some code to reset the field
-            r = ("PLAYING|PAUSED -> SETUP");
+            r = robots.ClearRobots();
         }
 
         else if( 
@@ -41,7 +41,9 @@ public class IDE : Node
             (CurrentState==STATE.PAUSED && targetState==STATE.PLAYING)
          ){
              // some code to toggle between playing and paused
-            r = ("PLAYING <-> PAUSED");
+             // actually dont need to do anything here lmao since the pause/play is handled by the _PhysicsProcess()
+            
+            r = "ide: "+(targetState==STATE.PAUSED?"paused":"played"); 
         }
 
         CurrentState = targetState;    
@@ -147,12 +149,12 @@ public class IDE : Node
         else if( Global.match(args[0], "(play|pause|(reset|setup))"))
             return StateCommand(args);
 
-        else if( Global.match(args[0],"(bot|asm)")){
+        else if( Global.match(args[0],"(bot|asm)") ){
 
             if(CurrentState==STATE.SETUP)    
-                return robots.interpretCommand(args);
+                return robots.interpretCommand(args, CurrentState);
             else
-                return String.Format("{0} : cannot be used on current state");
+                return String.Format("{0} : cannot be used on current state", args[0]);
         }
         else 
             return args[0] + " : command not found";
@@ -160,5 +162,8 @@ public class IDE : Node
 
     public override void _PhysicsProcess(float delta){
         moveCamera();
+        if(CurrentState==STATE.PLAYING){
+            robots.tick(delta);
+        }
     }
 }

@@ -87,16 +87,6 @@ public class RobotsHolder : Node
         return String.Format("Robot:[b]{0}[/b] does not exist",name);
     }
 
-    private string ClearRobots(){
-        if(GetChildCount()==0) return "No Robots found";
-        string s = "";
-        foreach(Node n in GetChildren()){
-            n.QueueFree();
-            s += String.Format("Deleted Robot:[b]{0}[/b]\n", n.Name);
-        }
-        return s;
-    }
-
     private string asmCommand(string name, string keyfilename){ 
         IDE.SaveFile.Load();
 
@@ -119,9 +109,56 @@ public class RobotsHolder : Node
         return "";
     }
 
+    public string ClearRobots(){
+        if(GetChildCount()==0) return "No Robots found";
+        string s = "";
+        foreach(Node n in GetChildren()){
+            n.QueueFree();
+            s += String.Format("Deleted Robot:[b]{0}[/b]\n", n.Name);
+        }
+        return s;
+    }
+
+    public string setUp(){
+        
+        Robot[] robotsInit = new Robot[GetChildCount()];
+        
+        string r = "";
+        for(int i = 0; i < robotsInit.Length; i++){
+            RobotPlaceHolder rph = GetChild<RobotPlaceHolder>(i);
+            robotsInit[i] = preloads[1].Instance<Robot>();
+            
+            string tempName = rph.Name;
+            rph.Name = "0";
+            robotsInit[i].Name = tempName; 
+            
+            robotsInit[i].Translation = rph.Translation;
+            robotsInit[i].Rotation = rph.Rotation;
+            robotsInit[i].Steering_Device = rph.steering_peripheral;    
+            robotsInit[i].Combat_Device = rph.combat_peripheral;    
+            robotsInit[i].Sensor_Device = rph.sensor_peripheral;    
+            robotsInit[i].program = rph.program;
+            rph.QueueFree();
+            r += "initialized bot \'"+robotsInit[i].Name+"\'\n";    
+        }
+
+        foreach(Robot rbt in robotsInit)
+            AddChild(rbt);
+        
+        return r;
+    }
+
+    public void tick(float delta){
+        for(int i = 0; i< GetChildCount(); i++){
+            //GD.Print(GetChild(i).Name);
+            if(GetChild(i) is Robot)
+                (GetChild(i) as Robot).tick(delta);
+        }
+    }
+
     /// <summary> this is meant for the InterfaceConsole to access 
     /// <br>returns bbcode text</summary>
-    public string interpretCommand(string[] args){
+    public string interpretCommand(string[] args, IDE.STATE state=IDE.STATE.SETUP){
         
         const string help = "[b]bot[/b] <options> --<arg>=<value>\n"+
                 "\toptions: \tclear|list|help|add|mod|del\n"+
@@ -131,7 +168,10 @@ public class RobotsHolder : Node
                 //"\n\t del --name="
                 ;
 
+        // reject preconditions
         if(args.Length<2) return help;
+        else if( state==IDE.STATE.PLAYING && Global.match(args[0], "(clear|add|mod|del)"))
+            return "bot : unable to execute command in current state";
 
         if( args[0].Equals("asm") ){
 
