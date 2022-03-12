@@ -21,13 +21,12 @@ public class RobotsHolder : Node
     }
 
     private int getIndex(string name){
-        int r = -1;
-        foreach(Node n in GetChildren()){
-            r++;
-            if(n.Name.Equals(name)) return r;
+        
+        for(int i = 0; i<GetChildCount(); i++ ){
+            if( GetChild(i).Name.Equals(name) )
+                return i;
         }
-        return r;
-
+        return -1;
     }
 
     private string AddRobot(string name, string steering="Tank", string combat="Drill", 
@@ -49,8 +48,9 @@ public class RobotsHolder : Node
 
     private string ModRobot(string name, string ma="", string ca="", string s="", string x="", string y="", string r=""){
         
-        RobotPlaceHolder temp = GetChild<RobotPlaceHolder>( getIndex(name) );
-        if(temp==null) return String.Format("Robot:{0} does not exist",name);
+        int index = getIndex(name);
+        if(index<0) return String.Format("Robot:{0} does not exist",name);
+        RobotPlaceHolder temp = GetChild<RobotPlaceHolder>(index);
 
         if(ma!="") temp.steering_peripheral = ma;
         if(ca!="") temp.combat_peripheral = ca;
@@ -214,7 +214,7 @@ public class RobotsHolder : Node
                     if(Global.match(args[i], argsGrammar[j])){
                         matched = true;
                         argsValue[j] = args[i].Split(new char[1]{'='})[1];
-                        argsValue[j] = char.ToUpper(argsValue[j][0]) + argsValue[j].Substring(1);
+                        if(j>0) argsValue[j] = char.ToUpper(argsValue[j][0]) + argsValue[j].Substring(1);
                     } 
                 }
                 if(!matched) return "[u]"+args[i] + "[/u] unrecognized parameter or arguement";
