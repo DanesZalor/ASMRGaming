@@ -33,7 +33,7 @@ public class IDE : Node
         // PLAYING|PAUSED -> SETUP
         else if ( ( CurrentState==STATE.PLAYING || CurrentState==STATE.PAUSED ) && targetState==STATE.SETUP ){
             // some code to reset the field
-            r = robots.ClearRobots();
+            r = robots.deSetup();
         }
 
         else if( 

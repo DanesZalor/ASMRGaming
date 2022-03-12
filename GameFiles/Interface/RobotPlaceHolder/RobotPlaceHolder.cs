@@ -22,6 +22,7 @@ public class RobotPlaceHolder : Spatial
         };
         updatePeripherals();
         robotTag = GetNode<Tag>("3DNameTag/Viewport/Tag");
+        robotTag.updateData();
     }
 
     public void updatePeripherals(){

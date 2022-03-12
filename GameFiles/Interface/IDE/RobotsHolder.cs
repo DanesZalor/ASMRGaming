@@ -42,7 +42,7 @@ public class RobotsHolder : Node
         temp.RotationDegrees = Vector3.Up * Convert.ToInt32(r);
         AddChild(temp);
         temp.updatePeripherals();
-        temp.robotTag.updateData();
+        //temp.robotTag.updateData();
         return String.Format("Added {0} Robot:[b]{0}[/b]",name);
     }
 
@@ -117,6 +117,33 @@ public class RobotsHolder : Node
             s += String.Format("Deleted Robot:[b]{0}[/b]\n", n.Name);
         }
         return s;
+    }
+
+    public string deSetup(){
+        RobotPlaceHolder[] robotsInit = new RobotPlaceHolder[GetChildCount()];
+
+        string r = "";
+        for(int i = 0; i < robotsInit.Length; i++){
+            Robot rbt = GetChild<Robot>(i);
+            robotsInit[i] = preloads[0].Instance<RobotPlaceHolder>();
+            
+            string tempName = rbt.Name;
+            rbt.Name = "0";
+            robotsInit[i].Name = tempName; 
+            
+            robotsInit[i].Translation = rbt.Translation;
+            robotsInit[i].Rotation = rbt.Rotation;
+            robotsInit[i].steering_peripheral = rbt.Steering_Device;    
+            robotsInit[i].combat_peripheral = rbt.Combat_Device;    
+            robotsInit[i].sensor_peripheral = rbt.Sensor_Device;    
+            robotsInit[i].program = rbt.program;
+            rbt.QueueFree();
+            r += "removed bot \'"+robotsInit[i].Name+"\'\n";    
+        }
+
+        foreach(RobotPlaceHolder rph in robotsInit)
+            AddChild(rph);
+        return r;
     }
 
     public string setUp(){
