@@ -81,14 +81,11 @@ public static class PreprocessorDirectives
                     {
                         newLine = Common.replace(newLine, Aliases[i, 0], Aliases[i, 1]);
                         if(i>18){
-                            string binary = Common.getMatch(line, " (0b([01]{1,8}))").Value.Trim();
-                            int dec = 0;
-                            byte mul = 0b1;
-                            for(int b = binary.Length-1; b>1; b--){
-                                dec += mul*(System.Convert.ToByte(binary[b]) - 48);
-                                mul = System.Convert.ToByte(mul<<1);
-                            }
-                            newLine = Common.replace(newLine, "<BIN>", System.Convert.ToString(dec));
+                            string binaryStr = Common.getMatch(line, " (0b([01]{1,8}))").Value.Trim();
+                            
+                            byte decimalStr = (byte)Convert.ToInt32(binaryStr.Replace("0b", ""), 2);
+
+                            newLine = Common.replace(newLine, "<BIN>", System.Convert.ToString(decimalStr));
                         }
                         else if(i>17){ // hex alias to decimal
                             int convertHexToDec(char s){
