@@ -9,6 +9,7 @@ public class RobotPlaceHolder : Spatial
     [Export(PropertyHint.MultilineText)] public string program = ""; 
     private Spatial[] peripherals;
     public Tag robotTag;
+    private Spatial hudGizmo;
 
     public override void _Ready()
     {
@@ -21,8 +22,10 @@ public class RobotPlaceHolder : Spatial
             GetNode<Spatial>("Parts/Camera")
         };
         updatePeripherals();
-        robotTag = GetNode<Tag>("3DNameTag/Viewport/Tag");
-        robotTag.updateData();
+        
+        hudGizmo = GetNode<Spatial>("Gizmo/HUD"); hudGizmo.SetAsToplevel(true); hudGizmo.Visible = false;
+        
+        robotTag = GetNode<Tag>("3DNameTag/Viewport/Tag"); robotTag.updateData();
     }
 
     public void updatePeripherals(){
@@ -36,4 +39,43 @@ public class RobotPlaceHolder : Spatial
         }
     }
 
+    
+    bool mousePress = false; Vector3 rayOrigin, rayEnd, hitPoint;
+    /*Signal*/ public override void _UnhandledInput(InputEvent @event){
+        if( @event is InputEventMouseButton && 
+            !(@event as InputEventMouseButton).Pressed
+        ) mousePress = false;
+    }
+    /*Signal*/ public void _on_Area_input_event(Node camera, InputEvent @event, Vector3 position, Vector3 normal, int shape_idx){
+        
+        if(@event is InputEventMouseButton){
+            InputEventMouseButton e = (@event as InputEventMouseButton);
+            mousePress = e.Pressed;
+                  
+            if(e.ButtonIndex==4) RotationDegrees += Vector3.Up*5;
+            else if(e.ButtonIndex==5) RotationDegrees -= Vector3.Up*5;
+        }
+        else if(@event is InputEventMouseMotion && mousePress){
+            
+            Vector2 mousePos = (@event as InputEventMouseMotion).Position;
+            PhysicsDirectSpaceState spaceState = GetWorld().DirectSpaceState;
+            
+            rayOrigin = ((Camera)camera).ProjectRayOrigin(mousePos);
+            rayEnd = rayOrigin + ((Camera)camera).ProjectRayNormal(mousePos) * 2000;
+
+            Godot.Collections.Dictionary intersect = spaceState.IntersectRay(rayOrigin, rayEnd);
+
+            if(intersect.Count>0){
+                hitPoint = (Vector3)intersect["position"];
+                Translation = new Vector3( (int)hitPoint.x ,0, (int)hitPoint.z);
+                hudGizmo.Translation = Translation;
+                robotTag.updateData();
+            }
+            
+        }
+        
+        
+    }
+
+    /*Signal*/ public void AreaMouseEnterExit(bool enter){ hudGizmo.Visible = enter; }
 }

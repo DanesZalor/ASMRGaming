@@ -8,5 +8,5 @@ load_path = "res://.import/Grid.jpg-2603ff3bc536badedec432e2a715ecef.s3tc.stex"
 
 [resource]
 shader = ExtResource( 1 )
-shader_param/albedo = Color( 0.666667, 0, 0, 1 )
+shader_param/albedo = Color( 1, 0.156863, 0.156863, 1 )
 shader_param/gridtex = SubResource( 1 )

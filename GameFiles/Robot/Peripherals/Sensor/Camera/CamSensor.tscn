@@ -66,7 +66,7 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id=7]
 shader = SubResource( 8 )
-shader_param/albedo = Color( 0, 0, 0.666667, 1 )
+shader_param/albedo = Color( 0, 0.584314, 0.972549, 1 )
 shader_param/gridtex = ExtResource( 4 )
 
 [sub_resource type="ShaderMaterial" id=12]

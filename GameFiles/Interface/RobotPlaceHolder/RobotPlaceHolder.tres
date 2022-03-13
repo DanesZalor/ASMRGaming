@@ -9,7 +9,8 @@ render_mode  unshaded, cull_back, blend_add;
 
 uniform vec4 albedo : hint_color;
 uniform sampler2D gridtex;
-//uniform vec2 offset;
+uniform vec2 uvmul;
+uniform vec2 uvoffset;
 
 
 void fragment(){
@@ -29,5 +30,7 @@ void fragment(){
 
 [resource]
 shader = SubResource( 9 )
-shader_param/albedo = Color( 0, 0.0666667, 0.0313726, 1 )
+shader_param/albedo = Color( 0, 0.12549, 0.0392157, 1 )
+shader_param/uvmul = Vector2( 0.2, 10 )
+shader_param/uvoffset = Vector2( 0.629, 0.79 )
 shader_param/gridtex = ExtResource( 1 )
