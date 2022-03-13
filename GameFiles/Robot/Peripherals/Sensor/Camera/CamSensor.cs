@@ -129,6 +129,9 @@ public class CamSensor : Peripheral
             r && parent.ToLocal(nearestBody.GlobalTransform.origin).x > 0,
             ram[0], 0b001 
         );
+        
+        //if(r) GD.Print( (parent.ToLocal(nearestBody.GlobalTransform.origin).x > 0) ? "Right":"Left");
+        //else GD.Print("");
 
         if(!r){
             nearestBody = null;

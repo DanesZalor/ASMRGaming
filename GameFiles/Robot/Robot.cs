@@ -83,6 +83,7 @@ public class Robot : KinematicBody
         camholder.Translation = GlobalTransform.origin;
 
         cpu.InstructionCycleTick();
+        cpu.InstructionCycleTick();
 
         foreach(Peripheral p in peripherals)
             p.tick(delta);

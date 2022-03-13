@@ -196,7 +196,7 @@ public static class SyntaxChecker
         string[] jmpline_splitted = jmpline.Split(new char[1]{' '}, StringSplitOptions.RemoveEmptyEntries);
         string jcaz = jmpline_splitted[0];
         string arg = jmpline_splitted[1];
-        string jcazflagSyntax = "(JN?(C|A|Z|E|B|AE|BE))";
+        string jcazflagSyntax = "(JN?(C|A|Z|E|B|AE|BE|CA|CZ|AZ))";
         string jmpSyntax = String.Format("({0} ({1}|{2}))", jcazflagSyntax, LEXICON.SYNTAX.ARGUEMENTS.R, NEW_LEXICON.SYNTAX.ARGUEMENTS.C);
         string jmpSyntaxVague = "jn?[a-z]+ (" + VAGUE_LEXICON.SYNTAX.ARGUEMENTS.C + "|" + VAGUE_LEXICON.SYNTAX.ARGUEMENTS.L + ")";
         if (!Common.match(jmpline, jmpSyntax, true))
