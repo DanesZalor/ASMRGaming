@@ -18,8 +18,8 @@ public class Tag : Control
 
     public void updateData(){
         labels[0].Text = robotparent.Name;
-        labels[1].Text = "x: "+Convert.ToString(robotparent.Translation.x);
-        labels[2].Text = "y: "+Convert.ToString(robotparent.Translation.z);
+        labels[1].Text = "x: "+Convert.ToString((int)robotparent.Translation.x);
+        labels[2].Text = "y: "+Convert.ToString((int)robotparent.Translation.z);
     }
 
 }
