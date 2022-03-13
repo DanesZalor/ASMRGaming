@@ -128,10 +128,14 @@ public class IDE : Node
             }
 
             float maxdiff = Mathf.Max(
-                Mathf.Max( max.x-min.x, (max.y-min.y)*1.2f )
+                Mathf.Max( max.x-min.x, (max.y-min.y)*1.4f )
             ,40);
             cam.Size = Mathf.Lerp(cam.Size, 30 * (maxdiff/40f), 0.1f);
             
+            //GD.Print(cam.Size);
+            cam.RotationDegrees = new Vector3( -35 - (cam.Size-30)*0.2f, 45, 0); 
+            GD.Print(cam.RotationDegrees.x);
+
             ave /= robots.GetChildCount();
         } 
 

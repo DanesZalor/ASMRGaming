@@ -67,7 +67,9 @@ public class RobotPlaceHolder : Spatial
 
             if(intersect.Count>0){
                 hitPoint = (Vector3)intersect["position"];
-                Translation = new Vector3( (int)hitPoint.x ,0, (int)hitPoint.z);
+                Translation = new Vector3( 
+                    Mathf.Clamp((int)hitPoint.x, -50, 50) ,0, Mathf.Clamp((int)hitPoint.z, -50, 50)) ;
+
                 hudGizmo.Translation = Translation;
                 robotTag.updateData();
             }
