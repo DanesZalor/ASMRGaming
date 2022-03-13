@@ -104,7 +104,8 @@ public class IDE : Node
     }
 
     private void moveCamera(){
-        if(Global.FRAME%3==0) return;
+        //if(Global.FRAME%3==0) return;
+        if(Input.IsActionPressed("LBtn") && CurrentState==STATE.SETUP) return;
 
         Vector2 ave = Vector2.Zero;
         if(robots.GetChildCount()>=1){

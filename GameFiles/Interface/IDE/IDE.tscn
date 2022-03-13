@@ -40,7 +40,7 @@ LineEdit/styles/normal = SubResource( 3 )
 size = Vector2( 100, 100 )
 
 [sub_resource type="SpatialMaterial" id=2]
-albedo_color = Color( 0.282353, 0.345098, 0.380392, 1 )
+albedo_color = Color( 0.196078, 0.215686, 0.223529, 1 )
 albedo_texture = ExtResource( 2 )
 uv1_scale = Vector3( 10, 10, 10 )
 

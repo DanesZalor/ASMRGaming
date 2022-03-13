@@ -77,5 +77,7 @@ public class RobotPlaceHolder : Spatial
         
     }
 
-    /*Signal*/ public void AreaMouseEnterExit(bool enter){ hudGizmo.Visible = enter; }
+    /*Signal*/ public void AreaMouseEnterExit(bool enter){ 
+        hudGizmo.Visible = enter;
+    }
 }

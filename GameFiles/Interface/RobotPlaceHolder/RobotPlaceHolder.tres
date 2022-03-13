@@ -16,8 +16,8 @@ uniform vec2 uvoffset;
 void fragment(){
 	vec3 GRIDTEX = texture(
 		gridtex, 
-		UV*vec2(5f, 0f) + 
-		vec2(TIME*0.1f, TIME*0.0005f) 
+		UV*uvmul + 
+		uvoffset
 	).rgb ;
 	vec3 TEX = albedo.rgb + GRIDTEX;
 	//ALPHA = intensity * intensity * 4f;
@@ -31,6 +31,6 @@ void fragment(){
 [resource]
 shader = SubResource( 9 )
 shader_param/albedo = Color( 0, 0.12549, 0.0392157, 1 )
-shader_param/uvmul = Vector2( 0.2, 10 )
-shader_param/uvoffset = Vector2( 0.629, 0.79 )
+shader_param/uvmul = Vector2( 5, 0 )
+shader_param/uvoffset = Vector2( 0.41205, 0 )
 shader_param/gridtex = ExtResource( 1 )
