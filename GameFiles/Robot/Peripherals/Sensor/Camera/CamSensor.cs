@@ -122,7 +122,7 @@ public class CamSensor : Peripheral
             }
         }
         
-        
+        ram[0] = 0;
         ram[0] = setFlagsIf(r, ram[0], 0b010); // DETECTED(1) / NO(0)
 
         ram[0] = setFlagsIf( // DETECTED is LEFT(0) or RIGHT(1)
