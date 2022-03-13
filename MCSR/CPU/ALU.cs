@@ -59,6 +59,7 @@ namespace CPU
         {
             A = (byte)(~A);
             setFlagsIf(A == 0, FLAG.Z);
+            setFlagsIf(A != 0, FLAG.C|FLAG.A);
         }
 
         /// <summary> changes A into conjunction of A and B. Affected flags [Z] </summary>
@@ -66,6 +67,7 @@ namespace CPU
         {
             A = (byte)(A & B);
             setFlagsIf(A == 0, FLAG.Z);
+            setFlagsIf(A != 0, FLAG.C|FLAG.A); //else
         }
 
         /// <summary> changes A into disjunction of A and B. Affected flags [Z] </summary>
@@ -73,6 +75,7 @@ namespace CPU
         {
             A = (byte)(A | B);
             setFlagsIf(A == 0, FLAG.Z);
+            setFlagsIf(A != 0, FLAG.C|FLAG.A); //else
         }
 
         /// <summary> changes A into Left shift A by B times. Affected flags [C] </summary>
@@ -83,6 +86,7 @@ namespace CPU
             setFlagsIf((res) > byte.MaxValue, FLAG.C);
             A = (byte)res;
             setFlagsIf(A == 0, FLAG.Z);
+            setFlagsIf(A != 0, FLAG.C|FLAG.A); //else
         }
 
         /// <summary> changes A into Right shift A by B times. Affected flags [C] </summary>
@@ -93,6 +97,7 @@ namespace CPU
             setFlagsIf(res != A / (Math.Pow(2, B)), FLAG.C);
             A = (byte)res;
             setFlagsIf(A == 0, FLAG.Z);
+            setFlagsIf(A != 0, FLAG.C|FLAG.A); //else
         }
 
         /// <summary> changes A into A / B. Affected flags [Z] </summary>
@@ -102,6 +107,7 @@ namespace CPU
 
             A = (byte)(A / B);
             setFlagsIf(A == 0, FLAG.Z);
+            setFlagsIf(A != 0, FLAG.C|FLAG.A); //else
         }
         /// <summary> changes A into A * B. Affected flags [C,Z] </summary>
         public void MUL(ref byte A, byte B)
@@ -110,6 +116,7 @@ namespace CPU
             setFlagsIf(res > byte.MaxValue, FLAG.C);
             A = (byte)res;
             setFlagsIf(A == 0, FLAG.Z);
+            setFlagsIf( res<=byte.MaxValue && A>0, FLAG.A);  // else
         }
         /// <summary> changes A into A - B. Affected flags [C,Z] </summary>
         public void SUB(ref byte A, byte B)
@@ -118,6 +125,7 @@ namespace CPU
             setFlagsIf(res < 0, FLAG.C);
             A = (byte)res;
             setFlagsIf(A == 0, FLAG.Z);
+            setFlagsIf( res>0, FLAG.A);  // else
         }
         /// <summary> changes A into A + B. Affected flags [C,Z] </summary>
         public void ADD(ref byte A, byte B)
@@ -126,6 +134,7 @@ namespace CPU
             setFlagsIf(res > byte.MaxValue, FLAG.C);
             A = (byte)res;
             setFlagsIf(A == 0, FLAG.Z);
+            setFlagsIf( A>0 && res < byte.MaxValue, FLAG.C);
         }
 
     }
