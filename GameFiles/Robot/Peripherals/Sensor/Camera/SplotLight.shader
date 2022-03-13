@@ -20,7 +20,7 @@ void fragment(){
 		gridtex, 
 		UV*vec2(9f,0.5f) + 
 		vec2(TIME*0.25f, TIME*0.1f) 
-	).rgb * (sin(TIME*5f)*0.5f + 1f);
+	).rgb * (sin(TIME*5f)*2f + 3f);
 	vec3 TEX = albedo.rgb + GRIDTEX;
 	TEX *= intensity;
 	//ALPHA = intensity * intensity * 4f;

@@ -1,12 +1,36 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=2]
 
-[ext_resource path="res://GameFiles/Common/SpotlightRay.shader" type="Shader" id=1]
+[ext_resource path="res://GameFiles/Common/Grid.jpg" type="Texture" id=2]
 
-[sub_resource type="StreamTexture" id=1]
-flags = 7
-load_path = "res://.import/Grid.jpg-2603ff3bc536badedec432e2a715ecef.s3tc.stex"
+[sub_resource type="Shader" id=1]
+code = "shader_type spatial;
+
+render_mode  unshaded, cull_back, blend_add;
+
+uniform vec4 albedo : hint_color;
+uniform sampler2D gridtex;
+uniform vec2 uvmul;
+uniform vec2 uvoffset;
+
+
+void fragment(){
+	vec3 GRIDTEX = texture(
+		gridtex, 
+		UV*uvmul + 
+		uvoffset
+	).rgb ;
+	vec3 TEX = albedo.rgb + GRIDTEX;
+	//ALPHA = intensity * intensity * 4f;
+	//vec3 SCREENTEX =  texture(SCREEN_TEXTURE, SCREEN_UV).rgb ;
+	ALBEDO.rgb = TEX ;
+	//ALPHA = 0.5f;
+}
+
+"
 
 [resource]
-shader = ExtResource( 1 )
+shader = SubResource( 1 )
 shader_param/albedo = Color( 1, 0.156863, 0.156863, 1 )
-shader_param/gridtex = SubResource( 1 )
+shader_param/uvmul = Vector2( 10, 0.2 )
+shader_param/uvoffset = Vector2( 0.058217, 0.291085 )
+shader_param/gridtex = ExtResource( 2 )

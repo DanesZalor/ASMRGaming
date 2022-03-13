@@ -4,7 +4,7 @@
 [ext_resource path="res://GameFiles/Robot/Peripherals/Sensor/Camera/CamSensor.cs" type="Script" id=2]
 [ext_resource path="res://GameFiles/Robot/Peripherals/Sensor/Camera/SpotLight.obj" type="ArrayMesh" id=3]
 [ext_resource path="res://GameFiles/Common/Grid.jpg" type="Texture" id=4]
-[ext_resource path="res://GameFiles/Robot/Peripherals/Sensor/Camera/SpotlightMat.tres" type="Material" id=6]
+[ext_resource path="res://GameFiles/Robot/Peripherals/Sensor/Camera/SplotLight.shader" type="Shader" id=6]
 [ext_resource path="res://GameFiles/Robot/Peripherals/Sensor/Camera/targetHud.png" type="Texture" id=7]
 [ext_resource path="res://GameFiles/Common/Common.shader" type="Shader" id=8]
 [ext_resource path="res://GameFiles/Robot/Peripherals/Sensor/Camera/HUDcyl.obj" type="ArrayMesh" id=9]
@@ -30,42 +30,13 @@ surfaces/0 = {
 "vertex_count": 894
 }
 
-[sub_resource type="Shader" id=8]
-code = "shader_type spatial;
-
-render_mode  unshaded, cull_back, blend_add;
-
-uniform vec4 albedo : hint_color;
-uniform sampler2D gridtex;
-//uniform vec2 offset;
-
-varying float intensity;
-
-void vertex(){
-	intensity = VERTEX.z/50f * 5f;
-	if(intensity<0.65f) intensity = 0.65f;
-	if(intensity>1f) intensity = 1f;
-	intensity = 1f - intensity;
-}
-
-void fragment(){
-	vec3 GRIDTEX = texture(
-		gridtex, 
-		UV*vec2(9f,0.5f) + 
-		vec2(TIME*0.25f, TIME*0.1f) 
-	).rgb * (sin(TIME*5f)*2f + 3f);
-	vec3 TEX = albedo.rgb + GRIDTEX;
-	TEX *= intensity;
-	//ALPHA = intensity * intensity * 4f;
-	//vec3 SCREENTEX =  texture(SCREEN_TEXTURE, SCREEN_UV).rgb ;
-	ALBEDO.rgb = TEX ;
-	//ALPHA = 0.5f;
-}
-
-"
+[sub_resource type="ShaderMaterial" id=15]
+shader = ExtResource( 6 )
+shader_param/albedo = Color( 1, 0, 0, 1 )
+shader_param/gridtex = ExtResource( 4 )
 
 [sub_resource type="ShaderMaterial" id=7]
-shader = SubResource( 8 )
+shader = ExtResource( 6 )
 shader_param/albedo = Color( 0, 0.584314, 0.972549, 1 )
 shader_param/gridtex = ExtResource( 4 )
 
@@ -75,38 +46,39 @@ shader_param/albedo = null
 shader_param/offset = null
 shader_param/uvmul = Vector2( 1, 1 )
 
-[sub_resource type="Animation" id=10]
-resource_name = "New Anim"
+[sub_resource type="Animation" id=13]
+resource_name = "Loop"
+length = 10.0
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Circle3D:rotation_degrees")
+tracks/0/path = NodePath("../MainMesh/Spotlight/R:material_override:shader_param/uvoffset")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
+"times": PoolRealArray( 0, 10 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 2, 0.9 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Circle3D:scale")
+tracks/1/path = NodePath("../MainMesh/Spotlight/R:material_override:shader_param/uvmul")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.5, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 1, 1, 1 ), Vector3( 0.75, 1.25, 0.75 ), Vector3( 1, 1, 1 ) ]
+"values": [ Vector2( 8, 0.2 ) ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=14]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Circle3D:rotation_degrees")
+tracks/0/path = NodePath("../MainMesh/Spotlight/R:material_override:shader_param/uvoffset")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -115,10 +87,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 0, 0, 0 ) ]
+"values": [ Vector2( 0, 1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Circle3D:scale")
+tracks/1/path = NodePath("../MainMesh/Spotlight/R:material_override:shader_param/uvmul")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -127,7 +99,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 1, 1, 1 ) ]
+"values": [ Vector2( 8, 0.2 ) ]
 }
 
 [node name="Sensor" type="Spatial"]
@@ -154,7 +126,7 @@ transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1.2, 0.777652, 0, 0 )
 
 [node name="R" type="MeshInstance" parent="MainMesh/Spotlight"]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0 )
-material_override = ExtResource( 6 )
+material_override = SubResource( 15 )
 cast_shadow = 0
 mesh = ExtResource( 3 )
 skeleton = NodePath("../..")
@@ -186,9 +158,9 @@ mesh = ExtResource( 9 )
 material/0 = SubResource( 12 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TargetMarker"]
-autoplay = "New Anim"
+autoplay = "Loop"
 playback_speed = 1.5
-"anims/New Anim" = SubResource( 10 )
-anims/RESET = SubResource( 11 )
+anims/Loop = SubResource( 13 )
+anims/RESET = SubResource( 14 )
 
 [connection signal="body_entered" from="RadiusArea" to="." method="_on_RadiusArea_bodyEnteredOrExit"]
