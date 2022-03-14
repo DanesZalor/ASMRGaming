@@ -334,7 +334,7 @@ public static class SyntaxChecker
         // Scanning Labels Phase
         NEW_LEXICON.TOKENS.labelsClear();
         for (int i = 0; i < lines.Length; i++){
-            string temp = Common.getMatch(lines[i], "^"+VAGUE_LEXICON.TOKENS.LABEL+":").Value.Trim().Replace(":","");
+            string temp = Common.getMatch(lines[i].Trim(), "^"+VAGUE_LEXICON.TOKENS.LABEL+":").Value.Trim().Replace(":","");
             if(temp.Length<1) continue;
             string label_res = NEW_LEXICON.TOKENS.labelsAdd(temp);
             if(label_res.Length>0){

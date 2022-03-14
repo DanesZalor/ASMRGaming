@@ -3,6 +3,7 @@ using System;
 
 public class Robot : KinematicBody
 {
+    public static byte CLOCKSPEED = 5;
     public static class preloads{
         public static PackedScene[] ACTUATOR_MOVEMENT = new PackedScene[2]{
             GD.Load<PackedScene>("res://GameFiles/Robot/Peripherals/Actuator_Movement/Tank/Tank.tscn"),
@@ -82,8 +83,8 @@ public class Robot : KinematicBody
         base._PhysicsProcess(delta);
         camholder.Translation = GlobalTransform.origin;
 
-        cpu.InstructionCycleTick();
-        cpu.InstructionCycleTick();
+        for(int i = 0; i < Mathf.Max(CLOCKSPEED,1); i++ )
+            cpu.InstructionCycleTick();
 
         foreach(Peripheral p in peripherals)
             p.tick(delta);

@@ -1,4 +1,5 @@
-﻿namespace CPU{
+﻿using Godot;
+namespace CPU{
     public class CPU{
         private class Register{ // for readability
             public byte value = 0;
@@ -26,7 +27,9 @@
             ram = new RAM();
 
             for(byte i=0; i<program.Length; i++) // load program into ram
-                ram.write(i, program[i]);    
+                ram.write(i, program[i]);  
+
+            GD.Print("cpu initialized");  
         }
 
         
