@@ -51,6 +51,7 @@ syntax_highlighting = true
 show_line_numbers = true
 highlight_all_occurrences = true
 override_selected_font_color = true
+wrap_enabled = true
 
 [node name="TitleBar" type="ColorRect" parent="."]
 margin_left = 3.0

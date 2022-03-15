@@ -23,7 +23,7 @@ public class RobotPlaceHolder : Spatial
         };
         updatePeripherals();
         
-        hudGizmo = GetNode<Spatial>("Gizmo/HUD"); hudGizmo.SetAsToplevel(true); hudGizmo.Visible = false;
+        hudGizmo = GetNode<Spatial>("Gizmo/HUD"); hudGizmo.SetAsToplevel(true); hudGizmo.Visible = false; hudGizmo.Rotation = Vector3.Zero;
         
         robotTag = GetNode<Tag>("3DNameTag/Viewport/Tag"); robotTag.updateData();
     }
