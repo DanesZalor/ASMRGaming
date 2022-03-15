@@ -52,7 +52,25 @@ At RAM[0], same as LS it has 3 bits. However, it is not the same as LS.
 010 - second bit determines if an enemy is detected(1) or not(0)
 001 - third bit determines if an enemy is on the left(0) or right(1)
 
-At RAM[1], if another robot is detected, it shows the angle of the detected robot non negative value, calculated by normalized vector dot product, basically the closer it is to 0, the nearer it is to the direct front.
+At RAM[1], if another robot is detected, it shows the angle of the detected robot non negative value, 
+calculated by normalized vector dot product, 
+basically the closer it is to 0, the nearer it is to the direct front.
 
-At RAM[2], if another robot is detected, it shows the range from your robot to the detected robot basically, the closer it is to 0, the nearer it is to your robot.
+At RAM[2], if another robot is detected, it shows 
+the range from your robot to the detected robot basically, 
+the closer it is to 0, the nearer it is to your robot.
 ```
+
+Image examples shown below:
+
+From the image below, the robot detects another robot to its left so values of RAM[0] would be 110
+
+![CameraSensor1](.images/CameraSensor1.png?raw=true "Robot detects another robot through the camera sensor to its left")
+
+
+
+![CameraSensor2](.images/CameraSensor2.png?raw=true "Robot detects another robot through the camera sensor to its right")
+
+
+
+![CameraSensorNone](.images/CameraSensorNone.png?raw=true "Robot did not detect the other robot anymore")
