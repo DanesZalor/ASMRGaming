@@ -52,8 +52,10 @@ public class RobotPlaceHolder : Spatial
             InputEventMouseButton e = (@event as InputEventMouseButton);
             mousePress = e.Pressed;
                   
-            if(e.ButtonIndex==4) RotationDegrees += Vector3.Up*5;
-            else if(e.ButtonIndex==5) RotationDegrees -= Vector3.Up*5;
+            if(e.ButtonIndex==4) RotationDegrees += Vector3.Up;
+            else if(e.ButtonIndex==5) RotationDegrees -= Vector3.Up;
+
+            //RotationDegrees = new Vector3( 0, 0, 0);
         }
         else if(@event is InputEventMouseMotion && mousePress){
             
