@@ -3,6 +3,7 @@ using System;
 
 public class RobotsHolder : Node
 {
+    static int MAXCHILD = 4; 
     private static PackedScene[] preloads = {
         GD.Load<PackedScene>("res://GameFiles/Interface/RobotPlaceHolder/RobotPlaceHolder.tscn"),
         GD.Load<PackedScene>("res://GameFiles/Robot/Robot.tscn")
@@ -243,8 +244,12 @@ public class RobotsHolder : Node
         }
         else if( Global.match(args[1],"(add|mod)") ){
 
+            // failing precondition for "bot add" and "bot mod"
             if(args.Length==2 && args[1].Equals("mod")) 
-                return "[b]"+args[1]+ "[/b] needs atleast one arguement";
+                return "bot: mod: requires --name= arguement";
+            
+            else if(args[1].Equals("add") && GetChildCount()>MAXCHILD)
+                return "bot: add: bot limit reached. Delete some.";
 
             string[] argsGrammar = new string[7]{
                 "(--name=(\\w){1,})", "(--steering=(tank|car))", "(--combat=(drill|chopper))",
