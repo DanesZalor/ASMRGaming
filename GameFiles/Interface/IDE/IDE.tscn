@@ -51,6 +51,7 @@ extents = Vector3( 50, 1, 50 )
 script = ExtResource( 6 )
 
 [node name="Console" type="ColorRect" parent="."]
+modulate = Color( 1, 1, 1, 0.862745 )
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 490.0
@@ -123,6 +124,10 @@ margin_bottom = 38.0
 custom_fonts/font = ExtResource( 3 )
 text = ">>"
 valign = 1
+
+[node name="ConsoleMinimized" type="TextureButton" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
 
 [node name="WindowsHandler" type="Node" parent="."]
 script = ExtResource( 8 )
