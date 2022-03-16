@@ -248,7 +248,7 @@ public class RobotsHolder : Node
             if(args.Length==2 && args[1].Equals("mod")) 
                 return "bot: mod: requires --name= arguement";
             
-            else if(args[1].Equals("add") && GetChildCount()>MAXCHILD)
+            else if(args[1].Equals("add") && GetChildCount()>=MAXCHILD)
                 return "bot: add: bot limit reached. Delete some.";
 
             string[] argsGrammar = new string[7]{
