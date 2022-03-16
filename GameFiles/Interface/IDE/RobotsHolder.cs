@@ -84,7 +84,7 @@ public class RobotsHolder : Node
             "Clint", "Demetrius", "Ellie", "Elliot", "Emma", "Emily", "Evelyn", 
             "Eve", "George", "Gil", "Gunther", "Gus", "Haley", "Harvey","Jas",
             "Jodi", "Kent", "Krobus", "Leah", "Lewis", "Linus", "Marlon", "Marnie",
-            "Maru", "Morris", "Qi", "Pam", "Penny", "Pierre", "Rob", "Robbin", "Sam",
+            "Maru", "Morris", "Qi", "Pam", "Penny", "Pierre", "Rob", "Robin", "Sam",
             "Sandy", "Sebastian", "Shane", "Vincent", "Willy", "Larry", "Bob", "Joe",
         };
 
