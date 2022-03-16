@@ -260,12 +260,12 @@ public class RobotsHolder : Node
                     );
             }                    
         }
-        else if( args[1].Equals("del") ){
+        else if( args[1].Equals("rm") ){
             
             if(args.Length==3 && Global.match(args[2], "(--name=.{1,})") )
                 return DeleteRobot(args[2].Replace("--name=",""));
             
-            else return "bot del usage: bot del --name=botname";
+            else return "bot del usage: bot rm --name=botname";
         }
         return "";
     }
