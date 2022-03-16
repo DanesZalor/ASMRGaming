@@ -231,14 +231,14 @@ public class RobotsHolder : Node
                 );
             else return "asm usage : asm --name=botname --src=filename";
         }
-        else if( Global.match(args[1],"(clear|list|help)") ){
+        else if( Global.match(args[1],"(clear|ls|help)") ){
                 
             if(args.Length>2) return "[b]"+args[1]+"[/b] takes no arguements";
             
             switch(args[1]){
-                case "list": return ListRobots();
+                case "ls": return ListRobots();
                 case "help": return help;
-                case "clear": return "not implemented. Might be deprecated";
+                case "clear": return ClearRobots();
             }
                 
         }
