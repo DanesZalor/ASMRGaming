@@ -1,8 +1,7 @@
-# Game Documentation of "A PROGRAMMABLE VIRTUAL ROBOT GAME AS A SUPPLEMENT TO LEARNING COMPUTER ARCHITECTURE AND ASSEMBLY PROGRAMMING LANGUAGE"
+# Game Documentation of "A 3D PROGRAMMABLE VIRTUAL ROBOT GAME AS A SUPPLEMENT TO LEARNING ASSEMBLY LANGUAGE PROGRAMMING"
 
 
 # PERIPHERALS
-
 
 ## Laser Sensors
 The Laser Sensors(LS) takes 3 bytes in the RAM:
@@ -63,7 +62,7 @@ the closer it is to 0, the nearer it is to your robot.
 
 Image examples shown below:
 
-From the image below, the robot detects another robot to its left so values of RAM[0] would be 110
+From the image below, the robot detects another robot to its left so values of RAM[0] would be 110.
 
 ![CameraSensor1](.images/CameraSensor1.png?raw=true "Robot detects another robot through the camera sensor to its left")
 
@@ -74,3 +73,43 @@ From the image below, the robot detects another robot to its left so values of R
 
 
 ![CameraSensorNone](.images/CameraSensorNone.png?raw=true "Robot did not detect the other robot anymore")
+
+## Steering
+There are two types of steering, these are tracks(tank) and tires(car). The steering is located at the [254] and [255] RAM Address.
+
+As shown in the  image below, this is an example of a tank robot that has a track as its wheels. As stated before, [254] and [255] is the RAM address for its steering, [254] for its left tracks and [255] for its right tracks.
+
+![TankWithDrill](.images/TankWithDrill.png?raw=true "Robot that has a track for steering and a drill weapon")
+
+A tank robot can move forward, backward, or be stationary depending on the values placed on the RAM address.
+```
+127 - stationary
+>127 - forward movement
+<127 - backward movement
+```
+
+Another type of steering is the Car(tires) as shown below.
+
+![CarWithDrill](.images/CarWithDrill.png?raw=true "Robot that has a tire for steering and a drill weapon")
+
+The Car has the same RAM address as the Tank, RAM address [254] and [255]. However, it acts/functions differently.
+
+```
+At RAM[254] - it functions as the acceleration of the Car, 
+the values are the same as the tank being; 
+127 is stationary, >127 is accelerate, <127 is deaccelerate.
+Additionally, RAM[254] is the rear wheel.
+
+At RAM[255] - it functions as the direction of the Car,
+the direction it goes depends on the value placed in the address the values are;
+127 to go straight, >127 to go left, <127 to go right
+Additionally, RAM[255] are the front wheels.
+```
+
+## Combat
+There are two types of combat weapons that can be used for the robots, these are the drill and chopper. Images shown below;
+
+![TankWithDrill](.images/TankWithDrill.png?raw=true "Robot that has a track for steering and a drill weapon")
+
+![TankWithChopper](.images/TankWithChopper.png?raw=true "Robot that has a track for steering and a chopper weapon")
+
