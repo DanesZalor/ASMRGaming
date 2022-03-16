@@ -139,6 +139,7 @@ material/0 = SubResource( 2 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="EnvironmentStuff/Plane"]
 transform = Transform( 0.604182, -0.654496, 0.454531, 0, 0.570413, 0.821358, -0.796846, -0.49625, 0.344633, 0, 4.75649, 0 )
+light_energy = 2.0
 shadow_enabled = true
 
 [node name="StaticBody" type="StaticBody" parent="EnvironmentStuff/Plane"]
