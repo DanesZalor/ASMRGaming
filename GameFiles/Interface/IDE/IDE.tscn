@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://GameFiles/Interface/IDE/InterfaceConsole.cs" type="Script" id=1]
 [ext_resource path="res://GameFiles/Common/prototex.jpg" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://GameFiles/Common/Cascadia.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://GameFiles/Interface/IDE/RobotsHolder.cs" type="Script" id=5]
 [ext_resource path="res://GameFiles/Interface/IDE/IDE.cs" type="Script" id=6]
+[ext_resource path="res://GameFiles/Interface/IDE/Controls/IDEControls.tscn" type="PackedScene" id=7]
 [ext_resource path="res://GameFiles/Interface/IDE/TextEditor/WindowsHandler.cs" type="Script" id=8]
 
 [sub_resource type="DynamicFontData" id=1]
@@ -49,6 +50,8 @@ extents = Vector3( 50, 1, 50 )
 
 [node name="InterfaceWorld" type="Node"]
 script = ExtResource( 6 )
+
+[node name="IDEControls" parent="." instance=ExtResource( 7 )]
 
 [node name="WindowsHandler" type="Control" parent="."]
 script = ExtResource( 8 )

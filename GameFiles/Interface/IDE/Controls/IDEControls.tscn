@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://GameFiles/Interface/IDE/Controls/IDE-Invis.png" type="Texture" id=1]
+[ext_resource path="res://GameFiles/Interface/IDE/Controls/IDE-Vis.png" type="Texture" id=2]
+[ext_resource path="res://GameFiles/Interface/IDE/Controls/IDE-stop.png" type="Texture" id=3]
+[ext_resource path="res://GameFiles/Interface/IDE/Controls/IDE-pause.png" type="Texture" id=4]
+[ext_resource path="res://GameFiles/Interface/IDE/Controls/IDE-play.png" type="Texture" id=5]
+[ext_resource path="res://GameFiles/Interface/IDE/Controls/IDEControls.cs" type="Script" id=6]
+
+[node name="IDEControls" type="Control"]
+margin_left = 1369.6
+margin_right = 1369.6
+script = ExtResource( 6 )
+
+[node name="PlayPause" type="TextureButton" parent="."]
+margin_left = 76.8
+margin_right = 332.8
+margin_bottom = 256.0
+rect_scale = Vector2( 0.3, 0.3 )
+toggle_mode = true
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 5 )
+
+[node name="Stop" type="TextureButton" parent="."]
+visible = false
+margin_right = 256.0
+margin_bottom = 256.0
+rect_scale = Vector2( 0.3, 0.3 )
+texture_normal = ExtResource( 3 )
+
+[node name="ShowHide" type="TextureButton" parent="."]
+margin_left = 153.6
+margin_right = 409.6
+margin_bottom = 256.0
+rect_scale = Vector2( 0.3, 0.3 )
+toggle_mode = true
+pressed = true
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 1 )
+
+[connection signal="pressed" from="PlayPause" to="." method="onButtonIDEControlPress" binds= [ 0 ]]
+[connection signal="pressed" from="Stop" to="." method="onButtonIDEControlPress" binds= [ 1 ]]
+[connection signal="pressed" from="ShowHide" to="." method="onButtonIDEControlPress" binds= [ 2 ]]

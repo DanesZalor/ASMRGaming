@@ -7,6 +7,7 @@ public class IDE : Node
     public enum STATE : byte 
         { SETUP, PLAYING, PAUSED } 
         private STATE CurrentState = STATE.SETUP;
+        public STATE GetSTATE(){ return CurrentState;}
     
     private string StateCommand(string[] args){ // (play|pause|reset)
         
@@ -47,6 +48,7 @@ public class IDE : Node
         }
 
         CurrentState = targetState;    
+        ideControls.refreshButtons();
         return r;
     }
 
@@ -87,6 +89,7 @@ public class IDE : Node
     }
 
     private InterfaceConsole console;
+    private IDEControls ideControls;
     public RobotsHolder robots;
     public WindowsHandler windowsHandler;
     private Spatial camHolder; private Camera cam;
@@ -99,6 +102,7 @@ public class IDE : Node
         cam = camHolder.GetNode<Camera>("Camera");
         robots = GetNode<RobotsHolder>("Robots");
         windowsHandler = GetNode<WindowsHandler>("WindowsHandler");
+        ideControls = GetNode<IDEControls>("IDEControls");
         console = GetNode<InterfaceConsole>("Console");
         shell = new Shell(this);
     }
@@ -142,6 +146,9 @@ public class IDE : Node
         );
     }
 
+    public string interpretCommand(string line){
+        return interpretCommand( new string[1]{line});
+    }
     public string interpretCommand(string[] args){
         if(args.Length==0) return "";
         
