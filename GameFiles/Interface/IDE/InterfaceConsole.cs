@@ -4,7 +4,8 @@ using System;
 
 public class InterfaceConsole : Control
 {
-    private IDE ideparent;    
+    private IDE ideparent;  
+    private WindowsHandler windowHandlerParent;  
     private RichTextLabel logs;
     private LineEdit prompt;
     private Control titleBar;
@@ -13,7 +14,8 @@ public class InterfaceConsole : Control
     public override void _Ready()
     {  
         cmd_history = new LinkedList<string>();
-        ideparent = GetParent<IDE>();
+        windowHandlerParent = GetParent<WindowsHandler>();
+        ideparent = windowHandlerParent.GetParent<IDE>();
         logs = GetNode<RichTextLabel>("Logs");
         prompt = GetNode<LineEdit>("Prompt");
         titleBar = GetNode<Control>("BlackBG/TitleBar");
@@ -59,7 +61,7 @@ public class InterfaceConsole : Control
         
     }
 
-    private bool mousePressInTitleBar = false, mouseInTitleBar = false, mouseInLogs = false;
+    private bool mousePressInTitleBar = false, mouseInTitleBar = false;
 
     /*Signal*/ public void _on_TitleBarMouseEnterOrExit(bool enter){ mouseInTitleBar = enter; }
     LinkedListNode<string> cmd_history_NodePointer;
@@ -71,6 +73,7 @@ public class InterfaceConsole : Control
             
             InputEventMouseButton e = (@event as InputEventMouseButton);
             mousePressInTitleBar = e.Pressed && mouseInTitleBar;
+            if(e.Pressed && mouseInTitleBar) windowHandlerParent.RaiseWindow(GetIndex());
         }
 
         else if(@event is InputEventMouseMotion && mousePressInTitleBar){

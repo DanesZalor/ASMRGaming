@@ -50,30 +50,32 @@ extents = Vector3( 50, 1, 50 )
 [node name="InterfaceWorld" type="Node"]
 script = ExtResource( 6 )
 
-[node name="Console" type="ColorRect" parent="."]
-modulate = Color( 1, 1, 1, 0.862745 )
+[node name="WindowsHandler" type="Control" parent="."]
+script = ExtResource( 8 )
+
+[node name="Console" type="ColorRect" parent="WindowsHandler"]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 490.0
 margin_bottom = 410.0
-color = Color( 0.752941, 0.752941, 0.752941, 1 )
+color = Color( 0.835294, 0.835294, 0.835294, 1 )
 script = ExtResource( 1 )
 
-[node name="BlackBG" type="ColorRect" parent="Console"]
+[node name="BlackBG" type="ColorRect" parent="WindowsHandler/Console"]
 margin_left = 3.0
 margin_top = 41.0
 margin_right = 477.0
 margin_bottom = 397.0
-color = Color( 0.0784314, 0.0784314, 0.0784314, 1 )
+color = Color( 0, 0, 0, 1 )
 
-[node name="TitleBar" type="ColorRect" parent="Console/BlackBG"]
+[node name="TitleBar" type="ColorRect" parent="WindowsHandler/Console/BlackBG"]
 margin_top = -38.0
 margin_right = 473.5
 margin_bottom = -3.0
 mouse_default_cursor_shape = 2
 color = Color( 0, 0, 0.501961, 1 )
 
-[node name="Label" type="Label" parent="Console/BlackBG/TitleBar"]
+[node name="Label" type="Label" parent="WindowsHandler/Console/BlackBG/TitleBar"]
 margin_left = 4.10896
 margin_top = 5.01071
 margin_right = 116.109
@@ -82,7 +84,7 @@ mouse_filter = 1
 custom_fonts/font = SubResource( 12 )
 text = "Console"
 
-[node name="Logs" type="RichTextLabel" parent="Console"]
+[node name="Logs" type="RichTextLabel" parent="WindowsHandler/Console"]
 modulate = Color( 0.862745, 0.866667, 0.87451, 1 )
 self_modulate = Color( 0.862745, 0.866667, 0.87451, 1 )
 margin_left = 8.0
@@ -99,7 +101,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Prompt" type="LineEdit" parent="Console"]
+[node name="Prompt" type="LineEdit" parent="WindowsHandler/Console"]
 margin_left = 35.0
 margin_top = 360.0
 margin_right = 475.0
@@ -114,7 +116,7 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Label" type="Label" parent="Console/Prompt"]
+[node name="Label" type="Label" parent="WindowsHandler/Console/Prompt"]
 modulate = Color( 1, 1, 1, 0.784314 )
 self_modulate = Color( 0.560784, 1, 0.498039, 1 )
 margin_left = -26.0
@@ -124,13 +126,6 @@ margin_bottom = 38.0
 custom_fonts/font = ExtResource( 3 )
 text = ">>"
 valign = 1
-
-[node name="ConsoleMinimized" type="TextureButton" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
-
-[node name="WindowsHandler" type="Node" parent="."]
-script = ExtResource( 8 )
 
 [node name="EnvironmentStuff" type="Node" parent="."]
 
@@ -162,6 +157,6 @@ far = 150.0
 [node name="Robots" type="Node" parent="."]
 script = ExtResource( 5 )
 
-[connection signal="mouse_entered" from="Console/BlackBG/TitleBar" to="Console" method="_on_TitleBarMouseEnterOrExit" binds= [ true ]]
-[connection signal="mouse_exited" from="Console/BlackBG/TitleBar" to="Console" method="_on_TitleBarMouseEnterOrExit" binds= [ false ]]
-[connection signal="text_entered" from="Console/Prompt" to="Console" method="onPromptEnteredSignal"]
+[connection signal="mouse_entered" from="WindowsHandler/Console/BlackBG/TitleBar" to="WindowsHandler/Console" method="_on_TitleBarMouseEnterOrExit" binds= [ true ]]
+[connection signal="mouse_exited" from="WindowsHandler/Console/BlackBG/TitleBar" to="WindowsHandler/Console" method="_on_TitleBarMouseEnterOrExit" binds= [ false ]]
+[connection signal="text_entered" from="WindowsHandler/Console/Prompt" to="WindowsHandler/Console" method="onPromptEnteredSignal"]
