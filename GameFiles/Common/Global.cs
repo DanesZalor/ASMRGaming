@@ -28,9 +28,15 @@ public class Global : Node
         );
     }
 
+    private static Random random;
+    public static int RandInt(int min=int.MinValue, int max=int.MaxValue){
+        return random.Next(min,max);
+    }
+
     public override void _Ready()
     {
         worldTree = GetTree();
+        random = new Random();
     }
 
 

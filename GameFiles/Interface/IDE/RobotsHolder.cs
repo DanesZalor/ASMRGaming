@@ -76,6 +76,25 @@ public class RobotsHolder : Node
         return s;
     }
 
+    private string generateBotName(){
+        
+        string[] randomNames = {
+            "Abigail", "Abbie", "Abe", "Alex", "Albert", "Caroline", "Carol", 
+            "Clint", "Demetrius", "Ellie", "Elliot", "Emma", "Emily", "Evelyn", 
+            "Eve", "George", "Gil", "Gunther", "Gus", "Haley", "Harvey","Jas",
+            "Jodi", "Kent", "Krobus", "Leah", "Lewis", "Linus", "Marlon", "Marnie",
+            "Maru", "Morris", "Qi", "Pam", "Penny", "Pierre", "Rob", "Robbin", "Sam",
+            "Sandy", "Sebastian", "Shane", "Vincent", "Willy", "Larry", "Bob", "Joe",
+        };
+
+        // tries out randomNames until it finds one that isn't used. Only up to 10 times to mitigate infinite tries
+        string choice = randomNames[Global.RandInt(0, randomNames.Length)];
+        for(int i = 0; exists(choice) && i<10; i++)
+            choice = randomNames[Global.RandInt(0, randomNames.Length)];
+        
+        return choice;
+    }
+
     private string DeleteRobot(string name){
         name = name.ToLower();
         for(int i = 0; i<GetChildCount(); i++){
@@ -224,14 +243,14 @@ public class RobotsHolder : Node
         }
         else if( Global.match(args[1],"(add|mod)") ){
 
-            if(args.Length==2) return "[b]"+args[1]+ "[/b] needs atleast one arguement";
+            if(args.Length==2 && args[1].Equals("mod")) return "[b]"+args[1]+ "[/b] needs atleast one arguement";
             
             string[] argsGrammar = new string[7]{
                 "(--name=(\\w){1,})", "(--steering=(tank|car))", "(--combat=(drill|chopper))",
                 "(--sensor=(laser|camera))","(--x=(-|)(\\d){1,})","(--y=(-|)(\\d){1,})","(--r=(-|)(\\d){1,})"
             }; 
             string[] argsValue = args[1]=="add"?
-                new string[7]{"","Tank","Drill","Laser","0","0","0"}:
+                new string[7]{generateBotName(),"Tank","Drill","Laser","0","0","0"}: // default arguements
                 new String[7]{"","","","","","",""};
             
             for(int i = 2; i<args.Length; i++){
