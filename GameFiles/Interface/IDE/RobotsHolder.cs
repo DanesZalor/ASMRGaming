@@ -267,6 +267,7 @@ public class RobotsHolder : Node
             
             else return "bot del usage: bot rm --name=botname";
         }
-        return "";
+
+        return "bot: wrong usage";
     }
 }
