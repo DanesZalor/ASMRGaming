@@ -243,14 +243,23 @@ public class RobotsHolder : Node
         }
         else if( Global.match(args[1],"(add|mod)") ){
 
-            if(args.Length==2 && args[1].Equals("mod")) return "[b]"+args[1]+ "[/b] needs atleast one arguement";
-            
+            if(args.Length==2 && args[1].Equals("mod")) 
+                return "[b]"+args[1]+ "[/b] needs atleast one arguement";
+
             string[] argsGrammar = new string[7]{
                 "(--name=(\\w){1,})", "(--steering=(tank|car))", "(--combat=(drill|chopper))",
                 "(--sensor=(laser|camera))","(--x=(-|)(\\d){1,})","(--y=(-|)(\\d){1,})","(--r=(-|)(\\d){1,})"
             }; 
             string[] argsValue = args[1]=="add"?
-                new string[7]{generateBotName(),"Tank","Drill","Laser","0","0","0"}: // default arguements
+                new string[7]{
+                    generateBotName(), 
+                    Global.RandInt()%2==0?"Tank":"Car",
+                    Global.RandInt()%2==0?"Chopper":"Drill",
+                    Global.RandInt()%2==0?"Laser":"Camera",
+                    Convert.ToString(Global.RandInt(-30,30)), // random x-coord
+                    Convert.ToString(Global.RandInt(-30,30)), // random y-coord
+                    Convert.ToString(Global.RandInt(0,60)*5)  // random rotation
+                }: // default arguements
                 new String[7]{"","","","","","",""};
             
             for(int i = 2; i<args.Length; i++){
