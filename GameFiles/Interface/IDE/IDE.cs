@@ -103,7 +103,7 @@ public class IDE : Node
         robots = GetNode<RobotsHolder>("Robots");
         windowsHandler = GetNode<WindowsHandler>("WindowsHandler");
         ideControls = GetNode<IDEControls>("IDEControls");
-        console = GetNode<InterfaceConsole>("Console");
+        console = windowsHandler.GetNode<InterfaceConsole>("Console");
         shell = new Shell(this);
     }
 
