@@ -55,7 +55,7 @@ surfaces/0 = {
 "vertex_count": 208
 }
 
-[node name="CarMesh" type="Spatial"]
+[node name="CarPeripheral" type="Spatial"]
 script = ExtResource( 2 )
 
 [node name="MainMesh" type="MeshInstance" parent="."]

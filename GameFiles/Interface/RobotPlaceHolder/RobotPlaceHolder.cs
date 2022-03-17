@@ -30,7 +30,7 @@ public class RobotPlaceHolder : Spatial
             GetNode<MeshInstance>("Parts/Camera")
         };
         updatePeripherals();
-        
+        updateTeam();
         hudGizmo = GetNode<Spatial>("Gizmo/HUD"); hudGizmo.SetAsToplevel(true); hudGizmo.Visible = false; hudGizmo.Rotation = Vector3.Zero;
         
         robotTag = GetNode<Tag>("3DNameTag/Viewport/Tag"); robotTag.updateData();

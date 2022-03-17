@@ -95,7 +95,7 @@ surfaces/0 = {
 "vertex_count": 128
 }
 
-[node name="Actuator_Movement" type="Spatial"]
+[node name="TankPeripheral" type="Spatial"]
 script = ExtResource( 1 )
 
 [node name="MainMesh" type="MeshInstance" parent="."]

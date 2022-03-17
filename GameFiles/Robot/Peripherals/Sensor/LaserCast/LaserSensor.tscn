@@ -37,7 +37,7 @@ shader = ExtResource( 5 )
 shader_param/albedo = Color( 0, 0.623529, 1, 1 )
 shader_param/offset = null
 
-[node name="Sensor" type="Spatial"]
+[node name="LaserPeripheral" type="Spatial"]
 script = ExtResource( 2 )
 
 [node name="MainMesh" type="MeshInstance" parent="."]

@@ -162,6 +162,7 @@ public class RobotsHolder : Node
             robotsInit[i].combat_peripheral = rbt.Combat_Device;    
             robotsInit[i].sensor_peripheral = rbt.Sensor_Device;    
             robotsInit[i].program = rbt.program;
+            robotsInit[i].teamIdx = rbt.teamIdx;
             rbt.QueueFree();
             r += "removed bot \'"+robotsInit[i].Name+"\'\n";    
         }
@@ -190,6 +191,7 @@ public class RobotsHolder : Node
             robotsInit[i].Combat_Device = rph.combat_peripheral;    
             robotsInit[i].Sensor_Device = rph.sensor_peripheral;    
             robotsInit[i].program = rph.program;
+            robotsInit[i].teamIdx = rph.teamIdx;
             rph.QueueFree();
             r += "initialized bot \'"+robotsInit[i].Name+"\'\n";    
         }

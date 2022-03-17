@@ -104,7 +104,7 @@ tracks/1/keys = {
 "values": [ Vector2( 8, 0.2 ) ]
 }
 
-[node name="Sensor" type="Spatial"]
+[node name="CamPeripheral" type="Spatial"]
 script = ExtResource( 2 )
 
 [node name="RadiusArea" type="Area" parent="."]
