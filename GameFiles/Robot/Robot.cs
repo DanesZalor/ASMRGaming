@@ -21,12 +21,10 @@ public class Robot : KinematicBody
         };
     }
 
+    [Export(PropertyHint.Range, "0,1,")] public byte teamIdx = 0;
     [Export(PropertyHint.Enum, "Tank,Car")] public string Steering_Device = "Tank";
-
     [Export(PropertyHint.Enum, "Drill,Chopper")] public string Combat_Device = "Drill";
-    
     [Export(PropertyHint.Enum, "Laser,Camera")] public string Sensor_Device = "Laser";  
-
     [Export(PropertyHint.MultilineText)] public string program = "";
 
     private CPU.CPU cpu;    public CPU.CPU CPU { get { return cpu; } }

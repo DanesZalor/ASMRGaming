@@ -69,4 +69,21 @@ public abstract class Peripheral : Spatial
     public bool isEnemy(Godot.Object body){
         return ( !body.Equals(parent) && (body is Robot) );
     }
+
+    // traverse tree to the mesh instances
+    protected void changeMaterial(int matIdx=0, MeshInstance meshI=null){
+        
+        if(meshI==null)
+            meshI = GetNode<MeshInstance>("MainMesh");
+
+        foreach(Node child in GetChildren())
+            changeMaterial(matIdx, (MeshInstance)child );
+        
+        meshI.MaterialOverride = preloadMats[matIdx];
+    }
+    
+    private static ShaderMaterial[] preloadMats = new ShaderMaterial[2]{
+        GD.Load<ShaderMaterial>("res://GameFiles/Robot/Peripherals/GreenPerpiheral.tres"),
+        GD.Load<ShaderMaterial>("res://GameFiles/Robot/Peripherals/BluePerpiheral.tres")
+    };
 }
