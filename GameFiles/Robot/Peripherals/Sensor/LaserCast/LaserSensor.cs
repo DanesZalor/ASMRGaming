@@ -4,13 +4,17 @@ using System;
 public class LaserSensor : Peripheral
 {
     private class Laser{
+        private Peripheral parent;
         private RayCast rayCast;
         private Spatial laserMesh, redBeam, blueBeam;
         private float laserLength = 0f; private bool enemyDetected = false;
         public float LENGTH { get => laserLength; }
         public bool COLLIDING { get => redBeam.Visible; }
         public Laser(RayCast rc){
+
             rayCast = rc;
+            parent = rc.GetParent().GetParent<Peripheral>();
+
             laserMesh = rc.GetNode<Spatial>("LaserMesh");
             redBeam = laserMesh.GetNode<Spatial>("W/Red");
             blueBeam = laserMesh.GetNode<Spatial>("W/Blue");
@@ -22,7 +26,7 @@ public class LaserSensor : Peripheral
             bool isColliding = rayCast.IsColliding();
             laserLength = (!isColliding ? rayCast.CastTo.x : rayCast.ToLocal(rayCast.GetCollisionPoint()).x) / rayCast.CastTo.x ;
 
-            enemyDetected = isColliding && (rayCast.GetCollider() is Robot);
+            enemyDetected = isColliding && parent.isEnemy(rayCast.GetCollider());
         }
 
         public void tickPresentational(bool on=true){

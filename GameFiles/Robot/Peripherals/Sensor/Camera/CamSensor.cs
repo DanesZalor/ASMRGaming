@@ -75,9 +75,9 @@ public class CamSensor : Peripheral
     Godot.Collections.Array bodies = new Godot.Collections.Array();
     public void _on_RadiusArea_bodyEnteredOrExit(Node body){
 
-        if(!(body is Robot) || body.Equals(parent) ) return;
+        if( !(body is Robot) || body.Equals(parent) ) return;
         
-        //nearestBody = null;
+        nearestBody = null;
         bodies.Clear();
         Godot.Collections.Array temp = RadiusArea.GetOverlappingBodies();
         foreach(Node b in temp){
@@ -99,13 +99,13 @@ public class CamSensor : Peripheral
     private Spatial nearestBody;
     public void updateEnemyDetected(){
         bool r = false;
-
         if(bodies != null ){
             
             float minDistance = float.MaxValue;
             Vector3 nA = parent.GlobalTransform.basis.z;
 
             foreach(Spatial b in bodies){
+                GD.Print(b.Name);
                 if(b.Equals(parent)) continue;
                 
                 if( getAngle(b) <= FOV ){
@@ -119,7 +119,7 @@ public class CamSensor : Peripheral
                         minDistance = distance; nearestBody = b;
                     }
                 }
-            }
+            }GD.Print("---");
         }
         
         ram[0] &= 0b111;

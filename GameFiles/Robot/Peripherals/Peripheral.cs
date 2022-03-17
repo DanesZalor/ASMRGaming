@@ -65,4 +65,8 @@ public abstract class Peripheral : Spatial
             (flags & ~mask)   // set to false
         );
     }
+
+    public bool isEnemy(Godot.Object body){
+        return ( !body.Equals(parent) && (body is Robot) );
+    }
 }
