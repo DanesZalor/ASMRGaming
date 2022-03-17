@@ -28,7 +28,7 @@ public abstract class Peripheral : Spatial
         ));
 
         updateRam();
-        changeMaterial(parent.teamIdx);
+        //changeMaterial(parent.teamIdx);
     }
 
     /// <summary> 
@@ -83,8 +83,8 @@ public abstract class Peripheral : Spatial
             }   
         }  
 
-        GD.Print(meshI.Name); 
-        meshI.SetSurfaceMaterial(0, (preloadMats[matIdx] as Material));
+        if(!meshI.Name.EndsWith("__X"))
+            meshI.SetSurfaceMaterial(0, (preloadMats[matIdx] as Material));
     }
     
     private static ShaderMaterial[] preloadMats = new ShaderMaterial[2]{

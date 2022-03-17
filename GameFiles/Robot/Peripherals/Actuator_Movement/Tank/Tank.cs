@@ -18,11 +18,11 @@ public class Tank : Peripheral
         base._Ready();
 
         /* Get Presentational Layer Init*/{
-            Ltracks = GetNode<MeshInstance>("MainMesh/TracksL");
+            Ltracks = GetNode<MeshInstance>("MainMesh/TracksL__X");
             Ltracks.SetSurfaceMaterial(0, (Material)Ltracks.GetSurfaceMaterial(0).Duplicate() );
             Ltracks_Mat = (Ltracks.GetSurfaceMaterial(0) as ShaderMaterial);
 
-            Rtracks = GetNode<MeshInstance>("MainMesh/TracksR");
+            Rtracks = GetNode<MeshInstance>("MainMesh/TracksR__X");
             Rtracks.SetSurfaceMaterial(0, (Material)Rtracks.GetSurfaceMaterial(0).Duplicate() );
             Rtracks_Mat = (Rtracks.GetSurfaceMaterial(0) as ShaderMaterial);
 
@@ -55,8 +55,6 @@ public class Tank : Peripheral
         parent.MoveAndCollide(lvel + rvel);
     }
 
-    Vector2 prevLwheel;
-    Vector2 prevRwheel;
     public override void tickPresentational(float delta)
     {
         float lv = (lwp * 18.5f) + (rwp * 9.5f);
