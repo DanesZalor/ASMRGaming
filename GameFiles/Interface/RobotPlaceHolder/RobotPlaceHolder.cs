@@ -3,29 +3,46 @@ using System;
 
 public class RobotPlaceHolder : Spatial
 {
+
+    private static ShaderMaterial[] preloads = {
+        GD.Load<ShaderMaterial>("res://GameFiles/Interface/RobotPlaceHolder/GreenTeam.tres"),
+        GD.Load<ShaderMaterial>("res://GameFiles/Interface/RobotPlaceHolder/BlueTeam.tres")
+    };
+
     [Export(PropertyHint.Enum, "Tank,Car")] public string steering_peripheral = "Tank";
     [Export(PropertyHint.Enum, "Drill,Chopper")] public string combat_peripheral = "Drill";
     [Export(PropertyHint.Enum, "Laser,Camera")] public string sensor_peripheral = "Laser";
+    [Export(PropertyHint.Range, "0,1,")] public byte teamIdx = 0;
     [Export(PropertyHint.MultilineText)] public string program = ""; 
-    private Spatial[] peripherals;
+    private MeshInstance[] peripherals;
     public Tag robotTag;
     private Spatial hudGizmo;
+    
 
     public override void _Ready()
     {
-        peripherals = new Spatial[6]{
-            GetNode<Spatial>("Parts/Tank"),
-            GetNode<Spatial>("Parts/Car"),
-            GetNode<Spatial>("Parts/Drill"),
-            GetNode<Spatial>("Parts/Chopper"),
-            GetNode<Spatial>("Parts/Laser"),
-            GetNode<Spatial>("Parts/Camera")
+        peripherals = new MeshInstance[6]{
+            GetNode<MeshInstance>("Parts/Tank"),
+            GetNode<MeshInstance>("Parts/Car"),
+            GetNode<MeshInstance>("Parts/Drill"),
+            GetNode<MeshInstance>("Parts/Chopper"),
+            GetNode<MeshInstance>("Parts/Laser"),
+            GetNode<MeshInstance>("Parts/Camera")
         };
         updatePeripherals();
         
         hudGizmo = GetNode<Spatial>("Gizmo/HUD"); hudGizmo.SetAsToplevel(true); hudGizmo.Visible = false; hudGizmo.Rotation = Vector3.Zero;
         
         robotTag = GetNode<Tag>("3DNameTag/Viewport/Tag"); robotTag.updateData();
+    }
+
+    public void updateTeam(){
+
+        teamIdx = (byte) Mathf.Clamp(teamIdx,0,1);
+        
+        foreach(MeshInstance m in peripherals)
+            m.MaterialOverride = preloads[teamIdx] as Material;
+
     }
 
     public void updatePeripherals(){

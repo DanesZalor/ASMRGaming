@@ -31,7 +31,7 @@ public class RobotsHolder : Node
     }
 
     private string AddRobot(string name, string steering="Tank", string combat="Drill", 
-                                string sensor="Laser", string x="0", string y="0", string r="0"
+                            string sensor="Laser", string x="0", string y="0", string r="0", string team="0"
     ){
         name = name.ToLower();
         if(exists(name)) return String.Format("Robot:{0} exists",name); 
@@ -41,13 +41,15 @@ public class RobotsHolder : Node
         temp.steering_peripheral = steering; temp.combat_peripheral = combat; temp.sensor_peripheral = sensor;
         temp.Translation = new Vector3(Convert.ToInt32(x), 0, Convert.ToInt32(y) );
         temp.RotationDegrees = Vector3.Up * Convert.ToInt32(r);
+        temp.teamIdx = (byte)Convert.ToInt32(team);
         AddChild(temp);
         temp.updatePeripherals();
+        temp.updateTeam();
         //temp.robotTag.updateData();
         return String.Format("Added {0} Robot:[b]{0}[/b]",name);
     }
 
-    private string ModRobot(string name, string ma="", string ca="", string s="", string x="", string y="", string r=""){
+    private string ModRobot(string name, string ma="", string ca="", string s="", string x="", string y="", string r="", string team=""){
         
         int index = getIndex(name);
         if(index<0) return String.Format("Robot:{0} does not exist",name);
@@ -63,8 +65,11 @@ public class RobotsHolder : Node
             (y==""?temp.Translation.z:Convert.ToInt32(y))
         );
 
+        if(team!="") temp.teamIdx = (byte)Convert.ToInt32(team);
         if(r!="") temp.RotationDegrees = Vector3.Up * Convert.ToInt32(r);
+        
         temp.robotTag.updateData();
+        temp.updateTeam();
 
         return String.Format("Updated {0} Robot:[b]{0}[/b]",name);
     }
@@ -251,21 +256,22 @@ public class RobotsHolder : Node
             else if(args[1].Equals("add") && GetChildCount()>=MAXCHILD)
                 return "bot: add: bot limit reached. Delete some.";
 
-            string[] argsGrammar = new string[7]{
-                "(--name=(\\w){1,})", "(--steering=(tank|car))", "(--combat=(drill|chopper))",
-                "(--sensor=(laser|camera))","(--x=(-|)(\\d){1,})","(--y=(-|)(\\d){1,})","(--r=(-|)(\\d){1,})"
+            string[] argsGrammar = new string[8]{
+                "(--name=(\\w){1,})", "(--steering=(tank|car))", "(--combat=(drill|chopper))","(--sensor=(laser|camera))",
+                "(--x=(-|)(\\d){1,})","(--y=(-|)(\\d){1,})","(--r=(-|)(\\d){1,})","(--team=(0|1))"
             }; 
             string[] argsValue = args[1]=="add"?
-                new string[7]{
+                new string[8]{ // default arguements
                     generateBotName(), 
                     Global.RandInt()%2==0?"Tank":"Car",
                     Global.RandInt()%2==0?"Chopper":"Drill",
                     Global.RandInt()%2==0?"Laser":"Camera",
-                    Convert.ToString(Global.RandInt(-30,30)), // random x-coord
-                    Convert.ToString(Global.RandInt(-30,30)), // random y-coord
-                    Convert.ToString(Global.RandInt(0,60)*5)  // random rotation
-                }: // default arguements
-                new String[7]{"","","","","","",""};
+                    Convert.ToString(Global.RandInt(-30,30)),   // random x-coord
+                    Convert.ToString(Global.RandInt(-30,30)),   // random y-coord
+                    Convert.ToString(Global.RandInt(0,60)*5),   // random rotation
+                    Convert.ToString(Global.RandInt(0,2)),      // team
+                }: 
+                new String[8]{"","","","","","","",""};
             
             for(int i = 2; i<args.Length; i++){
                 
@@ -284,12 +290,12 @@ public class RobotsHolder : Node
                 if(args[1]=="add")
                     return AddRobot(
                         argsValue[0], argsValue[1], argsValue[2], argsValue[3], 
-                        argsValue[4], argsValue[5], argsValue[6]
+                        argsValue[4], argsValue[5], argsValue[6], argsValue[7]
                     );
                 else// if(args[1]=="mod")
                     return ModRobot(
                         argsValue[0], argsValue[1], argsValue[2], argsValue[3], 
-                        argsValue[4], argsValue[5], argsValue[6]
+                        argsValue[4], argsValue[5], argsValue[6], argsValue[7]
                     );
             }                    
         }
