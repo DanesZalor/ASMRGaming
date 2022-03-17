@@ -7,4 +7,5 @@
 shader = ExtResource( 1 )
 shader_param/albedo = null
 shader_param/offset = null
+shader_param/uvmul = Vector2( 1, 1 )
 shader_param/tex = ExtResource( 2 )
