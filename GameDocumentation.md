@@ -113,3 +113,8 @@ There are two types of combat weapons that can be used for the robots, these are
 
 ![TankWithChopper](.images/TankWithChopper.png?raw=true "Robot that has a track for steering and a chopper weapon")
 
+These peripherals can be modified at RAM address [253], to switch between the two (the drill and chopper) the values would be
+```
+0 = Chopper
+1 = Drill
+```
