@@ -28,6 +28,7 @@ public abstract class Peripheral : Spatial
         ));
 
         updateRam();
+        changeMaterial(parent.teamIdx);
     }
 
     /// <summary> 
