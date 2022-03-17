@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://GameFiles/Common/Common.shader" type="Shader" id=1]
+[ext_resource path="res://GameFiles/Robot/Peripherals/BlueTheme.png" type="Texture" id=2]
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/albedo = null
+shader_param/offset = null
+shader_param/uvmul = Vector2( 1, 1 )
+shader_param/tex = ExtResource( 2 )

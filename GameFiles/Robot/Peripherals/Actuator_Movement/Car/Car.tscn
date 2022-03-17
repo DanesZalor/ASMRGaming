@@ -60,23 +60,27 @@ script = ExtResource( 2 )
 
 [node name="MainMesh" type="MeshInstance" parent="."]
 transform = Transform( 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0, 0 )
+material_override = ExtResource( 1 )
 mesh = SubResource( 1 )
-material/0 = ExtResource( 1 )
+material/0 = null
 
 [node name="WheelRear" type="MeshInstance" parent="MainMesh"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.5, 0 )
+material_override = ExtResource( 1 )
 mesh = SubResource( 4 )
 skeleton = NodePath("../..")
-material/0 = ExtResource( 1 )
+material/0 = null
 
 [node name="WheelFrontR" type="MeshInstance" parent="MainMesh"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.4, -0.986414 )
+material_override = ExtResource( 1 )
 mesh = SubResource( 2 )
 skeleton = NodePath("../..")
-material/0 = ExtResource( 1 )
+material/0 = null
 
 [node name="WheelFrontL" type="MeshInstance" parent="MainMesh"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.4, 0.986414 )
+material_override = ExtResource( 1 )
 mesh = SubResource( 3 )
 skeleton = NodePath("../..")
-material/0 = ExtResource( 1 )
+material/0 = null

@@ -120,8 +120,9 @@ material/0 = null
 
 [node name="MainMesh" type="MeshInstance" parent="."]
 transform = Transform( 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0, 0 )
+material_override = ExtResource( 1 )
 mesh = SubResource( 1 )
-material/0 = ExtResource( 1 )
+material/0 = null
 
 [node name="Spotlight" type="Spatial" parent="MainMesh"]
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1.2, 0.777652, 0, 0 )
