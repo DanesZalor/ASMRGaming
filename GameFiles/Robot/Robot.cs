@@ -74,9 +74,7 @@ public class Robot : KinematicBody
                 peripherals[i] = p.GetChild<Peripheral>(i);
                 
                 GD.Print(peripherals[i].Name);
-                peripherals[i].changeMaterial(
-                    peripherals[i].GetNode<MeshInstance>("MainMesh"), teamIdx
-                );
+                peripherals[i].changeMaterial( teamIdx);
             }
                 
 

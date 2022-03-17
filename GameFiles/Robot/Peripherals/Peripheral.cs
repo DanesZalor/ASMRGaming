@@ -71,16 +71,17 @@ public abstract class Peripheral : Spatial
     }
 
     // traverse tree to the mesh instances
-    public void changeMaterial(MeshInstance meshI, int matIdx=0){
+    public void changeMaterial(int matIdx=0, MeshInstance meshI=null){
         
-        
+        if(meshI==null) meshI = GetNode<MeshInstance>("MainMesh");
+
         if(meshI.GetChildCount()>0){
             foreach(Node child in meshI.GetChildren()){
                 if(child is MeshInstance)
-                    changeMaterial( (MeshInstance)child, matIdx );
+                    changeMaterial( matIdx, (MeshInstance)child );
             }   
         }  
-        
+
         GD.Print(meshI.Name); 
         meshI.SetSurfaceMaterial(0, (preloadMats[matIdx] as Material));
     }
