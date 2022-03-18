@@ -11,13 +11,12 @@ shader_param/uvmul = Vector2( 1, 1 )
 
 [sub_resource type="CubeMesh" id=3]
 material = SubResource( 4 )
-size = Vector3( 0.1, 0.1, 0.1 )
+size = Vector3( 0.2, 0.2, 0.2 )
 
 [node name="Sparks" type="CPUParticles"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 3.2 )
 emitting = false
 amount = 5
-lifetime = 0.25
+lifetime = 0.1
 explosiveness = 1.0
 local_coords = false
 mesh = SubResource( 3 )

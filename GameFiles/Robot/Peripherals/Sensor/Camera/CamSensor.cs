@@ -75,7 +75,7 @@ public class CamSensor : Peripheral
     Godot.Collections.Array bodies = new Godot.Collections.Array();
     public void _on_RadiusArea_bodyEnteredOrExit(Node body){
 
-        if( !(body is Robot) || body.Equals(parent) ) return;
+        //if( !(body is Robot) || body.Equals(parent) ) return;
         
         nearestBody = null;
         bodies.Clear();
@@ -83,7 +83,7 @@ public class CamSensor : Peripheral
         foreach(Node b in temp){
             //if( (b is Robot) && !b.Equals(parent) ) 
             
-            if(isEnemy(b))  bodies.Add(b);
+            if(isEnemy(b) && !b.Equals(parent) )  bodies.Add(b);
         }
         
     }
@@ -106,9 +106,13 @@ public class CamSensor : Peripheral
             Vector3 nA = parent.GlobalTransform.basis.z;
 
             foreach(Spatial b in bodies){
-                if(b.Equals(parent)) continue;
                 
-                if( getAngle(b) <= FOV ){
+                if(b==null || b.IsQueuedForDeletion()){
+                    _on_RadiusArea_bodyEnteredOrExit(null);
+                }
+                else if(b.Equals(parent)) continue;
+                
+                else if( getAngle(b) <= FOV ){
                     
                     r = true;
                     

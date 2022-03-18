@@ -18,6 +18,11 @@ public class Drill : Peripheral
             rcs = r;
         }
 
+        public void setEnable(bool b){
+            for(int i = 0; i<rcs.Length; i++)
+                rcs[i].Enabled = b;
+        }
+
         public void tick(){
             currentCollisionPoint = Vector3.Zero;
             colliding = false;
@@ -57,6 +62,8 @@ public class Drill : Peripheral
 
     public override void tickLogical(float delta){
         rotvel = Mathf.MoveToward(rotvel, (ram[0]==0 ? 0f : 1f), delta );
+        
+        hitbox.setEnable(ram[0]>0);
         hitbox.tick();
 
         if(Global.FRAME%2==0 && hitbox.COLLIDING){
