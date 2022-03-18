@@ -41,7 +41,7 @@ mesh = SubResource( 1 )
 material/0 = ExtResource( 2 )
 
 [node name="DrillShaft" type="MeshInstance" parent="MainMesh"]
-transform = Transform( 1.2, 0, 0, 0, 1, 0, 0, 0, 1, -0.0312257, 1.35943, 0 )
+transform = Transform( 1.2, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 1.359, 0 )
 mesh = SubResource( 2 )
 skeleton = NodePath("../..")
 material/0 = ExtResource( 2 )
@@ -49,19 +49,14 @@ material/0 = ExtResource( 2 )
 [node name="HitScan" type="Spatial" parent="."]
 
 [node name="RC1" type="RayCast" parent="HitScan"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
-enabled = true
-cast_to = Vector3( 0, 0, 4 )
-
-[node name="RC2" type="RayCast" parent="HitScan"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 1.5, 0 )
 enabled = true
-cast_to = Vector3( 0, 0, 4 )
+cast_to = Vector3( 0, 0, 4.5 )
 
-[node name="RC3" type="RayCast" parent="HitScan"]
+[node name="RC2" type="RayCast" parent="HitScan"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 1.5, 0 )
 enabled = true
-cast_to = Vector3( 0, 0, 4 )
+cast_to = Vector3( 0, 0, 4.5 )
 
 [node name="Sparks" parent="HitScan" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )

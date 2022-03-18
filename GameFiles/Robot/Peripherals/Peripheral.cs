@@ -67,7 +67,7 @@ public abstract class Peripheral : Spatial
         );
     }
 
-    public bool isEnemy(Godot.Object body){
+    public bool isEnemy(Node body){
         return ( !body.Equals(parent) && (body is Robot) && (body as Robot).teamIdx != parent.teamIdx );
     }
 

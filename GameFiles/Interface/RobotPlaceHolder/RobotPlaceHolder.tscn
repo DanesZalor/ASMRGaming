@@ -127,7 +127,7 @@ skeleton = NodePath("../..")
 material/0 = null
 
 [node name="Drill" type="MeshInstance" parent="Parts"]
-transform = Transform( 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0, 0 )
+transform = Transform( -5.24537e-08, 0, 1, 0, 1, 0, -1.2, 0, -4.37114e-08, 0, 0, 0.4 )
 material_override = ExtResource( 3 )
 cast_shadow = 0
 mesh = SubResource( 4 )

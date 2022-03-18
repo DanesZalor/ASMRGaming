@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://GameFiles/Robot/Peripherals/Actuator_Combat/Chopper/Chopper.cs" type="Script" id=1]
 [ext_resource path="res://GameFiles/Common/Common.shader" type="Shader" id=2]
 [ext_resource path="res://GameFiles/Robot/Peripherals/GreenTheme.png" type="Texture" id=3]
+[ext_resource path="res://GameFiles/Robot/Peripherals/Actuator_Combat/Sparks.tscn" type="PackedScene" id=4]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "SawMesh_Cube"
@@ -39,6 +40,10 @@ surfaces/0 = {
 "vertex_count": 186
 }
 
+[sub_resource type="CylinderShape" id=16]
+radius = 3.5
+height = 0.3
+
 [node name="ChopperPeripheral" type="Spatial"]
 script = ExtResource( 1 )
 
@@ -52,3 +57,17 @@ transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0
 mesh = SubResource( 2 )
 skeleton = NodePath("../..")
 material/0 = SubResource( 15 )
+
+[node name="HitScan" type="Spatial" parent="."]
+
+[node name="Area" type="Area" parent="HitScan"]
+
+[node name="CollisionShape" type="CollisionShape" parent="HitScan/Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
+shape = SubResource( 16 )
+
+[node name="Sparks" parent="HitScan" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[connection signal="body_entered" from="HitScan/Area" to="." method="hitAreabodyEnteredExit"]
+[connection signal="body_exited" from="HitScan/Area" to="." method="hitAreabodyEnteredExit"]

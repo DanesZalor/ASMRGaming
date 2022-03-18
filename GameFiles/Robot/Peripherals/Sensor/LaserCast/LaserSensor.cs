@@ -26,7 +26,7 @@ public class LaserSensor : Peripheral
             bool isColliding = rayCast.IsColliding();
             laserLength = (!isColliding ? rayCast.CastTo.x : rayCast.ToLocal(rayCast.GetCollisionPoint()).x) / rayCast.CastTo.x ;
 
-            enemyDetected = isColliding && parent.isEnemy(rayCast.GetCollider());
+            enemyDetected = isColliding && parent.isEnemy( (Node)rayCast.GetCollider());
         }
 
         public void tickPresentational(bool on=true){

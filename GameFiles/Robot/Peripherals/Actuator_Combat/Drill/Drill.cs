@@ -46,10 +46,10 @@ public class Drill : Peripheral
         base._Ready();
         drillShaft = GetNode<Spatial>("MainMesh/DrillShaft");
 
-        hitbox = new RCHitBox(new RayCast[3]{
+        hitbox = new RCHitBox(new RayCast[2]{
+            //GetNode<RayCast>("HitScan/RC1"),
             GetNode<RayCast>("HitScan/RC1"),
             GetNode<RayCast>("HitScan/RC2"),
-            GetNode<RayCast>("HitScan/RC3"),
         });
         sparkParticles = GetNode<Sparks>("HitScan/Sparks");
     }
@@ -62,13 +62,17 @@ public class Drill : Peripheral
         if(Global.FRAME%2==0 && hitbox.COLLIDING){
 
             Godot.Object hitbody = hitbox.COLLIDER;
-            if(isEnemy(hitbody))
-                (hitbody as Robot).recieveDamage(2);
+            if(isEnemy((Node)hitbody))
+                (hitbody as Robot).recieveDamage(5);
         }
     }
     public override void tickPresentational(float delta){
         drillShaft.Rotation += new Vector3(0.2f,0,0) * rotvel;
-        sparkParticles.Emit( hitbox.COLLISIONPOINT );
+        
+        if(Global.FRAME%2==0){
+            sparkParticles.Emitting = hitbox.COLLIDING;
+            sparkParticles.Translation = hitbox.COLLISIONPOINT;
+        }
     }
     
 }
