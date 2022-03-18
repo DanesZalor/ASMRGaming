@@ -4,10 +4,8 @@ using System;
 public class Tank : Peripheral
 {
 
-    private MeshInstance Ltracks;
-    private ShaderMaterial Ltracks_Mat;
-    private MeshInstance Rtracks;
-    private ShaderMaterial Rtracks_Mat;
+    private MeshInstance Ltracks; private ShaderMaterial Ltracks_Mat;
+    private MeshInstance Rtracks; private ShaderMaterial Rtracks_Mat;
     private Spatial[] Lwheels = new Spatial[3];
     private Spatial[] Rwheels = new Spatial[3]; 
 
