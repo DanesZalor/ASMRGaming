@@ -77,7 +77,7 @@ public class CamSensor : Peripheral
 
         //if( !(body is Robot) || body.Equals(parent) ) return;
         
-        nearestBody = null;
+        //nearestBody = null;
         bodies.Clear();
         Godot.Collections.Array temp = RadiusArea.GetOverlappingBodies();
         foreach(Node b in temp){
@@ -107,7 +107,7 @@ public class CamSensor : Peripheral
 
             foreach(Spatial b in bodies){
                 
-                if(b==null || b.IsQueuedForDeletion()){
+                if(b==null){
                     _on_RadiusArea_bodyEnteredOrExit(null);
                 }
                 else if(b.Equals(parent)) continue;
@@ -126,16 +126,13 @@ public class CamSensor : Peripheral
             }
         }
         
-        ram[0] &= 0b111;
+        ram[0] &= 0b100;
         ram[0] = setFlagsIf(r, ram[0], 0b010); // DETECTED(1) / NO(0)
 
         ram[0] = setFlagsIf( // DETECTED is LEFT(0) or RIGHT(1)
             r && parent.ToLocal(nearestBody.GlobalTransform.origin).x > 0,
             ram[0], 0b001 
         );
-        
-        //if(r) GD.Print( (parent.ToLocal(nearestBody.GlobalTransform.origin).x > 0) ? "Right":"Left");
-        //else GD.Print("");
 
         if(!r){
             nearestBody = null;
