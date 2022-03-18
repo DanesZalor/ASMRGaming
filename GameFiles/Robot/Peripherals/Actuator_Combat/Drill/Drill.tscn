@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://GameFiles/Robot/Peripherals/Actuator_Combat/Drill/Drill.cs" type="Script" id=1]
 [ext_resource path="res://GameFiles/Robot/Peripherals/GreenPerpiheral.tres" type="Material" id=2]
-[ext_resource path="res://GameFiles/Common/Common.shader" type="Shader" id=3]
+[ext_resource path="res://GameFiles/Robot/Peripherals/Actuator_Combat/Sparks.tscn" type="PackedScene" id=3]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "DrillMesh_Cube024"
@@ -32,16 +32,6 @@ surfaces/0 = {
 "vertex_count": 609
 }
 
-[sub_resource type="ShaderMaterial" id=4]
-shader = ExtResource( 3 )
-shader_param/albedo = Color( 1, 0.992157, 0.788235, 1 )
-shader_param/offset = null
-shader_param/uvmul = Vector2( 1, 1 )
-
-[sub_resource type="CubeMesh" id=3]
-material = SubResource( 4 )
-size = Vector3( 0.2, 0.2, 0.2 )
-
 [node name="DrillPeripheral" type="Spatial"]
 script = ExtResource( 1 )
 
@@ -51,7 +41,7 @@ mesh = SubResource( 1 )
 material/0 = ExtResource( 2 )
 
 [node name="DrillShaft" type="MeshInstance" parent="MainMesh"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0312257, 1.35943, 0 )
+transform = Transform( 1.2, 0, 0, 0, 1, 0, 0, 0, 1, -0.0312257, 1.35943, 0 )
 mesh = SubResource( 2 )
 skeleton = NodePath("../..")
 material/0 = ExtResource( 2 )
@@ -63,15 +53,15 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
 enabled = true
 cast_to = Vector3( 0, 0, 4 )
 
-[node name="Sparks" type="CPUParticles" parent="HitScan"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 3.2 )
-emitting = false
-lifetime = 0.25
-explosiveness = 1.0
-local_coords = false
-mesh = SubResource( 3 )
-direction = Vector3( 0, 0, 0 )
-spread = 180.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 100.0
-initial_velocity_random = 1.0
+[node name="RC2" type="RayCast" parent="HitScan"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 1.5, 0 )
+enabled = true
+cast_to = Vector3( 0, 0, 4 )
+
+[node name="RC3" type="RayCast" parent="HitScan"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 1.5, 0 )
+enabled = true
+cast_to = Vector3( 0, 0, 4 )
+
+[node name="Sparks" parent="HitScan" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
