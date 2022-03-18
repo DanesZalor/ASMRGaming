@@ -68,7 +68,7 @@ public abstract class Peripheral : Spatial
     }
 
     public bool isEnemy(Godot.Object body){
-        return ( !body.Equals(parent) && (body is Robot) );
+        return ( !body.Equals(parent) && (body is Robot) && (body as Robot).teamIdx != parent.teamIdx );
     }
 
     // traverse tree to the mesh instances
