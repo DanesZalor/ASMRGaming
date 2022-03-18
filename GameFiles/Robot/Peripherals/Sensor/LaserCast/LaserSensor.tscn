@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://GameFiles/Robot/Peripherals/GreenPerpiheral.tres" type="Material" id=1]
 [ext_resource path="res://GameFiles/Robot/Peripherals/Sensor/LaserCast/LaserSensor.cs" type="Script" id=2]
@@ -23,7 +23,7 @@ surfaces/0 = {
 flip_faces = true
 size = Vector3( 0.15, 0.1, 0.1 )
 
-[sub_resource type="ShaderMaterial" id=8]
+[sub_resource type="ShaderMaterial" id=10]
 shader = ExtResource( 5 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/offset = null
@@ -35,6 +35,11 @@ size = Vector3( 0.15, 0.2, 0.2 )
 [sub_resource type="ShaderMaterial" id=9]
 shader = ExtResource( 5 )
 shader_param/albedo = Color( 0, 0.623529, 1, 1 )
+shader_param/offset = null
+
+[sub_resource type="ShaderMaterial" id=8]
+shader = ExtResource( 5 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/offset = null
 
 [node name="LaserPeripheral" type="Spatial"]
@@ -57,7 +62,7 @@ transform = Transform( 170, 0, 0, 0, 1, 0, 0, 0, 1, -12.75, 0, 0 )
 cast_shadow = 0
 mesh = SubResource( 7 )
 skeleton = NodePath("../..")
-material/0 = SubResource( 8 )
+material/0 = SubResource( 10 )
 
 [node name="Red" type="MeshInstance" parent="MainMesh/RCL/LaserMesh/W"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19209e-07, 0 )

@@ -27,6 +27,8 @@ public class Robot : KinematicBody
     [Export(PropertyHint.Enum, "Laser,Camera")] public string Sensor_Device = "Laser";  
     [Export(PropertyHint.MultilineText)] public string program = "";
 
+    private int HealthPoints = 255; 
+
     private CPU.CPU cpu;    public CPU.CPU CPU { get { return cpu; } }
 
     private Peripheral[] peripherals;
@@ -90,5 +92,11 @@ public class Robot : KinematicBody
             Mathf.Clamp(Translation.x, -squareLimit, squareLimit), 0,
             Mathf.Clamp(Translation.z, -squareLimit, squareLimit)
         );
+    }
+
+    public void recieveDamage(int damage){
+        HealthPoints -= damage;
+        
+        if(HealthPoints<=0) QueueFree();
     }
 }

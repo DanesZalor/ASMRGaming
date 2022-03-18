@@ -1,14 +1,14 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://GameFiles/Robot/Peripherals/GreenPerpiheral.tres" type="Material" id=1]
 [ext_resource path="res://GameFiles/Robot/Peripherals/Sensor/Camera/CamSensor.cs" type="Script" id=2]
 [ext_resource path="res://GameFiles/Robot/Peripherals/Sensor/Camera/SpotLight.obj" type="ArrayMesh" id=3]
-[ext_resource path="res://GameFiles/Common/Grid.jpg" type="Texture" id=4]
+[ext_resource path="res://GameFiles/Robot/Peripherals/Sensor/Camera/BlueCone.tres" type="Material" id=4]
 [ext_resource path="res://GameFiles/Robot/Peripherals/Sensor/Camera/SpotlightMat.tres" type="Material" id=5]
-[ext_resource path="res://GameFiles/Robot/Peripherals/Sensor/Camera/SplotLight.shader" type="Shader" id=6]
 [ext_resource path="res://GameFiles/Robot/Peripherals/Sensor/Camera/targetHud.png" type="Texture" id=7]
 [ext_resource path="res://GameFiles/Common/Common.shader" type="Shader" id=8]
 [ext_resource path="res://GameFiles/Robot/Peripherals/Sensor/Camera/HUDcyl.obj" type="ArrayMesh" id=9]
+[ext_resource path="res://GameFiles/Robot/Peripherals/Sensor/Camera/RedCone.tres" type="Material" id=10]
 
 [sub_resource type="CylinderShape" id=5]
 radius = 23.0
@@ -31,16 +31,6 @@ surfaces/0 = {
 "skeleton_aabb": [  ],
 "vertex_count": 894
 }
-
-[sub_resource type="ShaderMaterial" id=15]
-shader = ExtResource( 6 )
-shader_param/albedo = Color( 1, 0, 0, 1 )
-shader_param/gridtex = ExtResource( 4 )
-
-[sub_resource type="ShaderMaterial" id=7]
-shader = ExtResource( 6 )
-shader_param/albedo = Color( 0, 0.584314, 0.972549, 1 )
-shader_param/gridtex = ExtResource( 4 )
 
 [sub_resource type="ShaderMaterial" id=12]
 shader = ExtResource( 8 )
@@ -128,7 +118,8 @@ transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1.2, 0.777652, 0, 0 )
 
 [node name="R" type="MeshInstance" parent="MainMesh/Spotlight"]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0 )
-material_override = SubResource( 15 )
+visible = false
+material_override = ExtResource( 10 )
 cast_shadow = 0
 mesh = ExtResource( 3 )
 skeleton = NodePath("../..")
@@ -136,8 +127,7 @@ material/0 = null
 
 [node name="B" type="MeshInstance" parent="MainMesh/Spotlight"]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0 )
-visible = false
-material_override = SubResource( 7 )
+material_override = ExtResource( 4 )
 cast_shadow = 0
 mesh = ExtResource( 3 )
 skeleton = NodePath("../..")
