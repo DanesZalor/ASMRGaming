@@ -30,15 +30,12 @@ public class Robot : KinematicBody
     private CPU.CPU cpu;    public CPU.CPU CPU { get { return cpu; } }
 
     private Peripheral[] peripherals;
-    private Spatial camholder;
 
     public override void _Ready()
     {
         GD.Print(Name+":\n"+program+"----\n\n");
         // remove editor placeholder
         GetNode("MeshPlaceHolder").QueueFree();
-        camholder = GetNode<Spatial>("CamHolder");
-        camholder.SetAsToplevel(true);
 
         cpu = new CPU.CPU(Assembler.Assembler.compile(program));
 
@@ -81,7 +78,6 @@ public class Robot : KinematicBody
     public void tick(float delta)
     {
         base._PhysicsProcess(delta);
-        camholder.Translation = GlobalTransform.origin;
 
         for(int i = 0; i < Mathf.Max(CLOCKSPEED,1); i++ )
             cpu.InstructionCycleTick();
