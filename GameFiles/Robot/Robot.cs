@@ -87,7 +87,6 @@ public class Robot : KinematicBody
             cpu.InstructionCycleTick();
 
         foreach(Peripheral p in peripherals)
-            p.tick(delta);
-           
+                p.tick(delta);
     }
 }
