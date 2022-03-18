@@ -226,13 +226,15 @@ public class RobotsHolder : Node
 
         if( args[0].Equals("asm") ){
 
-            if( args.Length==3 && 
-                Global.match(args[1], "(--name=.{1,})") &&
-                Global.match(args[2], "(--src=.{1,})")
-            ) return asmCommand(
-                args[1].Split( new char[1]{'='})[1], 
-                args[2].Split( new char[1]{'='})[1]
-                );
+            if( args.Length==3){
+
+                if(Global.match(args[1], "(--name=.{1,})") && Global.match(args[2], "(--src=.{1,})"))
+                    return asmCommand(
+                        args[1].Split( new char[1]{'='})[1], 
+                        args[2].Split( new char[1]{'='})[1]
+                    );
+                
+            }
             else return "asm usage : asm --name=botname --src=filename";
         }
         else if( Global.match(args[1],"(clear|ls|help)") ){
