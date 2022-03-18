@@ -21,12 +21,12 @@ public class Tank : Peripheral
 
         /* Get Presentational Layer Init*/{
             Ltracks = GetNode<MeshInstance>("MainMesh/TracksL__X");
-            Ltracks.SetSurfaceMaterial(0, (Material)Ltracks.GetSurfaceMaterial(0).Duplicate() );
-            //Ltracks_Mat = (Ltracks.GetSurfaceMaterial(0) as ShaderMaterial);
+            Ltracks.SetSurfaceMaterial(0, Ltracks.GetSurfaceMaterial(0).Duplicate() as Material );
+            //LTMAT.SetShaderParam("offset", Vector2.Zero);
 
             Rtracks = GetNode<MeshInstance>("MainMesh/TracksR__X");
-            Rtracks.SetSurfaceMaterial(0, (Material)Rtracks.GetSurfaceMaterial(0).Duplicate() );
-            //Rtracks_Mat = (Rtracks.GetSurfaceMaterial(0) as ShaderMaterial);
+            Rtracks.SetSurfaceMaterial(0, Rtracks.GetSurfaceMaterial(0).Duplicate() as Material );
+            //RTMAT.SetShaderParam("offset", Vector2.Zero);
 
             Lwheels[0] = Ltracks.GetNode<Spatial>("WheelL1");
             Lwheels[1] = Ltracks.GetNode<Spatial>("WheelL2");
@@ -75,8 +75,7 @@ public class Tank : Peripheral
         RTMAT.SetShaderParam("offset", 
             (Vector2)(RTMAT.GetShaderParam("offset")) + 
             Vector2.Right * rv
-        );  
-            
+        ); 
 
     }
 }

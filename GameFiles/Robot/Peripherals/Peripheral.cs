@@ -74,7 +74,11 @@ public abstract class Peripheral : Spatial
     // traverse tree to the mesh instances
     private void changeMaterial(int matIdx=0, MeshInstance meshI=null){
         
-        if(meshI==null) meshI = GetNode<MeshInstance>("MainMesh");
+        if(meshI==null){
+            meshI = GetNode<MeshInstance>("MainMesh");
+            preloadMats[0].SetShaderParam("offset", Vector2.Zero);
+            preloadMats[1].SetShaderParam("offset", Vector2.Zero);
+        } 
 
         if(meshI.GetChildCount()>0){
             foreach(Node child in meshI.GetChildren()){
@@ -83,12 +87,12 @@ public abstract class Peripheral : Spatial
             }   
         }  
 
-        if(!meshI.Name.EndsWith("__X"))
-            meshI.SetSurfaceMaterial(0, (preloadMats[matIdx] as Material));
+        //if(!meshI.Name.EndsWith("__X"))
+        meshI.SetSurfaceMaterial(0, (preloadMats[matIdx] as Material));
     }
     
     private static ShaderMaterial[] preloadMats = new ShaderMaterial[2]{
-        GD.Load<ShaderMaterial>("res://GameFiles/Robot/Peripherals/GreenPerpiheral.tres"),
-        GD.Load<ShaderMaterial>("res://GameFiles/Robot/Peripherals/BluePerpiheral.tres")
+        ResourceLoader.Load<ShaderMaterial>("res://GameFiles/Robot/Peripherals/GreenPerpiheral.tres"),
+        ResourceLoader.Load<ShaderMaterial>("res://GameFiles/Robot/Peripherals/BluePerpiheral.tres")
     };
 }
