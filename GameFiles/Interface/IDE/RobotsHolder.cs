@@ -84,19 +84,16 @@ public class RobotsHolder : Node
 
     private string generateBotName(){
         
-        string[] randomNames = {
-            "Abigail", "Abbie", "Abe", "Alex", "Albert", "Caroline", "Carol", 
-            "Clint", "Demetrius", "Ellie", "Elliot", "Emma", "Emily", "Evelyn", 
-            "Eve", "George", "Gil", "Gunther", "Gus", "Haley", "Harvey","Jas",
-            "Jodi", "Kent", "Krobus", "Leah", "Lewis", "Linus", "Marlon", "Marnie",
-            "Maru", "Morris", "Qi", "Pam", "Penny", "Pierre", "Rob", "Robin", "Sam",
-            "Sandy", "Sebastian", "Shane", "Vincent", "Willy", "Larry", "Bob", "Joe",
-        };
+        Godot.Collections.Array<String> randNames = new Godot.Collections.Array<string>(new string[]{
+            "Joe", "Bob", "Abe", "Tom", "Rob", "Ann", "Eve", "Ken", "Gil", "Sam", "Gus", "Jodi", "Jas", "Ash",
+            "Jon", "Ian", "Leo", "Rex", "Tim", "Wil", "Vic", "Kat", "Jeb", "Avi", "Art", "Zac", "Jef", "Eli",
+        });
 
         // tries out randomNames until it finds one that isn't used. Only up to 10 times to mitigate infinite tries
-        string choice = randomNames[Global.RandInt(0, randomNames.Length)];
-        for(int i = 0; exists(choice) && i<10; i++)
-            choice = randomNames[Global.RandInt(0, randomNames.Length)];
+        string choice = randNames[Global.RandInt(0, randNames.Count)];
+        
+        for(int i = 0; i<10 && exists(choice); i++) 
+            choice = randNames[Global.RandInt(0, randNames.Count)];
         
         return choice;
     }
