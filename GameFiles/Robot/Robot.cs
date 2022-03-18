@@ -28,6 +28,7 @@ public class Robot : KinematicBody
     [Export(PropertyHint.MultilineText)] public string program = "";
 
     private int HealthPoints = 255; 
+    public Transform initialTransform;
 
     private CPU.CPU cpu;    public CPU.CPU CPU { get { return cpu; } }
 
@@ -36,6 +37,7 @@ public class Robot : KinematicBody
 
     public override void _Ready()
     {
+        initialTransform = Transform;
         hpHud = GetNode<HPHud>("Sprite3D/HPHUD/HPBar");
         hpHud.updateData(HealthPoints, Name);
         //GD.Print(Name+":\n"+program+"----\n\n");
