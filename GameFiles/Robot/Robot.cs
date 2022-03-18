@@ -72,7 +72,6 @@ public class Robot : KinematicBody
             peripherals = new Peripheral[p.GetChildCount()];
             for(byte i = 0; i<p.GetChildCount(); i++){
                 peripherals[i] = p.GetChild<Peripheral>(i);
-                peripherals[i].changeMaterial( teamIdx);
             }
                 
 

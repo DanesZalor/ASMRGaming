@@ -28,7 +28,7 @@ public abstract class Peripheral : Spatial
         ));
 
         updateRam();
-        //changeMaterial(parent.teamIdx);
+        changeMaterial(parent.teamIdx);
     }
 
     /// <summary> 
@@ -72,7 +72,7 @@ public abstract class Peripheral : Spatial
     }
 
     // traverse tree to the mesh instances
-    public void changeMaterial(int matIdx=0, MeshInstance meshI=null){
+    private void changeMaterial(int matIdx=0, MeshInstance meshI=null){
         
         if(meshI==null) meshI = GetNode<MeshInstance>("MainMesh");
 
