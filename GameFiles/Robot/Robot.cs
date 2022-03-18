@@ -84,5 +84,11 @@ public class Robot : KinematicBody
 
         foreach(Peripheral p in peripherals)
                 p.tick(delta);
+        
+        int squareLimit = 49;
+        Translation = new Vector3(
+            Mathf.Clamp(Translation.x, -squareLimit, squareLimit), 0,
+            Mathf.Clamp(Translation.z, -squareLimit, squareLimit)
+        );
     }
 }
