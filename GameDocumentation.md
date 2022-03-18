@@ -4,12 +4,13 @@
 Bot commands;
 ```
 bot <options> --<arg>=<value>
-    options: clear | list | help | add | mod | del
-    args:    --name=<string>
-             --steering=tank|car
-             --combat=drill|chopper
-             --sensor=laser|camera
-             --x|y|r=<int>
+    options: clear | ls | help | add | mod | rm
+    args:   --team=0/1  
+            --name=<string>
+            --steering=tank|car
+            --combat=drill|chopper
+            --sensor=laser|camera
+            --x|y|r=<int>
 
 ; note that if you add a bot without specifying any of the 
 components then it would randomly choose/generate a component
@@ -19,7 +20,21 @@ bot's steering, combat, sensor, and its coordinates.
 
 touch command;
 ```
+touch <filename> - creates a source/instruction file
+```
 
+edit command; 
+```
+edit <filename> - opens and edit the source/instruction file
+
+note: if the user edits a non-existing source/instruction file, it
+would create a new source/instruction file
+```
+
+ASM (assemble) command - assembles the bot, it places the instructions you have created from
+the source/instruction file and places it into the robot;
+```
+asm --bot name=<botname> --src=<filename>
 ```
 
 # Peripherals
