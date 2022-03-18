@@ -32,10 +32,13 @@ public class Robot : KinematicBody
     private CPU.CPU cpu;    public CPU.CPU CPU { get { return cpu; } }
 
     private Peripheral[] peripherals;
+    private HPHud hpHud;
 
     public override void _Ready()
     {
-        GD.Print(Name+":\n"+program+"----\n\n");
+        hpHud = GetNode<HPHud>("Sprite3D/HPHUD/HPBar");
+        hpHud.updateData(HealthPoints, Name);
+        //GD.Print(Name+":\n"+program+"----\n\n");
         // remove editor placeholder
         GetNode("MeshPlaceHolder").QueueFree();
 
@@ -72,7 +75,6 @@ public class Robot : KinematicBody
             for(byte i = 0; i<p.GetChildCount(); i++){
                 peripherals[i] = p.GetChild<Peripheral>(i);
             }
-                
 
         }
     }
@@ -96,7 +98,7 @@ public class Robot : KinematicBody
 
     public void recieveDamage(int damage){
         HealthPoints -= damage;
-        
+        hpHud.updateData(HealthPoints);
         if(HealthPoints<=0) QueueFree();
     }
 }
