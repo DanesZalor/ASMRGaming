@@ -1,7 +1,28 @@
 # Game Documentation of "A 3D PROGRAMMABLE VIRTUAL ROBOT GAME AS A SUPPLEMENT TO LEARNING ASSEMBLY LANGUAGE PROGRAMMING"
 
+# Console Commands
+Bot commands;
+```
+bot <options> --<arg>=<value>
+    options: clear | list | help | add | mod | del
+    args:    --name=<string>
+             --steering=tank|car
+             --combat=drill|chopper
+             --sensor=laser|camera
+             --x|y|r=<int>
 
-# PERIPHERALS
+; note that if you add a bot without specifying any of the 
+components then it would randomly choose/generate a component
+e.g. bot add --name=<testbot> , it would randomly generate the
+bot's steering, combat, sensor, and its coordinates.
+```
+
+touch command;
+```
+
+```
+
+# Peripherals
 
 ## Laser Sensors
 The Laser Sensors(LS) takes 3 bytes in the RAM:
