@@ -239,12 +239,18 @@ public class RobotsHolder : Node
                         if( Global.match(args[i], argGrammars[j]))
                             argValues[j] = args[i].Split(argSeparator)[1]; 
                     }
-                    
+                }
+                
+                if(argValues[0]=="" && argValues[1]==""){
+                    argValues[0] = args[1];
+                    argValues[1] = args[2];
                 }
 
                 return asmCommand(argValues[0], argValues[1]);
                 
-            }
+            }else if (args.Length==2)
+                return asmCommand(args[1], args[1]);
+            
             else return "asm usage : asm --name=botname --src=filename";
         }
         else if( Global.match(args[1],"(clear|ls|help)") ){

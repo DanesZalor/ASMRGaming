@@ -81,7 +81,7 @@ public static class PreprocessorDirectives
                     {
                         newLine = Common.replace(newLine, Aliases[i, 0], Aliases[i, 1]);
                         if(i>18){
-                            string binaryStr = Common.getMatch(line, " (0b([01]{1,8}))").Value.Trim();
+                            string binaryStr = Common.getMatch(line, "(0b([01]{1,8}))").Value.Trim();
                             
                             byte decimalStr = (byte)Convert.ToInt32(binaryStr.Replace("0b", ""), 2);
 
