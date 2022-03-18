@@ -106,7 +106,6 @@ public class CamSensor : Peripheral
             Vector3 nA = parent.GlobalTransform.basis.z;
 
             foreach(Spatial b in bodies){
-                GD.Print(b.Name);
                 if(b.Equals(parent)) continue;
                 
                 if( getAngle(b) <= FOV ){
@@ -120,7 +119,7 @@ public class CamSensor : Peripheral
                         minDistance = distance; nearestBody = b;
                     }
                 }
-            }GD.Print("---");
+            }
         }
         
         ram[0] &= 0b111;
