@@ -81,8 +81,9 @@ public class CamSensor : Peripheral
         bodies.Clear();
         Godot.Collections.Array temp = RadiusArea.GetOverlappingBodies();
         foreach(Node b in temp){
-            if((b is Robot) && !b.Equals(parent) ) 
-                bodies.Add(b);
+            //if( (b is Robot) && !b.Equals(parent) ) 
+            
+            if(isEnemy(b))  bodies.Add(b);
         }
         
     }
