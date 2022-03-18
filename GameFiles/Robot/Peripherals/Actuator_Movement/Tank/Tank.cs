@@ -4,8 +4,12 @@ using System;
 public class Tank : Peripheral
 {
 
-    private MeshInstance Ltracks; private ShaderMaterial Ltracks_Mat;
-    private MeshInstance Rtracks; private ShaderMaterial Rtracks_Mat;
+    private MeshInstance Ltracks; //private ShaderMaterial Ltracks_Mat;
+    private MeshInstance Rtracks; //private ShaderMaterial Rtracks_Mat;
+
+    private ShaderMaterial LTMAT { get => (Ltracks.GetSurfaceMaterial(0) as ShaderMaterial); }
+    private ShaderMaterial RTMAT { get => (Rtracks.GetSurfaceMaterial(0) as ShaderMaterial); }
+    
     private Spatial[] Lwheels = new Spatial[3];
     private Spatial[] Rwheels = new Spatial[3]; 
 
@@ -18,11 +22,11 @@ public class Tank : Peripheral
         /* Get Presentational Layer Init*/{
             Ltracks = GetNode<MeshInstance>("MainMesh/TracksL__X");
             Ltracks.SetSurfaceMaterial(0, (Material)Ltracks.GetSurfaceMaterial(0).Duplicate() );
-            Ltracks_Mat = (Ltracks.GetSurfaceMaterial(0) as ShaderMaterial);
+            //Ltracks_Mat = (Ltracks.GetSurfaceMaterial(0) as ShaderMaterial);
 
             Rtracks = GetNode<MeshInstance>("MainMesh/TracksR__X");
             Rtracks.SetSurfaceMaterial(0, (Material)Rtracks.GetSurfaceMaterial(0).Duplicate() );
-            Rtracks_Mat = (Rtracks.GetSurfaceMaterial(0) as ShaderMaterial);
+            //Rtracks_Mat = (Rtracks.GetSurfaceMaterial(0) as ShaderMaterial);
 
             Lwheels[0] = Ltracks.GetNode<Spatial>("WheelL1");
             Lwheels[1] = Ltracks.GetNode<Spatial>("WheelL2");
@@ -64,12 +68,12 @@ public class Tank : Peripheral
             Rwheels[i].Rotation -= Vector3.Right * rv ;
         }
 
-        Ltracks_Mat.SetShaderParam("offset", 
-            (Vector2)(Ltracks_Mat.GetShaderParam("offset")) + 
+        LTMAT.SetShaderParam("offset", 
+            (Vector2)(LTMAT.GetShaderParam("offset")) + 
             Vector2.Right * lv
         );  
-        Rtracks_Mat.SetShaderParam("offset", 
-            (Vector2)(Rtracks_Mat.GetShaderParam("offset")) + 
+        RTMAT.SetShaderParam("offset", 
+            (Vector2)(RTMAT.GetShaderParam("offset")) + 
             Vector2.Right * rv
         );  
             
