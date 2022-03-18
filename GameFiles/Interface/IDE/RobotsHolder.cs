@@ -216,6 +216,8 @@ public class RobotsHolder : Node
                 //"\n\t clear|list|help\t no arguements\n\t add|mod --name= --steering? --combat? --sensor? --x? --y? --r?"+
                 //"\n\t del --name="
                 ;
+        
+        char[] argSeparator = new char[1]{'='}; 
 
         // reject preconditions
         if(args.Length<2) return help;
@@ -225,14 +227,28 @@ public class RobotsHolder : Node
         if( args[0].Equals("asm") ){
 
             if( args.Length==3){
-
-                if(Global.match(args[1], "(--name=.{1,})") && Global.match(args[2], "(--src=.{1,})"))
-                    return asmCommand(
-                        args[1].Split( new char[1]{'='})[1], 
-                        args[2].Split( new char[1]{'='})[1]
-                    );
                 
-            }
+                
+                string[] argGrammars = {"(--name=.{1,})", "(--src=.{1,})"};
+                string[] argValues = {"",""};
+
+                for(int i = 1; i<args.Length; i++){
+                    for(int j = 0; j < argGrammars.Length; j++){
+                        if( Global.match(args[i], argGrammars[j]))
+                            argValues[j] = args[i].Split(argSeparator)[1]; 
+                    }
+                }
+                
+                if(argValues[0]=="" && argValues[1]==""){
+                    argValues[0] = args[1];
+                    argValues[1] = args[2];
+                }
+
+                return asmCommand(argValues[0], argValues[1]);
+                
+            }else if (args.Length==2)
+                return asmCommand(args[1], args[1]);
+            
             else return "asm usage : asm --name=botname --src=filename";
         }
         else if( Global.match(args[1],"(clear|ls|help)") ){
@@ -309,3 +325,4 @@ public class RobotsHolder : Node
         return "bot: wrong usage";
     }
 }
+
