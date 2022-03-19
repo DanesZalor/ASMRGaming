@@ -82,7 +82,17 @@ public class Shell{
     public string interpretCommand(string[] args){
         IDE.SaveFile.Load();
 
-        if(args[0].Equals("ls")){
+        const string shellhelp = @"ASMR Shell Commands
+ ls
+ touch (args){1,}   creates a file
+ cat (args){1,}     concatenates files and prints
+ rm (args){1,}      removes existing files
+ mv <file> <str>    moves (rename) a file
+ cp <file> <str>    copies a file 
+ edit <file>        opens an existing file in the text editor
+";
+        if(args[0].Equals("help")) return shellhelp;
+        else if(args[0].Equals("ls")){
 
             if(args.Length>1) return "[b]ls[/b] requires no arguements";
 
@@ -92,7 +102,7 @@ public class Shell{
             return r;
         }
         
-        if(Global.match(args[0],"(touch|rm|edit|cat)")){
+        else if(Global.match(args[0],"(touch|rm|edit|cat)")){
             if(args.Length<2)
                 return String.Format("{0}: needs atleast one filename arguement", args[0]);
 
@@ -108,7 +118,7 @@ public class Shell{
             else if(args[0].Equals("cat"))
                 return catCommand(args);
         }
-        if (Global.match(args[0], "(mv|cp)")){
+        else if (Global.match(args[0], "(mv|cp)")){
             if(args.Length!=3)
                 return String.Format("{0}: needs exactly 2 filename arguements", args[0]);
             

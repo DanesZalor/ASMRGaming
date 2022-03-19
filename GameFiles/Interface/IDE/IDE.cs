@@ -152,7 +152,7 @@ public class IDE : Node
     public string interpretCommand(string[] args){
         if(args.Length==0) return "";
         
-        else if( Global.match(args[0], "(ls|touch|cat|edit|rm|mv|cp)") )
+        else if( Global.match(args[0], "(ls|touch|cat|edit|rm|mv|cp|help)") )
             return shell.interpretCommand(args);
         
         else if( Global.match(args[0], "(play|pause|(reset|setup))"))
