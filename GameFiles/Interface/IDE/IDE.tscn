@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://GameFiles/Interface/IDE/InterfaceConsole.cs" type="Script" id=1]
 [ext_resource path="res://GameFiles/Common/prototex.jpg" type="Texture" id=2]
@@ -18,8 +18,15 @@ use_filter = true
 font_data = SubResource( 1 )
 
 [sub_resource type="DynamicFont" id=6]
+size = 10
+use_filter = true
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=14]
 outline_size = 1
-outline_color = Color( 1, 1, 1, 0.623529 )
+outline_color = Color( 1, 1, 1, 0.466667 )
+use_mipmaps = true
+use_filter = true
 font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=5]
@@ -95,9 +102,14 @@ margin_top = 45.0
 margin_right = 472.0
 margin_bottom = 368.0
 focus_mode = 2
-custom_fonts/bold_font = SubResource( 6 )
+custom_fonts/italics_font = SubResource( 6 )
+custom_fonts/bold_font = SubResource( 14 )
 custom_fonts/normal_font = SubResource( 5 )
 bbcode_enabled = true
+bbcode_text = "a [i]italic[/i]
+a [b]bold[/b]"
+text = "a italic
+a bold"
 scroll_following = true
 selection_enabled = true
 __meta__ = {
