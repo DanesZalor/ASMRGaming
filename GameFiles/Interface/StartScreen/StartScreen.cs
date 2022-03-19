@@ -24,7 +24,7 @@ public class StartScreen : Control
             new Vector2(1600,900),
             new Vector2(1920,1080),
         };
-        float[] scales = {0.8f,1f, 1.2f}; 
+        float[] scales = {1f,1.25f, 1.5f}; 
         //OS.SetMinWindowSize(resolutions[id]);
         GetTree().SetScreenStretch(SceneTree.StretchMode.Mode2d, SceneTree.StretchAspect.Keep, resolutions[id], scales[id]);
     }
