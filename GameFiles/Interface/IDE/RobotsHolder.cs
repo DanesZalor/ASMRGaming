@@ -85,7 +85,7 @@ public class RobotsHolder : Node
     private string generateBotName(){
         
         Godot.Collections.Array<String> randNames = new Godot.Collections.Array<string>(new string[]{
-            "Joe", "Bob", "Abe", "Tom", "Rob", "Ann", "Eve", "Ken", "Gil", "Sam", "Gus", "Jodi", "Jas", "Ash",
+            "Joe", "Bob", "Abe", "Tom", "Rob", "Ann", "Eve", "Ken", "Gil", "Sam", "Gus", "Jas", "Ash",
             "Jon", "Ian", "Leo", "Rex", "Tim", "Wil", "Vic", "Kat", "Jeb", "Avi", "Art", "Zac", "Jef", "Eli",
         });
 
