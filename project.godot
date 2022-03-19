@@ -20,8 +20,8 @@ Global="*res://GameFiles/Common/Global.cs"
 
 [display]
 
-window/size/width=1920
-window/size/height=1080
+window/size/width=1600
+window/size/height=900
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 
@@ -125,6 +125,6 @@ quality/shading/force_vertex_shading.mobile=false
 quality/shading/force_lambert_over_burley=true
 quality/shading/force_blinn_over_ggx=true
 quality/shading/use_physical_light_attenuation=true
-quality/filters/msaa=1
+quality/filters/msaa=2
 quality/filters/use_fxaa=true
 environment/default_environment="res://default_env.tres"
