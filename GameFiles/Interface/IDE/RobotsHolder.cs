@@ -209,18 +209,45 @@ public class RobotsHolder : Node
     /// <br>returns bbcode text</summary>
     public string interpretCommand(string[] args, IDE.STATE state=IDE.STATE.SETUP){
         
-        const string help = "[b]bot[/b] <options> --<arg>=<value>\n"+
-                "\toptions: \tclear|list|help|add|mod|del\n"+
-                "\targs\n\t\t--name=<string>\n\t\t--steering=tank|car\n\t\t--combat=drill|chopper\n\t\t--sensor=laser|camera"+
-                "\n\t\t--x|y|r=<int>" 
-                //"\n\t clear|list|help\t no arguements\n\t add|mod --name= --steering? --combat? --sensor? --x? --y? --r?"+
-                //"\n\t del --name="
-                ;
+        const string bothelp = @"Usage: 
+    bot [clear|ls|help]
+    bot add (args){0,8}
+    bot mod --name=___ (args){0,7}
+    bot rm --name=___
+
+Options:
+ clear    remove all bots in the field
+ ls       list all bots in the field
+ help     display this message
+ add      adds a bot in the field
+ mod      modifies a bot in the field
+ rm       removes a bot from the field
+
+Arguements:
+ --name=<string>
+ --steering=tank|car
+ --combat=chopper|drill
+ --sensor=laser|camera
+ --team=0|1
+ --x=<int>
+ --y=<int>
+ --r=<int>
+";
+        const string asmhelp = @"Usage:
+    asm --name=___ --src=___
+    asm --src=___ --name=___
+    asm <name> <src>
+    asm <name&src>
+
+Arguements:
+ --name=<string>   name of existing bot
+ --src=<string>    name of existing file
+";
         
         char[] argSeparator = new char[1]{'='}; 
 
         // reject preconditions
-        if(args.Length<2) return help;
+        if(args.Length<2) return args[0]+": wrong usage. check "+args[0]+" help";
         else if( state==IDE.STATE.PLAYING && Global.match(args[0], "(clear|add|mod|del)"))
             return "bot : unable to execute command in current state";
 
@@ -246,10 +273,14 @@ public class RobotsHolder : Node
 
                 return asmCommand(argValues[0], argValues[1]);
                 
-            }else if (args.Length==2)
-                return asmCommand(args[1], args[1]);
+            }else if (args.Length==2){
+                
+                if(args[1].Equals("help")) return asmhelp;
+
+                else return asmCommand(args[1], args[1]);
+            }
             
-            else return "asm usage : asm --name=botname --src=filename";
+            else return "asm : wrong usage. check asm help";
         }
         else if( Global.match(args[1],"(clear|ls|help)") ){
                 
@@ -257,7 +288,7 @@ public class RobotsHolder : Node
             
             switch(args[1]){
                 case "ls": return ListRobots();
-                case "help": return help;
+                case "help": return bothelp;
                 case "clear": return ClearRobots();
             }
                 
@@ -322,7 +353,7 @@ public class RobotsHolder : Node
             else return "bot del usage: bot rm --name=botname";
         }
 
-        return "bot: wrong usage";
+        return "bot: wrong usage. check bot help";
     }
 }
 
