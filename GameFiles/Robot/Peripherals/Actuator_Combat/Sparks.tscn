@@ -4,14 +4,14 @@
 [ext_resource path="res://GameFiles/Robot/Peripherals/Actuator_Combat/Sparks.cs" type="Script" id=2]
 [ext_resource path="res://GameFiles/Robot/Peripherals/Actuator_Combat/metalhitsound.ogg" type="AudioStream" id=3]
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=8]
 shader = ExtResource( 1 )
-shader_param/albedo = Color( 1, 0.968627, 0.917647, 1 )
+shader_param/albedo = Color( 1, 0.988235, 0.760784, 1 )
 shader_param/offset = null
 shader_param/uvmul = Vector2( 1, 1 )
 
-[sub_resource type="CubeMesh" id=3]
-material = SubResource( 4 )
+[sub_resource type="PrismMesh" id=7]
+material = SubResource( 8 )
 size = Vector3( 0.2, 0.2, 0.2 )
 
 [sub_resource type="Animation" id=5]
@@ -71,6 +71,7 @@ tracks/1/keys = {
 }
 
 [node name="Sparks" type="CPUParticles"]
+cast_shadow = 0
 amount = 3
 lifetime = 0.15
 explosiveness = 1.0
@@ -78,7 +79,7 @@ randomness = 1.0
 lifetime_randomness = 1.0
 fixed_fps = 60
 local_coords = false
-mesh = SubResource( 3 )
+mesh = SubResource( 7 )
 direction = Vector3( 0, 0, 0 )
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )

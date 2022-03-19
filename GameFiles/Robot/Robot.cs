@@ -84,6 +84,7 @@ public class Robot : KinematicBody
 
     public void tick(float delta)
     {
+        if(IS_DEAD) return;
         base._PhysicsProcess(delta);
 
         for(int i = 0; i < Mathf.Max(CLOCKSPEED,1); i++ )
@@ -102,6 +103,12 @@ public class Robot : KinematicBody
     public void recieveDamage(int damage){
         HealthPoints -= damage;
         hpHud.updateData(HealthPoints);
-        if(HealthPoints<=0) QueueFree();
+        if(HealthPoints<=0) dieButLikeNotReally();
+    }
+
+    private Vector3 hell = new Vector3(0,-9999f,0);
+    public bool IS_DEAD { get => (Translation.y < -1) ;}
+    private void dieButLikeNotReally(){
+        Translation = hell;
     }
 }
