@@ -171,6 +171,11 @@ public class IDE : Node
             else
                 return String.Format("{0} : cannot be used on current state", args[0]);
         }
+        else if( Global.match(args[0], "(quit|exit|shutdown)")){
+            // change to start screen
+            GetTree().ChangeScene("res://GameFiles/Interface/StartScreen/StartScreen.tscn");
+            return "";
+        }
         else 
             return args[0] + " : command not found";
     }

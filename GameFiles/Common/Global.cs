@@ -5,8 +5,9 @@ public class Global : Node
 {
     private static byte curr_frame = 0; public static byte FRAME { get => curr_frame;}
     
-    private static SceneTree worldTree; public static SceneTree WORLDTREE { get => worldTree; }
-    public static Vector2 SCREENSIZE { get => WORLDTREE.Root.GetViewport().GetVisibleRect().Size; }
+    private static Global self;
+
+    public static Vector2 SCREENSIZE { get => self.GetTree().Root.GetViewport().GetVisibleRect().Size; }
 
 
     public static bool match(string line, string grammar, bool exact=true){
@@ -35,8 +36,8 @@ public class Global : Node
 
     public override void _Ready()
     {
-        worldTree = GetTree();
         random = new Random();
+        self = this;
     }
 
 

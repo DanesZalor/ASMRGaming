@@ -10,8 +10,8 @@ public class IDEControls : Control
         ideparent = GetParent<IDE>();
         
         // set position relative to window size
-        RectPosition = new Vector2(OS.WindowSize.x - (256 * 0.9f), 0);
-
+        RectPosition = new Vector2(GetViewportRect().Size.x - (256 * 0.9f), 0);
+        
         buttons = new TextureButton[3]{
             GetNode<TextureButton>("PlayPause"),
             GetNode<TextureButton>("Stop"),
