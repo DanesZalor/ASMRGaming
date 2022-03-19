@@ -11,7 +11,7 @@
 size = Vector2( 100, 100 )
 
 [sub_resource type="SpatialMaterial" id=2]
-albedo_color = Color( 0.196078, 0.215686, 0.223529, 1 )
+albedo_color = Color( 0.219608, 0.227451, 0.227451, 1 )
 albedo_texture = ExtResource( 2 )
 uv1_scale = Vector3( 10, 10, 10 )
 
@@ -35,14 +35,10 @@ margin_bottom = 410.0
 [node name="EnvironmentStuff" type="Node" parent="."]
 
 [node name="Plane" type="MeshInstance" parent="EnvironmentStuff"]
+cast_shadow = 0
 mesh = SubResource( 11 )
 skeleton = NodePath("../..")
 material/0 = SubResource( 2 )
-
-[node name="DirectionalLight" type="DirectionalLight" parent="EnvironmentStuff/Plane"]
-transform = Transform( 0.604182, -0.654496, 0.454531, 0, 0.570413, 0.821358, -0.796846, -0.49625, 0.344633, 0, 4.75649, 0 )
-light_energy = 2.0
-shadow_enabled = true
 
 [node name="StaticBody" type="StaticBody" parent="EnvironmentStuff/Plane"]
 
@@ -59,6 +55,11 @@ current = true
 size = 30.0
 near = 0.01
 far = 150.0
+
+[node name="DirectionalLight" type="DirectionalLight" parent="EnvironmentStuff"]
+transform = Transform( 0.604182, -0.654496, 0.454531, 0, 0.570413, 0.821358, -0.796846, -0.49625, 0.344633, 0, 4.75649, 0 )
+light_energy = 2.0
+shadow_enabled = true
 
 [node name="Robots" type="Node" parent="."]
 script = ExtResource( 5 )
