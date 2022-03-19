@@ -49,6 +49,7 @@ label
 mov a, [10]"
 syntax_highlighting = true
 show_line_numbers = true
+draw_tabs = true
 highlight_all_occurrences = true
 override_selected_font_color = true
 smooth_scrolling = true
@@ -99,11 +100,11 @@ custom_colors/font_color = Color( 0.435294, 0.435294, 0.435294, 1 )
 custom_fonts/font = SubResource( 10 )
 text = "×"
 
-[node name="TextureButton" type="TextureButton" parent="ExitButton"]
+[node name="ExitButton" type="TextureButton" parent="ExitButton"]
 margin_right = 28.0
 margin_bottom = 28.0
 
 [connection signal="focus_entered" from="TextEdit" to="." method="_on_TextEdit_focus_entered"]
 [connection signal="mouse_entered" from="TitleBar" to="." method="_on_TitleBarMouseEnterOrExit" binds= [ true ]]
 [connection signal="mouse_exited" from="TitleBar" to="." method="_on_TitleBarMouseEnterOrExit" binds= [ false ]]
-[connection signal="pressed" from="ExitButton/TextureButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="ExitButton/ExitButton" to="." method="onExitBtnPressed"]

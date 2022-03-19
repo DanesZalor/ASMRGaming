@@ -28,6 +28,13 @@ public class ASMRTextEditor : ColorRect
         ready = true;     
         
         textBox.GrabFocus();
+        /*random window placing*/{
+            Vector2 windowSize = Global.SCREENSIZE;
+            int offset = (20*parent.GetChildCount());
+            RectPosition = new Vector2(
+                windowSize.x - (430 + offset), 10 + offset
+            );
+        }
     }
 
     public void setFileName(string s){
@@ -57,9 +64,20 @@ public class ASMRTextEditor : ColorRect
                 Mathf.Clamp(RectPosition.y, 0, screenSize.y - RectSize.y)
             );
         }
+
+        else if((@event is InputEventKey) && (@event as InputEventKey).Pressed && textBox.HasFocus()){
+            // puts an * if the text has changes unsaved
+            if(Input.IsActionJustPressed("save")){
+                IDE.SaveFile.DATA[fileName] = textBox.Text;
+                IDE.SaveFile.Save();
+                titleLabel.Text = "Textpad - " + fileName;
+            }else{
+                titleLabel.Text = "Textpad - " + fileName + (!IDE.SaveFile.DATA[fileName].Equals(textBox.Text)?"*":"");
+            }
+        }
     }
 
-    /*Signal - Exit button*/ public void _on_TextureButton_pressed(){
+    /*Signal - Exit button*/ public void onExitBtnPressed(){
         IDE.SaveFile.DATA[fileName] = textBox.Text;
         IDE.SaveFile.Save();
         QueueFree();
