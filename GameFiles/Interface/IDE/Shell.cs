@@ -58,7 +58,8 @@ public class Shell{
             
             if(!keyFileExists(args[i]))
                 s += String.Format("edit: \'{0}\': no such file",args[i]);
-            openTextEditor(args[i]);
+            else
+                openTextEditor(args[i]);
         }
         return s;
     }
