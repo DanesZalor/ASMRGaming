@@ -7,13 +7,14 @@ public class Car : Peripheral
     public override void _Ready()
     {
         ram = new byte[2]{127,127};
+        
         base._Ready();
+        
         wheels = new Spatial[3]{
             GetNode<Spatial>("MainMesh/WheelRear"),
             GetNode<Spatial>("MainMesh/WheelFrontL"),
             GetNode<Spatial>("MainMesh/WheelFrontR"),
         };
-        
     }
 
     float accel, steering;
@@ -30,7 +31,6 @@ public class Car : Peripheral
 
     public override void tickPresentational(float delta)
     {
-        
         for(int i = 0; i<3; i++){
             // wheel spinning effect
             wheels[i].Rotation += Vector3.Back * accel * 0.3f;
@@ -39,6 +39,5 @@ public class Car : Peripheral
             if(i>0)
                 wheels[i].Rotation = Vector3.Down * steering * 0.35f;
         }
-
     }
 }

@@ -40,8 +40,11 @@ public class Chopper : Peripheral
 
         if(Global.FRAME%2==0 && bodiesInRange.Count>0){ // inflict damage
             for(int i = 0; i < bodiesInRange.Count<Robot>(); i++){
+                
                 if(bodiesInRange[i]!=null &&rotvel>0)
-                    bodiesInRange[i].recieveDamage(2);
+                    sparkParticles.playImpact(impactPoint, bodiesInRange[i], 2);
+                    //bodiesInRange[i].recieveDamage(2);
+
                 else // simulate area entered/exit to refresh the bodies array
                     hitAreabodyEnteredExit(null);
             }
@@ -51,11 +54,6 @@ public class Chopper : Peripheral
     public override void tickPresentational(float delta)
     {
         blades.Rotation += new Vector3(0,0.2f,0) * rotvel;
-        
-        if(Global.FRAME%2==0 && rotvel>0){
-            sparkParticles.Emitting = bodiesInRange.Count>0;
-            sparkParticles.Translation = impactPoint;
-        }
     }
 
 }

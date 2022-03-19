@@ -3,7 +3,7 @@ using System;
 
 public class HPHud : ColorRect
 {
-    [Export] public int currentHP = 255;
+    [Export] public int currentHP = Robot.MAXHP;
     [Export] public string name = "name"; 
 
     private ColorRect hpbar;
@@ -21,7 +21,7 @@ public class HPHud : ColorRect
         if(n.Length>0) name = n;
         
         nameTag.Text = name;
-        hpbar.RectSize = new Vector2( ( (float)currentHP/255f)*360, 30 );
+        hpbar.RectSize = new Vector2( ( (float)currentHP/(Robot.MAXHP))*360, 30 );
     }
 
 

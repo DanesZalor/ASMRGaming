@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/metalhitsound.ogg-2abcb1ad2fa0a70d3993e69ebafde472.oggstr"
+
+[deps]
+
+source_file="res://GameFiles/Robot/Peripherals/Actuator_Combat/metalhitsound.ogg"
+dest_files=[ "res://.import/metalhitsound.ogg-2abcb1ad2fa0a70d3993e69ebafde472.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

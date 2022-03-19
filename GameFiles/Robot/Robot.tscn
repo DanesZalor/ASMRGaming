@@ -41,7 +41,7 @@ billboard = 1
 texture = SubResource( 6 )
 
 [node name="HPHUD" type="Viewport" parent="Sprite3D"]
-size = Vector2( 300, 300 )
+size = Vector2( 360, 240 )
 transparent_bg = true
 
 [node name="HPBar" parent="Sprite3D/HPHUD" instance=ExtResource( 2 )]

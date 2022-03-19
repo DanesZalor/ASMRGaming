@@ -41,7 +41,7 @@ surfaces/0 = {
 }
 
 [sub_resource type="CylinderShape" id=16]
-radius = 3.5
+radius = 3.9
 height = 0.3
 
 [node name="ChopperPeripheral" type="Spatial"]
@@ -67,7 +67,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
 shape = SubResource( 16 )
 
 [node name="Sparks" parent="HitScan" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+visible = false
 
 [connection signal="body_entered" from="HitScan/Area" to="." method="hitAreabodyEnteredExit"]
 [connection signal="body_exited" from="HitScan/Area" to="." method="hitAreabodyEnteredExit"]

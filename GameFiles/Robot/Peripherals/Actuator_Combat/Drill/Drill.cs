@@ -70,16 +70,11 @@ public class Drill : Peripheral
 
             Godot.Object hitbody = hitbox.COLLIDER;
             if(isEnemy((Node)hitbody))
-                (hitbody as Robot).recieveDamage(5);
+                sparkParticles.playImpact(hitbox.COLLISIONPOINT, (hitbody as Robot), 3);
         }
     }
     public override void tickPresentational(float delta){
         drillShaft.Rotation += new Vector3(0.2f,0,0) * rotvel;
-        
-        if(Global.FRAME%2==0){
-            sparkParticles.Emitting = hitbox.COLLIDING;
-            sparkParticles.Translation = hitbox.COLLISIONPOINT;
-        }
     }
     
 }

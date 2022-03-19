@@ -59,4 +59,5 @@ enabled = true
 cast_to = Vector3( 0, 0, 4.5 )
 
 [node name="Sparks" parent="HitScan" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+visible = false
+atkSpeed = 1.5
