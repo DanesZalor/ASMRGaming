@@ -4,6 +4,6 @@
 font_path = "res://GameFiles/Common/Cascadia.ttf"
 
 [resource]
-size = 18
+size = 14
 use_filter = true
 font_data = SubResource( 1 )

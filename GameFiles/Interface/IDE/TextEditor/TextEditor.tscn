@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://GameFiles/Common/Cascadia.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://GameFiles/Common/CascadiaFont.tres" type="DynamicFont" id=2]
@@ -13,14 +13,6 @@ size = 14
 use_filter = true
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFontData" id=1]
-font_path = "res://GameFiles/Common/Cascadia.ttf"
-
-[sub_resource type="DynamicFont" id=10]
-size = 32
-use_filter = true
-font_data = SubResource( 1 )
-
 [node name="TextEditor" type="ColorRect"]
 margin_right = 420.0
 margin_bottom = 420.0
@@ -29,9 +21,9 @@ script = ExtResource( 3 )
 
 [node name="TextEdit" type="TextEdit" parent="."]
 margin_left = 3.0
-margin_top = 40.0
+margin_top = 34.0
 margin_right = 417.0
-margin_bottom = 416.0
+margin_bottom = 417.0
 theme = SubResource( 9 )
 custom_colors/symbol_color = Color( 0, 0, 0, 1 )
 custom_colors/selection_color = Color( 0, 0.0745098, 0.396078, 1 )
@@ -59,7 +51,7 @@ wrap_enabled = true
 margin_left = 3.0
 margin_top = 3.0
 margin_right = 417.0
-margin_bottom = 37.0
+margin_bottom = 31.0
 color = Color( 0, 0, 0.501961, 1 )
 
 [node name="Label" type="Label" parent="TitleBar"]
@@ -71,10 +63,10 @@ custom_fonts/font = ExtResource( 2 )
 text = "Textpad - Filename.asmr"
 
 [node name="ExitButton" type="ColorRect" parent="."]
-margin_left = 386.0
-margin_top = 6.261
-margin_right = 414.0
-margin_bottom = 34.261
+margin_left = 390.0
+margin_top = 3.0
+margin_right = 418.0
+margin_bottom = 31.0
 
 [node name="ExitButton2" type="ColorRect" parent="ExitButton"]
 margin_left = 1.0
@@ -92,13 +84,14 @@ mouse_filter = 2
 color = Color( 0.823529, 0.823529, 0.823529, 1 )
 
 [node name="Label" type="Label" parent="ExitButton"]
-margin_left = 5.24408
-margin_top = -5.99323
-margin_right = 33.2441
-margin_bottom = 33.0068
+margin_left = 5.0
+margin_right = 15.0
+margin_bottom = 14.0
+rect_scale = Vector2( 2, 2 )
 custom_colors/font_color = Color( 0.435294, 0.435294, 0.435294, 1 )
-custom_fonts/font = SubResource( 10 )
 text = "×"
+align = 1
+valign = 1
 
 [node name="ExitButton" type="TextureButton" parent="ExitButton"]
 margin_right = 28.0

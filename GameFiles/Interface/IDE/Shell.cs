@@ -85,12 +85,12 @@ public class Shell{
 
         const string shellhelp = @"ASMR Shell Commands
  ls
- touch (args){1,}   creates a file
- cat (args){1,}     concatenates files and prints
- rm (args){1,}      removes existing files
- mv <file> <str>    moves (rename) a file
- cp <file> <str>    copies a file 
- edit <file>        opens an existing file in the text editor
+ touch (args){1,}   [i]creates a file[/i]
+ cat (args){1,}     [i]concatenates files and prints[/i]
+ rm (args){1,}      [i]removes existing files[/i]
+ mv <file> <str>    [i]moves (rename) a file[/i]
+ cp <file> <str>    [i]copies a file[/i] 
+ edit <file>        [i]opens a file in text editor[/i]
 ";
         if(args[0].Equals("help")) return shellhelp;
         else if(args[0].Equals("ls")){
