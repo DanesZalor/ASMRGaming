@@ -56,10 +56,8 @@ public class Shell{
         string s = "";
         for(int i=1; i< args.Length; i++){
             
-            if(!keyFileExists(args[i])){
-                create_KeyFile(args[i]);
-                s += String.Format("edit: \'{0}\': created since no such file existed\n",args[i]);
-            }
+            if(!keyFileExists(args[i]))
+                s += String.Format("edit: \'{0}\': no such file",args[i]);
             openTextEditor(args[i]);
         }
         return s;
