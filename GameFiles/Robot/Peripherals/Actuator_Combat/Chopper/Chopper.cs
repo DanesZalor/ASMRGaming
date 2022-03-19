@@ -41,13 +41,15 @@ public class Chopper : Peripheral
         if(Global.FRAME%2==0 && bodiesInRange.Count>0){ // inflict damage
             for(int i = 0; i < bodiesInRange.Count<Robot>(); i++){
                 
-                if(bodiesInRange[i]!=null &&rotvel>0)
-                    sparkParticles.playImpact(impactPoint, bodiesInRange[i], 2);
+                if( !(bodiesInRange[i]!=null &&rotvel>0))
+                    bodiesInRange.Remove(bodiesInRange[i]);
                     //bodiesInRange[i].recieveDamage(2);
 
                 else // simulate area entered/exit to refresh the bodies array
                     hitAreabodyEnteredExit(null);
             }
+
+            sparkParticles.playImpact(impactPoint, bodiesInRange, 2);
         }
     }
 

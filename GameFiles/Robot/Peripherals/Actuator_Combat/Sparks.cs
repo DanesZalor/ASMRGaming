@@ -7,20 +7,31 @@ public class Sparks : CPUParticles
     public AnimationPlayer animationPlayer;
     public override void _Ready()
     {
+        Emitting = false;
         Visible = true;
-        SetAsToplevel(true);       
+        SetAsToplevel(true);   
+            
         animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         animationPlayer.PlaybackSpeed = atkSpeed;
         SpeedScale = atkSpeed;
-        Emitting = false;
+        
     }
 
-    public void playImpact(Vector3 point, Robot damageReciever, int damage=1){
+    public void playImpact(Vector3 point, Godot.Collections.Array<Robot> damageRecievers, int damage=1){
         
         if(animationPlayer.IsPlaying()) return;
         
         Translation = point;
         animationPlayer.Play("Emit");
-        damageReciever.recieveDamage(damage);
+        
+        foreach(Robot rbt in damageRecievers)
+            rbt.recieveDamage(damage);
+    }
+
+    public void playImpact(Vector3 point, Robot damageReciever, int damage=1){
+        playImpact(point, 
+            new Godot.Collections.Array<Robot>(new Robot[1]{damageReciever}),
+            damage
+        );
     }
 }
