@@ -21,10 +21,9 @@ public class ASMRTextEditor : ColorRect
             textBox.Text = (IDE.SaveFile.DATA[fileName] as String);
             titleLabel.Text = "Textpad - " + fileName;
         }
-        else{
-            GD.Print(fileName + " not found");
-            QueueFree();
-        }
+        else
+            throw new Exception(fileName + " not found");
+        
         ready = true;     
         
         textBox.GrabFocus();
