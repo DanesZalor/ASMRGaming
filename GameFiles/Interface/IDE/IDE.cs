@@ -14,7 +14,7 @@ public class IDE : Node
         STATE targetState = STATE.SETUP;
         if( args[0].Equals("play") ) targetState = STATE.PLAYING;
         else if( args[0].Equals("pause") ) targetState = STATE.PAUSED;
-        else if( args[0].Equals("(reset|setup)") ) targetState = STATE.SETUP;
+        else if( args[0].Equals("(reset|setup|stop)") ) targetState = STATE.SETUP;
 
         //GD.Print(CurrentState+" -> "+targetState);
 
@@ -155,7 +155,7 @@ public class IDE : Node
         else if( Global.match(args[0], "(ls|touch|cat|edit|rm|mv|cp|help)") )
             return shell.interpretCommand(args);
         
-        else if( Global.match(args[0], "(play|pause|(reset|setup))"))
+        else if( Global.match(args[0], "(play|pause|(reset|setup|stop))"))
             return StateCommand(args);
 
         else if( Global.match(args[0],"(bot|asm)") ){
