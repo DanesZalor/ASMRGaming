@@ -52,19 +52,6 @@ align = 1
 valign = 1
 autowrap = true
 
-[node name="Researchers" type="Label" parent="AboutScreen"]
-visible = false
-modulate = Color( 0, 0, 0, 1 )
-margin_top = 475.0
-margin_right = 2130.0
-margin_bottom = 552.0
-rect_scale = Vector2( 0.6, 0.6 )
-custom_fonts/font = ExtResource( 4 )
-text = "Cuenca, Francis R.   |   Dolor, Daniel James Z.   |   Gonzaga, Jose Miguel D.   |   Sulay, Fregilu M."
-align = 1
-valign = 1
-autowrap = true
-
 [node name="Buttons" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
