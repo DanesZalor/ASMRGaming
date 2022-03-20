@@ -10,10 +10,8 @@
 [ext_resource path="res://GameFiles/Interface/IDE/TextEditor/WindowsHandler.cs" type="Script" id=8]
 
 [sub_resource type="SpatialMaterial" id=16]
-flags_vertex_lighting = true
-vertex_color_use_as_albedo = true
 params_diffuse_mode = 4
-params_specular_mode = 4
+params_specular_mode = 3
 albedo_color = Color( 0.611765, 0.611765, 0.611765, 1 )
 albedo_texture = ExtResource( 3 )
 

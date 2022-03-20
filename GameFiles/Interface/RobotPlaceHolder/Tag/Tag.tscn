@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://GameFiles/Common/Cascadia.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://GameFiles/Common/Fonts/Cascadia.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://GameFiles/Interface/RobotPlaceHolder/Tag/Tag.cs" type="Script" id=2]
 
 [sub_resource type="DynamicFont" id=1]
