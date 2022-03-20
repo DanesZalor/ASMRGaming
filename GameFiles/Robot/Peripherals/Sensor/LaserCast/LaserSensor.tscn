@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://GameFiles/Robot/Peripherals/GreenPerpiheral.tres" type="Material" id=1]
 [ext_resource path="res://GameFiles/Robot/Peripherals/Sensor/LaserCast/LaserSensor.cs" type="Script" id=2]
-[ext_resource path="res://GameFiles/Robot/Peripherals/Sensor/LaserCast/LaserMat.tres" type="Material" id=4]
-[ext_resource path="res://GameFiles/Common/UnshadedCommon.shader" type="Shader" id=5]
+[ext_resource path="res://GameFiles/Common/Holo.shader" type="Shader" id=3]
+[ext_resource path="res://GameFiles/Robot/Peripherals/Sensor/Camera/SpotRed.tres" type="Material" id=4]
+[ext_resource path="res://GameFiles/Robot/Peripherals/Sensor/Camera/SpotBlue.tres" type="Material" id=5]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "LaserMesh_Cube023"
@@ -20,27 +21,15 @@ surfaces/0 = {
 }
 
 [sub_resource type="CubeMesh" id=7]
-flip_faces = true
 size = Vector3( 0.15, 0.1, 0.1 )
 
 [sub_resource type="ShaderMaterial" id=10]
-shader = ExtResource( 5 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/offset = null
+shader = ExtResource( 3 )
+shader_param/albedo = Color( 1, 1, 1, 0.709804 )
 
 [sub_resource type="CubeMesh" id=2]
 flip_faces = true
 size = Vector3( 0.15, 0.2, 0.2 )
-
-[sub_resource type="ShaderMaterial" id=9]
-shader = ExtResource( 5 )
-shader_param/albedo = Color( 0, 0.623529, 1, 1 )
-shader_param/offset = null
-
-[sub_resource type="ShaderMaterial" id=8]
-shader = ExtResource( 5 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/offset = null
 
 [node name="LaserPeripheral" type="Spatial"]
 script = ExtResource( 2 )
@@ -77,7 +66,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19209e-07, 0 )
 cast_shadow = 0
 mesh = SubResource( 2 )
 skeleton = NodePath("../../..")
-material/0 = SubResource( 9 )
+material/0 = ExtResource( 5 )
 
 [node name="RCR" type="RayCast" parent="MainMesh"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.375, 1.975, -0.5 )
@@ -90,20 +79,20 @@ transform = Transform( 170, 0, 0, 0, 1, 0, 0, 0, 1, -12.75, 0, 0 )
 [node name="W" type="MeshInstance" parent="MainMesh/RCR/LaserMesh"]
 cast_shadow = 0
 mesh = SubResource( 7 )
-skeleton = NodePath("../../../RCL/LaserMesh")
-material/0 = SubResource( 8 )
+skeleton = NodePath("../../../RCL")
+material/0 = SubResource( 10 )
 
 [node name="Red" type="MeshInstance" parent="MainMesh/RCR/LaserMesh/W"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19209e-07, 0 )
 visible = false
 cast_shadow = 0
 mesh = SubResource( 2 )
-skeleton = NodePath("../../../../RCL/LaserMesh")
+skeleton = NodePath("../../../../RCL")
 material/0 = ExtResource( 4 )
 
 [node name="Blue" type="MeshInstance" parent="MainMesh/RCR/LaserMesh/W"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19209e-07, 0 )
 cast_shadow = 0
 mesh = SubResource( 2 )
-skeleton = NodePath("../../../../RCL/LaserMesh")
-material/0 = SubResource( 9 )
+skeleton = NodePath("../../../../RCL")
+material/0 = ExtResource( 5 )
