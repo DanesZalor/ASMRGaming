@@ -38,15 +38,11 @@ public class Chopper : Peripheral
     {
         rotvel = Mathf.MoveToward(rotvel, (ram[0]==0 ? 0f : 1f), delta );
 
-        if(Global.FRAME%2==0 && bodiesInRange.Count>0){ // inflict damage
+        if(Global.FRAME%2==0 && bodiesInRange.Count>0 && ram[0]>0){ // inflict damage
             for(int i = 0; i < bodiesInRange.Count<Robot>(); i++){
                 
-                if( !(bodiesInRange[i]!=null &&rotvel>0))
+                if( bodiesInRange[i]==null )
                     bodiesInRange.Remove(bodiesInRange[i]);
-                    //bodiesInRange[i].recieveDamage(2);
-
-                else // simulate area entered/exit to refresh the bodies array
-                    hitAreabodyEnteredExit(null);
             }
 
             sparkParticles.playImpact(impactPoint, bodiesInRange, 2);
