@@ -9,6 +9,7 @@ public class RobotPlaceHolder : Spatial
         GD.Load<ShaderMaterial>("res://GameFiles/Interface/RobotPlaceHolder/BlueTeam.tres")
     };
 
+
     [Export(PropertyHint.Enum, "Tank,Car")] public string steering_peripheral = "Tank";
     [Export(PropertyHint.Enum, "Drill,Chopper")] public string combat_peripheral = "Drill";
     [Export(PropertyHint.Enum, "Laser,Camera")] public string sensor_peripheral = "Laser";
@@ -40,9 +41,8 @@ public class RobotPlaceHolder : Spatial
 
         teamIdx = (byte) Mathf.Clamp(teamIdx,0,1);
         
-        foreach(MeshInstance m in peripherals)
-            m.MaterialOverride = preloads[teamIdx] as Material;
-
+        foreach(MeshInstance m in peripherals) 
+            m.SetSurfaceMaterial(0, preloads[teamIdx]);
     }
 
     public void updatePeripherals(){

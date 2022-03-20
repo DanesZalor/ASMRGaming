@@ -1,9 +1,7 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
 
-[ext_resource path="res://GameFiles/Common/Grid.jpg" type="Texture" id=1]
-[ext_resource path="res://GameFiles/Robot/Peripherals/Sensor/Camera/SplotLight.shader" type="Shader" id=2]
+[ext_resource path="res://GameFiles/Common/Holo.shader" type="Shader" id=1]
 
 [resource]
-shader = ExtResource( 2 )
-shader_param/albedo = Color( 0, 0.309804, 0.447059, 1 )
-shader_param/gridtex = ExtResource( 1 )
+shader = ExtResource( 1 )
+shader_param/albedo = Color( 0, 0.505882, 1, 0.364706 )
