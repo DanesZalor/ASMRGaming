@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://GameFiles/Robot/Peripherals/GreenPerpiheral.tres" type="Material" id=1]
 [ext_resource path="res://GameFiles/Robot/Peripherals/Sensor/Camera/CamSensor.cs" type="Script" id=2]
@@ -70,61 +70,6 @@ shader_param/albedo = null
 shader_param/offset = null
 shader_param/uvmul = Vector2( 1, 1 )
 
-[sub_resource type="Animation" id=13]
-resource_name = "Loop"
-length = 10.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("../MainMesh/Spotlight/R:material_override:shader_param/uvoffset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 10 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 2, 0.9 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("../MainMesh/Spotlight/R:material_override:shader_param/uvmul")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 8, 0.2 ) ]
-}
-
-[sub_resource type="Animation" id=14]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("../MainMesh/Spotlight/R:material_override:shader_param/uvoffset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("../MainMesh/Spotlight/R:material_override:shader_param/uvmul")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 8, 0.2 ) ]
-}
-
 [node name="CamPeripheral" type="Spatial"]
 script = ExtResource( 2 )
 
@@ -177,11 +122,6 @@ texture = ExtResource( 7 )
 cast_shadow = 0
 mesh = ExtResource( 9 )
 material/0 = SubResource( 12 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="TargetMarker"]
-playback_speed = 1.5
-anims/Loop = SubResource( 13 )
-anims/RESET = SubResource( 14 )
 
 [connection signal="body_entered" from="RadiusArea" to="." method="_on_RadiusArea_bodyEnteredOrExit"]
 [connection signal="body_exited" from="RadiusArea" to="." method="_on_RadiusArea_bodyEnteredOrExit"]
