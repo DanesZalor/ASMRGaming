@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://GameFiles/Interface/IDE/InterfaceConsole.cs" type="Script" id=1]
-[ext_resource path="res://GameFiles/Common/CascadiaFont.tres" type="DynamicFont" id=2]
-[ext_resource path="res://GameFiles/Common/Cascadia.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://GameFiles/Common/ConsoleFont.tres" type="DynamicFont" id=3]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://GameFiles/Common/Cascadia.ttf"
@@ -10,24 +9,6 @@ font_path = "res://GameFiles/Common/Cascadia.ttf"
 [sub_resource type="DynamicFont" id=12]
 use_filter = true
 font_data = SubResource( 1 )
-
-[sub_resource type="DynamicFont" id=6]
-size = 14
-use_filter = true
-font_data = ExtResource( 3 )
-
-[sub_resource type="DynamicFont" id=14]
-size = 14
-outline_size = 1
-outline_color = Color( 1, 1, 1, 0.466667 )
-use_mipmaps = true
-use_filter = true
-font_data = ExtResource( 3 )
-
-[sub_resource type="DynamicFont" id=5]
-size = 14
-use_filter = true
-font_data = ExtResource( 3 )
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.172549, 0.164706, 0.196078, 0 )
@@ -77,9 +58,9 @@ margin_top = 34.0
 margin_right = 475.0
 margin_bottom = 368.0
 focus_mode = 2
-custom_fonts/italics_font = SubResource( 6 )
-custom_fonts/bold_font = SubResource( 14 )
-custom_fonts/normal_font = SubResource( 5 )
+custom_fonts/italics_font = ExtResource( 3 )
+custom_fonts/bold_font = ExtResource( 3 )
+custom_fonts/normal_font = ExtResource( 3 )
 bbcode_enabled = true
 scroll_following = true
 selection_enabled = true
@@ -93,7 +74,7 @@ margin_top = 362.0
 margin_right = 475.0
 margin_bottom = 402.0
 theme = SubResource( 4 )
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 3 )
 placeholder_text = "asmr shell"
 placeholder_alpha = 0.3
 caret_blink = true
@@ -109,7 +90,7 @@ margin_left = -26.0
 margin_top = 2.0
 margin_right = 10.0
 margin_bottom = 38.0
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 3 )
 text = ">>"
 valign = 1
 
