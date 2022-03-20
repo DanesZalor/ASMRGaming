@@ -10,7 +10,11 @@
 [ext_resource path="res://GameFiles/Interface/IDE/TextEditor/WindowsHandler.cs" type="Script" id=8]
 
 [sub_resource type="SpatialMaterial" id=16]
-albedo_color = Color( 0.352941, 0.352941, 0.352941, 1 )
+flags_vertex_lighting = true
+vertex_color_use_as_albedo = true
+params_diffuse_mode = 4
+params_specular_mode = 4
+albedo_color = Color( 0.611765, 0.611765, 0.611765, 1 )
 albedo_texture = ExtResource( 3 )
 
 [sub_resource type="BoxShape" id=15]
@@ -46,7 +50,6 @@ far = 150.0
 
 [node name="DirectionalLight" type="DirectionalLight" parent="EnvironmentStuff"]
 transform = Transform( 0.583595, -0.779828, 0.226461, 0.156374, 0.381581, 0.911012, -0.796846, -0.49625, 0.344633, 0, 4.75649, 0 )
-light_energy = 2.0
 shadow_enabled = true
 
 [node name="TableEnv" type="MeshInstance" parent="EnvironmentStuff"]
@@ -62,7 +65,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0 )
 shape = SubResource( 15 )
 
 [node name="TableEnv_SHADOWS" type="MeshInstance" parent="EnvironmentStuff/TableEnv"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 0 )
 cast_shadow = 3
 mesh = ExtResource( 2 )
 skeleton = NodePath("../../..")

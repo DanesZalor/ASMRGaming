@@ -113,18 +113,28 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+quality/filters/sharpen_intensity=0.5
 quality/driver/driver_name="GLES2"
 quality/driver/fallback_to_gles2=true
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
 quality/directional_shadow/size=2048
-quality/shadow_atlas/size=2048
+quality/shadow_atlas/size=256
+quality/shadow_atlas/size.mobile=256
+quality/shadow_atlas/cubemap_size=64
+quality/shadow_atlas/quadrant_0_subdiv=0
+quality/shadow_atlas/quadrant_1_subdiv=0
+quality/shadow_atlas/quadrant_2_subdiv=0
+quality/shadow_atlas/quadrant_3_subdiv=0
 quality/reflections/texture_array_reflections=false
 quality/reflections/high_quality_ggx=false
-quality/shading/force_vertex_shading.mobile=false
+quality/reflections/irradiance_max_size=32
+quality/shading/force_vertex_shading=true
 quality/shading/force_lambert_over_burley=true
 quality/shading/force_blinn_over_ggx=true
 quality/shading/use_physical_light_attenuation=true
-quality/filters/msaa=1
+quality/filters/use_nearest_mipmap_filter=true
+quality/reflections/atlas_size=1
 quality/filters/use_fxaa=true
 environment/default_environment="res://default_env.tres"
+quality/dynamic_fonts/use_oversampling=false

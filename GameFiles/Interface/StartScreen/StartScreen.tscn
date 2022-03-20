@@ -53,6 +53,7 @@ valign = 1
 autowrap = true
 
 [node name="Researchers" type="Label" parent="AboutScreen"]
+visible = false
 modulate = Color( 0, 0, 0, 1 )
 margin_top = 475.0
 margin_right = 2130.0
@@ -82,6 +83,17 @@ margin_left = 288.216
 margin_top = 576.0
 margin_right = 509.216
 margin_bottom = 655.0
+rect_scale = Vector2( 0.75, 0.75 )
 custom_fonts/font = ExtResource( 4 )
-text = "resolution"
+text = "1280x720"
+clip_text = true
+
+[node name="msaaBtn" type="OptionButton" parent="Buttons"]
+margin_left = 469.329
+margin_top = 576.0
+margin_right = 669.329
+margin_bottom = 655.0
+rect_scale = Vector2( 0.75, 0.75 )
+custom_fonts/font = ExtResource( 4 )
+text = "MSAA Off"
 clip_text = true
