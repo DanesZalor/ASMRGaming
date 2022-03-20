@@ -4,7 +4,7 @@ using System;
 public class Robot : KinematicBody
 {
     public static byte CLOCKSPEED = 5;
-    public static float SQUARELIMIT = 35;
+    public static float SQUARELIMIT = 25;
     public static class preloads{
         public static PackedScene[] ACTUATOR_MOVEMENT = new PackedScene[2]{
             GD.Load<PackedScene>("res://GameFiles/Robot/Peripherals/Actuator_Movement/Tank/Tank.tscn"),

@@ -312,8 +312,8 @@ Arguements:
                     Global.RandInt()%2==0?"Tank":"Car",
                     Global.RandInt()%2==0?"Chopper":"Drill",
                     Global.RandInt()%2==0?"Laser":"Camera",
-                    Convert.ToString(Global.RandInt(-30,30)),   // random x-coord
-                    Convert.ToString(Global.RandInt(-30,30)),   // random y-coord
+                    Convert.ToString(Global.RandInt((int)-Robot.SQUARELIMIT, (int)Robot.SQUARELIMIT)),   // random x-coord
+                    Convert.ToString(Global.RandInt((int)-Robot.SQUARELIMIT, (int)Robot.SQUARELIMIT)),   // random y-coord
                     Convert.ToString(Global.RandInt(0,60)*5),   // random rotation
                     Convert.ToString(Global.RandInt(0,2)),      // team
                 }: 

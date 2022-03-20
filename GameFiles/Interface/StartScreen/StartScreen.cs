@@ -3,6 +3,7 @@ using System;
 
 public class StartScreen : Control
 {
+    public static Vector2 UIScale = Vector2.One;
     private OptionButton resolutionButton;
     private Button playBtn;
     public override void _Ready()
@@ -28,6 +29,7 @@ public class StartScreen : Control
         
         GetTree().SetScreenStretch(SceneTree.StretchMode.Mode2d, SceneTree.StretchAspect.Keep, resolutions[id], 1f);
         RectScale = new Vector2(scales[id], scales[id]);
+        UIScale = RectScale;
     }
 
     public void playGame(){

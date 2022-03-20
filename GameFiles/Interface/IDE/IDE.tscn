@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://GameFiles/Interface/IDE/Console.tscn" type="PackedScene" id=1]
+[ext_resource path="res://GameFiles/Arena/TableEnv_SHADOWS.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://GameFiles/Arena/Table.png" type="Texture" id=3]
 [ext_resource path="res://GameFiles/Arena/TableEnv.obj" type="ArrayMesh" id=4]
 [ext_resource path="res://GameFiles/Interface/IDE/RobotsHolder.cs" type="Script" id=5]
@@ -8,17 +9,19 @@
 [ext_resource path="res://GameFiles/Interface/IDE/Controls/IDEControls.tscn" type="PackedScene" id=7]
 [ext_resource path="res://GameFiles/Interface/IDE/TextEditor/WindowsHandler.cs" type="Script" id=8]
 
-[sub_resource type="SpatialMaterial" id=14]
-albedo_color = Color( 0.376471, 0.376471, 0.376471, 1 )
+[sub_resource type="SpatialMaterial" id=16]
+albedo_color = Color( 0.352941, 0.352941, 0.352941, 1 )
 albedo_texture = ExtResource( 3 )
 
 [sub_resource type="BoxShape" id=15]
-extents = Vector3( 50, 1, 50 )
+extents = Vector3( 25.5, 1, 25.5 )
 
-[node name="InterfaceWorld" type="Node"]
+[node name="InterfaceWorld" type="Control"]
 script = ExtResource( 6 )
 
 [node name="IDEControls" parent="." instance=ExtResource( 7 )]
+margin_left = 1048.0
+margin_right = 1048.0
 
 [node name="WindowsHandler" type="Control" parent="."]
 script = ExtResource( 8 )
@@ -42,21 +45,28 @@ near = 0.01
 far = 150.0
 
 [node name="DirectionalLight" type="DirectionalLight" parent="EnvironmentStuff"]
-transform = Transform( 0.604182, -0.654496, 0.454531, 0, 0.570413, 0.821358, -0.796846, -0.49625, 0.344633, 0, 4.75649, 0 )
+transform = Transform( 0.583595, -0.779828, 0.226461, 0.156374, 0.381581, 0.911012, -0.796846, -0.49625, 0.344633, 0, 4.75649, 0 )
 light_energy = 2.0
 shadow_enabled = true
 
 [node name="TableEnv" type="MeshInstance" parent="EnvironmentStuff"]
-transform = Transform( 0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0 )
+cast_shadow = 0
 mesh = ExtResource( 4 )
 skeleton = NodePath("../..")
-material/0 = SubResource( 14 )
+material/0 = SubResource( 16 )
 
 [node name="StaticBody" type="StaticBody" parent="EnvironmentStuff/TableEnv"]
 
 [node name="CollisionShape" type="CollisionShape" parent="EnvironmentStuff/TableEnv/StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0 )
 shape = SubResource( 15 )
+
+[node name="TableEnv_SHADOWS" type="MeshInstance" parent="EnvironmentStuff/TableEnv"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 0 )
+cast_shadow = 3
+mesh = ExtResource( 2 )
+skeleton = NodePath("../../..")
+material/0 = null
 
 [node name="Robots" type="Node" parent="."]
 script = ExtResource( 5 )
