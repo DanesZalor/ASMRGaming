@@ -4,6 +4,7 @@ using System;
 public class Robot : KinematicBody
 {
     public static byte CLOCKSPEED = 5;
+    public static float SQUARELIMIT = 35;
     public static class preloads{
         public static PackedScene[] ACTUATOR_MOVEMENT = new PackedScene[2]{
             GD.Load<PackedScene>("res://GameFiles/Robot/Peripherals/Actuator_Movement/Tank/Tank.tscn"),
@@ -93,10 +94,10 @@ public class Robot : KinematicBody
         foreach(Peripheral p in peripherals)
                 p.tick(delta);
         
-        int squareLimit = 49;
+        
         Translation = new Vector3(
-            Mathf.Clamp(Translation.x, -squareLimit, squareLimit), 0,
-            Mathf.Clamp(Translation.z, -squareLimit, squareLimit)
+            Mathf.Clamp(Translation.x, -SQUARELIMIT, SQUARELIMIT), 0,
+            Mathf.Clamp(Translation.z, -SQUARELIMIT, SQUARELIMIT)
         );
     }
 

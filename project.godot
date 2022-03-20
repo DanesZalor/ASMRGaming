@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="ASMR Robotgame"
-run/main_scene="res://GameFiles/Interface/IDE/IDE.tscn"
+run/main_scene="res://GameFiles/Interface/StartScreen/StartScreen.tscn"
 boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
 config/icon="res://AssemblyRobotGaming.png"
 
