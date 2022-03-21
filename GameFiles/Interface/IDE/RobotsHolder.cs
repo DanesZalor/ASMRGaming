@@ -3,7 +3,7 @@ using System;
 
 public class RobotsHolder : Node
 {
-    static int MAXCHILD = 4; 
+    public static int MAXCHILD = 4; 
     private static PackedScene[] preloads = {
         GD.Load<PackedScene>("res://GameFiles/Interface/RobotPlaceHolder/RobotPlaceHolder.tscn"),
         GD.Load<PackedScene>("res://GameFiles/Robot/Robot.tscn")

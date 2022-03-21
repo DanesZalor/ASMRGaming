@@ -118,6 +118,12 @@ margin_right = 1230.0
 margin_bottom = 635.0
 color = Color( 0, 0, 0.501961, 1 )
 
+[node name="Pointer" type="ColorRect" parent="Menu/Content"]
+visible = false
+margin_left = 390.0
+margin_right = 590.0
+margin_bottom = 5.0
+
 [node name="Game" type="Control" parent="Menu/Content"]
 margin_right = 1200.0
 margin_bottom = 550.0
@@ -148,7 +154,7 @@ rect_scale = Vector2( 1.25, 1.25 )
 custom_fonts/font = ExtResource( 2 )
 text = "Clockspeed :
 
-Robot Starting HP:
+Robot Starting HP :
 
 Max Robots :"
 align = 2
@@ -190,9 +196,9 @@ __meta__ = {
 
 [node name="Parameters" type="Label" parent="Menu/Content/Settings"]
 modulate = Color( 0.815686, 0.815686, 0.815686, 1 )
-margin_left = 40.0
+margin_left = 145.0
 margin_top = 40.0
-margin_right = 204.0
+margin_right = 309.0
 margin_bottom = 378.0
 rect_scale = Vector2( 1.25, 1.25 )
 custom_fonts/font = ExtResource( 2 )
@@ -210,10 +216,10 @@ VSync :"
 align = 2
 
 [node name="Arguements" type="Label" parent="Menu/Content/Settings"]
-margin_left = 300.0
+margin_left = 389.5
 margin_top = 40.0
-margin_right = 450.0
-margin_bottom = 254.0
+margin_right = 539.5
+margin_bottom = 378.0
 rect_scale = Vector2( 1.25, 1.25 )
 custom_fonts/font = ExtResource( 2 )
 text = "1280x720

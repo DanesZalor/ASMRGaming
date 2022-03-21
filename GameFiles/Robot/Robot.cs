@@ -28,7 +28,7 @@ public class Robot : KinematicBody
     [Export(PropertyHint.Enum, "Laser,Camera")] public string Sensor_Device = "Laser";  
     [Export(PropertyHint.MultilineText)] public string program = "";
 
-    public const int MAXHP = 155;
+    public static int MAXHP = 155;
     private int HealthPoints = MAXHP; 
     public Transform initialTransform;
 

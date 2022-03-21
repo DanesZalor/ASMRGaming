@@ -10,6 +10,13 @@ public class Global : Node
     public static Vector2 SCREENSIZE { get => self.GetTree().Root.GetViewport().GetVisibleRect().Size; }
 
 
+    public static int ClampRound(int val, int min, int max){
+        
+        if(val<min) return max;
+        else if(val>max) return min;
+
+        return val;
+    }
     public static bool match(string line, string grammar, bool exact=true){
         return Assembler.Common.match(line,grammar,exact);
     }
@@ -38,6 +45,7 @@ public class Global : Node
     {
         random = new Random();
         self = this;
+        Engine.TargetFps = 30;
     }
 
 
