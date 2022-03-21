@@ -45,16 +45,29 @@ public class StartCLI : Control
                 Convert.ToString(RobotsHolder.MAXCHILD)
             );
         }
+        
         static void setResolution(int appendChoice){
-            
-            float ratio = Mathf.Clamp((controlparent.RectSize.x/1280f) , 1f, 1.5f );
-            ratio = Mathf.Clamp( ratio + appendChoice*0.05f, 1f, 1.5f );
 
-            controlparent.RectSize = new Vector2(1280,720) * ratio;
+            controlparent.RectSize = new Vector2(
+                Mathf.Clamp(controlparent.RectSize.x + (appendChoice * 320), 1280, 1920),
+                Mathf.Clamp(controlparent.RectSize.y + (appendChoice * 180), 720, 1080)
+            );
+            float ratio=1f; switch((int)controlparent.RectSize.x){
+                case 1280: ratio=1f; break;
+                case 1600: ratio=1.25f; break;
+                case 1920: ratio=1.5f; break;
+            } controlparent.RectScale = Vector2.One * ratio;
+
             Menu_Args[1].Text = editStringElement(
                 Menu_Args[1].Text, 0, 
-                Convert.ToString((int)controlparent.RectSize.x)+"x"+Convert.ToString((int)controlparent.RectSize.y)
+                Convert.ToString(controlparent.RectSize.x)+"x"+Convert.ToString(controlparent.RectSize.y)
             ); 
+            controlparent.GetTree().SetScreenStretch(
+                SceneTree.StretchMode.Mode2d,
+                SceneTree.StretchAspect.Keep, 
+                controlparent.RectSize, 1f);
+            
+            
         }
         static void setFullScreen(bool on){
             OS.WindowFullscreen = on;
@@ -63,7 +76,6 @@ public class StartCLI : Control
                 Menu_Args[1].Text, 1, OS.WindowFullscreen ? "ON" : "OFF"
             );
         }
-
         static void setMSAA( int appendChoice){
             int choice = Mathf.Clamp( 
                 (int)controlparent.GetViewport().Msaa + appendChoice, 
@@ -77,7 +89,6 @@ public class StartCLI : Control
                 Menu_Args[1].Text, 2, msaaStr[(int)controlparent.GetViewport().Msaa] 
             );
         }
-
         static void setFPS(int fps){
             Engine.TargetFps = Mathf.Clamp(fps, 30, 60);
 
@@ -120,6 +131,76 @@ public class StartCLI : Control
                 case 6: setShadows(!SHADOWS); break;
            }
         }
+
+        public static void LoadSettings(){
+            SettingsFile.Load();
+            string getData(string key, string fallback){
+                if(SettingsFile.DATA == null) throw new Exception("SettingsFile.JSON is null");
+                
+                if(SettingsFile.DATA.Contains(key)) return (SettingsFile.DATA[key] as string);
+                
+                SettingsFile.DATA[key] = fallback;
+                return fallback;
+
+            }
+
+            // load resolution
+            float resX = (float)Convert.ToInt32( getData("Resolution", "1280") );
+            controlparent.RectSize = new Vector2( resX, resX * 0.5625f );
+            setResolution(0);
+        
+            
+            setFullScreen( Convert.ToBoolean(getData("FullScreen", "false")) );
+            
+            controlparent.GetViewport().Msaa = (Viewport.MSAA)Convert.ToInt32(getData("MSAA", "0")); setMSAA(0);
+
+            setFPS(Convert.ToInt32(getData("FPS","60")));
+
+            setVsync( Convert.ToBoolean(getData("VSync", "false")) );
+
+            setShadows( Convert.ToBoolean(getData("Shadows","true")));
+
+        }
+
+        public static void SaveSettings(){
+            SettingsFile.DATA["Resolution"] = Convert.ToString(controlparent.RectSize.x);
+            SettingsFile.DATA["FullScreen"] = Convert.ToString(OS.WindowFullscreen);
+            SettingsFile.DATA["MSAA"] = Convert.ToString( (int)controlparent.GetViewport().Msaa );
+            SettingsFile.DATA["FPS"] = Convert.ToString( Engine.TargetFps );
+            SettingsFile.DATA["VSync"] = Convert.ToString( OS.VsyncEnabled );
+            SettingsFile.DATA["Shadows"] = Convert.ToString( SHADOWS );
+            SettingsFile.Save();
+        }
+
+        private static class SettingsFile{
+            public const string path = "user://GameSettings.json";
+            private static Godot.File file = new Godot.File();
+            private static Godot.Collections.Dictionary data;
+            public static Godot.Collections.Dictionary DATA { get => data; }
+
+            private static string Read(){
+                string r = "";
+                if(file.FileExists(path)){
+                    file.Open(path, Godot.File.ModeFlags.Read);
+                    r = file.GetAsText();
+                
+                }else file.Open(path, Godot.File.ModeFlags.Write);
+
+                file.Close(); return r;
+            }
+            private static void Write(string content){
+                file.Open(path, Godot.File.ModeFlags.Write);
+                file.StoreString(content);
+                file.Close();
+            }
+            public static void Load(){
+                Godot.JSONParseResult jparse = Godot.JSON.Parse(Read());
+                
+                if(jparse.Result == null) data = new Godot.Collections.Dictionary();
+                else data = jparse.Result as Godot.Collections.Dictionary;
+            }
+            public static void Save(){ Write(JSON.Print(data)); }
+        }
     }
 
     private AnimationPlayer animationPlayer;
@@ -128,6 +209,7 @@ public class StartCLI : Control
 
     public override void _Ready()
     {
+        
         animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 
         menuContent = new Control[3]{
@@ -141,6 +223,7 @@ public class StartCLI : Control
             GetNode<Label>("Menu/Content/Settings/Arguements"),
         };
         SETTINGS.controlparent = this;
+        SETTINGS.LoadSettings();
 
         headerPressed(0);
     }
@@ -208,12 +291,12 @@ public class StartCLI : Control
     }
 
     private void playGame(){
+        SETTINGS.SaveSettings();
         async void delayThenStart(){
+            GD.Print(String.Format( "Settings:\n Resolution: {0}x{1}\n MSAA: {2}\n FPS: {3}",
+                RectSize.x, RectSize.y, GetViewport().Msaa, Engine.TargetFps            
+            ));
             await ToSignal(GetTree().CreateTimer(1f), "timeout");
-            GetTree().SetScreenStretch(
-                SceneTree.StretchMode.Mode2d,
-                SceneTree.StretchAspect.Keep, 
-                RectSize, 1f);
             GetTree().ChangeScene("res://GameFiles/Interface/IDE/IDE.tscn");
         } delayThenStart();
     }

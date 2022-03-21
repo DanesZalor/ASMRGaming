@@ -12,7 +12,7 @@
 [sub_resource type="SpatialMaterial" id=16]
 params_diffuse_mode = 4
 params_specular_mode = 3
-albedo_color = Color( 0.529412, 0.529412, 0.529412, 1 )
+albedo_color = Color( 0.384314, 0.384314, 0.384314, 1 )
 albedo_texture = ExtResource( 3 )
 
 [sub_resource type="BoxShape" id=15]
@@ -47,8 +47,8 @@ near = 0.01
 far = 150.0
 
 [node name="DirectionalLight" type="DirectionalLight" parent="EnvironmentStuff"]
-transform = Transform( 0.583595, -0.779828, 0.226461, 0.156374, 0.381581, 0.911012, -0.796846, -0.49625, 0.344633, 0, 4.75649, 0 )
-light_energy = 0.4
+transform = Transform( 0.583371, -0.781114, 0.222573, 0.0558245, 0.311948, 0.948458, -0.810285, -0.540878, 0.225587, 0, 4.75649, 0 )
+light_energy = 0.5
 shadow_enabled = true
 
 [node name="TableEnv" type="MeshInstance" parent="EnvironmentStuff"]
