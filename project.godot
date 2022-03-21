@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="ASMR Robotgame"
-run/main_scene="res://GameFiles/Interface/StartScreen/StartScreen.tscn"
+run/main_scene="res://GameFiles/Interface/StartCLI/StartCLI.tscn"
 boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
 config/icon="res://AssemblyRobotGaming.png"
 
@@ -22,6 +22,7 @@ Global="*res://GameFiles/Common/Global.cs"
 [debug]
 
 settings/fps/force_fps=60
+settings/stdout/print_fps=true
 
 [display]
 
@@ -138,7 +139,6 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-quality/filters/sharpen_intensity=0.5
 quality/driver/driver_name="GLES2"
 quality/driver/fallback_to_gles2=true
 vram_compression/import_etc=true
@@ -154,6 +154,7 @@ quality/shadow_atlas/quadrant_3_subdiv=0
 quality/reflections/texture_array_reflections=false
 quality/reflections/high_quality_ggx=false
 quality/reflections/irradiance_max_size=32
+quality/filters/anisotropic_filter_level=1
 quality/filters/use_nearest_mipmap_filter=true
 environment/default_clear_color=Color( 0, 0, 0, 1 )
 quality/reflections/atlas_size=1
