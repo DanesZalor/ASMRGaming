@@ -148,21 +148,21 @@ rect_scale = Vector2( 1.25, 1.25 )
 custom_fonts/font = ExtResource( 2 )
 text = "Clockspeed :
 
-Process Speed :
+Robot Starting HP:
 
 Max Robots :"
 align = 2
 
 [node name="Arguements" type="Label" parent="Menu/Content/Game"]
-margin_left = 370.0
+margin_left = 389.5
 margin_top = 40.0
-margin_right = 678.0
+margin_right = 697.5
 margin_bottom = 192.0
 rect_scale = Vector2( 1.25, 1.25 )
 custom_fonts/font = ExtResource( 2 )
 text = "60Hz
 
-1x
+155
 
 4"
 

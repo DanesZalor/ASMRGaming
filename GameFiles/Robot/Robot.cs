@@ -4,7 +4,6 @@ using System;
 public class Robot : KinematicBody
 {
     public static byte CLOCKSPEED = 5;
-    public static byte PROCESS_SPEED = 1;
     public static float SQUARELIMIT = 25;
     public static class preloads{
         public static PackedScene[] ACTUATOR_MOVEMENT = new PackedScene[2]{
@@ -92,10 +91,9 @@ public class Robot : KinematicBody
         for(int i = 0; i < Mathf.Max(CLOCKSPEED,1); i++ )
             cpu.InstructionCycleTick();
 
-        for(int i = 0; i< Mathf.Max(PROCESS_SPEED,1); i++){
-            foreach(Peripheral p in peripherals)
+        foreach(Peripheral p in peripherals)
                 p.tick(delta);
-        }
+        
         
         Translation = new Vector3(
             Mathf.Clamp(Translation.x, -SQUARELIMIT, SQUARELIMIT), 0,
