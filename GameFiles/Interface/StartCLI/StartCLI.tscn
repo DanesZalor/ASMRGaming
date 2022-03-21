@@ -144,7 +144,7 @@ margin_left = 40.0
 margin_top = 40.0
 margin_right = 190.0
 margin_bottom = 192.0
-rect_scale = Vector2( 1.5, 1.5 )
+rect_scale = Vector2( 1.25, 1.25 )
 custom_fonts/font = ExtResource( 2 )
 text = "Clockspeed :
 
@@ -154,11 +154,11 @@ Max Robots :"
 align = 2
 
 [node name="Arguements" type="Label" parent="Menu/Content/Game"]
-margin_left = 400.0
+margin_left = 370.0
 margin_top = 40.0
-margin_right = 708.0
+margin_right = 678.0
 margin_bottom = 192.0
-rect_scale = Vector2( 1.5, 1.5 )
+rect_scale = Vector2( 1.25, 1.25 )
 custom_fonts/font = ExtResource( 2 )
 text = "60Hz
 
@@ -192,8 +192,8 @@ __meta__ = {
 modulate = Color( 0.815686, 0.815686, 0.815686, 1 )
 margin_left = 40.0
 margin_top = 40.0
-margin_right = 190.0
-margin_bottom = 192.0
+margin_right = 204.0
+margin_bottom = 378.0
 rect_scale = Vector2( 1.25, 1.25 )
 custom_fonts/font = ExtResource( 2 )
 text = "Resolution :
@@ -254,9 +254,8 @@ __meta__ = {
 modulate = Color( 0.815686, 0.815686, 0.815686, 1 )
 margin_left = 40.0
 margin_top = 40.0
-margin_right = 940.0
-margin_bottom = 421.0
-rect_scale = Vector2( 1.25, 1.25 )
+margin_right = 1161.0
+margin_bottom = 512.0
 custom_fonts/font = ExtResource( 2 )
 text = "All Rights Reserved to No one since this projectis open source check at <link>
 

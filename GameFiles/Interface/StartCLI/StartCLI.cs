@@ -3,6 +3,22 @@ using System;
 
 public class StartCLI : Control
 {
+    public static class SETTINGS{
+        public const int IDX_CLOCKSPEED = 0, 
+                  IDX_PROCCESS_SPEED = 1,
+                  IDX_MAX_ROBOTS = 2;
+        
+        private static void setClockSpeed(int choice){
+            
+            Mathf.Clamp(choice, 1, 10);
+
+            Robot.CLOCKSPEED = (byte)choice;
+        }
+
+        //private static void setProcessSpeed
+
+    }
+
     private AnimationPlayer animationPlayer;
     private bool IS_BOOTLOGO { get => animationPlayer.IsPlaying();}
     private Control[] menuContent;
@@ -22,8 +38,7 @@ public class StartCLI : Control
         //OS.WindowFullscreen = true;
     }
 
-    private int currentHeaderIdx = 0;
-    public void headerPressed(int idx){
+    private int currentHeaderIdx = 0; public void headerPressed(int idx){
         
         if(idx<0) idx = menuContent.Length - 1;
         else if(idx>menuContent.Length-1) idx = 0;
