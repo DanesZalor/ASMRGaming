@@ -79,6 +79,7 @@ margin_right = 1280.0
 margin_bottom = 720.0
 
 [node name="ARGlogo" type="Label" parent="StartScreen"]
+modulate = Color( 0.243137, 0.501961, 1, 1 )
 margin_top = 40.0
 margin_right = 1280.0
 margin_bottom = 409.0
@@ -95,9 +96,10 @@ margin_bottom = 667.0
 custom_fonts/font = ExtResource( 2 )
 text = "Assembly Robot Game
 
-A 3D programmable robot game as supplement for learning assembly language programming
+by Nodepad studios
 
 
+Version 1.01
 
 
 
