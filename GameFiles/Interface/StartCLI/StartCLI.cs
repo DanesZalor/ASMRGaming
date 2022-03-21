@@ -20,8 +20,6 @@ public class StartCLI : Control
                 multiline += splitted[i] + "\n\n";
             return multiline;
         }
-
-
         static void setClockSpeed(int choice){
             Robot.CLOCKSPEED = (byte) Mathf.Clamp(choice, 1, 10);
             Menu_Args[0].Text = editStringElement(
@@ -59,12 +57,34 @@ public class StartCLI : Control
                         SceneTree.StretchAspect.Keep, 
                         controlparent.RectSize, 1f);
             
-
             Menu_Args[1].Text = editStringElement(
                 Menu_Args[1].Text, 0, 
                 Convert.ToString((int)controlparent.RectSize.x)+"x"+Convert.ToString((int)controlparent.RectSize.y)
             ); 
         }
+        static void setFullScreen(){
+            OS.WindowFullscreen = !OS.WindowFullscreen;
+
+            Menu_Args[1].Text = editStringElement(
+                Menu_Args[1].Text, 1, OS.WindowFullscreen ? "ON" : "OFF"
+            );
+        }
+
+        static void setMSAA( int appendChoice){
+            //GD.Print((int)Viewport.MSAA.Msaa2x);
+            int choice = Mathf.Clamp( 
+                (int)controlparent.GetViewport().Msaa + appendChoice, 
+                (int)Viewport.MSAA.Disabled, (int)Viewport.MSAA.Msaa16x
+            );
+            
+            controlparent.GetViewport().Msaa = (Viewport.MSAA)choice;
+
+            string[] msaaStr = { "Disabled", "MSAA 2x", "MSAA 4x", "MSAA 8x", "MSAA 16x"}; 
+            Menu_Args[1].Text = editStringElement(
+                Menu_Args[1].Text, 2, msaaStr[(int)controlparent.GetViewport().Msaa] 
+            );
+        }
+
         public static void setGameSetting(int settingIdx, int choiceAppend){
             switch(settingIdx){
                 case 1: 
@@ -80,8 +100,10 @@ public class StartCLI : Control
 
         public static void setSystemSetting(int settingIdx, int choiceAppend){
            switch(settingIdx){
-               case 1:
-                    setResolution( choiceAppend ); break;
+               case 1: setResolution( choiceAppend ); break;
+                case 2: setFullScreen(); break;
+                case 3: setMSAA(choiceAppend); break;
+
            }
         }
     }
@@ -109,6 +131,8 @@ public class StartCLI : Control
         //Engine.TargetFps = 30;
         //OS.VsyncEnabled = false;
         //OS.WindowFullscreen = true;
+
+        headerPressed(0);
     }
 
     private int currentHeaderIdx = 0; public void headerPressed(int idx){

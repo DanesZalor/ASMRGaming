@@ -125,6 +125,7 @@ margin_right = 590.0
 margin_bottom = 5.0
 
 [node name="Game" type="Control" parent="Menu/Content"]
+visible = false
 margin_right = 1200.0
 margin_bottom = 550.0
 
@@ -173,7 +174,6 @@ text = "60Hz
 4"
 
 [node name="Settings" type="Control" parent="Menu/Content"]
-visible = false
 margin_right = 1200.0
 margin_bottom = 590.0
 
@@ -224,7 +224,7 @@ rect_scale = Vector2( 1.25, 1.25 )
 custom_fonts/font = ExtResource( 2 )
 text = "1280x720
 
-ON
+OFF
 
 Disabled
 
