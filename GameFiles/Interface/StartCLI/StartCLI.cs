@@ -3,7 +3,8 @@ using System;
 
 public class StartCLI : Control
 {
-    private static class SETTINGS{
+    public static class SETTINGS{
+        public static bool SHADOWS = true;
         public static Control controlparent;       
         public static Label[] Menu_Args;
         
@@ -77,7 +78,6 @@ public class StartCLI : Control
             );
         }
 
-        // QUITE BUGGY IDK cant figure it out yet
         static void setFPS(int fps){
             Engine.TargetFps = Mathf.Clamp(fps, 30, 60);
 
@@ -85,6 +85,17 @@ public class StartCLI : Control
                 Menu_Args[1].Text, 3, Convert.ToString(Engine.TargetFps)
             );
         }
+        static void setVsync(bool on){
+            OS.VsyncEnabled = on;
+
+            Menu_Args[1].Text = editStringElement(Menu_Args[1].Text, 4, OS.VsyncEnabled?"ON":"OFF");
+        }
+        static void setShadows(bool on){
+            SHADOWS = on;
+
+            Menu_Args[1].Text = editStringElement(Menu_Args[1].Text, 5, SHADOWS?"ON":"OFF");
+        }
+
 
         public static void setGameSetting(int settingIdx, int choiceAppend){
             switch(settingIdx){
@@ -105,6 +116,8 @@ public class StartCLI : Control
                 case 2: setFullScreen(!OS.WindowFullscreen); break;
                 case 3: setMSAA(choiceAppend); break;
                 case 4: setFPS(Engine.TargetFps + (choiceAppend * 15)); break;
+                case 5: setVsync(!OS.VsyncEnabled); break;
+                case 6: setShadows(!SHADOWS); break;
            }
         }
     }
@@ -189,8 +202,6 @@ public class StartCLI : Control
 
                 pointerRect.Visible = (currH!=0);
                 pointerRect.RectPosition = new Vector2(390, 80 * currH );
-
-                //GD.Print(currH);
             }
 
         }

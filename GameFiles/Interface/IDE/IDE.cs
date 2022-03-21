@@ -97,6 +97,7 @@ public class IDE : Node
 
     public override void _Ready()
     {
+        GetNode<DirectionalLight>("EnvironmentStuff/DirectionalLight").ShadowEnabled = StartCLI.SETTINGS.SHADOWS;
         base._Ready();
         camHolder = GetNode<Spatial>("EnvironmentStuff/CamHolder");
         cam = camHolder.GetNode<Camera>("Camera");
