@@ -45,18 +45,10 @@ public class StartCLI : Control
         }
         static void setResolution(int appendChoice){
             
-            int currChoice = Mathf.Clamp( (int)((controlparent.RectSize.x / 1280f)*100), 100, 150);
-            currChoice = (int)(Mathf.Round( (float)currChoice/5f) * 5f);
-            currChoice = Mathf.Clamp(currChoice + appendChoice * 5, 100, 150);
+            float ratio = Mathf.Clamp((controlparent.RectSize.x/1280f) , 1f, 1.5f );
+            ratio = Mathf.Clamp( ratio + appendChoice*0.05f, 1f, 1.5f );
 
-            float tempf = (float)currChoice/100f;
-            controlparent.RectSize = new Vector2(1280,720) * tempf;
-            controlparent.RectScale = new Vector2(tempf, tempf);
-            controlparent.GetTree().SetScreenStretch(
-                        SceneTree.StretchMode.Mode2d,
-                        SceneTree.StretchAspect.Keep, 
-                        controlparent.RectSize, 1f);
-            
+            controlparent.RectSize = new Vector2(1280,720) * ratio;
             Menu_Args[1].Text = editStringElement(
                 Menu_Args[1].Text, 0, 
                 Convert.ToString((int)controlparent.RectSize.x)+"x"+Convert.ToString((int)controlparent.RectSize.y)
@@ -71,7 +63,6 @@ public class StartCLI : Control
         }
 
         static void setMSAA( int appendChoice){
-            //GD.Print((int)Viewport.MSAA.Msaa2x);
             int choice = Mathf.Clamp( 
                 (int)controlparent.GetViewport().Msaa + appendChoice, 
                 (int)Viewport.MSAA.Disabled, (int)Viewport.MSAA.Msaa16x
@@ -159,6 +150,10 @@ public class StartCLI : Control
                 
                 async void delayThenStart(){
                     await ToSignal(GetTree().CreateTimer(1f), "timeout");
+                    GetTree().SetScreenStretch(
+                        SceneTree.StretchMode.Mode2d,
+                        SceneTree.StretchAspect.Keep, 
+                        RectSize, 1f);
                     GetTree().ChangeScene("res://GameFiles/Interface/IDE/IDE.tscn");
                 }
                 delayThenStart();
