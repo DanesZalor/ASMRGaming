@@ -291,12 +291,16 @@ public class StartCLI : Control
     }
 
     private void playGame(){
+        
         SETTINGS.SaveSettings();
+
+        GetNode<AnimationPlayer>("AnimationPlayer").Play("Load");
+
         async void delayThenStart(){
             GD.Print(String.Format( "Settings:\n Resolution: {0}x{1}\n MSAA: {2}\n FPS: {3}",
                 RectSize.x, RectSize.y, GetViewport().Msaa, Engine.TargetFps            
             ));
-            await ToSignal(GetTree().CreateTimer(1f), "timeout");
+            await ToSignal(GetTree().CreateTimer(3f), "timeout");
             GetTree().ChangeScene("res://GameFiles/Interface/IDE/IDE.tscn");
         } delayThenStart();
     }
