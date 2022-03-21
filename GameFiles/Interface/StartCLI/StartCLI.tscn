@@ -264,7 +264,18 @@ margin_right = 1290.0
 margin_bottom = 626.0
 rect_scale = Vector2( 0.9, 0.9 )
 custom_fonts/font = ExtResource( 2 )
-text = "<insert Thesis shit here>"
+text = "Assembly Robot Game
+
+A 3D programmable robot game as supplement for learning assembly language programming
+
+In partial fulfillment of the requirement for the degree of Bachelor of Science in Computer Science
+
+Published under MIT license
+
+
+
+
+"
 autowrap = true
 
 [node name="Headers" type="Label" parent="Menu"]
@@ -296,12 +307,12 @@ margin_bottom = 28.0
 flat = true
 
 [node name="Play" type="Label" parent="Menu"]
-margin_left = 900.0
-margin_top = 660.0
-margin_right = 1232.0
-margin_bottom = 688.0
+margin_left = 320.0
+margin_top = 652.4
+margin_right = 1228.0
+margin_bottom = 680.4
 custom_fonts/font = ExtResource( 2 )
-text = "Press Enter to Play"
+text = "Use Arrow keys to Navigate                                                   Press Enter to Play"
 align = 2
 
 [connection signal="pressed" from="Menu/Headers/BtnGame" to="." method="headerPressed" binds= [ 0 ]]
