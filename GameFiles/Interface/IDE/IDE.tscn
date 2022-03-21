@@ -11,7 +11,7 @@
 
 [sub_resource type="SpatialMaterial" id=16]
 params_diffuse_mode = 4
-params_specular_mode = 3
+params_specular_mode = 4
 albedo_color = Color( 0.384314, 0.384314, 0.384314, 1 )
 albedo_texture = ExtResource( 3 )
 
@@ -50,6 +50,7 @@ far = 150.0
 transform = Transform( 0.583371, -0.781114, 0.222573, 0.0558245, 0.311948, 0.948458, -0.810285, -0.540878, 0.225587, 0, 4.75649, 0 )
 light_energy = 0.5
 shadow_enabled = true
+shadow_color = Color( 0.2, 0.2, 0.2, 1 )
 
 [node name="TableEnv" type="MeshInstance" parent="EnvironmentStuff"]
 cast_shadow = 0
