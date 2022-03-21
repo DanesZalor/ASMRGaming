@@ -202,17 +202,17 @@ margin_right = 309.0
 margin_bottom = 378.0
 rect_scale = Vector2( 1.25, 1.25 )
 custom_fonts/font = ExtResource( 2 )
-text = "Resolution :
+text = "Resolution:
 
-Full Screen :
+Fullscreen:
 
 MSAA :
 
 FPS :
 
-Shadows :
+Vsync :
 
-VSync :"
+Shadows:"
 align = 2
 
 [node name="Arguements" type="Label" parent="Menu/Content/Settings"]

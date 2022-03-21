@@ -45,7 +45,6 @@ public class Global : Node
     {
         random = new Random();
         self = this;
-        Engine.TargetFps = 30;
     }
 
 

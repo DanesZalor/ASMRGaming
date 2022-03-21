@@ -21,10 +21,11 @@ public class StartCLI : Control
             return multiline;
         }
         static void setClockSpeed(int choice){
+            //GD.Print(Robot.CLOCKSPEED);
             Robot.CLOCKSPEED = (byte) Mathf.Clamp(choice, 1, 10);
             Menu_Args[0].Text = editStringElement(
                 Menu_Args[0].Text, 0, 
-                Convert.ToString(Robot.CLOCKSPEED*Engine.TargetFps) + " Hz" 
+                Convert.ToString(Robot.CLOCKSPEED*Engine.IterationsPerSecond) + " Hz" 
             );
         }
         static void setRobotMaxHP(int choice){
@@ -54,8 +55,8 @@ public class StartCLI : Control
                 Convert.ToString((int)controlparent.RectSize.x)+"x"+Convert.ToString((int)controlparent.RectSize.y)
             ); 
         }
-        static void setFullScreen(){
-            OS.WindowFullscreen = !OS.WindowFullscreen;
+        static void setFullScreen(bool on){
+            OS.WindowFullscreen = on;
 
             Menu_Args[1].Text = editStringElement(
                 Menu_Args[1].Text, 1, OS.WindowFullscreen ? "ON" : "OFF"
@@ -76,6 +77,15 @@ public class StartCLI : Control
             );
         }
 
+        // QUITE BUGGY IDK cant figure it out yet
+        static void setFPS(int fps){
+            Engine.TargetFps = Mathf.Clamp(fps, 30, 60);
+
+            Menu_Args[1].Text = editStringElement(
+                Menu_Args[1].Text, 3, Convert.ToString(Engine.TargetFps)
+            );
+        }
+
         public static void setGameSetting(int settingIdx, int choiceAppend){
             switch(settingIdx){
                 case 1: 
@@ -91,10 +101,10 @@ public class StartCLI : Control
 
         public static void setSystemSetting(int settingIdx, int choiceAppend){
            switch(settingIdx){
-               case 1: setResolution( choiceAppend ); break;
-                case 2: setFullScreen(); break;
+                case 1: setResolution( choiceAppend ); break;
+                case 2: setFullScreen(!OS.WindowFullscreen); break;
                 case 3: setMSAA(choiceAppend); break;
-
+                case 4: setFPS(Engine.TargetFps + (choiceAppend * 15)); break;
            }
         }
     }
@@ -118,10 +128,6 @@ public class StartCLI : Control
             GetNode<Label>("Menu/Content/Settings/Arguements"),
         };
         SETTINGS.controlparent = this;
-
-        //Engine.TargetFps = 30;
-        //OS.VsyncEnabled = false;
-        //OS.WindowFullscreen = true;
 
         headerPressed(0);
     }
@@ -148,15 +154,7 @@ public class StartCLI : Control
                 GetNode<Control>("Menu/Content").Visible = false;
                 GetNode<Control>("Menu/Headers").Visible = false;
                 
-                async void delayThenStart(){
-                    await ToSignal(GetTree().CreateTimer(1f), "timeout");
-                    GetTree().SetScreenStretch(
-                        SceneTree.StretchMode.Mode2d,
-                        SceneTree.StretchAspect.Keep, 
-                        RectSize, 1f);
-                    GetTree().ChangeScene("res://GameFiles/Interface/IDE/IDE.tscn");
-                }
-                delayThenStart();
+                playGame();
                 return;
             }
 
@@ -196,5 +194,16 @@ public class StartCLI : Control
             }
 
         }
+    }
+
+    private void playGame(){
+        async void delayThenStart(){
+            await ToSignal(GetTree().CreateTimer(1f), "timeout");
+            GetTree().SetScreenStretch(
+                SceneTree.StretchMode.Mode2d,
+                SceneTree.StretchAspect.Keep, 
+                RectSize, 1f);
+            GetTree().ChangeScene("res://GameFiles/Interface/IDE/IDE.tscn");
+        } delayThenStart();
     }
 }

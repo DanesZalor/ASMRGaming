@@ -173,7 +173,7 @@ public class IDE : Node
         }
         else if( Global.match(args[0], "(quit|exit|shutdown)")){
             // change to start screen
-            GetTree().ChangeScene("res://GameFiles/Interface/StartScreen/StartScreen.tscn");
+            GetTree().ChangeScene("res://GameFiles/Interface/StartCLI/StartCLI.tscn");
             return "";
         }
         else 
