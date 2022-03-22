@@ -202,7 +202,6 @@ public class StartCLI : Control
     {
         
         animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-        GD.Print("wtf");
         menuContent = new Control[3]{
             GetNode<Control>("Menu/Content/Game"),
             GetNode<Control>("Menu/Content/Settings"),
@@ -231,8 +230,7 @@ public class StartCLI : Control
     public override void _UnhandledInput(InputEvent @event)
     {
         base._UnhandledInput(@event);
-        //if(IS_BOOTLOGO) return;
-        GD.Print("startscreen event");
+        if(IS_BOOTLOGO) return;
 
         if((@event is InputEventKey) && (@event as InputEventKey).Pressed){
             
