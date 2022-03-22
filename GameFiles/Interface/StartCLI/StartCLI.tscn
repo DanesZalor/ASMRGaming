@@ -248,7 +248,6 @@ margin_right = 1280.0
 margin_bottom = 720.0
 
 [node name="ARGlogo" type="Label" parent="StartScreen"]
-modulate = Color( 0.243137, 0.501961, 1, 1 )
 margin_top = 40.0
 margin_right = 1280.0
 margin_bottom = 409.0
@@ -265,9 +264,12 @@ margin_bottom = 667.0
 custom_fonts/font = ExtResource( 2 )
 text = "Assembly Robot Game
 
+
+
+
+
+
 by Nodepad studios
-
-
 Version 1.01
 
 
@@ -477,12 +479,12 @@ margin_bottom = 28.0
 flat = true
 
 [node name="Play" type="Label" parent="Menu"]
-margin_left = 320.0
-margin_top = 652.4
-margin_right = 1228.0
-margin_bottom = 680.4
+margin_left = -105.736
+margin_top = 675.0
+margin_right = 1234.26
+margin_bottom = 703.0
 custom_fonts/font = ExtResource( 2 )
-text = "Use Arrow keys to Navigate                                                   Press Enter to Play"
+text = "Use Arrow keys to Navigate                                                                                                    Press Enter to Play"
 align = 2
 
 [node name="TTYLogs" type="Control" parent="."]

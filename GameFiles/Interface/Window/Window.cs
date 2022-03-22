@@ -18,6 +18,7 @@ public class Window : ColorRect
         contentHolder = GetNode<Control>("ContentHolder");
 
         RaiseWindow();
+        setPosition( Vector2.One * (20f + windowHandlerParent.GetChildCount()*20f ) );
     }
 
     public bool isTopWindow(){
