@@ -65,9 +65,12 @@ public class CommandPrompt : ColorRect
     public override void _Input(InputEvent @event)
     {
         base._Input(@event);
-        
+
         if(@event is InputEventKey && prompt.HasFocus() && (@event as InputEventKey).Pressed ){
             
+            //prompt.HasFocus();
+            //prompt.GrabFocus();
+
             bool[] arrow = {Input.IsActionJustPressed("ArrowUp"), Input.IsActionJustPressed("ArrowDown")};
 
             if(arrow[0] || arrow[1]){

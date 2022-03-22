@@ -16,6 +16,8 @@ public class Notepad : TextEdit
         else throw new Exception(fileName + " not found");
 
         GrabFocus();
+        this.CursorSetLine(99999);
+        this.CursorSetColumn(99999);
     }
 
     public override void _Input(InputEvent @event)
