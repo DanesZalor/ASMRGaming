@@ -88,7 +88,6 @@ public class IDE : Node
         }
     }
 
-    private InterfaceConsole console;
     private IDEControls ideControls;
     public RobotsHolder robots;
     public WindowsHandler windowsHandler;
@@ -104,7 +103,6 @@ public class IDE : Node
         robots = GetNode<RobotsHolder>("Robots");
         windowsHandler = GetNode<WindowsHandler>("WindowsHandler");
         ideControls = GetNode<IDEControls>("IDEControls");
-        console = windowsHandler.GetNode<InterfaceConsole>("Console");
         shell = new Shell(this);
     }
 
