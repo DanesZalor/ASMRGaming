@@ -19,14 +19,14 @@ public class Window : ColorRect
 
         }
 
-        else if ( @event is InputEventMouseMotion && mousePress ){
+        else if ( @event is InputEventMouseMotion && mousePress && mouseInTitleBar ){
 
             InputEventMouseMotion e = (@event as InputEventMouseMotion);
-            Vector2 screenSize = GetViewportRect().Size;
+            Vector2 POSLIMIT = GetViewportRect().Size - RectSize;
 
             RectPosition = new Vector2(
-                Mathf.Clamp( RectPosition.x + e.Relative.x, 0, screenSize.x),   
-                Mathf.Clamp( RectPosition.y + e.Relative.y, 0, screenSize.y)   
+                Mathf.Clamp( RectPosition.x + e.Relative.x, 0, POSLIMIT.x),   
+                Mathf.Clamp( RectPosition.y + e.Relative.y, 0, POSLIMIT.y)   
 
             );
 
