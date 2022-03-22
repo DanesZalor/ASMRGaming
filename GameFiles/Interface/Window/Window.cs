@@ -7,9 +7,11 @@ public class Window : ColorRect
     private bool mouseInTitleBar = false; public void mouseEnterInTitlebar(bool entered){ mouseInTitleBar = entered; }
     private bool anchorPressed = false; public void anchorButtonAction(bool pressed){ anchorPressed = pressed; }
     private Control anchorBtn, titleBar, exitBtn, contentHolder;
+    private WindowsHandler windowHandlerParent;
 
     public override void _Ready()
     {
+        windowHandlerParent = GetParent<WindowsHandler>();
         anchorBtn = GetNode<Control>("Anchor");
         titleBar = GetNode<Control>("titlebar");
         exitBtn = GetNode<Control>("titlebar/ExitBtn");
@@ -20,6 +22,8 @@ public class Window : ColorRect
         contentHolder = GetNode<Control>("ContentHolder");
         if(contentHolder.GetChildCount()==0)
             contentHolder.AddChild(c);
+        
+        c.Connect("focus_entered", this, "RaiseWindow");
     }
 
     public void setTitle(string t){ GetNode<Label>("titlebar/title").Text = t; }
@@ -40,17 +44,19 @@ public class Window : ColorRect
 
             if(mousePress && mouseInTitleBar){
                 
+                RaiseWindow();
                 Vector2 POSLIMIT = GetViewportRect().Size - RectSize;
 
                 RectPosition = new Vector2(
                     Mathf.Clamp( RectPosition.x + e.Relative.x, 0, POSLIMIT.x),   
                     Mathf.Clamp( RectPosition.y + e.Relative.y, 0, POSLIMIT.y)   
                 );
+                
                 return; 
             }
 
             else if(anchorPressed){
-
+                RaiseWindow();
                 Vector2 SIZELIMIT = GetViewportRect().Size - RectPosition;
                 
                 RectSize = new Vector2(

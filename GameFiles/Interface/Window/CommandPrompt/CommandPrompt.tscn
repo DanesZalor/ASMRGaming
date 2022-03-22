@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://GameFiles/Interface/Window/CommandPrompt/CommandPrompt.cs" type="Script" id=1]
+[ext_resource path="res://GameFiles/Common/Fonts/ConsoleFont.tres" type="DynamicFont" id=3]
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.172549, 0.164706, 0.196078, 0 )
+border_blend = true
+
+[sub_resource type="Theme" id=4]
+LineEdit/colors/font_color = Color( 0.862745, 0.866667, 0.87451, 1 )
+LineEdit/colors/font_color_selected = Color( 0.137255, 0.137255, 0.14902, 1 )
+LineEdit/colors/selection_color = Color( 0.862745, 0.866667, 0.87451, 1 )
+LineEdit/styles/focus = SubResource( 3 )
+LineEdit/styles/normal = SubResource( 3 )
+
+[node name="CommandPrompt" type="ColorRect"]
+margin_right = 290.0
+margin_bottom = 357.0
+color = Color( 0.156863, 0.156863, 0.156863, 1 )
+script = ExtResource( 1 )
+
+[node name="Logs" type="RichTextLabel" parent="."]
+modulate = Color( 0.862745, 0.866667, 0.87451, 1 )
+self_modulate = Color( 0.862745, 0.866667, 0.87451, 1 )
+margin_right = 290.0
+margin_bottom = 357.0
+focus_mode = 2
+custom_fonts/italics_font = ExtResource( 3 )
+custom_fonts/bold_font = ExtResource( 3 )
+custom_fonts/normal_font = ExtResource( 3 )
+bbcode_enabled = true
+scroll_following = true
+selection_enabled = true
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Prompt" type="LineEdit" parent="."]
+anchor_left = 0.1
+anchor_top = -0.109629
+anchor_right = -0.631034
+anchor_bottom = -0.134839
+margin_left = -2.0
+margin_top = 368.138
+margin_right = 473.0
+margin_bottom = 408.138
+theme = SubResource( 4 )
+custom_fonts/font = ExtResource( 3 )
+placeholder_text = "asmr shell"
+placeholder_alpha = 0.3
+caret_blink = true
+caret_blink_speed = 0.3
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Prompt"]
+modulate = Color( 1, 1, 1, 0.784314 )
+self_modulate = Color( 0.560784, 1, 0.498039, 1 )
+margin_left = -22.9132
+margin_right = 13.0868
+margin_bottom = 36.0
+custom_fonts/font = ExtResource( 3 )
+text = ">>"
+valign = 1
+
+[connection signal="text_entered" from="Prompt" to="." method="onPromptEnteredSignal"]
