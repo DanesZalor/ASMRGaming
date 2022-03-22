@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/AssemblyRobotGaming.png-8403921d25593b38c67fd4014184aeee.stex"
+path="res://.import/ARG_Logo.png-b8ae3111602fd56a5379a0835e67ab5e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://AssemblyRobotGaming.png"
-dest_files=[ "res://.import/AssemblyRobotGaming.png-8403921d25593b38c67fd4014184aeee.stex" ]
+source_file="res://ARG_Logo.png"
+dest_files=[ "res://.import/ARG_Logo.png-b8ae3111602fd56a5379a0835e67ab5e.stex" ]
 
 [params]
 
