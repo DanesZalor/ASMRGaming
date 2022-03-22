@@ -11,11 +11,20 @@ config_version=4
 [application]
 
 config/name="ASMR Robotgame"
+config/description="A 3D programmable Virtual Robot Game as a Supplement For Learning Assembly Language Programming
+
+A thesis presented to the 
+Department of Computer Science 
+College of Computer Studies
+
+
+In partial fulfillment of the requirement for the degree of 
+Bachelor of Science in Computer Science
+"
 run/main_scene="res://GameFiles/Interface/StartCLI/StartCLI.tscn"
 boot_splash/image="res://GameFiles/Arena/Table.png"
 boot_splash/fullsize=false
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
-config/icon="res://AssemblyRobotGaming.png"
 
 [autoload]
 
