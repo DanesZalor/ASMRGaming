@@ -22,7 +22,6 @@ public class StartCLI : Control
             return multiline;
         }
         static void setClockSpeed(int choice){
-            //GD.Print(Robot.CLOCKSPEED);
             Robot.CLOCKSPEED = (byte) Mathf.Clamp(choice, 1, 10);
             Menu_Args[0].Text = editStringElement(
                 Menu_Args[0].Text, 0, 
@@ -47,26 +46,18 @@ public class StartCLI : Control
         }
         
         static void setResolution(int appendChoice){
-
-            controlparent.RectSize = new Vector2(
-                Mathf.Clamp(controlparent.RectSize.x + (appendChoice * 320), 1280, 1920),
-                Mathf.Clamp(controlparent.RectSize.y + (appendChoice * 180), 720, 1080)
-            );
-            float ratio=1f; switch((int)controlparent.RectSize.x){
-                case 1280: ratio=1f; break;
-                case 1600: ratio=1.25f; break;
-                case 1920: ratio=1.5f; break;
-            } controlparent.RectScale = Vector2.One * ratio;
+            
+            controlparent.GetTree().SetScreenStretch( SceneTree.StretchMode.Mode2d, SceneTree.StretchAspect.Keep, new Vector2(
+                Mathf.Clamp(controlparent.GetViewportRect().Size.x + (appendChoice * 320), 1280, 1920),
+                Mathf.Clamp(controlparent.GetViewportRect().Size.y + (appendChoice * 180), 720, 1080)
+            ));
+            
+            controlparent.RectScale = Vector2.One * (controlparent.GetViewportRect().Size.x / 1280f);
 
             Menu_Args[1].Text = editStringElement(
-                Menu_Args[1].Text, 0, 
-                Convert.ToString(controlparent.RectSize.x)+"x"+Convert.ToString(controlparent.RectSize.y)
+                Menu_Args[1].Text, 0,
+                String.Format("{0}x{1}", controlparent.GetViewportRect().Size.x, controlparent.GetViewportRect().Size.y ) 
             ); 
-            controlparent.GetTree().SetScreenStretch(
-                SceneTree.StretchMode.Mode2d,
-                SceneTree.StretchAspect.Keep, 
-                controlparent.RectSize, 1f);
-            
             
         }
         static void setFullScreen(bool on){
@@ -146,7 +137,7 @@ public class StartCLI : Control
 
             // load resolution
             float resX = (float)Convert.ToInt32( getData("Resolution", "1280") );
-            controlparent.RectSize = new Vector2( resX, resX * 0.5625f );
+            controlparent.GetViewport().Size = new Vector2( resX, resX * 0.5625f );
             setResolution(0);
         
             
