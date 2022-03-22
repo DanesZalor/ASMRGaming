@@ -25,6 +25,7 @@ run/main_scene="res://GameFiles/Interface/StartCLI/StartCLI.tscn"
 boot_splash/image="res://GameFiles/Arena/Table.png"
 boot_splash/fullsize=false
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
+config/icon="res://ARG_Logo.png"
 
 [autoload]
 
