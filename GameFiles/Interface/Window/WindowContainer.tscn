@@ -45,5 +45,20 @@ margin_top = 37.0
 margin_right = 295.0
 margin_bottom = 394.6
 
+[node name="Anchor" type="TextureButton" parent="."]
+margin_left = 280.0
+margin_top = 380.0
+margin_right = 300.0
+margin_bottom = 400.0
+keep_pressed_outside = true
+
+[node name="ColorRect" type="ColorRect" parent="Anchor"]
+margin_right = 20.0
+margin_bottom = 20.0
+mouse_filter = 2
+color = Color( 0.878431, 0.878431, 0.878431, 1 )
+
 [connection signal="mouse_entered" from="titlebar" to="." method="mouseEnterInTitlebar" binds= [ true ]]
 [connection signal="mouse_exited" from="titlebar" to="." method="mouseEnterInTitlebar" binds= [ false ]]
+[connection signal="button_down" from="Anchor" to="." method="anchorButtonAction" binds= [ true ]]
+[connection signal="button_up" from="Anchor" to="." method="anchorButtonAction" binds= [ false ]]
