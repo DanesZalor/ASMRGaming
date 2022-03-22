@@ -20,6 +20,7 @@ public class CommandPrompt : ColorRect
     public void RectUpdated(){
         logs.RectSize = RectSize;
         prompt.RectPosition = new Vector2(27, RectSize.y - 28);
+        prompt.RectSize = new Vector2(logs.RectSize.x - 38, prompt.RectSize.y );
     }
 
     private string interpretCommand(string cmd){
