@@ -39,7 +39,7 @@ theme = SubResource( 1 )
 text = "X"
 flat = true
 
-[node name="Content" type="Control" parent="."]
+[node name="ContentHolder" type="Control" parent="."]
 margin_left = 5.0
 margin_top = 37.0
 margin_right = 295.0
@@ -60,5 +60,6 @@ color = Color( 0.878431, 0.878431, 0.878431, 1 )
 
 [connection signal="mouse_entered" from="titlebar" to="." method="mouseEnterInTitlebar" binds= [ true ]]
 [connection signal="mouse_exited" from="titlebar" to="." method="mouseEnterInTitlebar" binds= [ false ]]
+[connection signal="pressed" from="titlebar/ExitBtn/Button" to="." method="ExitBtnPressed"]
 [connection signal="button_down" from="Anchor" to="." method="anchorButtonAction" binds= [ true ]]
 [connection signal="button_up" from="Anchor" to="." method="anchorButtonAction" binds= [ false ]]

@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://GameFiles/Common/Fonts/Cascadia.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://GameFiles/Common/Fonts/CascadiaFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://GameFiles/Interface/Window/Notepad/Notepad.cs" type="Script" id=3]
+
+[sub_resource type="Theme" id=9]
+default_font = ExtResource( 2 )
+TextEdit/fonts/font = null
+
+[sub_resource type="DynamicFont" id=8]
+size = 14
+use_filter = true
+font_data = ExtResource( 1 )
+
+[node name="TextEdit" type="TextEdit"]
+margin_right = 290.0
+margin_bottom = 357.6
+theme = SubResource( 9 )
+custom_colors/symbol_color = Color( 0, 0, 0, 1 )
+custom_colors/selection_color = Color( 0, 0.0745098, 0.396078, 1 )
+custom_colors/font_color_selected = Color( 1, 1, 1, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/line_number_color = Color( 0.482353, 0.482353, 0.482353, 1 )
+custom_colors/background_color = Color( 0.964706, 0.964706, 0.964706, 1 )
+custom_colors/number_color = Color( 0, 0, 0, 1 )
+custom_colors/completion_background_color = Color( 0, 0, 0, 1 )
+custom_colors/mark_color = Color( 0, 0, 0, 1 )
+custom_colors/word_highlighted_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "mov a, 10 ; comment
+label
+mov a, [10]"
+syntax_highlighting = true
+show_line_numbers = true
+draw_tabs = true
+highlight_all_occurrences = true
+override_selected_font_color = true
+smooth_scrolling = true
+wrap_enabled = true
+script = ExtResource( 3 )

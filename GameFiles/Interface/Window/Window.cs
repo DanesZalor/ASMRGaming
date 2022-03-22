@@ -6,14 +6,25 @@ public class Window : ColorRect
     private bool mousePress = false;
     private bool mouseInTitleBar = false; public void mouseEnterInTitlebar(bool entered){ mouseInTitleBar = entered; }
     private bool anchorPressed = false; public void anchorButtonAction(bool pressed){ anchorPressed = pressed; }
-    private Control anchorBtn, titleBar, exitBtn;
+    private Control anchorBtn, titleBar, exitBtn, contentHolder;
 
     public override void _Ready()
     {
         anchorBtn = GetNode<Control>("Anchor");
         titleBar = GetNode<Control>("titlebar");
         exitBtn = GetNode<Control>("titlebar/ExitBtn");
+        contentHolder = GetNode<Control>("ContentHolder");
     }
+
+    public void setContent(Control c){
+        contentHolder = GetNode<Control>("ContentHolder");
+        if(contentHolder.GetChildCount()==0)
+            contentHolder.AddChild(c);
+    }
+
+    public void setTitle(string t){ GetNode<Label>("titlebar/title").Text = t; }
+
+    public void RaiseWindow(){ GetParent<WindowsHandler>().RaiseWindow(GetIndex()); }
 
     public override void _Input(InputEvent @event){
 
@@ -49,10 +60,17 @@ public class Window : ColorRect
                 anchorBtn.RectPosition = RectSize - anchorBtn.RectSize;
                 titleBar.RectSize = new Vector2(RectSize.x - 10, 30);
                 exitBtn.RectPosition = new Vector2( titleBar.RectSize.x - 29, 1);
+
+                contentHolder.RectSize = new Vector2(RectSize.x - 10, RectSize.y - 42);
+                contentHolder.GetChild<Control>(0).RectSize = contentHolder.RectSize;
             }
 
         }
 
+    }
+
+    public void ExitBtnPressed(){
+        QueueFree();
     }
     
 }
