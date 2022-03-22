@@ -16,6 +16,8 @@ public class Window : ColorRect
         titleBar = GetNode<Control>("titlebar");
         exitBtn = GetNode<Control>("titlebar/ExitBtn");
         contentHolder = GetNode<Control>("ContentHolder");
+
+        RaiseWindow();
     }
 
     public void setContent(Control c){
@@ -28,7 +30,18 @@ public class Window : ColorRect
 
     public void setTitle(string t){ GetNode<Label>("titlebar/title").Text = t; }
 
-    public void RaiseWindow(){ GetParent<WindowsHandler>().RaiseWindow(GetIndex()); }
+    public void RaiseWindow(){ 
+        WindowsHandler winHnd = GetParent<WindowsHandler>();
+        
+        winHnd.RaiseWindow(GetIndex());
+
+        foreach(Window win in winHnd.GetChildren()){
+            win.GetNode<ColorRect>("titlebar").Color = new Color("#808080");
+            win.GetNode<Label>("titlebar/title").Modulate = new Color("#000000");
+        }
+        GetNode<ColorRect>("titlebar").Color = new Color("#000080");
+        GetNode<Label>("titlebar/title").Modulate = new Color("#ffffff");
+    }
 
     public override void _Input(InputEvent @event){
 
