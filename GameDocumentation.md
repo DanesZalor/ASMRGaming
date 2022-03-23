@@ -136,7 +136,7 @@ There are two types of steering, these are tracks(tank) and tires(car). The stee
 
 As shown in the  image below, this is an example of a tank robot that has a track as its wheels. As stated before, [254] and [255] is the RAM address for its steering, [254] for its left tracks and [255] for its right tracks.
 
-![TankWithDrill](.images/TankWithDrill.png?raw=true "Robot that has a track for steering and a drill weapon")
+![CarWithDrill](.images/CarWithDrill.png?raw=true "Robot that has a tire for steering and a drill weapon")
 
 A tank robot can move forward, backward, or be stationary depending on the values placed on the RAM address.
 ```
@@ -147,7 +147,7 @@ A tank robot can move forward, backward, or be stationary depending on the value
 
 Another type of steering is the Car(tires) as shown below.
 
-![CarWithDrill](.images/CarWithDrill.png?raw=true "Robot that has a tire for steering and a drill weapon")
+![TankWithDrill](.images/TankWithDrill.png?raw=true "Robot that has a track for steering and a drill weapon")
 
 The Car has the same RAM address as the Tank, RAM address [254] and [255]. However, it acts/functions differently.
 
