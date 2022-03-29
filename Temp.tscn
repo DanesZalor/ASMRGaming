@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://GameFiles/Robot/Robot.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Temp.cs" type="Script" id=2]
+
+[sub_resource type="PlaneMesh" id=1]
+size = Vector2( 40, 40 )
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0.341176, 0.466667, 0.231373, 1 )
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="Camera" type="Camera" parent="MeshInstance"]
+transform = Transform( 0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 30, 40, 30 )
+projection = 1
+size = 30.0
+
+[node name="Robot2" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -10.0818 )
+teamIdx = 1
+
+[node name="MainBot" parent="." instance=ExtResource( 1 )]
+transform = Transform( -0.964447, 0, -0.264277, 0, 1, 0, 0.264277, 0, -0.964447, 0, 0, 1.72226 )
+program = "init:
+	mov a, 0b100
+	mov [250], a
+	mov b, 255
+	mov c, 0
+	jmp loop
+
+loop:
+	mov b, 255
+	mov c, 0
+	
+	mov a, [250]
+	cmp a, 0b111
+	
+	jne noDetected
+	mov b, 0
+	mov c, 0
+	noDetected:
+	
+	mov [254], b
+	mov [255], c
+	jmp loop"
