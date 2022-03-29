@@ -76,9 +76,14 @@ public class Shell{
         return s + "[/color]";
     }
     private void openTextEditor(string filename){
-        ASMRTextEditor te = WindowsHandler.TEXT_EDITOR_PRELOAD.Instance<ASMRTextEditor>();
-        te.setFileName(filename);
-        ide.windowsHandler.AddChild(te);
+
+        Window win = WindowsHandler.WINDOW.Instance<Window>();
+        Notepad np = WindowsHandler.NOTEPAD.Instance<Notepad>();
+        np.fileName = filename;
+
+        win.setContent(np);
+        ide.windowsHandler.AddChild(win);
+
     }
     public string interpretCommand(string[] args){
         IDE.SaveFile.Load();
@@ -91,6 +96,10 @@ public class Shell{
  mv <file> <str>    [i]moves (rename) a file[/i]
  cp <file> <str>    [i]copies a file[/i] 
  edit <file>        [i]opens a file in text editor[/i]
+ 
+Extra:
+ bot                [i]bot commands (add, remove, list, mod). check bot help for more info[/i]
+ asm                [i]compiles a program into existing bot. check asm help for more info[/i]
 ";
         if(args[0].Equals("help")) return shellhelp;
         else if(args[0].Equals("ls")){

@@ -1,40 +1,42 @@
 using Godot;
 using System;
 
-
-public class InterfaceConsole : Control
+public class CommandPrompt : ColorRect
 {
-    private IDE ideparent;  
-    private WindowsHandler windowHandlerParent;  
-    private RichTextLabel logs;
-    private LineEdit prompt;
-    private Control titleBar;
-
-    private LinkedList<string> cmd_history;
+    private RichTextLabel logs; private LineEdit prompt; private LinkedList<string> cmd_history;
+    private Window windowParent; private IDE ideparent;
     public override void _Ready()
-    {  
+    {
+        windowParent = GetParent().GetParent<Window>();
+        ideparent = windowParent.GetParent().GetParent<IDE>();
         cmd_history = new LinkedList<string>();
-        windowHandlerParent = GetParent<WindowsHandler>();
-        ideparent = windowHandlerParent.GetParent<IDE>();
         logs = GetNode<RichTextLabel>("Logs");
         prompt = GetNode<LineEdit>("Prompt");
-        titleBar = GetNode<Control>("BlackBG/TitleBar");
+        Connect("item_rect_changed", this, "RectUpdated");
+        RectUpdated();
+        windowParent.setTitle("Command Prompt");
     }
-    
+
+    public void RectUpdated(){
+        logs.RectSize = RectSize;
+        prompt.RectPosition = new Vector2(27, RectSize.y - 28);
+        prompt.RectSize = new Vector2(logs.RectSize.x - 38, prompt.RectSize.y );
+    }
+
     private string interpretCommand(string cmd){
         cmd = cmd.Trim().ToLower();
         string[] args = cmd.Split(new char[1]{' '},StringSplitOptions.RemoveEmptyEntries);
         return ideparent.interpretCommand(args);
     }
 
+    
     public void clearCommand(){
         logLines = 0;
         logs.BbcodeText = "";
     }
 
-    // EVENTS
-    int logLines = 0;
-    /*Signal*/ public void onPromptEnteredSignal(String cmd){
+    int logLines = 0; LinkedListNode<string> cmd_history_NodePointer;
+    public void onPromptEnteredSignal(String cmd){
         
         prompt.Text = "";
         if(Global.match(cmd, "clear")) {
@@ -61,34 +63,12 @@ public class InterfaceConsole : Control
         
     }
 
-    private bool mousePressInTitleBar = false, mouseInTitleBar = false;
-
-    /*Signal*/ public void _on_TitleBarMouseEnterOrExit(bool enter){ mouseInTitleBar = enter; }
-    LinkedListNode<string> cmd_history_NodePointer;
     public override void _Input(InputEvent @event)
     {
         base._Input(@event);
 
-        if( (@event is InputEventMouseButton) ){
-            
-            InputEventMouseButton e = (@event as InputEventMouseButton);
-            mousePressInTitleBar = e.Pressed && mouseInTitleBar;
-            if(e.Pressed && mouseInTitleBar) windowHandlerParent.RaiseWindow(GetIndex());
-        }
+        if(@event is InputEventKey && prompt.HasFocus() && (@event as InputEventKey).Pressed ){
 
-        else if(@event is InputEventMouseMotion && mousePressInTitleBar){
-            
-            InputEventMouseMotion e = (@event as InputEventMouseMotion);
-            Vector2 screenSize = Global.SCREENSIZE;
-            RectPosition += e.Relative; 
-            RectPosition = new Vector2(
-                Mathf.Clamp(RectPosition.x, 0, screenSize.x - RectSize.x),
-                Mathf.Clamp(RectPosition.y, 0, screenSize.y - RectSize.y)
-            );
-            
-        }
-        else if(@event is InputEventKey && prompt.HasFocus() && (@event as InputEventKey).Pressed ){
-            
             bool[] arrow = {Input.IsActionJustPressed("ArrowUp"), Input.IsActionJustPressed("ArrowDown")};
 
             if(arrow[0] || arrow[1]){
@@ -114,5 +94,4 @@ public class InterfaceConsole : Control
 
         }
     }
-    
 }

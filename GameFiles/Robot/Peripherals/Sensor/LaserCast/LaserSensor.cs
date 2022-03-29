@@ -21,7 +21,7 @@ public class LaserSensor : Peripheral
         }
 
         public void tickLogical(bool on=true){
-
+            rayCast.Enabled = on;
             bool isColliding = rayCast.IsColliding();
             laserLength = (!isColliding ? rayCast.CastTo.x : rayCast.ToLocal(rayCast.GetCollisionPoint()).x) / rayCast.CastTo.x ;
 
@@ -58,14 +58,23 @@ public class LaserSensor : Peripheral
     public override void tickLogical(float delta)
     {
         for(byte i=0; i<2; i++){
+            
             lasers[i].tickLogical((ram[0] & 0b100) > 0 );
             
             // turn ram[0] bit on if colliding with Enemy
-            ram[0] = (byte)(ram[0] | (lasers[i].COLLIDING ? (0b010 >> i) : 0b0 ));
-            
+            ram[0] = (byte)( (lasers[i].COLLIDING) ? 
+                (ram[0] | (0b010 >> i)) :
+                (ram[0] & ~(0b010 >> i))
+            );
+
             // set respective ram[i] with laser distance if colliding
             ram[i + 1] = (byte)( lasers[i].COLLIDING ? lasers[i].LENGTH * 255 : 0 );
         }
+
+        string s = "colliding:";
+        if( (ram[0] & 0b10) > 0) s += " left "; 
+        if( (ram[0] & 0b01) > 0) s += " right "; 
+        GD.Print(s);
     }
 
     public override void tickPresentational(float delta)

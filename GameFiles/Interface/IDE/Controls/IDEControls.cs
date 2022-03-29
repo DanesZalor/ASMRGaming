@@ -27,14 +27,13 @@ public class IDEControls : Control
 
         switch(btnIdx){
             case 0:
-                ideparent.interpretCommand( buttons[0].Pressed?"play":"pause" ); 
-            break;
+                ideparent.interpretCommand( buttons[0].Pressed?"play":"pause" ); break;
             case 1:
-                ideparent.interpretCommand( "reset" );
-            break;
+                ideparent.interpretCommand( "reset" ); break;
             case 2:
-                ideparent.windowsHandler.Visible = buttons[2].Pressed; 
-            break;
+                ideparent.windowsHandler.Visible = buttons[2].Pressed; break;
+            case 3:
+                ideparent.windowsHandler.OpenConsole(); break;
         }
     }
 }

@@ -1,0 +1,67 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://GameFiles/Interface/Window/Window.cs" type="Script" id=1]
+[ext_resource path="res://GameFiles/Common/Fonts/CascadiaFont.tres" type="DynamicFont" id=2]
+
+[sub_resource type="Theme" id=1]
+
+[node name="Window" type="ColorRect"]
+margin_right = 300.0
+margin_bottom = 400.0
+color = Color( 0.752941, 0.752941, 0.752941, 1 )
+script = ExtResource( 1 )
+
+[node name="titlebar" type="ColorRect" parent="."]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 295.0
+margin_bottom = 35.0
+color = Color( 0, 0, 0.501961, 1 )
+
+[node name="title" type="Label" parent="titlebar"]
+margin_left = 8.0
+margin_right = 198.0
+margin_bottom = 30.0
+custom_fonts/font = ExtResource( 2 )
+text = "Title"
+valign = 1
+
+[node name="ExitBtn" type="ColorRect" parent="titlebar"]
+margin_left = 261.0
+margin_top = 1.0
+margin_right = 288.5
+margin_bottom = 28.5
+color = Color( 0.815686, 0.815686, 0.815686, 1 )
+
+[node name="Button" type="Button" parent="titlebar/ExitBtn"]
+modulate = Color( 0.34902, 0.34902, 0.34902, 1 )
+margin_right = 30.0
+margin_bottom = 30.0
+theme = SubResource( 1 )
+text = "X"
+flat = true
+
+[node name="ContentHolder" type="Control" parent="."]
+margin_left = 5.0
+margin_top = 37.0
+margin_right = 295.0
+margin_bottom = 394.6
+
+[node name="Anchor" type="TextureButton" parent="."]
+margin_left = 280.0
+margin_top = 380.0
+margin_right = 300.0
+margin_bottom = 400.0
+keep_pressed_outside = true
+
+[node name="ColorRect" type="ColorRect" parent="Anchor"]
+margin_right = 20.0
+margin_bottom = 20.0
+mouse_filter = 2
+color = Color( 0.878431, 0.878431, 0.878431, 1 )
+
+[connection signal="mouse_entered" from="titlebar" to="." method="mouseEnterInTitlebar" binds= [ true ]]
+[connection signal="mouse_exited" from="titlebar" to="." method="mouseEnterInTitlebar" binds= [ false ]]
+[connection signal="pressed" from="titlebar/ExitBtn/Button" to="." method="ExitBtnPressed"]
+[connection signal="button_down" from="Anchor" to="." method="anchorButtonAction" binds= [ true ]]
+[connection signal="button_up" from="Anchor" to="." method="anchorButtonAction" binds= [ false ]]

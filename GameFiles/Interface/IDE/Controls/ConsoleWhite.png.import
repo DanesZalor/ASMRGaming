@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Godot.png-2ea661472a16f1b63dcf87c903a2dc94.stex"
+path="res://.import/ConsoleWhite.png-7b4cd5561f52736ad7959e14b0308033.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GameFiles/Interface/StartScreen/Godot.png"
-dest_files=[ "res://.import/Godot.png-2ea661472a16f1b63dcf87c903a2dc94.stex" ]
+source_file="res://GameFiles/Interface/IDE/Controls/ConsoleWhite.png"
+dest_files=[ "res://.import/ConsoleWhite.png-7b4cd5561f52736ad7959e14b0308033.stex" ]
 
 [params]
 

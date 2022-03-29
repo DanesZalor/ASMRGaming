@@ -202,7 +202,6 @@ public class StartCLI : Control
     {
         
         animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-
         menuContent = new Control[3]{
             GetNode<Control>("Menu/Content/Game"),
             GetNode<Control>("Menu/Content/Settings"),
